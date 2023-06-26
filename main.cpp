@@ -11,48 +11,56 @@ int main(int argc, char const *argv[])
 	{
 		cout<<"You fogor commands lul.";
 	}
+
 	srand(static_cast<unsigned>(time(NULL)));
+
 	if (*argv[1] == '3')
-	{
-		while(*argv[2] == 'c'){
-		cout<<Three_By_Three();
-		cin>>inputtedTime;
-		}
-	}
-	else if (*argv[1] == '2')
-	{
-		while(*argv[2] == 'c'){
-			cout<<Two_By_Two();
-			cin>>inputtedTime;
-		}
-	}
-	else if (*argv[1] == '4')
-	{
-		while(*argv[2] == 'c'){
-			cout<<Four_By_Four();
-			cin>>inputtedTime;
-		}
-	}
-	else if (*argv[1] == '5')
-	{
-		while(*argv[2] == 'c'){
-			cout<<Five_By_Five();
-			cin>>inputtedTime;
-		}
-	}
-	else if (*argv[1] == '6')
-	{
-		while(*argv[2] == 'c'){
-			cout<<Six_By_Six();
-			cin>>inputtedTime;
-		}
-	}
-	else if (*argv[1] == '7')
-	{
-		while(*argv[2] == 'c'){
-			cout<<Seven_By_Seven();
-			cin>>inputtedTime;
-		}
-	}
+		{
+		do
+			{
+				cout<<Three_By_Three();
+				cin>>inputtedTime;
+			} while (*argv[2] == 'c');	}
+
+	else if(*argv[2] == '2')
+		{
+		do
+			{
+				cout<<Two_By_Two();
+				cin>>inputtedTime;
+			} while (*argv[2] == 'c');	}
+
+	else if(*argv[2] == '4')
+		{
+		do
+			{
+				cout<<Four_By_Four();
+				cin>>inputtedTime;
+			} while (*argv[2] == 'c');	}
+
+	else if(*argv[2] == '5')
+		{
+		do
+			{
+				cout<<Five_By_Five();
+				cin>>inputtedTime;
+			} while (*argv[2] == 'c');	}
+
+	else if(*argv[2] == '6')
+		{
+		do
+			{
+				cout<<Six_By_Six();
+				cin>>inputtedTime;
+			} while (*argv[2] == 'c');	}
+
+	else if(*argv[2] == '7')
+		{
+		do
+			{
+				cout<<Seven_By_Seven();
+				cin>>inputtedTime;
+			} while (*argv[2] == 'c');	}
+
 	return 0;
 }
