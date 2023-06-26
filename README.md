@@ -1,4 +1,4 @@
-# CLI_Timer
+# CLI_Timer ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
 
 This is a Rubik's cube training timer (some what similar to cstimer) used in the command line. 
 
@@ -23,7 +23,8 @@ This will either:
 * open a session if "session_name" does exist
 It will always be continuous so `c` isn't needed 
 
-NOTE: you will NOT be able to change the scramble type of a session.
+###### NOTE: you will NOT be able to change the scramble type of a session.
+<br>
 
 `s` <br>
 skewb <br>
@@ -32,6 +33,6 @@ megaminx <br>
 `p` <br>
 pyraminx <br>
 `q` <br>
-square one (may not exist cus im dumb)
+square one (may not exist cus im dumb) <br> 
 `k` <br>
 clock.
