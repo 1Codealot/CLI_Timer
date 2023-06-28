@@ -1,5 +1,5 @@
 #include <iostream>
-#include "scrambles.cpp"
+#include "Scrambles.hpp"
 
 using namespace std;
 
@@ -22,7 +22,7 @@ int main(int argc, char const *argv[])
 				cin>>inputtedTime;
 			} while (*argv[2] == 'c');	}
 
-	else if(*argv[2] == '2')
+	else if(*argv[1] == '2')
 		{
 		do
 			{
@@ -30,7 +30,7 @@ int main(int argc, char const *argv[])
 				cin>>inputtedTime;
 			} while (*argv[2] == 'c');	}
 
-	else if(*argv[2] == '4')
+	else if(*argv[1] == '4')
 		{
 		do
 			{
@@ -38,7 +38,7 @@ int main(int argc, char const *argv[])
 				cin>>inputtedTime;
 			} while (*argv[2] == 'c');	}
 
-	else if(*argv[2] == '5')
+	else if(*argv[1] == '5')
 		{
 		do
 			{
@@ -46,7 +46,7 @@ int main(int argc, char const *argv[])
 				cin>>inputtedTime;
 			} while (*argv[2] == 'c');	}
 
-	else if(*argv[2] == '6')
+	else if(*argv[1] == '6')
 		{
 		do
 			{
@@ -54,11 +54,35 @@ int main(int argc, char const *argv[])
 				cin>>inputtedTime;
 			} while (*argv[2] == 'c');	}
 
-	else if(*argv[2] == '7')
+	else if(*argv[1] == '7')
 		{
 		do
 			{
 				cout<<Seven_By_Seven();
+				cin>>inputtedTime;
+			} while (*argv[2] == 'c');	}
+
+	else if(*argv[1] == 'S')
+		{
+		do
+			{
+				cout<<Skewb();
+				cin>>inputtedTime;
+			} while (*argv[2] == 'c');	}
+
+	else if(*argv[1] == 'M')
+		{
+		do
+			{
+				cout<<Megaminx();
+				cin>>inputtedTime;
+			} while (*argv[2] == 'c');	}
+
+	else if(*argv[1] == 'P')
+		{
+		do
+			{
+				cout<<Pyraminx();
 				cin>>inputtedTime;
 			} while (*argv[2] == 'c');	}
 
