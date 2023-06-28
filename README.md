@@ -16,6 +16,15 @@ are commands to choose the scramble type (e.g. 3 means 3x3x3 puzzle)
 `c`
 continuous means that after entering a time (which currently does nothing) it'll produce a new scramble of the same type. (If `c` is not inputted it'll only do one scramble and exit after a time is inputted)
 
+<br>
+
+`S` <br>
+skewb <br>
+`M` <br>
+megaminx <br>
+`P` <br>
+pyraminx <br>
+
 ### To be implemented
 `-s"session_name"`
 This will either:
@@ -26,12 +35,7 @@ It will always be continuous so `c` isn't needed
 ###### NOTE: you will NOT be able to change the scramble type of a session.
 <br>
 
-`s` <br>
-skewb <br>
-`m` <br>
-megaminx <br>
-`p` <br>
-pyraminx <br>
+
 `q` <br>
 square one (may not exist cus im dumb) <br> 
 `k` <br>
