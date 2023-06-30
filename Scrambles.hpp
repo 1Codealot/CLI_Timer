@@ -6,6 +6,20 @@ int getRandomNum(int min, int max) {
     return rand() % (max - min) + min;
 }
 
+std::string removeExcess(std::string str){
+    std::string final;
+    for (char c : str) {
+        if (isprint(c)) {
+            final += c;
+        } else if (c == ' ') {
+            if (final.empty() || final.back() != ' ') {
+                final += c;
+            }
+        }
+    }
+    return final;
+}
+
 std::string Two_By_Two() {
     const char space[] = {' '};
 
@@ -32,21 +46,7 @@ std::string Two_By_Two() {
             currMove[0] = moves[getRandomNum(0, 2+1)];
         }
     }
-
-    std::string result;
-
-    // Remove non-printable characters and excessive spaces
-    for (char c : alg) {
-        if (isprint(c)) {
-            result += c;
-        } else if (c == ' ') {
-            if (result.empty() || result.back() != ' ') {
-                result += c;
-            }
-        }
-    }
-
-    return result;
+    return removeExcess(alg);
 }
 
 std::string Three_By_Three() {
@@ -70,28 +70,13 @@ std::string Three_By_Three() {
         }
         alg += space;
 
-
-
         prevMove[0] = currMove[0];
         while (currMove[0] == prevMove[0]) {
             currMove[0] = moves[getRandomNum(0, 5+1)];
         }
     }
 
-    std::string result;
-
-    // Remove non-printable characters and excessive spaces
-    for (char c : alg) {
-        if (isprint(c)) {
-            result += c;
-        } else if (c == ' ') {
-            if (result.empty() || result.back() != ' ') {
-                result += c;
-            }
-        }
-    }
-
-    return result;
+    return removeExcess(alg);
 }
 
 std::string Four_By_Four() {
@@ -127,28 +112,13 @@ std::string Four_By_Four() {
         }
         alg += space;
 
-
-
         prevMove[0] = currMove[0];
         while (currMove[0] == prevMove[0]) {
             currMove[0] = moves[getRandomNum(0, 5+1)];
         }
     }
 
-    std::string result;
-
-    // Remove non-printable characters and excessive spaces
-    for (char c : alg) {
-        if (isprint(c)) {
-            result += c;
-        } else if (c == ' ') {
-            if (result.empty() || result.back() != ' ') {
-                result += c;
-            }
-        }
-    }
-
-    return result;
+    return removeExcess(alg);
 }
 
 std::string Five_By_Five() {
@@ -182,28 +152,13 @@ std::string Five_By_Five() {
         }
         alg += space;
 
-
-
         prevMove[0] = currMove[0];
         while (currMove[0] == prevMove[0]) {
             currMove[0] = moves[getRandomNum(0, 5+1)];
         }
     }
 
-    std::string result;
-
-    // Remove non-printable characters and excessive spaces
-    for (char c : alg) {
-        if (isprint(c)) {
-            result += c;
-        } else if (c == ' ') {
-            if (result.empty() || result.back() != ' ') {
-                result += c;
-            }
-        }
-    }
-
-    return result;
+    return removeExcess(alg);
 }
 
 std::string Six_By_Six() {
@@ -220,8 +175,6 @@ std::string Six_By_Six() {
 
     for (int i = 0; i < getRandomNum(58,63); ++i) {
         alg += currMove;
-
-
 
         wide = getRandomNum(1,2+1);
         if (wide == 1)
@@ -243,28 +196,13 @@ std::string Six_By_Six() {
         }
         alg += space;
 
-
-
         prevMove[0] = currMove[0];
         while (currMove[0] == prevMove[0]) {
             currMove[0] = moves[getRandomNum(0, 5+1)];
         }
     }
 
-    std::string result;
-
-    // Remove non-printable characters and excessive spaces
-    for (char c : alg) {
-        if (isprint(c)) {
-            result += c;
-        } else if (c == ' ') {
-            if (result.empty() || result.back() != ' ') {
-                result += c;
-            }
-        }
-    }
-
-    return result;
+    return removeExcess(alg);
 }
 
 std::string Seven_By_Seven() {
@@ -281,8 +219,6 @@ std::string Seven_By_Seven() {
 
     for (int i = 0; i < getRandomNum(68,73); ++i) {
         alg += currMove;
-
-
 
         wide = getRandomNum(1,2+1);
         if (wide == 1)
@@ -304,28 +240,13 @@ std::string Seven_By_Seven() {
         }
         alg += space;
 
-
-
         prevMove[0] = currMove[0];
         while (currMove[0] == prevMove[0]) {
             currMove[0] = moves[getRandomNum(0, 5+1)];
         }
     }
 
-    std::string result;
-
-    // Remove non-printable characters and excessive spaces
-    for (char c : alg) {
-        if (isprint(c)) {
-            result += c;
-        } else if (c == ' ') {
-            if (result.empty() || result.back() != ' ') {
-                result += c;
-            }
-        }
-    }
-
-    return result;
+    return removeExcess(alg);
 }
 
 std::string Skewb() {
@@ -353,20 +274,7 @@ std::string Skewb() {
         }
     }
 
-    std::string result;
-
-    // Remove non-printable characters and excessive spaces
-    for (char c : alg) {
-        if (isprint(c)) {
-            result += c;
-        } else if (c == ' ') {
-            if (result.empty() || result.back() != ' ') {
-                result += c;
-            }
-        }
-    }
-
-    return result;
+    return removeExcess(alg);
 }
 
 std::string Megaminx(){
@@ -411,21 +319,7 @@ std::string Megaminx(){
         alg += '\n';
     }
 
-     std::string result;
-
-    // Remove non-printable characters and excessive spaces
-    for (char c : alg) {
-        if (isprint(c)) {
-            result += c;
-        } else if (c == ' ') {
-            if (result.empty() || result.back() != ' ') {
-                result += c;
-            }
-        }
-    }
-
-    
-    return alg;  
+     return removeExcess(alg);
 }
 
 std::string Pyraminx() {
@@ -474,18 +368,5 @@ std::string Pyraminx() {
         }
     }
 
-    std::string result;
-
-    // Remove non-printable characters and excessive spaces
-    for (char c : alg) {
-        if (isprint(c)) {
-            result += c;
-        } else if (c == ' ') {
-            if (result.empty() || result.back() != ' ') {
-                result += c;
-            }
-        }
-    }
-
-    return result;
+    return removeExcess(alg);
 }
