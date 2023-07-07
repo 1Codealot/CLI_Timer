@@ -300,9 +300,11 @@ std::string Megaminx(){
         }
         if(Dpp){
             alg += 'U';
+            alg += space;
         }else{
             alg += 'U';
-            alg += '\''; 
+            alg += '\'';
+            alg += space;
         }
         alg += '\n';
     }

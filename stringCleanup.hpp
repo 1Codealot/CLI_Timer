@@ -22,8 +22,13 @@ std::string strCleanup(std::string str){
         case '+':
         case '-':
         case 'w': // for wide moves (e.g. 4x4)
+        case 'u': // Pyra tips
+        case 'f':
+        case 'r':
+        case 'b':
         case ' ': // Not clock stuff
         case '\'': // :(
+        case '\n': // Needed for megaminx
             final+=x;
             break;
 
