@@ -21,6 +21,7 @@ std::string strCleanup(std::string str){
         case 'A':
         case '+':
         case '-':
+        case 'w': // for wide moves (e.g. 4x4)
         case ' ': // Not clock stuff
         case '\'': // :(
             final+=x;
