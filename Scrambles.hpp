@@ -2,22 +2,10 @@
 #include <cstdlib>
 #include <ctime>
 
+#include "stringCleanup.hpp"
+
 int getRandomNum(int min, int max) {
     return rand() % (max - min) + min;
-}
-
-std::string removeExcess(std::string str){
-    std::string final;
-    for (char c : str) {
-        if (isprint(c)) {
-            final += c;
-        } else if (c == ' ') {
-            if (final.empty() || final.back() != ' ') {
-                final += c;
-            }
-        }
-    }
-    return final;
 }
 
 std::string Two_By_Two() {
@@ -46,7 +34,7 @@ std::string Two_By_Two() {
             currMove[0] = moves[getRandomNum(0, 2+1)];
         }
     }
-    return removeExcess(alg);
+    return strCleanup(alg);
 }
 
 std::string Three_By_Three() {
@@ -76,7 +64,7 @@ std::string Three_By_Three() {
         }
     }
 
-    return removeExcess(alg);
+    return strCleanup(alg);
 }
 
 std::string Four_By_Four() {
@@ -118,7 +106,7 @@ std::string Four_By_Four() {
         }
     }
 
-    return removeExcess(alg);
+    return strCleanup(alg);
 }
 
 std::string Five_By_Five() {
@@ -158,7 +146,7 @@ std::string Five_By_Five() {
         }
     }
 
-    return removeExcess(alg);
+    return strCleanup(alg);
 }
 
 std::string Six_By_Six() {
@@ -202,7 +190,7 @@ std::string Six_By_Six() {
         }
     }
 
-    return removeExcess(alg);
+    return strCleanup(alg);
 }
 
 std::string Seven_By_Seven() {
@@ -246,7 +234,7 @@ std::string Seven_By_Seven() {
         }
     }
 
-    return removeExcess(alg);
+    return strCleanup(alg);
 }
 
 std::string Skewb() {
@@ -274,7 +262,7 @@ std::string Skewb() {
         }
     }
 
-    return removeExcess(alg);
+    return strCleanup(alg);
 }
 
 std::string Megaminx(){
@@ -319,7 +307,7 @@ std::string Megaminx(){
         alg += '\n';
     }
 
-     return removeExcess(alg);
+     return strCleanup(alg);
 }
 
 std::string Pyraminx() {
@@ -368,5 +356,46 @@ std::string Pyraminx() {
         }
     }
 
-    return removeExcess(alg);
+    return strCleanup(alg);
+}
+
+std::string Clock(){
+    const char space[] = {' '};
+    std::string moves[] = {"5-","4-","3-","2-","1-","0+","1+","2+","3+","4+","5+","6+"};
+    std::string alg;
+
+    // pin order: UR, DR, DL, UL
+
+    alg = alg + 
+    "UR" + moves[getRandomNum(0, 12)] + space + 
+    "DR" + moves[getRandomNum(0, 12)] + space + 
+    "DL" + moves[getRandomNum(0, 12)] + space + 
+    "UL" + moves[getRandomNum(0, 12)] + space +
+    "ALL"+ moves[getRandomNum(0, 12)] + space + "y2" + space +
+    "U"  + moves[getRandomNum(0, 12)] + space +
+    "R"  + moves[getRandomNum(0, 12)] + space +
+    "D"  + moves[getRandomNum(0, 12)] + space +
+    "L"  + moves[getRandomNum(0, 12)] + space +
+    "ALL"+ moves[getRandomNum(0, 12)] + space;
+
+    if (getRandomNum(1, 2+1) == 1)
+    {
+        alg = alg + "UR ";
+    }
+    if (getRandomNum(1, 2+1) == 1)
+    {
+        alg = alg + "DR ";
+    }
+    if (getRandomNum(1, 2+1) == 1)
+    {
+        alg = alg + "DL ";
+    }
+    if (getRandomNum(1, 2+1) == 1)
+    {
+        alg = alg + "UL ";
+    }
+
+    // Yes there is lots of hard coding here. I can't care tbh. This is done because the scramble is consistant (maybe not the end pin scramble)
+
+    return strCleanup(alg);
 }

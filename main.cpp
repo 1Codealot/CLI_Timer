@@ -86,5 +86,13 @@ int main(int argc, char const *argv[])
 				cin>>inputtedTime;
 			} while (*argv[2] == 'c');	}
 
+	else if(*argv[1] == 'K')
+		{
+		do
+			{
+				cout<<Clock();
+				cin>>inputtedTime;
+			} while (*argv[2] == 'c');	}
+
 	return 0;
 }
