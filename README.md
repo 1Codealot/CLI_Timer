@@ -24,6 +24,8 @@ skewb <br>
 megaminx <br>
 `P` <br>
 pyraminx <br>
+`k` <br>
+clock.
 
 ### To be implemented
 `-s"session_name"`
@@ -32,11 +34,13 @@ This will either:
 * open a session if "session_name" does exist
 It will always be continuous so `c` isn't needed 
 
-###### NOTE: you will NOT be able to change the scramble type of a session.
+###### NOTE: you may NOT be able to change the scramble type of a session (uncertainty as I haven't tried implementing it)
 <br>
 
-
 `q` <br>
-square one (may not exist cus im dumb) <br> 
-`k` <br>
-clock.
+square one (may not exist cus im dumb) 
+
+# Other things to be implemented
+* Better outputting
+  * Prompting time input
+  * Displaying averages
