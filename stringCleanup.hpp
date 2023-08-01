@@ -1,7 +1,7 @@
 #include <string>
 
 std::string strCleanup(std::string str){
-    std::string final;
+    std::string Final;
     for(char x:str){
         switch (x)
         {
@@ -29,7 +29,7 @@ std::string strCleanup(std::string str){
         case ' ': // Not clock stuff
         case '\'': // :(
         case '\n': // Needed for megaminx
-            final+=x;
+            Final+=x;
             break;
 
 
@@ -37,5 +37,18 @@ std::string strCleanup(std::string str){
             continue;
         }
     }
-    return final;
+    // 6x6 and 7x7 should have 3Uw not U3w.
+    // This should clean it
+    int count = 0;
+    for(auto n : Final){
+        if (n == '3')
+        {
+            Final[count] = Final[count-1];
+            Final[count-1] = '3';
+            
+        }
+        count += 1;
+    }
+
+    return Final;
 }
