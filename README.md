@@ -26,21 +26,27 @@ megaminx <br>
 pyraminx <br>
 `k` <br>
 clock.
+<br>
+<br>
 
-### To be implemented
-`-s"session_name"`
+`-s{sessionName}`
 This will either:
 * create a new session if "session_name" does not exist.
 * open a session if "session_name" does exist
-It will always be continuous so `c` isn't needed 
+It will always be continuous so `c` isn't needed
+ 
+###### NOTE: you are able to change the scramble type of a session
 
-###### NOTE: you may NOT be able to change the scramble type of a session (uncertainty as I haven't tried implementing it)
-<br>
+#### Example commands
+`CLI_Timer.exe 3` This will generate a single scramble for a 3x3 <br>
+`CLI_Timer.exe 5 c` This will continually generate scrambles for a 5x5. This will NOT save to a file. <br>
+`CLI_Timer.exe M -sMegaminx_Session` This will continually generate scrambles for megaminx. This will save to a file called Megaminx_Session.CLI_T_S.
+
+### To be implemented
 
 `q` <br>
 square one (may not exist cus im dumb) 
 
 # Other things to be implemented
 * Better outputting
-  * Prompting time input
   * Displaying averages
