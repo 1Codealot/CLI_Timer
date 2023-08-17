@@ -13,7 +13,7 @@ std::string changeExtension(std::string fileName){
     return finalFileName + ".CLI_T_S"; // CLI_T_S means CLI Timer Session.
 }
 
-void save(std::string sessionName, std::string scramble, float time){
+void save_to_file(std::string sessionName, std::string scramble, float time){
     FILE *fptr;
     fptr = fopen(changeExtension(sessionName).c_str(), "a");
 
