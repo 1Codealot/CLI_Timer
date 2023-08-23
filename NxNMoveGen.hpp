@@ -64,7 +64,7 @@ void createMove(struct move &newMove, char moveType){ // no idea why I need stru
             break; // New world record
 
         case 'S':
-            newMove.base=baseMoves[getRandomNum(1, 5)];
+            newMove.base=baseMoves[getRandomNum(1, 4)];
             newMove.direction = directions[getRandomNum(0,1)];
             newMove.wsize=wideSizes[0];
     }
