@@ -300,52 +300,27 @@ std::string Megaminx(){
 }
 
 std::string Pyraminx() {
-    const char space[] = {' '};
-
-    char moves[] = {'U', 'L', 'R', 'B'};
     char tips[] = {'u', 'l', 'r', 'b'};
-    char currMove[2] = {moves[getRandomNum(0, 3+1)], '\0'};
-    char prevMove[2] = {'\0'};
+    std::string scramble = Skewb();
 
-    std::string alg;
-
-    for (int i = 0; i < getRandomNum(9, 12); ++i) {
-        alg += currMove;
-        int extra = getRandomNum(1,2+1);
-
-        if (extra == 1)
+    for(int i = 0; i < 3; i++){
+        int direction = getRandomNum(1, 3);
+        if (direction == 1)
         {
-            alg += '\'';
+            continue;
         }
-        alg += space;
-
-        prevMove[0] = currMove[0];
-        while (currMove[0] == prevMove[0]) {
-            currMove[0] = moves[getRandomNum(0, 2+1)];
+        else if (direction == 2)
+        {  
+            scramble += tips[i];
+            scramble += " ";
+        }
+        else if (direction == 3)
+        {
+            scramble += tips[i];
+            scramble += "' ";
         }
     }
-
-    char TcurrMove[2] = {tips[getRandomNum(0, 3+1)], '\0'};
-    char TprevMove[2] = {'\0'};
-
-    // Tips
-    for (int i = 0; i < getRandomNum(1, 4); ++i) {
-        alg += TcurrMove;
-        int extra = getRandomNum(1,2+1);
-
-        if (extra == 1)
-        {
-            alg += '\'';
-        }
-        alg += space;
-
-        TprevMove[0] = TcurrMove[0];
-        while (TcurrMove[0] == TprevMove[0]) {
-            TcurrMove[0] = tips[getRandomNum(0, 3+1)];
-        }
-    }
-
-    return strCleanup(alg);
+    return scramble;
 }
 
 std::string Clock(){
