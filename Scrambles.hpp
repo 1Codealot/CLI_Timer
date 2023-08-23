@@ -265,50 +265,38 @@ std::string Skewb(){
 }
 
 std::string Megaminx(){
-    const char space[] = {' '};
-    char prevMove[2] = {'\0'};
     bool Dpp;
+    std::string scramble;
 
-    std::string alg;
+    for (int i = 0; i < 5; i++)
+    {
+        for (int n = 0; n < 7; n++){
+            scramble += "R";
+            if(getRandomNum(0, 1) == 0){
+                scramble += "++ ";
+            } else {
+                scramble += "-- ";
+            }
 
-    for (int n = 0; n < 5; ++n)
-    {    
-        for (int i = 0; i < 7; ++i)
+            scramble += "D";
+            if(getRandomNum(0, 1) == 0){
+                scramble += "++ ";
+                Dpp = true;
+            } else {
+                scramble += "-- ";
+                Dpp = false;
+            }
+        }
+        if (Dpp)
         {
-            alg += 'R';
-            if (getRandomNum(1,2+1) == 1)
-            {
-                    alg += '+'; alg += '+'; //Bruh
-                    alg += space;
-                }else{
-                    alg += '-'; alg += '-';
-                    alg += space;
-            }
-
-            alg += 'D';
-            if (getRandomNum(1,2+1) == 1)
-            {
-                    alg += '+'; alg += '+';
-                    Dpp = true;
-                    alg += space;
-                }else{
-                    alg += '-'; alg += '-';
-                    Dpp = false;
-                    alg += space;
-            }
+            scramble += "U \n";
+        } 
+        else
+        {
+            scramble += "U' \n";
         }
-        if(Dpp){
-            alg += 'U';
-            alg += space;
-        }else{
-            alg += 'U';
-            alg += '\'';
-            alg += space;
-        }
-        alg += '\n';
     }
-
-     return strCleanup(alg);
+    return scramble;
 }
 
 std::string Pyraminx() {
