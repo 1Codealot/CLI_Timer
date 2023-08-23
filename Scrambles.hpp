@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "stringCleanup.hpp"
 #include "NxNMoveGen.hpp"
 
 bool canUseMove(struct move *pMove1, struct move *pMove2){ // Two x Two
@@ -265,138 +264,98 @@ std::string Skewb(){
 }
 
 std::string Megaminx(){
-    const char space[] = {' '};
-    char prevMove[2] = {'\0'};
     bool Dpp;
+    std::string scramble;
 
-    std::string alg;
+    for (int i = 0; i < 5; i++)
+    {
+        for (int n = 0; n < 7; n++){
+            scramble += "R";
+            if(getRandomNum(0, 1) == 0){
+                scramble += "++ ";
+            } else {
+                scramble += "-- ";
+            }
 
-    for (int n = 0; n < 5; ++n)
-    {    
-        for (int i = 0; i < 7; ++i)
+            scramble += "D";
+            if(getRandomNum(0, 1) == 0){
+                scramble += "++ ";
+                Dpp = true;
+            } else {
+                scramble += "-- ";
+                Dpp = false;
+            }
+        }
+        if (Dpp)
         {
-            alg += 'R';
-            if (getRandomNum(1,2+1) == 1)
-            {
-                    alg += '+'; alg += '+'; //Bruh
-                    alg += space;
-                }else{
-                    alg += '-'; alg += '-';
-                    alg += space;
-            }
-
-            alg += 'D';
-            if (getRandomNum(1,2+1) == 1)
-            {
-                    alg += '+'; alg += '+';
-                    Dpp = true;
-                    alg += space;
-                }else{
-                    alg += '-'; alg += '-';
-                    Dpp = false;
-                    alg += space;
-            }
+            scramble += "U \n";
+        } 
+        else
+        {
+            scramble += "U' \n";
         }
-        if(Dpp){
-            alg += 'U';
-            alg += space;
-        }else{
-            alg += 'U';
-            alg += '\'';
-            alg += space;
-        }
-        alg += '\n';
     }
-
-     return strCleanup(alg);
+    return scramble;
 }
 
 std::string Pyraminx() {
-    const char space[] = {' '};
-
-    char moves[] = {'U', 'L', 'R', 'B'};
     char tips[] = {'u', 'l', 'r', 'b'};
-    char currMove[2] = {moves[getRandomNum(0, 3+1)], '\0'};
-    char prevMove[2] = {'\0'};
+    std::string scramble = Skewb();
 
-    std::string alg;
-
-    for (int i = 0; i < getRandomNum(9, 12); ++i) {
-        alg += currMove;
-        int extra = getRandomNum(1,2+1);
-
-        if (extra == 1)
+    for(int i = 0; i < 3; i++){
+        int direction = getRandomNum(1, 3);
+        if (direction == 1)
         {
-            alg += '\'';
+            continue;
         }
-        alg += space;
-
-        prevMove[0] = currMove[0];
-        while (currMove[0] == prevMove[0]) {
-            currMove[0] = moves[getRandomNum(0, 2+1)];
+        else if (direction == 2)
+        {  
+            scramble += tips[i];
+            scramble += " ";
+        }
+        else if (direction == 3)
+        {
+            scramble += tips[i];
+            scramble += "' ";
         }
     }
-
-    char TcurrMove[2] = {tips[getRandomNum(0, 3+1)], '\0'};
-    char TprevMove[2] = {'\0'};
-
-    // Tips
-    for (int i = 0; i < getRandomNum(1, 4); ++i) {
-        alg += TcurrMove;
-        int extra = getRandomNum(1,2+1);
-
-        if (extra == 1)
-        {
-            alg += '\'';
-        }
-        alg += space;
-
-        TprevMove[0] = TcurrMove[0];
-        while (TcurrMove[0] == TprevMove[0]) {
-            TcurrMove[0] = tips[getRandomNum(0, 3+1)];
-        }
-    }
-
-    return strCleanup(alg);
+    return scramble;
 }
 
 std::string Clock(){
-    const char space[] = {' '};
     std::string moves[] = {"5-","4-","3-","2-","1-","0+","1+","2+","3+","4+","5+","6+"};
-    std::string alg;
+    std::string scramble;
 
-    // pin order: UR, DR, DL, UL
+    scramble += 
+    "UR" + moves[getRandomNum(0, 12)] + " " +
+    "DR" + moves[getRandomNum(0, 12)] + " " +
+    "DL" + moves[getRandomNum(0, 12)] + " " +
+    "UL" + moves[getRandomNum(0, 12)] + " " +
+    "U"   + moves[getRandomNum(0, 12)] + " " +
+    "R"   + moves[getRandomNum(0, 12)] + " " +
+    "D"   + moves[getRandomNum(0, 12)] + " " +
+    "L"   + moves[getRandomNum(0, 12)] + " " +
+    "ALL"+ moves[getRandomNum(0, 12)] + " " + "y2" + " " +
+    "U"   + moves[getRandomNum(0, 12)] + " " +
+    "R"   + moves[getRandomNum(0, 12)] + " " +
+    "D"   + moves[getRandomNum(0, 12)] + " " +
+    "L"   + moves[getRandomNum(0, 12)] + " ";
 
-    alg = alg + 
-    "UR" + moves[getRandomNum(0, 12)] + space + 
-    "DR" + moves[getRandomNum(0, 12)] + space + 
-    "DL" + moves[getRandomNum(0, 12)] + space + 
-    "UL" + moves[getRandomNum(0, 12)] + space +
-    "ALL"+ moves[getRandomNum(0, 12)] + space + "y2" + space +
-    "U"  + moves[getRandomNum(0, 12)] + space +
-    "R"  + moves[getRandomNum(0, 12)] + space +
-    "D"  + moves[getRandomNum(0, 12)] + space +
-    "L"  + moves[getRandomNum(0, 12)] + space +
-    "ALL"+ moves[getRandomNum(0, 12)] + space;
-
-    if (getRandomNum(1, 2+1) == 1)
+    if (getRandomNum(0, 1) == 1)
     {
-        alg = alg + "UR ";
+        scramble += "UR ";
     }
-    if (getRandomNum(1, 2+1) == 1)
+    if (getRandomNum(0, 1) == 1)
     {
-        alg = alg + "DR ";
+        scramble += "DR ";
     }
-    if (getRandomNum(1, 2+1) == 1)
+    if (getRandomNum(0, 1) == 1)
     {
-        alg = alg + "DL ";
+        scramble += "DL ";
     }
-    if (getRandomNum(1, 2+1) == 1)
+    if (getRandomNum(0, 1) == 1)
     {
-        alg = alg + "UL ";
+        scramble += "UL ";
     }
-
-    // Yes there is lots of hard coding here. I can't care tbh. This is done because the scramble is consistant (maybe not the end pin scramble)
-
-    return strCleanup(alg);
+    return scramble;
 }
