@@ -361,42 +361,40 @@ std::string Pyraminx() {
 }
 
 std::string Clock(){
-    const char space[] = {' '};
     std::string moves[] = {"5-","4-","3-","2-","1-","0+","1+","2+","3+","4+","5+","6+"};
-    std::string alg;
+    std::string scramble;
 
-    // pin order: UR, DR, DL, UL
+    scramble += 
+    "UR" + moves[getRandomNum(0, 12)] + " " +
+    "DR" + moves[getRandomNum(0, 12)] + " " +
+    "DL" + moves[getRandomNum(0, 12)] + " " +
+    "UL" + moves[getRandomNum(0, 12)] + " " +
+    "U"   + moves[getRandomNum(0, 12)] + " " +
+    "R"   + moves[getRandomNum(0, 12)] + " " +
+    "D"   + moves[getRandomNum(0, 12)] + " " +
+    "L"   + moves[getRandomNum(0, 12)] + " " +
+    "ALL"+ moves[getRandomNum(0, 12)] + " " + "y2" + " " +
+    "U"   + moves[getRandomNum(0, 12)] + " " +
+    "R"   + moves[getRandomNum(0, 12)] + " " +
+    "D"   + moves[getRandomNum(0, 12)] + " " +
+    "L"   + moves[getRandomNum(0, 12)] + " ";
 
-    alg = alg + 
-    "UR" + moves[getRandomNum(0, 12)] + space + 
-    "DR" + moves[getRandomNum(0, 12)] + space + 
-    "DL" + moves[getRandomNum(0, 12)] + space + 
-    "UL" + moves[getRandomNum(0, 12)] + space +
-    "ALL"+ moves[getRandomNum(0, 12)] + space + "y2" + space +
-    "U"  + moves[getRandomNum(0, 12)] + space +
-    "R"  + moves[getRandomNum(0, 12)] + space +
-    "D"  + moves[getRandomNum(0, 12)] + space +
-    "L"  + moves[getRandomNum(0, 12)] + space +
-    "ALL"+ moves[getRandomNum(0, 12)] + space;
-
-    if (getRandomNum(1, 2+1) == 1)
+    if (getRandomNum(0, 1) == 1)
     {
-        alg = alg + "UR ";
+        scramble += "UR ";
     }
-    if (getRandomNum(1, 2+1) == 1)
+    if (getRandomNum(0, 1) == 1)
     {
-        alg = alg + "DR ";
+        scramble += "DR ";
     }
-    if (getRandomNum(1, 2+1) == 1)
+    if (getRandomNum(0, 1) == 1)
     {
-        alg = alg + "DL ";
+        scramble += "DL ";
     }
-    if (getRandomNum(1, 2+1) == 1)
+    if (getRandomNum(0, 1) == 1)
     {
-        alg = alg + "UL ";
+        scramble += "UL ";
     }
-
-    // Yes there is lots of hard coding here. I can't care tbh. This is done because the scramble is consistant (maybe not the end pin scramble)
-
-    return strCleanup(alg);
+    
+    return scramble;
 }
