@@ -1,7 +1,3 @@
-#include <string>
-#include <cstdlib>
-#include <ctime>
-
 #include "NxNMoveGen.hpp"
 
 bool canUseMove(struct move *pMove1, struct move *pMove2){ // Two x Two
@@ -357,5 +353,6 @@ std::string Clock(){
     {
         scramble += "UL ";
     }
+    
     return scramble;
 }
