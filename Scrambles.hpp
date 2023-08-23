@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "stringCleanup.hpp"
 #include "NxNMoveGen.hpp"
 
 bool canUseMove(struct move *pMove1, struct move *pMove2){ // Two x Two
