@@ -5,7 +5,6 @@ This code is here to deprecate the original Scrambles.hpp and stringCleanup.hpp
 #include <string>
 #include <cstdlib>
 #include <ctime>
-#include <iostream>
 
 int getRandomNum(int min, int max){
     return (rand() % (max+1 - min)) + min;
