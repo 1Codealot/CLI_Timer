@@ -3,266 +3,265 @@
 #include <ctime>
 
 #include "stringCleanup.hpp"
+#include "NxNMoveGen.hpp"
 
-int getRandomNum(int min, int max) {
-    return rand() % (max - min) + min;
+bool canUseMove(struct move *pMove1, struct move *pMove2){ // Two x Two
+    return pMove1->base != pMove2->base;
 }
 
-std::string Two_By_Two() {
-    const char space[] = {' '};
-
-    char moves[] = {'U', 'F', 'R'};
-    char currMove[2] = {moves[getRandomNum(0, 2+1)], '\0'};
-    char prevMove[2] = {'\0'};
-
-    std::string alg;
-
-    for (int i = 0; i < getRandomNum(9, 12); ++i) {
-        alg += currMove;
-        int extra = getRandomNum(1,3+1);
-
-        if (extra == 1)
+bool canUseMove(struct move *pMove1, struct move *pMove2, struct move *pMove3){
+    if (!canUseMove(pMove2, pMove3)){
+        return false;
+    }
+    if(!(pMove3->wsize != pMove2->wsize && pMove3->wsize != pMove1->wsize)){
+        switch (pMove3->base)
         {
-            alg += '\'';
-        } else if(extra == 2){
-            alg += '2';
-        }
-        alg += space;
+        case 'U':
+            return !(pMove1->base == 'U' && pMove2->base == 'D');
+            break;
+        
+        case 'F':
+            return !(pMove1->base == 'F' && pMove2->base == 'B');
+            break;
 
-        prevMove[0] = currMove[0];
-        while (currMove[0] == prevMove[0]) {
-            currMove[0] = moves[getRandomNum(0, 2+1)];
+        case 'R':
+            return !(pMove1->base == 'R' && pMove2->base == 'L');
+            break;
+
+        case 'D':
+            return !(pMove2->base == 'U' && pMove1->base == 'D');
+            break;
+        
+        case 'B':
+            return !(pMove2->base == 'F' && pMove1->base == 'B');
+            break;
+
+        case 'L':
+            return !(pMove2->base == 'R' && pMove1->base == 'L');
+            break;
+        
+        default:
+            return true;
+            break;
         }
     }
-    return strCleanup(alg);
+    else {
+        return true;
+    }
 }
 
-std::string Three_By_Three() {
-    const char space[] = {' '};
 
-    char moves[] = {'U', 'F', 'R', 'B', 'L', 'D'};
-    char currMove[2] = {moves[getRandomNum(0, 5+1)], '\0'};
-    char prevMove[2] = {'\0'};
+/*
+######################################################NOTE################################################################
+How to use above functions:
+```
+do{
+    createMove(//whatever);
+}while(!canUseMove(&TwoPrevMove, &PrevMove, &Move));
+```
+You need a minimum of 2 references to a move struct.
+*/
 
-    std::string alg;
 
-    for (int i = 0; i < getRandomNum(20, 25); ++i) {
-        alg += currMove;
-        int extra = getRandomNum(1,3+1);
+std::string Two_By_Two(){
+    std::string scramble;
+    struct move Move;
+    struct move PrevMove;
+    int moveCount = getRandomNum(9, 13);
+    
+    // So PrevMove is initalised.
+    createMove(PrevMove, '2');
 
-        if (extra == 1)
+    for (int n = 0; n < moveCount; n++)
+    {
+        do
         {
-            alg += '\'';
-        } else if(extra == 2){
-            alg += '2';
-        }
-        alg += space;
+            createMove(Move, '2');
+        } while (!canUseMove(&PrevMove, &Move));
+        
 
-        prevMove[0] = currMove[0];
-        while (currMove[0] == prevMove[0]) {
-            currMove[0] = moves[getRandomNum(0, 5+1)];
-        }
+        scramble += getRepresentation(&Move) + ' ';
+        PrevMove = Move; // Don't forget this!! :DDDDDDDDDD
     }
-
-    return strCleanup(alg);
+    return scramble;
 }
 
-std::string Four_By_Four() {
-    const char space[] = {' '};
+std::string Three_By_Three(){
+    std::string scramble;
+    struct move Move;
+    struct move PrevMove;
+    struct move TwoPrevMove;
+    int moveCount = getRandomNum(19, 27);
+    
+    // So TwoPrevMove is initialised
+    createMove(TwoPrevMove, '3');
 
-    char moves[] = {'U', 'F', 'R', 'B', 'L', 'D'};
-    char currMove[2] = {moves[getRandomNum(0, 5+1)], '\0'};
-    char prevMove[2] = {'\0'};
+    // So PrevMove is initalised.
+   do{
+    createMove(PrevMove, '3');
+    }while(!canUseMove(&TwoPrevMove, &PrevMove));
 
-    std::string alg;
+    for (int n = 0; n < moveCount; n++)
+    {
 
-    int wide;
-    int extra;
-
-    for (int i = 0; i < getRandomNum(35, 42); ++i) {
-        alg += currMove;
-
-        if (*currMove == 'U' || *currMove == 'F' || *currMove == 'R')
+        do
         {
-        wide = getRandomNum(1,2+1);
-        if (wide == 1)
-        {
-            alg += 'w';
-        }}
+            createMove(Move, '3');
+        } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
+        
 
-        extra = getRandomNum(1,3+1);
-
-        if (extra == 1)
-        {
-            alg += '\'';
-        } else if(extra == 2){
-            alg += '2';
-        }
-        alg += space;
-
-        prevMove[0] = currMove[0];
-        while (currMove[0] == prevMove[0]) {
-            currMove[0] = moves[getRandomNum(0, 5+1)];
-        }
+        scramble += getRepresentation(&Move) + ' ';
+        TwoPrevMove = PrevMove;
+        PrevMove = Move; // 
     }
-
-    return strCleanup(alg);
+    return scramble;
 }
 
-std::string Five_By_Five() {
-    const char space[] = {' '};
+std::string Four_By_Four(){
+    std::string scramble;
+    struct move Move;
+    struct move PrevMove;
+    struct move TwoPrevMove;
+    int moveCount = getRandomNum(38, 43);
+    
+    // So TwoPrevMove is initialised
+    createMove(TwoPrevMove, '4');
 
-    char moves[] = {'U', 'F', 'R', 'B', 'L', 'D'};
-    char currMove[2] = {moves[getRandomNum(0, 5+1)], '\0'};
-    char prevMove[2] = {'\0'};
+    // So PrevMove is initalised.
+   do{
+    createMove(PrevMove, '4');
+    }while(!canUseMove(&TwoPrevMove, &PrevMove));
 
-    std::string alg;
+    for (int n = 0; n < moveCount; n++)
+    {
 
-    int wide;
-    int extra;
-
-    for (int i = 0; i < getRandomNum(48, 53); ++i) {
-        alg += currMove;
-
-        wide = getRandomNum(1,2+1);
-        if (wide == 1)
+        do
         {
-            alg += 'w';
-        }
+            createMove(Move, '4');
+        } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
+        
 
-        extra = getRandomNum(1,3+1);
-
-        if (extra == 1)
-        {
-            alg += '\'';
-        } else if(extra == 2){
-            alg += '2';
-        }
-        alg += space;
-
-        prevMove[0] = currMove[0];
-        while (currMove[0] == prevMove[0]) {
-            currMove[0] = moves[getRandomNum(0, 5+1)];
-        }
+        scramble += getRepresentation(&Move) + " ";
+        TwoPrevMove = PrevMove;
+        PrevMove = Move; // 
     }
-
-    return strCleanup(alg);
+    return scramble;
 }
 
-std::string Six_By_Six() {
-    const char space[] = {' '};
+std::string Five_By_Five(){
+    std::string scramble;
+    struct move Move;
+    struct move PrevMove;
+    struct move TwoPrevMove;
+    int moveCount = getRandomNum(48, 53);
+    
+    // So TwoPrevMove is initialised
+    createMove(TwoPrevMove, '5');
 
-    char moves[] = {'U', 'F', 'R', 'B', 'L', 'D'};
-    char currMove[2] = {moves[getRandomNum(0, 5+1)], '\0'};
-    char prevMove[2] = {'\0'};
+    // So PrevMove is initalised.
+   do{
+    createMove(PrevMove, '5');
+    }while(!canUseMove(&TwoPrevMove, &PrevMove));
 
-    std::string alg;
+    for (int n = 0; n < moveCount; n++)
+    {
 
-    int wide;
-    int extra;
-
-    for (int i = 0; i < getRandomNum(58,63); ++i) {
-        alg += currMove;
-
-        wide = getRandomNum(1,2+1);
-        if (wide == 1)
+        do
         {
-            if ((*currMove == 'U' || *currMove == 'F' || *currMove == 'R') && (getRandomNum(1,3) == 1))
-            {
-                alg += "3";
-            }
-            alg += 'w';
-        }
+            createMove(Move, '5');
+        } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
+        
 
-        extra = getRandomNum(1,3+1);
-
-        if (extra == 1)
-        {
-            alg += '\'';
-        } else if(extra == 2){
-            alg += '2';
-        }
-        alg += space;
-
-        prevMove[0] = currMove[0];
-        while (currMove[0] == prevMove[0]) {
-            currMove[0] = moves[getRandomNum(0, 5+1)];
-        }
+        scramble += getRepresentation(&Move) + " ";
+        TwoPrevMove = PrevMove;
+        PrevMove = Move; // 
     }
-
-    return strCleanup(alg);
+    return scramble;
 }
 
-std::string Seven_By_Seven() {
-    const char space[] = {' '};
+std::string Six_By_Six(){
+    std::string scramble;
+    struct move Move;
+    struct move PrevMove;
+    struct move TwoPrevMove;
+    int moveCount = getRandomNum(58, 63);
+    
+    // So TwoPrevMove is initialised
+    createMove(TwoPrevMove, '6');
 
-    char moves[] = {'U', 'F', 'R', 'B', 'L', 'D'};
-    char currMove[2] = {moves[getRandomNum(0, 5+1)], '\0'};
-    char prevMove[2] = {'\0'};
+    // So PrevMove is initalised.
+   do{
+    createMove(PrevMove, '6');
+    }while(!canUseMove(&TwoPrevMove, &PrevMove));
 
-    std::string alg;
+    for (int n = 0; n < moveCount; n++)
+    {
 
-    int wide;
-    int extra;
-
-    for (int i = 0; i < getRandomNum(68,73); ++i) {
-        alg += currMove;
-
-        wide = getRandomNum(1,2+1);
-        if (wide == 1)
+        do
         {
-            if (getRandomNum(1,3) == 1)
-            {
-                alg += "3";
-            }
-            alg += 'w';
-        }
+            createMove(Move, '6');
+        } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
+        
 
-        extra = getRandomNum(1,3+1);
-
-        if (extra == 1)
-        {
-            alg += '\'';
-        } else if(extra == 2){
-            alg += '2';
-        }
-        alg += space;
-
-        prevMove[0] = currMove[0];
-        while (currMove[0] == prevMove[0]) {
-            currMove[0] = moves[getRandomNum(0, 5+1)];
-        }
+        scramble += getRepresentation(&Move) + " ";
+        TwoPrevMove = PrevMove;
+        PrevMove = Move; // 
     }
-
-    return strCleanup(alg);
+    return scramble;
 }
 
-std::string Skewb() {
-    const char space[] = {' '};
+std::string Seven_By_Seven(){
+    std::string scramble;
+    struct move Move;
+    struct move PrevMove;
+    struct move TwoPrevMove;
+    int moveCount = getRandomNum(68, 73);
+    
+    // So TwoPrevMove is initialised
+    createMove(TwoPrevMove, '7');
 
-    char moves[] = {'U', 'L', 'R', 'B'};
-    char currMove[2] = {moves[getRandomNum(0, 3+1)], '\0'};
-    char prevMove[2] = {'\0'};
+    // So PrevMove is initalised.
+   do{
+    createMove(PrevMove, '7');
+    }while(!canUseMove(&TwoPrevMove, &PrevMove));
 
-    std::string alg;
+    for (int n = 0; n < moveCount; n++)
+    {
 
-    for (int i = 0; i < getRandomNum(9, 12); ++i) {
-        alg += currMove;
-        int extra = getRandomNum(1,2+1);
-
-        if (extra == 1)
+        do
         {
-            alg += '\'';
-        }
-        alg += space;
+            createMove(Move, '7');
+        } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
+        
 
-        prevMove[0] = currMove[0];
-        while (currMove[0] == prevMove[0]) {
-            currMove[0] = moves[getRandomNum(0, 2+1)];
-        }
+        scramble += getRepresentation(&Move) + " ";
+        TwoPrevMove = PrevMove;
+        PrevMove = Move; // 
     }
+    return scramble;
+}
 
-    return strCleanup(alg);
+std::string Skewb(){
+    std::string scramble;
+    struct move Move;
+    struct move PrevMove;
+    int moveCount = getRandomNum(9, 13);
+    
+    // So PrevMove is initalised.
+    createMove(PrevMove, 'S');
+
+    for (int n = 0; n < moveCount; n++)
+    {
+        do
+        {
+            createMove(Move, 'S');
+        } while (!canUseMove(&PrevMove, &Move));
+        
+
+        scramble += getRepresentation(&Move) + ' ';
+        PrevMove = Move; // Don't forget this!! :DDDDDDDDDD
+    }
+    return scramble;
 }
 
 std::string Megaminx(){
