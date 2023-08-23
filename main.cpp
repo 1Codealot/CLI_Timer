@@ -18,7 +18,7 @@ bool shouldContinue(int argc, const char *argv[]){
 	if (argc != 3){
 		return false;
 	}else{
-		return (argv[2][0] == 'c' || shouldSave(argc, argv));
+		return (argv[2][0] == 'c' || shouldSave(argc, argv)); 
 	}
 }
 
