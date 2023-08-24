@@ -13,11 +13,19 @@ std::string changeExtension(std::string fileName){
     return finalFileName + ".CLI_T_S"; // CLI_T_S means CLI Timer Session.
 }
 
-void save_to_file(std::string sessionName, std::string scramble, float time){
+void save_to_file(std::string sessionName, std::string scramble, float time, std::string penalty, std::string comment){
     FILE *fptr;
     fptr = fopen(changeExtension(sessionName).c_str(), "a");
 
-    fprintf(fptr, "%s %.2f\n", scramble.c_str(), time);
-
+    if (penalty == "DNF" || penalty == "dnf")
+    {
+        fprintf(fptr, "%s;DNF(%.2f);%s\n", scramble.c_str(), time, comment.c_str());
+    } else if (penalty == "+2")
+    {
+        fprintf(fptr, "%s;%.2f+;%s\n", scramble.c_str(), time+2, comment.c_str());
+    } else
+    {
+        fprintf(fptr, "%s;%.2f;%s\n", scramble.c_str(), time, comment.c_str());
+    }
     fclose(fptr);
 }
