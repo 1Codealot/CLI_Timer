@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip> //Used for one line smh my head
 #include "Scrambles.hpp"
 #include "fileIO.hpp"
 
@@ -35,7 +36,6 @@ int main(int argc, char const *argv[])
     const bool cont = shouldContinue(argc, argv);
 
 	srand(static_cast<unsigned>(time(NULL)));
-
 
 	do
 	{
@@ -89,15 +89,34 @@ int main(int argc, char const *argv[])
 			break;
 		}
 
-		cout<<currentScramble<<"\nEnter your time: ";
- 			cin>>inputtedTime;
+		// Prompting
 
- 			if (save){
- 				save_to_file(argv[2], currentScramble, inputtedTime);
- 				}
+		char correct = 'n';
+		string penalty = "n";
+		string comment;
+		cout<<currentScramble;
+
+		do{
+		cout<<"\nEnter your time: ";
+ 		cin>>inputtedTime;
+		cout<<"\nYou entered in "<<fixed<<setprecision(2)/*The line I imported a whole thing for smh my head.*/<<inputtedTime<<"\nIs this correct? (Y/N)\n";
+		cin>>correct;
+		} while(correct != 'Y' && correct != 'y');
+
+		do
+		{
+			cout<<"Enter an penalty (OK/+2/DNF)\n";
+			cin>>penalty;
+		} while (penalty != "OK" && penalty != "ok" && penalty != "+2" && penalty != "DNF" && penalty != "dnf" );
+
+		cout<<"Enter in a comment (or don't you can leave blank)\n";
+		getline(cin, comment);
+		
+ 		if (save){
+			save_to_file(argv[2], currentScramble, inputtedTime, penalty, comment);
+			}
 				
 	} while (cont);
-
 
 	return 0;
 }
