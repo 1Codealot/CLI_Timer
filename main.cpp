@@ -23,6 +23,14 @@ bool shouldContinue(int argc, const char *argv[]){
 	}
 }
 
+bool shouldPrompt(int argc, const char *argv[]){
+	if (argc != 3){
+		return false;
+	}else{
+		return !(argv[2][0] == '-' && argv[2][1] == '-' && argv[2][2] == 'n' && argv[2][3] == 'o' && argv[2][4] == '_' && argv[2][5] == 'p' && argv[2][6] == 'r' && argv[2][7] == 'o'&& argv[2][8] == 'm' && argv[2][9] == 'p' && argv[2][10] == 't'); 
+	}
+}
+
 int main(int argc, char const *argv[])
 {
 
@@ -32,6 +40,7 @@ int main(int argc, char const *argv[])
 		return 1;
 	}
 
+	const bool prompt = shouldPrompt(argc, argv);
     const bool save = shouldSave(argc, argv);
     const bool cont = shouldContinue(argc, argv);
 
@@ -86,37 +95,39 @@ int main(int argc, char const *argv[])
 		default:
 			cerr<<"Command: \""<<*argv[1]<<"\" Not understood.";
 			exit(EXIT_FAILURE);
-			break;
 		}
-
-		// Prompting
-
-		char correct = 'n';
-		string penalty = "n";
-		string comment;
 		cout<<currentScramble;
 
-		do{
-		cout<<"\nEnter your time: ";
- 		cin>>inputtedTime;
-		cout<<"\nYou entered in "<<fixed<<setprecision(2)/*The line I imported a whole thing for smh my head.*/<<inputtedTime<<"\nIs this correct? (Y/N)\n";
-		cin>>correct;
-		} while(correct != 'Y' && correct != 'y');
+		if(prompt){
+			// Prompting
+			char correct = 'n';
+			string penalty = "n";
+			string comment;
 
-		do
-		{
-			cout<<"Enter an penalty (OK/+2/DNF)\n";
-			cin>>penalty;
-		} while (penalty != "OK" && penalty != "ok" && penalty != "+2" && penalty != "DNF" && penalty != "dnf" );
+			do{
+			cout<<"\nEnter your time: ";
+			cin>>inputtedTime;
+			cout<<"\nYou entered in "<<fixed<<setprecision(2)/*The line I imported a whole thing for smh my head.*/<<inputtedTime<<"\nIs this correct? (Y/N)\n";
+			cin>>correct;
+			} while(correct != 'Y' && correct != 'y');
 
-		cout<<"Enter in a comment (or don't you can leave blank)\n";
-		getline(cin, comment);
-		
- 		if (save){
-			save_to_file(argv[2], currentScramble, inputtedTime, penalty, comment);
-			}
-				
-	} while (cont);
+			do
+			{
+				cout<<"Enter an penalty (OK/+2/DNF)\n";
+				cin>>penalty;
+			} while (penalty != "OK" && penalty != "ok" && penalty != "+2" && penalty != "DNF" && penalty != "dnf" );
+
+			// cout<<"Enter in a comment (or don't you can leave blank)\n";
+			// cin>>comment;
+			if (save){
+				cout<<"Enter in a comment\n";
+				cin.ignore();
+				getline(cin, comment); // PLS HELP
+
+				save_to_file(argv[2], currentScramble, inputtedTime, penalty, comment);
+				}
+		} 
+	}while(cont);
 
 	return 0;
 }

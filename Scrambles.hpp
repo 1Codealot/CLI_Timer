@@ -13,31 +13,24 @@ bool canUseMove(struct move *pMove1, struct move *pMove2, struct move *pMove3){
         {
         case 'U':
             return !(pMove1->base == 'U' && pMove2->base == 'D');
-            break;
         
         case 'F':
             return !(pMove1->base == 'F' && pMove2->base == 'B');
-            break;
 
         case 'R':
             return !(pMove1->base == 'R' && pMove2->base == 'L');
-            break;
 
         case 'D':
             return !(pMove2->base == 'U' && pMove1->base == 'D');
-            break;
         
         case 'B':
             return !(pMove2->base == 'F' && pMove1->base == 'B');
-            break;
 
         case 'L':
             return !(pMove2->base == 'R' && pMove1->base == 'L');
-            break;
-        
+
         default:
             return true;
-            break;
         }
     }
     else {

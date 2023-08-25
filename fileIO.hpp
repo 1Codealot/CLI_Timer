@@ -19,13 +19,13 @@ void save_to_file(std::string sessionName, std::string scramble, float time, std
 
     if (penalty == "DNF" || penalty == "dnf")
     {
-        fprintf(fptr, "%s;DNF(%.2f);%s\n", scramble.c_str(), time, comment.c_str());
+        fprintf(fptr, "%s;DNF(%.2f);%s;\n", scramble.c_str(), time, comment.c_str());
     } else if (penalty == "+2")
     {
-        fprintf(fptr, "%s;%.2f+;%s\n", scramble.c_str(), time+2, comment.c_str());
+        fprintf(fptr, "%s;%.2f+;%s;\n", scramble.c_str(), time+2, comment.c_str());
     } else
     {
-        fprintf(fptr, "%s;%.2f;%s\n", scramble.c_str(), time, comment.c_str());
+        fprintf(fptr, "%s;%.2f;%s;\n", scramble.c_str(), time, comment.c_str());
     }
     fclose(fptr);
 }
