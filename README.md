@@ -37,9 +37,11 @@ This will either:
 * create a new session if "session_name" does not exist.
 * open a session if "session_name" does exist
 It will always be continuous so `c` isn't needed
-On windows, the session files will save to %appdata%\\CLI_Timer_Sessions.
-I will create an equivalent for Linux and MacOs
- 
+<br>
+On windows, the session files will save to %appdata%\\CLI_Timer_Sessions.<br>
+On Linux it saves to /home/your_username/.config<br>
+On MacOs it saves to /Users/your_username/Library/Application Support<br>
+
 ###### NOTE: you are able to change the scramble type of a session
 
 <hr>
