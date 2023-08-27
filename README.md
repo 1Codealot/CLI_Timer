@@ -5,18 +5,15 @@ This is a Rubik's cube training timer (some what similar to cstimer) used in the
 # Commands
 
 ### Implemented
+##### NxN cube types
 `2`
 `3`
 `4`
 `5`
 `6`
 `7`
-are commands to choose the scramble type (e.g. 3 means 3x3x3 puzzle)
 
-`c`
-continuous means that after entering a time (which currently does nothing) it'll produce a new scramble of the same type. (If `c` is not inputted it'll only do one scramble and exit after a time is inputted)
-
-<br>
+##### Side event cube types
 
 `S` <br>
 skewb <br>
@@ -24,18 +21,28 @@ skewb <br>
 megaminx <br>
 `P` <br>
 pyraminx <br>
-`k` <br>
+`K` <br>
 clock.
 <br>
-<br>
+
+<hr>
+
+`c`
+continuous means that after entering a time (which currently does nothing) it'll produce a new scramble of the same type. (If `c` is not inputted it'll only do one scramble and exit after a time is inputted)
+
+<hr>
 
 `-s{sessionName}`
 This will either:
 * create a new session if "session_name" does not exist.
 * open a session if "session_name" does exist
 It will always be continuous so `c` isn't needed
+On windows, the session files will save to %appdata%\\CLI_Timer_Sessions.
+I will create an equivalent for Linux and MacOs
  
 ###### NOTE: you are able to change the scramble type of a session
+
+<hr>
 
 #### Example commands
 `CLI_Timer.exe 3` This will generate a single scramble for a 3x3 <br>
@@ -44,7 +51,7 @@ It will always be continuous so `c` isn't needed
 
 ### To be implemented
 
-`q` <br>
+`Q` <br>
 square one (may not exist cus im dumb) 
 
 # Other things to be implemented
