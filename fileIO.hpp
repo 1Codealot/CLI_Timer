@@ -2,12 +2,23 @@
 #include <filesystem>
 
 std::string getPath(){
-    // TODO: Add cases to non-windows eventually.
-    std::string appDataPath = std::getenv("APPDATA");
-    std::string targetDir = appDataPath + "\\CLI_Timer_Sessions\\";
+    #ifdef _WIN32
+        std::string appDataPath = std::getenv("APPDATA");
+        std::string targetDir = appDataPath + "\\CLI_Timer_Sessions\\";
 
-    std::filesystem::create_directory(targetDir);
+        std::filesystem::create_directory(targetDir);
+    
+    #elif __APPLE__
+        std::string appDataPath = std::getenv("HOME");
+        std::string targetDir = appDataPath + "/Library/Application Support";
+        std::filesystem::create_directory(targetDir);
+   
+   #elif __linux__
+    std::string appDataPath = std::getenv("HOME");
+        std::string targetDir = appDataPath + "/.config";
+        std::filesystem::create_directory(targetDir);
 
+    #endif
     return targetDir;
 }
 
