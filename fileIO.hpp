@@ -10,12 +10,12 @@ std::string getPath(){
     
     #elif __APPLE__
         std::string appDataPath = std::getenv("HOME");
-        std::string targetDir = appDataPath + "/Library/Application Support";
+        std::string targetDir = appDataPath + "/Library/Application Support/CLI_Timer_Sessions/";
         std::filesystem::create_directory(targetDir);
    
    #elif __linux__
-    std::string appDataPath = std::getenv("HOME");
-        std::string targetDir = appDataPath + "/.config";
+    	std::string appDataPath = std::getenv("HOME");
+        std::string targetDir = appDataPath + "/.config/CLI_Timer_Sessions/";
         std::filesystem::create_directory(targetDir);
 
     #endif
