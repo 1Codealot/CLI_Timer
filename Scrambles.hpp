@@ -328,7 +328,8 @@ std::string Clock(){
     "U"   + moves[getRandomNum(0, 12)] + " " +
     "R"   + moves[getRandomNum(0, 12)] + " " +
     "D"   + moves[getRandomNum(0, 12)] + " " +
-    "L"   + moves[getRandomNum(0, 12)] + " ";
+    "L"   + moves[getRandomNum(0, 12)] + " "  +
+    "ALL"+moves[getRandomNum(0, 12)] + " ";
 
     if (getRandomNum(0, 1) == 1)
     {
