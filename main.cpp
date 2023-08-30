@@ -48,7 +48,7 @@ int main(int argc, char const *argv[])
 
 	do
 	{
-		string currentScramble;
+		string currentScramble = "                                                                                                                           ";
 		// Get scramble
 		switch (*argv[1])
 		{

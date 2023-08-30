@@ -221,7 +221,6 @@ std::string Seven_By_Seven(){
             createMove(Move, '7');
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
         
-
         scramble += getRepresentation(&Move) + " ";
         TwoPrevMove = PrevMove;
         PrevMove = Move; // 
@@ -289,7 +288,8 @@ std::string Megaminx(){
 
 std::string Pyraminx() {
     char tips[] = {'u', 'l', 'r', 'b'};
-    std::string scramble = Skewb();
+    std::string  scramble;
+    scramble += Skewb();
 
     for(int i = 0; i < 3; i++){
         int direction = getRandomNum(1, 3);
@@ -312,24 +312,23 @@ std::string Pyraminx() {
 }
 
 std::string Clock(){
-    std::string moves[] = {"5-","4-","3-","2-","1-","0+","1+","2+","3+","4+","5+","6+"};
+    std::string hours[] = {"5-","4-","3-","2-","1-","0+","1+","2+","3+","4+","5+","6+"};
     std::string scramble;
-
-    scramble += 
-    "UR" + moves[getRandomNum(0, 12)] + " " +
-    "DR" + moves[getRandomNum(0, 12)] + " " +
-    "DL" + moves[getRandomNum(0, 12)] + " " +
-    "UL" + moves[getRandomNum(0, 12)] + " " +
-    "U"   + moves[getRandomNum(0, 12)] + " " +
-    "R"   + moves[getRandomNum(0, 12)] + " " +
-    "D"   + moves[getRandomNum(0, 12)] + " " +
-    "L"   + moves[getRandomNum(0, 12)] + " " +
-    "ALL"+ moves[getRandomNum(0, 12)] + " " + "y2" + " " +
-    "U"   + moves[getRandomNum(0, 12)] + " " +
-    "R"   + moves[getRandomNum(0, 12)] + " " +
-    "D"   + moves[getRandomNum(0, 12)] + " " +
-    "L"   + moves[getRandomNum(0, 12)] + " "  +
-    "ALL"+moves[getRandomNum(0, 12)] + " ";
+    
+    scramble =  "UR"  + hours[getRandomNum(0, 11)] + " "; 
+    scramble += "DR"  + hours[getRandomNum(0, 11)] + " ";
+    scramble += "DL"  + hours[getRandomNum(0, 11)] + " " ;
+    scramble += "UL"  + hours[getRandomNum(0, 11)] + " " ;
+    scramble += "U"   + hours[getRandomNum(0, 11)] + " " ; 
+    scramble += "R"   + hours[getRandomNum(0, 11)] + " "; 
+    scramble += "D"   + hours[getRandomNum(0, 11)] + " " ;
+    scramble += "L"   + hours[getRandomNum(0, 11)] + " " ;
+    scramble += "ALL" + hours[getRandomNum(0, 11)] + " " + "y2" + " " ; 
+    scramble += "U"   + hours[getRandomNum(0, 11)] + " " ;
+    scramble += "R"   + hours[getRandomNum(0, 11)] + " " ; 
+    scramble += "D"   + hours[getRandomNum(0, 11)] + " " ;
+    scramble += "L"   + hours[getRandomNum(0, 11)] + " " ;
+    scramble += "ALL" + hours[getRandomNum(0, 11)] + " ";
 
     if (getRandomNum(0, 1) == 1)
     {
