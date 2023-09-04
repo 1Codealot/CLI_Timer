@@ -46,6 +46,12 @@ On MacOs it saves to /Users/your_username/Library/Application Support<br>
 
 <hr>
 
+`--no_prompt`
+This will not prompt you to enter in your time.
+If you do `CLI_Timer 2 -sSession --no_prompt` it will say "You can't save without prompting therefore it will prompt". I'm sure you can figure out why from the message.
+
+<hr>
+
 #### Example commands
 `CLI_Timer.exe 3` This will generate a single scramble for a 3x3 <br>
 `CLI_Timer.exe 5 c` This will continually generate scrambles for a 5x5. This will NOT save to a file. <br>
