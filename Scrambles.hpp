@@ -1,19 +1,23 @@
 #include "NxNMoveGen.hpp"
 
-bool canUseMove(struct move *pMove1, struct move *pMove2){ // Two x Two
+bool canUseMove(struct move *pMove1, struct move *pMove2)
+{ // Two x Two
     return pMove1->base != pMove2->base;
 }
 
-bool canUseMove(struct move *pMove1, struct move *pMove2, struct move *pMove3){
-    if (!canUseMove(pMove2, pMove3)){
+bool canUseMove(struct move *pMove1, struct move *pMove2, struct move *pMove3)
+{
+    if (!canUseMove(pMove2, pMove3))
+    {
         return false;
     }
-    if(!(pMove3->wsize != pMove2->wsize && pMove3->wsize != pMove1->wsize)){
+    if (!(pMove3->wsize != pMove2->wsize && pMove3->wsize != pMove1->wsize))
+    {
         switch (pMove3->base)
         {
         case 'U':
             return !(pMove1->base == 'U' && pMove2->base == 'D');
-        
+
         case 'F':
             return !(pMove1->base == 'F' && pMove2->base == 'B');
 
@@ -22,7 +26,7 @@ bool canUseMove(struct move *pMove1, struct move *pMove2, struct move *pMove3){
 
         case 'D':
             return !(pMove2->base == 'U' && pMove1->base == 'D');
-        
+
         case 'B':
             return !(pMove2->base == 'F' && pMove1->base == 'B');
 
@@ -33,11 +37,11 @@ bool canUseMove(struct move *pMove1, struct move *pMove2, struct move *pMove3){
             return true;
         }
     }
-    else {
+    else
+    {
         return true;
     }
 }
-
 
 /*
 ######################################################NOTE################################################################
@@ -50,13 +54,13 @@ do{
 You need a minimum of 2 references to a move struct.
 */
 
-
-std::string Two_By_Two(){
+std::string Two_By_Two()
+{
     std::string scramble;
     struct move Move;
     struct move PrevMove;
     int moveCount = getRandomNum(9, 13);
-    
+
     // So PrevMove is initalised.
     createMove(PrevMove, '2');
 
@@ -66,7 +70,6 @@ std::string Two_By_Two(){
         {
             createMove(Move, '2');
         } while (!canUseMove(&PrevMove, &Move));
-        
 
         scramble += getRepresentation(&Move) + ' ';
         PrevMove = Move; // Don't forget this!! :DDDDDDDDDD
@@ -74,20 +77,22 @@ std::string Two_By_Two(){
     return scramble;
 }
 
-std::string Three_By_Three(){
+std::string Three_By_Three()
+{
     std::string scramble;
     struct move Move;
     struct move PrevMove;
     struct move TwoPrevMove;
     int moveCount = getRandomNum(19, 27);
-    
+
     // So TwoPrevMove is initialised
     createMove(TwoPrevMove, '3');
 
     // So PrevMove is initalised.
-   do{
-    createMove(PrevMove, '3');
-    }while(!canUseMove(&TwoPrevMove, &PrevMove));
+    do
+    {
+        createMove(PrevMove, '3');
+    } while (!canUseMove(&TwoPrevMove, &PrevMove));
 
     for (int n = 0; n < moveCount; n++)
     {
@@ -96,29 +101,30 @@ std::string Three_By_Three(){
         {
             createMove(Move, '3');
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
-        
 
         scramble += getRepresentation(&Move) + ' ';
         TwoPrevMove = PrevMove;
-        PrevMove = Move; // 
+        PrevMove = Move; //
     }
     return scramble;
 }
 
-std::string Four_By_Four(){
+std::string Four_By_Four()
+{
     std::string scramble;
     struct move Move;
     struct move PrevMove;
     struct move TwoPrevMove;
     int moveCount = getRandomNum(38, 43);
-    
+
     // So TwoPrevMove is initialised
     createMove(TwoPrevMove, '4');
 
     // So PrevMove is initalised.
-   do{
-    createMove(PrevMove, '4');
-    }while(!canUseMove(&TwoPrevMove, &PrevMove));
+    do
+    {
+        createMove(PrevMove, '4');
+    } while (!canUseMove(&TwoPrevMove, &PrevMove));
 
     for (int n = 0; n < moveCount; n++)
     {
@@ -127,29 +133,30 @@ std::string Four_By_Four(){
         {
             createMove(Move, '4');
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
-        
 
         scramble += getRepresentation(&Move) + " ";
         TwoPrevMove = PrevMove;
-        PrevMove = Move; // 
+        PrevMove = Move; //
     }
     return scramble;
 }
 
-std::string Five_By_Five(){
+std::string Five_By_Five()
+{
     std::string scramble;
     struct move Move;
     struct move PrevMove;
     struct move TwoPrevMove;
     int moveCount = getRandomNum(48, 53);
-    
+
     // So TwoPrevMove is initialised
     createMove(TwoPrevMove, '5');
 
     // So PrevMove is initalised.
-   do{
-    createMove(PrevMove, '5');
-    }while(!canUseMove(&TwoPrevMove, &PrevMove));
+    do
+    {
+        createMove(PrevMove, '5');
+    } while (!canUseMove(&TwoPrevMove, &PrevMove));
 
     for (int n = 0; n < moveCount; n++)
     {
@@ -158,29 +165,30 @@ std::string Five_By_Five(){
         {
             createMove(Move, '5');
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
-        
 
         scramble += getRepresentation(&Move) + " ";
         TwoPrevMove = PrevMove;
-        PrevMove = Move; // 
+        PrevMove = Move; //
     }
     return scramble;
 }
 
-std::string Six_By_Six(){
+std::string Six_By_Six()
+{
     std::string scramble;
     struct move Move;
     struct move PrevMove;
     struct move TwoPrevMove;
     int moveCount = getRandomNum(58, 63);
-    
+
     // So TwoPrevMove is initialised
     createMove(TwoPrevMove, '6');
 
     // So PrevMove is initalised.
-   do{
-    createMove(PrevMove, '6');
-    }while(!canUseMove(&TwoPrevMove, &PrevMove));
+    do
+    {
+        createMove(PrevMove, '6');
+    } while (!canUseMove(&TwoPrevMove, &PrevMove));
 
     for (int n = 0; n < moveCount; n++)
     {
@@ -189,29 +197,30 @@ std::string Six_By_Six(){
         {
             createMove(Move, '6');
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
-        
 
         scramble += getRepresentation(&Move) + " ";
         TwoPrevMove = PrevMove;
-        PrevMove = Move; // 
+        PrevMove = Move; //
     }
     return scramble;
 }
 
-std::string Seven_By_Seven(){
+std::string Seven_By_Seven()
+{
     std::string scramble;
     struct move Move;
     struct move PrevMove;
     struct move TwoPrevMove;
     int moveCount = getRandomNum(68, 73);
-    
+
     // So TwoPrevMove is initialised
     createMove(TwoPrevMove, '7');
 
     // So PrevMove is initalised.
-   do{
-    createMove(PrevMove, '7');
-    }while(!canUseMove(&TwoPrevMove, &PrevMove));
+    do
+    {
+        createMove(PrevMove, '7');
+    } while (!canUseMove(&TwoPrevMove, &PrevMove));
 
     for (int n = 0; n < moveCount; n++)
     {
@@ -220,20 +229,21 @@ std::string Seven_By_Seven(){
         {
             createMove(Move, '7');
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
-        
+
         scramble += getRepresentation(&Move) + " ";
         TwoPrevMove = PrevMove;
-        PrevMove = Move; // 
+        PrevMove = Move; //
     }
     return scramble;
 }
 
-std::string Skewb(){
+std::string Skewb()
+{
     std::string scramble;
     struct move Move;
     struct move PrevMove;
     int moveCount = getRandomNum(9, 13);
-    
+
     // So PrevMove is initalised.
     createMove(PrevMove, 'S');
 
@@ -243,7 +253,6 @@ std::string Skewb(){
         {
             createMove(Move, 'S');
         } while (!canUseMove(&PrevMove, &Move));
-        
 
         scramble += getRepresentation(&Move) + ' ';
         PrevMove = Move; // Don't forget this!! :DDDDDDDDDD
@@ -251,25 +260,33 @@ std::string Skewb(){
     return scramble;
 }
 
-std::string Megaminx(){
+std::string Megaminx()
+{
     bool Dpp;
     std::string scramble;
 
     for (int i = 0; i < 5; i++)
     {
-        for (int n = 0; n < 7; n++){
+        for (int n = 0; n < 7; n++)
+        {
             scramble += "R";
-            if(getRandomNum(0, 1) == 0){
+            if (getRandomNum(0, 1) == 0)
+            {
                 scramble += "++ ";
-            } else {
+            }
+            else
+            {
                 scramble += "-- ";
             }
 
             scramble += "D";
-            if(getRandomNum(0, 1) == 0){
+            if (getRandomNum(0, 1) == 0)
+            {
                 scramble += "++ ";
                 Dpp = true;
-            } else {
+            }
+            else
+            {
                 scramble += "-- ";
                 Dpp = false;
             }
@@ -277,7 +294,7 @@ std::string Megaminx(){
         if (Dpp)
         {
             scramble += "U \n";
-        } 
+        }
         else
         {
             scramble += "U' \n";
@@ -286,19 +303,21 @@ std::string Megaminx(){
     return scramble;
 }
 
-std::string Pyraminx() {
+std::string Pyraminx()
+{
     char tips[] = {'u', 'l', 'r', 'b'};
-    std::string  scramble;
+    std::string scramble;
     scramble += Skewb();
 
-    for(int i = 0; i < 3; i++){
+    for (int i = 0; i < 3; i++)
+    {
         int direction = getRandomNum(1, 3);
         if (direction == 1)
         {
             continue;
         }
         else if (direction == 2)
-        {  
+        {
             scramble += tips[i];
             scramble += " ";
         }
@@ -311,23 +330,24 @@ std::string Pyraminx() {
     return scramble;
 }
 
-std::string Clock(){
-    std::string hours[] = {"5-","4-","3-","2-","1-","0+","1+","2+","3+","4+","5+","6+"};
+std::string Clock()
+{
+    std::string hours[] = {"5-", "4-", "3-", "2-", "1-", "0+", "1+", "2+", "3+", "4+", "5+", "6+"};
     std::string scramble;
-    
-    scramble =  "UR"  + hours[getRandomNum(0, 11)] + " "; 
-    scramble += "DR"  + hours[getRandomNum(0, 11)] + " ";
-    scramble += "DL"  + hours[getRandomNum(0, 11)] + " " ;
-    scramble += "UL"  + hours[getRandomNum(0, 11)] + " " ;
-    scramble += "U"   + hours[getRandomNum(0, 11)] + " " ; 
-    scramble += "R"   + hours[getRandomNum(0, 11)] + " "; 
-    scramble += "D"   + hours[getRandomNum(0, 11)] + " " ;
-    scramble += "L"   + hours[getRandomNum(0, 11)] + " " ;
-    scramble += "ALL" + hours[getRandomNum(0, 11)] + " " + "y2" + " " ; 
-    scramble += "U"   + hours[getRandomNum(0, 11)] + " " ;
-    scramble += "R"   + hours[getRandomNum(0, 11)] + " " ; 
-    scramble += "D"   + hours[getRandomNum(0, 11)] + " " ;
-    scramble += "L"   + hours[getRandomNum(0, 11)] + " " ;
+
+    scramble = "UR" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "DR" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "DL" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "UL" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "U" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "R" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "D" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "L" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "ALL" + hours[getRandomNum(0, 11)] + " " + "y2" + " ";
+    scramble += "U" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "R" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "D" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "L" + hours[getRandomNum(0, 11)] + " ";
     scramble += "ALL" + hours[getRandomNum(0, 11)] + " ";
 
     if (getRandomNum(0, 1) == 1)
@@ -346,6 +366,6 @@ std::string Clock(){
     {
         scramble += "UL ";
     }
-    
+
     return scramble;
 }
