@@ -11,9 +11,9 @@ int getRandomNum(int min, int max)
     return (rand() % (max + 1 - min)) + min;
 }
 
-constexpr char baseMoves[] = {'F', 'U', 'R', 'B', 'L', 'D'};
-constexpr char directions[] = {' ', '\'', '2'}; // If ' ' Ignore, can't have ''
-constexpr char wideSizes[] = {' ', '2', '3'};
+constexpr char baseMoves[6] = {'F', 'U', 'R', 'B', 'L', 'D'};
+constexpr char directions[3] = {' ', '\'', '2'}; // If ' ' Ignore, can't have ''
+constexpr char wideSizes[3] = {' ', '2', '3'};
 
 struct move
 {
@@ -69,7 +69,15 @@ void createMove(struct move &newMove, char moveType)
         newMove.base = baseMoves[getRandomNum(1, 4)];
         newMove.direction = directions[getRandomNum(0, 1)];
         newMove.wsize = wideSizes[0];
+        break;
+
+    default:
+        newMove.base = 'B';
+        newMove.direction = 'A';
+        newMove.wsize = 'D';
+        // Done as i cba to create a custom exception
     }
+
 }
 
 std::string getRepresentation(struct move *pMove)
@@ -97,11 +105,4 @@ std::string getRepresentation(struct move *pMove)
     }
 
     return finalMove;
-}
-
-std::string outputMove(char moveType)
-{
-    struct move Move;
-    createMove(Move, moveType);
-    return getRepresentation(&Move);
 }

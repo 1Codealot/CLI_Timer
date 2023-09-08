@@ -3,7 +3,6 @@
 
 #include "Scrambles.hpp"
 #include "fileIO.hpp"
-#include "cmdLineParser.hpp"
 
 using namespace std;
 
@@ -73,7 +72,7 @@ int main(int argc, char const *argv[])
 	const bool save = shouldSave(argc, argv);
 	const bool cont = shouldContinue(argc, argv);
 
-	srand(static_cast<unsigned>(time(NULL)));
+	srand(static_cast<unsigned>(time(nullptr)));
 
 	do
 	{ // while (cont);

@@ -57,8 +57,8 @@ You need a minimum of 2 references to a move struct.
 std::string Two_By_Two()
 {
     std::string scramble;
-    struct move Move;
-    struct move PrevMove;
+    struct move Move{};
+    struct move PrevMove{};
     int moveCount = getRandomNum(9, 13);
 
     // So PrevMove is initalised.
@@ -80,9 +80,9 @@ std::string Two_By_Two()
 std::string Three_By_Three()
 {
     std::string scramble;
-    struct move Move;
-    struct move PrevMove;
-    struct move TwoPrevMove;
+    struct move Move{};
+    struct move PrevMove{};
+    struct move TwoPrevMove{};
     int moveCount = getRandomNum(19, 27);
 
     // So TwoPrevMove is initialised
@@ -112,9 +112,9 @@ std::string Three_By_Three()
 std::string Four_By_Four()
 {
     std::string scramble;
-    struct move Move;
-    struct move PrevMove;
-    struct move TwoPrevMove;
+    struct move Move{};
+    struct move PrevMove{};
+    struct move TwoPrevMove{};
     int moveCount = getRandomNum(38, 43);
 
     // So TwoPrevMove is initialised
@@ -144,9 +144,9 @@ std::string Four_By_Four()
 std::string Five_By_Five()
 {
     std::string scramble;
-    struct move Move;
-    struct move PrevMove;
-    struct move TwoPrevMove;
+    struct move Move{};
+    struct move PrevMove{};
+    struct move TwoPrevMove{};
     int moveCount = getRandomNum(48, 53);
 
     // So TwoPrevMove is initialised
@@ -176,9 +176,9 @@ std::string Five_By_Five()
 std::string Six_By_Six()
 {
     std::string scramble;
-    struct move Move;
-    struct move PrevMove;
-    struct move TwoPrevMove;
+    struct move Move{};
+    struct move PrevMove{};
+    struct move TwoPrevMove{};
     int moveCount = getRandomNum(58, 63);
 
     // So TwoPrevMove is initialised
@@ -208,9 +208,9 @@ std::string Six_By_Six()
 std::string Seven_By_Seven()
 {
     std::string scramble;
-    struct move Move;
-    struct move PrevMove;
-    struct move TwoPrevMove;
+    struct move Move{};
+    struct move PrevMove{};
+    struct move TwoPrevMove{};
     int moveCount = getRandomNum(68, 73);
 
     // So TwoPrevMove is initialised
@@ -240,8 +240,8 @@ std::string Seven_By_Seven()
 std::string Skewb()
 {
     std::string scramble;
-    struct move Move;
-    struct move PrevMove;
+    struct move Move{};
+    struct move PrevMove{};
     int moveCount = getRandomNum(9, 13);
 
     // So PrevMove is initalised.

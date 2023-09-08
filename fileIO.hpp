@@ -4,7 +4,7 @@
 std::string getPath()
 {
 #ifdef _WIN32
-    std::string appDataPath = std::getenv("AMOGUS");
+    std::string appDataPath = std::getenv("%APPDATA%");
     std::string targetDir = appDataPath + "\\CLI_Timer_Sessions\\";
     std::filesystem::create_directory(targetDir);
 
@@ -39,7 +39,7 @@ std::string changeExtensionAndAddPath(std::string fileName)
     return getPath() + finalFileName + ".CLI_T_S"; // CLI_T_S means CLI Timer Session.
 }
 
-void save_to_file(std::string sessionName, std::string scramble, float time, std::string penalty, std::string comment)
+void save_to_file(std::string sessionName, std::string& scramble, float time, std::string& penalty, std::string& comment)
 {
     FILE *fptr;
     fptr = fopen(changeExtensionAndAddPath(sessionName).c_str(), "a");
