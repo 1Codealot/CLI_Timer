@@ -369,3 +369,43 @@ std::string Clock()
 
     return scramble;
 }
+
+// Use this one
+std::string generate_scramble(const char cube){
+    switch (cube)
+    {
+        case '2':
+            return Two_By_Two();    
+
+        case '3':
+            return Three_By_Three();            
+
+        case '4':
+            return Four_By_Four();            
+
+        case '5':
+            return Five_By_Five();            
+
+        case '6':
+            return Six_By_Six();           
+
+        case '7':
+            return Seven_By_Seven();
+
+        case 'S':
+            return Skewb();
+
+        case 'P':
+            return Pyraminx();
+
+        case 'M':
+            return Megaminx();
+
+        case 'K':
+            return Clock();
+
+        default:
+            return "Unknown puzzle";
+            
+    }
+}

@@ -1,5 +1,4 @@
 #include <iostream>
-#include <iomanip> //Used for one line smh my head
 
 #include "Scrambles.hpp"
 #include "fileIO.hpp"
@@ -7,6 +6,8 @@
 using namespace std;
 
 float inputtedTime;
+
+// Commandline stuff. Move later
 
 bool shouldSave(int argc, const char *argv[])
 {
@@ -59,6 +60,55 @@ bool shouldPrompt(int argc, const char *argv[])
 	}
 }
 
+// Prompting
+float getTime(){
+	float inputtedTime;
+	string correct;
+
+	cout << "\nEnter your time: ";
+	cin >> inputtedTime;
+
+	cout << "\nYou entered in " << fixed << setprecision(2) << inputtedTime << "\nIs this correct? (Y/n)\n";
+
+	cin.ignore();
+
+	getline(cin, correct);
+
+	if (correct.length() == 0)
+	{
+		return inputtedTime;
+	}
+	else if (correct[0] == 'Y' || correct[0] == 'y') // bruh
+	{
+		return inputtedTime;
+	}
+	else
+	{
+		return getTime();
+	}
+}
+
+string getPenalty(){
+	string penalty;
+
+	cout << "Enter an penalty (OK/+2/dnf)\n";
+	getline(cin, penalty);
+
+	if (penalty.length() == 0)
+	{
+		return "OK";
+	}
+	else if (penalty == "OK" || penalty == "ok" || penalty == "+2" || penalty == "DNF" || penalty == "dnf")
+	{
+		return penalty;
+	}
+	else
+	{
+		return getPenalty();
+	}
+}
+
+
 int main(int argc, char const *argv[])
 {
 
@@ -78,52 +128,16 @@ int main(int argc, char const *argv[])
 	{ // while (cont);
 		string currentScramble = /*Lots of spaces btw*/ "                                                                                                                           ";
 		// Get scramble
-		switch (*argv[1])
+
+		currentScramble = generate_scramble(*argv[1]);
+
+		// Edge case incase idot uses this intellecktualy maid sw.
+		if (currentScramble == "Unknown puzzle")
 		{
-		case '2':
-			currentScramble = Two_By_Two();
-			break;
-
-		case '3':
-			currentScramble = Three_By_Three();
-			break;
-
-		case '4':
-			currentScramble = Four_By_Four();
-			break;
-
-		case '5':
-			currentScramble = Five_By_Five();
-			break;
-
-		case '6':
-			currentScramble = Six_By_Six();
-			break;
-
-		case '7':
-			currentScramble = Seven_By_Seven();
-			break;
-
-		case 'S':
-			currentScramble = Skewb();
-			break;
-
-		case 'P':
-			currentScramble = Pyraminx();
-			break;
-
-		case 'M':
-			currentScramble = Megaminx();
-			break;
-
-		case 'K':
-			currentScramble = Clock();
-			break;
-
-		default:
-			cerr << "Command: \"" << *argv[1] << "\" Not understood.";
+			cerr<<"Unknown puzzle type: "<<*argv[1];
 			exit(EXIT_FAILURE);
 		}
+
 		cout << currentScramble;
 
 		if (!prompt)
@@ -135,34 +149,18 @@ int main(int argc, char const *argv[])
 
 		else
 		{
-			// Prompting
-			char correct = 'n';
-			string penalty = "n";
-			string comment;
+			float solveTime = getTime();			
 
-			do
-			{ // while(correct != 'Y' && correct != 'y');
-				cout << "\nEnter your time: ";
-				cin >> inputtedTime;
-				cout << "\nYou entered in " << fixed << setprecision(2) /*The line I imported a whole thing for smh my head.*/ << inputtedTime << "\nIs this correct? (Y/N)\n";
-				cin >> correct;
-			} while (correct != 'Y' && correct != 'y');
+			string penalty = getPenalty();
 
-			do // while (penalty != "OK" && penalty != "ok" && penalty != "+2" && penalty != "DNF" && penalty != "dnf" );
-			{
-				cout << "Enter an penalty (OK/+2/DNF)\n";
-				cin >> penalty;
-			} while (penalty != "OK" && penalty != "ok" && penalty != "+2" && penalty != "DNF" && penalty != "dnf");
-
-			// cout<<"Enter in a comment (or don't you can leave blank)\n";
-			// cin>>comment;
 			if (save)
 			{
-				cout << "Enter in a comment\n";
+				string comment;
+				cout << "Enter in a comment (or don't you can leave blank)\n";
 				cin.ignore();
 				getline(cin, comment);
 
-				save_to_file(argv[2], currentScramble, inputtedTime, penalty, comment);
+				save_to_file(argv[2], currentScramble, solveTime, penalty, comment);
 			}
 		}
 	} while (cont);
