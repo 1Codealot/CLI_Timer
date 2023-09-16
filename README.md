@@ -1,4 +1,4 @@
-# CLI_Timer ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+# CLI_Timer ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white) <br>![Download Count](https://img.shields.io/github/downloads/1Codealot/CLI_Timer/total)
 
 This is a Rubik's cube training timer (some what similar to cstimer) used in the command line. 
 
@@ -38,9 +38,9 @@ This will either:
 * open a session if "session_name" does exist
 It will always be continuous so `c` isn't needed
 <br>
-On windows, the session files will save to %appdata%\\CLI_Timer_Sessions.<br>
-On Linux it saves to /home/your_username/.config<br>
-On MacOs it saves to /Users/your_username/Library/Application Support<br>
+On windows, the session files will save to %appdata%\CLI_Timer_Sessions.<br>
+On Linux it saves to /home/your_username/.config/CLI_Timer_Sessions<br>
+On MacOs it saves to /Users/your_username/Library/Application Support/CLI_Timer_Sessions<br>
 
 ###### NOTE: you are able to change the scramble type of a session
 
@@ -60,7 +60,7 @@ If you do `CLI_Timer 2 -sSession --no_prompt` it will say "You can't save withou
 ### To be implemented
 
 `Q` <br>
-square one (may not exist cus im dumb) 
+square one (Don't tell anyone i might be working on it 🤫) 
 
 # Other things to be implemented
 * Better outputting
