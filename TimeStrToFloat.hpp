@@ -1,39 +1,26 @@
 #include <string>
 
-unsigned long long charCountInStr(char c, const std::string& str){
-    unsigned long long count = 0;
-    
-    for (auto &&i : str)
-    {
-        if (i == c)
-        {
-            count++;
-        }
-        
-    }
-    return count;
-}
-
 float timeStrToFloatSecs(std::string time_in){
 
-    if (charCountInStr('.', time_in) >= 1)
-    {
-        time_in.erase('.');
+    size_t pos = time_in.find('.');
+
+    while (pos != std::string::npos){
+        time_in.erase(pos, 1);
+        pos = time_in.find('.');
     }
 
-    if (charCountInStr(':', time_in) >= 1)
-    {
-        time_in.erase(':');
+
+    pos = time_in.find(':');
+
+    while (pos != std::string::npos){
+        time_in.erase(pos, 1);
+        pos = time_in.find(':');
     }
 
     time_in.insert(0, 8-time_in.length(), '0');
 
     
     int HMSD[] {-1, -1, -1, -1}; //HHMMSSDD
-
-    //std::string in_time { "00000000" };
-
-
                                                                  
     int part { 0 };
 
@@ -68,27 +55,28 @@ float timeStrToFloatSecs(std::string time_in){
 }
 
 std::string outputTime(std::string time_in){
+    size_t pos = time_in.find('.');
+
+    while (pos != std::string::npos){
+        time_in.erase(pos, 1);
+        pos = time_in.find('.');
+    }
+
+
+    pos = time_in.find(':');
+
+    while (pos != std::string::npos){
+        time_in.erase(pos, 1);
+        pos = time_in.find(':');
+    }
+
     time_in.insert(0, 8-time_in.length(), '0');
 
-    if (charCountInStr('.', time_in) >= 1)
-    {
-        time_in.erase('.');
-    }
+    time_in.insert(2, ":");
+    time_in.insert(5, ":");
+    time_in.insert(8, ".");
 
-    if (charCountInStr(':', time_in) >= 1)
-    {
-        time_in.erase(':');
-    }
-    std::string output { time_in };
+    // TODO: sigfigs
 
-    output.insert(2, ":");
-    output.insert(5, ":");
-    output.insert(8, ".");
-
-    return output;    
+    return time_in;
 }
-
-//std::string eraseTest(){
-//    std::string srtyfgui { "AAAAABAAAAAAAAAC" };
-//    return srtyfgui.erase('A');
-//}
