@@ -76,7 +76,15 @@ std::string outputTime(std::string time_in){
     time_in.insert(5, ":");
     time_in.insert(8, ".");
 
-    // TODO: sigfigs
+    // sigfigs
+
+    while (time_in.at(0) == '0' && time_in.at(1) == '0' && time_in.at(2) != '.'){
+        time_in.erase(0, 3);
+    }
+
+    if (time_in.at(0) == '0'){
+        time_in.erase(0, 1);
+    }
 
     return time_in;
 }
