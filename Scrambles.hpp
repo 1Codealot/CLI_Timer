@@ -335,19 +335,19 @@ std::string Clock()
     std::string hours[] = {"5-", "4-", "3-", "2-", "1-", "0+", "1+", "2+", "3+", "4+", "5+", "6+"};
     std::string scramble;
 
-    scramble = "UR" + hours[getRandomNum(0, 11)] + " ";
+    scramble  = "UR" + hours[getRandomNum(0, 11)] + " ";
     scramble += "DR" + hours[getRandomNum(0, 11)] + " ";
     scramble += "DL" + hours[getRandomNum(0, 11)] + " ";
     scramble += "UL" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "U" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "R" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "D" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "L" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "U"  + hours[getRandomNum(0, 11)] + " ";
+    scramble += "R"  + hours[getRandomNum(0, 11)] + " ";
+    scramble += "D"  + hours[getRandomNum(0, 11)] + " ";
+    scramble += "L"  + hours[getRandomNum(0, 11)] + " ";
     scramble += "ALL" + hours[getRandomNum(0, 11)] + " " + "y2" + " ";
-    scramble += "U" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "R" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "D" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "L" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "U"  + hours[getRandomNum(0, 11)] + " ";
+    scramble += "R"  + hours[getRandomNum(0, 11)] + " ";
+    scramble += "D"  + hours[getRandomNum(0, 11)] + " ";
+    scramble += "L"  + hours[getRandomNum(0, 11)] + " ";
     scramble += "ALL" + hours[getRandomNum(0, 11)] + " ";
 
     if (getRandomNum(0, 1) == 1)

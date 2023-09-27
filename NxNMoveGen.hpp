@@ -3,12 +3,13 @@ This code is here to deprecate the original Scrambles.hpp and stringCleanup.hpp
 */
 
 #include <string>
-#include <cstdlib>
-#include <ctime>
+#include <random>
+
+std::random_device rng;
 
 int getRandomNum(int min, int max)
 {
-    return (rand() % (max + 1 - min)) + min;
+    return (rng() % (max + 1 - min)) + min;
 }
 
 constexpr char baseMoves[6] = {'F', 'U', 'R', 'B', 'L', 'D'};
