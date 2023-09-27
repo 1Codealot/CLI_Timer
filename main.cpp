@@ -2,10 +2,9 @@
 
 #include "Scrambles.hpp"
 #include "fileIO.hpp"
+#include "TimeStrToFloat.hpp"
 
 using namespace std;
-
-float inputtedTime;
 
 // Commandline stuff. Move later
 
@@ -62,13 +61,20 @@ bool shouldPrompt(int argc, const char *argv[])
 
 // Prompting
 float getTime(){
-	float inputtedTime;
+	string inputtedTime;
 	string correct;
 
 	cout << "\nEnter your time: ";
 	cin >> inputtedTime;
 
-	cout << "\nYou entered in " << fixed << setprecision(2) << inputtedTime << "\nIs this correct? (Y/n)\n";
+    if (inputtedTime[0] == 'Q' || inputtedTime[0] == 'q'){
+		cout<<endl;
+        exit(EXIT_SUCCESS);
+    }
+
+	float real_time_secs = timeStrToFloatSecs(inputtedTime);
+
+	cout << "\nYou entered in " << outputTime(inputtedTime) << " (which is also " << fixed << setprecision(2) << real_time_secs << " seconds)\nIs this correct? (Y/n)\n";
 
 	cin.ignore();
 
@@ -76,11 +82,11 @@ float getTime(){
 
 	if (correct.length() == 0)
 	{
-		return inputtedTime;
+		return real_time_secs;
 	}
 	else if (correct[0] == 'Y' || correct[0] == 'y') // bruh
 	{
-		return inputtedTime;
+		return real_time_secs;
 	}
 	else
 	{
@@ -122,11 +128,10 @@ int main(int argc, char const *argv[])
 	const bool save = shouldSave(argc, argv);
 	const bool cont = shouldContinue(argc, argv);
 
-	srand(static_cast<unsigned>(time(nullptr)));
 
 	do
 	{ // while (cont);
-		string currentScramble = /*Lots of spaces btw*/ "                                                                                                                           ";
+		string currentScramble;
 		// Get scramble
 
 		currentScramble = generate_scramble(*argv[1]);
@@ -134,7 +139,7 @@ int main(int argc, char const *argv[])
 		// Edge case incase idot uses this intellecktualy maid sw.
 		if (currentScramble == "Unknown puzzle")
 		{
-			cerr<<"Unknown puzzle type: "<<*argv[1];
+			cerr<<"Unknown puzzle type: "<<*argv[1]<<"\n";
 			exit(EXIT_FAILURE);
 		}
 
@@ -157,7 +162,7 @@ int main(int argc, char const *argv[])
 			{
 				string comment;
 				cout << "Enter in a comment (or don't you can leave blank)\n";
-				cin.ignore();
+				//cin.ignore();
 				getline(cin, comment);
 
 				save_to_file(argv[2], currentScramble, solveTime, penalty, comment);
@@ -165,5 +170,5 @@ int main(int argc, char const *argv[])
 		}
 	} while (cont);
 
-	return 0;
+    return 0;
 }

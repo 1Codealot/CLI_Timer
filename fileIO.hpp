@@ -18,6 +18,9 @@ std::string getPath()
     std::string targetDir = appDataPath + "/.config/CLI_Timer_Sessions/";
     std::filesystem::create_directory(targetDir);
 
+#else
+    return "./";
+
 #endif
     return targetDir;
 }
@@ -42,7 +45,7 @@ std::string changeExtensionAndAddPath(std::string fileName)
 void save_to_file(std::string sessionName, std::string& scramble, float time, std::string& penalty, std::string& comment)
 {
     FILE *fptr;
-    fptr = fopen(changeExtensionAndAddPath(sessionName).c_str(), "a");
+    fptr = fopen(changeExtensionAndAddPath(std::move(sessionName)).c_str(), "a");
 
     if (penalty == "DNF" || penalty == "dnf")
     {
