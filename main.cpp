@@ -162,7 +162,7 @@ int main(int argc, char const *argv[])
 			{
 				string comment;
 				cout << "Enter in a comment (or don't you can leave blank)\n";
-				cin.ignore();
+
 				getline(cin, comment);
 
 				save_to_file(argv[2], currentScramble, solveTime, penalty, comment);
