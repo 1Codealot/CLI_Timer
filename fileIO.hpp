@@ -42,10 +42,15 @@ std::string changeExtensionAndAddPath(std::string fileName)
     return getPath() + finalFileName + ".CLI_T_S"; // CLI_T_S means CLI Timer Session.
 }
 
-void save_to_file(std::string sessionName, std::string& scramble, float time, std::string& penalty, std::string& comment)
-{
+void save_to_file(std::string sessionName, std::string& scramble, float time, std::string& penalty, std::string& comment, bool shouldReset = false) {
+
     FILE *fptr;
-    fptr = fopen(changeExtensionAndAddPath(std::move(sessionName)).c_str(), "a");
+
+    if (shouldReset) {
+        fptr = fopen(changeExtensionAndAddPath(std::move(sessionName)).c_str(), "w");
+    } else {
+        fptr = fopen(changeExtensionAndAddPath(std::move(sessionName)).c_str(), "a");
+    }
 
     if (penalty == "DNF" || penalty == "dnf")
     {
