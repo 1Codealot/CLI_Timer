@@ -57,6 +57,8 @@ If you do `CLI_Timer 2 -sSession --no_prompt` it will say "You can't save withou
 `CLI_Timer.exe 5 c` This will continually generate scrambles for a 5x5. This will NOT save to a file. <br>
 `CLI_Timer.exe M -sMegaminx_Session` This will continually generate scrambles for megaminx. This will save to a file called Megaminx_Session.CLI_T_S.
 
+###### NOTE: as of now, the commands no longer need to be in any order (i hope)
+
 # Entering in times
 You can enter in times in the format of HH:MM:SS.DD or the regex `(((\d)?\d(:)?)?(\d\d(:)?))?((\d){1,2}(\.)?)?(\d){1,2}`
 ###### NOTE: May be wrong as I'm not great at regex.
