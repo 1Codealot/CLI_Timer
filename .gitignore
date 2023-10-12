@@ -31,5 +31,9 @@
 *.out
 *.app
 
+# Ignores IDE folders
+/.vscode/
+/.idea/
+
 # Ignores Build Folder
 /Final_Build/
