@@ -21,7 +21,7 @@ skewb <br>
 megaminx <br>
 `P` <br>
 pyraminx <br>
-`K` <br>
+`C` <br>
 clock.
 <br>
 
@@ -42,7 +42,6 @@ On windows, the session files will save to %appdata%\CLI_Timer_Sessions.<br>
 On Linux it saves to /home/your_username/.config/CLI_Timer_Sessions<br>
 On MacOs it saves to /Users/your_username/Library/Application Support/CLI_Timer_Sessions<br>
 
-###### NOTE: you are able to change the scramble type of a session
 
 <hr>
 
@@ -52,7 +51,16 @@ If you do `CLI_Timer 2 -sSession --no_prompt` it will say "You can't save withou
 
 <hr>
 
-#### Example commands
+### Other commands 
+
+`help`
+This outputs a help message.
+
+`--version` 
+Outputs the current version.
+<hr>
+
+### Example commands
 `CLI_Timer.exe 3` This will generate a single scramble for a 3x3 <br>
 `CLI_Timer.exe 5 c` This will continually generate scrambles for a 5x5. This will NOT save to a file. <br>
 `CLI_Timer.exe M -sMegaminx_Session` This will continually generate scrambles for megaminx. This will save to a file called Megaminx_Session.CLI_T_S.
@@ -69,7 +77,3 @@ You can enter in times in the format of HH:MM:SS.DD or the regex `(((\d)?\d(:)?)
 
 `Q` <br>
 square one (Don't tell anyone i might be working on it 🤫) 
-
-### Other things to be implemented
-* Better outputting
-  * Displaying averages

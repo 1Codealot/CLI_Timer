@@ -21,7 +21,7 @@ char getCubeType(cmdLineArgs){
             // I could do some magic ASCII checking (i.e. if (*argv[i]) is between ASCII nums for '2' to '7')
             // However that wouldn't make much sense
             // Although c++ isn't meant to be understood easily
-            if ((*argv[i] == '2' || *argv[i] == '3' || *argv[i] == '4' || *argv[i] == '5' || *argv[i] == '6' || *argv[i] == '7' || *argv[i] == 'P' || *argv[i] == 'M' || *argv[i] == 'S' || *argv[i] == 'K') && (*argv[i] != 'c')) {
+            if ((*argv[i] == '2' || *argv[i] == '3' || *argv[i] == '4' || *argv[i] == '5' || *argv[i] == '6' || *argv[i] == '7' || *argv[i] == 'P' || *argv[i] == 'M' || *argv[i] == 'S' || *argv[i] == 'C') && (*argv[i] != 'c')) {
                 return *argv[i];
             }
         }
@@ -81,6 +81,23 @@ bool shouldPrompt(cmdLineArgs){
 }
 
 void setup(struct should &Options, cmdLineArgs){
+    // Pre-checks
+    // These are for like `help` or `--version`
+
+    std::string helpMSG = "How to use CLI_Timer.\nCLI_Timer (cube type) [c] | [-s{session name}] | [--no_prompt] \n\nArgument (cube type) means an NxN of (2)x2 (3)x3 to (7)x7 or (S)kewb, (P)yraminx, (M)egaminx, or (C)lock. It is required (why else would you use it?)\n\n[c] means [c]ontinuous, meaning it won't stop after generating one scramble\n\nArgument [-s] is for saving to a file which name will come directly after [-s] (e.g. CLI_Timer 3 -s3x3_One_Handed). \nIt will save to a .CLI_T_S (CLI_Timer_Session) file. Check README.md to see where it goes on your OS.\n\nArgument [--no_prompt] will just generate a scramble, not ask for a time (for this reason you can't have [-s] with this), wait for an enter, then generate another one.\n\nCLI_Timer (--version)\nOutputs the current version of CLI_Timer\n\nCLI_Timer (help)\nOutputs this.\n\nAny issues, put them on the GitHub repo.";
+
+    if (argc == 1){
+        std::cout<<helpMSG<<std::endl;
+        exit(EXIT_SUCCESS);
+    } else if (std::string(argv[1]) == "help") {
+        std::cout<<helpMSG<<std::endl;
+        exit(EXIT_SUCCESS);
+    } else if (std::string(argv[1]) == "--version"){
+        std::cout<<"CLI_Timer version. 1.9.1"<<std::endl;
+        std::cout<<"Changes: more commands:\n`help`\n`--version`"<<std::endl;
+        exit(EXIT_SUCCESS);
+    }
+
     Options.cubeType = getCubeType(argc, argv);
     Options.shouldSave = shouldSave(argc, argv);
     Options.fileName = getFileName(argc, argv);
