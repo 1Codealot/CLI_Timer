@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// Prompting.
+// Prompting
 float getTime(){
 	string inputtedTime;
 	string correct;
