@@ -93,7 +93,7 @@ void setup(struct should &Options, cmdLineArgs){
         std::cout<<helpMSG<<std::endl;
         exit(EXIT_SUCCESS);
     } else if (std::string(argv[1]) == "--version"){
-        std::cout<<"CLI_Timer version. 1.9.1"<<std::endl;
+        std::cout<<"CLI_Timer version: 1.9.1\n\n";
         std::cout<<"Changes: more commands:\n`help`\n`--version`"<<std::endl;
         exit(EXIT_SUCCESS);
     }
