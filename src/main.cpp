@@ -80,6 +80,11 @@ int main(int argc, char const *argv[])
 		{
 			string buffer;
 			getline(cin, buffer);
+
+			if (buffer == "Q" || buffer == "q"){
+				exit(EXIT_SUCCESS);
+			}
+
 			continue;
 		}
 

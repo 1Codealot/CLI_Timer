@@ -105,7 +105,8 @@ void setup(struct should &Options, cmdLineArgs){
         exit(EXIT_SUCCESS);
     } else if (std::string(argv[1]) == "--version"){
         std::cout<<"CLI_Timer version: 1.9.2\n\n";
-        std::cout<<"Changes: fixed (then removed) non-existant memory leaks."<<std::endl;
+        std::cout<<"Changes: fixed (then removed the fix for) non-existant memory leaks."<<std::endl;
+        std::cout<<"After inputting 'q' (or 'Q') with `--no_propmt` you can quit."<<std::endl;
         exit(EXIT_SUCCESS);
     }
 
