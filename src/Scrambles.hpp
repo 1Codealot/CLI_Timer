@@ -74,10 +74,6 @@ std::string Two_By_Two()
         scramble += getRepresentation(&Move) + ' ';
         PrevMove = Move; // Don't forget this!! :DDDDDDDDDD
     }
-
-    delete &Move;
-    delete &PrevMove;
-
     return scramble;
 }
 
@@ -110,11 +106,6 @@ std::string Three_By_Three()
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
-    // No memory leak (however a mem leak could only occur on a scramble that is extreeeeeeeeeeemly long but good practice is good practice)
-    delete &Move;
-    delete &PrevMove;
-    delete &TwoPrevMove;
-
     return scramble;
 }
 
@@ -147,11 +138,6 @@ std::string Four_By_Four()
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
-
-    delete &Move;
-    delete &PrevMove;
-    delete &TwoPrevMove;
-
     return scramble;
 }
 
@@ -184,11 +170,6 @@ std::string Five_By_Five()
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
-
-    delete &Move;
-    delete &PrevMove;
-    delete &TwoPrevMove;
-
     return scramble;
 }
 
@@ -221,11 +202,6 @@ std::string Six_By_Six()
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
-
-    delete &Move;
-    delete &PrevMove;
-    delete &TwoPrevMove;
-
     return scramble;
 }
 
@@ -258,11 +234,6 @@ std::string Seven_By_Seven()
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
-
-    delete &Move;
-    delete &PrevMove;
-    delete &TwoPrevMove;
-
     return scramble;
 }
 
@@ -286,10 +257,6 @@ std::string Skewb()
         scramble += getRepresentation(&Move) + ' ';
         PrevMove = Move; // Don't forget this!! :DDDDDDDDDD
     }
-
-    delete &Move;
-    delete &PrevMove;
-
     return scramble;
 }
 
