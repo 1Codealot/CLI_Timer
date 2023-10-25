@@ -1,5 +1,7 @@
 #include <string>
 #include <filesystem>
+#include <fstream>
+#include <iomanip>
 
 const std::string getPath()
 {
@@ -43,24 +45,20 @@ std::string changeExtensionAndAddPath(std::string fileName)
 }
 
 void save_to_file(std::string sessionName, std::string& scramble, float time, std::string& penalty, std::string& comment) {
+    std::ofstream fileToSaveTo(sessionName);
 
-    FILE *fptr;
-
-    
-    fptr = fopen(changeExtensionAndAddPath(std::move(sessionName)).c_str(), "a");
-    
-
-    if (penalty == "DNF" || penalty == "dnf")
-    {
-        fprintf(fptr, "%s;DNF(%.2f);%s;\n", scramble.c_str(), time, comment.c_str());
+    if (penalty == "DNF" || penalty == "dnf"){
+        fileToSaveTo<<scramble<<"§DNF("<<fixed<<std::setprecision(2)<<time<<")§"<<comment<<std::endl;
     }
     else if (penalty == "+2")
     {
-        fprintf(fptr, "%s;%.2f+;%s;\n", scramble.c_str(), time + 2, comment.c_str());
+        fileToSaveTo<<scramble<<"§"<<fixed<<std::setprecision(2)<<(time+2)<<"+§"<<comment<<std::endl;
     }
     else
     {
-        fprintf(fptr, "%s;%.2f;%s;\n", scramble.c_str(), time, comment.c_str());
+        fileToSaveTo<<scramble<<"§"<<fixed<<std::setprecision(2)<<time<<"§"<<comment<<std::endl;
     }
-    fclose(fptr);
+
+    fileToSaveTo.close();
+
 }
