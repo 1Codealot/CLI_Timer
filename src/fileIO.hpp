@@ -48,15 +48,15 @@ void save_to_file(std::string sessionName, std::string& scramble, float time, st
     std::ofstream fileToSaveTo(sessionName);
 
     if (penalty == "DNF" || penalty == "dnf"){
-        fileToSaveTo<<scramble<<"§DNF("<<fixed<<std::setprecision(2)<<time<<")§"<<comment<<std::endl;
+        fileToSaveTo<<scramble<<"§DNF("<<std::fixed<<std::setprecision(2)<<time<<")§"<<comment<<std::endl;
     }
     else if (penalty == "+2")
     {
-        fileToSaveTo<<scramble<<"§"<<fixed<<std::setprecision(2)<<(time+2)<<"+§"<<comment<<std::endl;
+        fileToSaveTo<<scramble<<"§"<<std::fixed<<std::setprecision(2)<<(time+2)<<"+§"<<comment<<std::endl;
     }
     else
     {
-        fileToSaveTo<<scramble<<"§"<<fixed<<std::setprecision(2)<<time<<"§"<<comment<<std::endl;
+        fileToSaveTo<<scramble<<"§"<<std::fixed<<std::setprecision(2)<<time<<"§"<<comment<<std::endl;
     }
 
     fileToSaveTo.close();
