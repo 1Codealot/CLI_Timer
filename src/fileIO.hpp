@@ -1,7 +1,7 @@
 #include <string>
 #include <filesystem>
 
-std::string getPath()
+const std::string getPath()
 {
 #ifdef _WIN32
     std::string appDataPath = std::getenv("%%APPDATA%");
