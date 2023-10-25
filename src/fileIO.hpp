@@ -1,7 +1,6 @@
 #include <string>
 #include <filesystem>
 #include <fstream>
-#include <iomanip>
 
 const std::string getPath()
 {
@@ -45,7 +44,7 @@ std::string changeExtensionAndAddPath(std::string fileName)
 }
 
 void save_to_file(std::string sessionName, std::string& scramble, float time, std::string& penalty, std::string& comment) {
-    std::ofstream fileToSaveTo(sessionName);
+    std::ofstream fileToSaveTo(changeExtensionAndAddPath(sessionName), std::fstream::app);
 
     if (penalty == "DNF" || penalty == "dnf"){
         fileToSaveTo<<scramble<<"§DNF("<<std::fixed<<std::setprecision(2)<<time<<")§"<<comment<<std::endl;
