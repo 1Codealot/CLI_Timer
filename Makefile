@@ -13,13 +13,6 @@ EXECUTABLE = $(OBJ_DIR)/CLI_Timer
 
 .PHONY: all clean
 
-all: $(EXECUTABLE)
-
-	# Remove old builds.
-
-	rm -rf $(OBJ_DIR)/main.o
-	$(OBJ_DIR)/CLI_Timer
-
 # Rule to build the executable
 $(EXECUTABLE): $(OBJ_FILES)
 	$(CXX) $(CXXFLAGS) $^ -o $@
