@@ -19,7 +19,7 @@ std::string getPath()
     std::filesystem::create_directory(targetDir);
 
 #else
-    return "./";
+    return "./CLI_Timer_Sessions/";
 
 #endif
     return targetDir;
