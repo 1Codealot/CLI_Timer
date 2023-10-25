@@ -15,6 +15,11 @@ EXECUTABLE = $(OBJ_DIR)/CLI_Timer
 
 all: $(EXECUTABLE)
 
+	# Remove old builds.
+
+	rm -rf $(OBJ_DIR)/main.o
+	$(OBJ_DIR)/CLI_Timer
+
 # Rule to build the executable
 $(EXECUTABLE): $(OBJ_FILES)
 	$(CXX) $(CXXFLAGS) $^ -o $@
@@ -26,6 +31,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
 # Create the output directory if it doesn't exist
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
+
+
 
 clean:
 	rm -rf $(OBJ_DIR)/main.o
