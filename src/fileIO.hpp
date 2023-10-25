@@ -4,7 +4,7 @@
 std::string getPath()
 {
 #ifdef _WIN32
-    std::string appDataPath = std::getenv("%APPDATA%");
+    std::string appDataPath = std::getenv("%%APPDATA%");
     std::string targetDir = appDataPath + "\\CLI_Timer_Sessions\\";
     std::filesystem::create_directory(targetDir);
 
