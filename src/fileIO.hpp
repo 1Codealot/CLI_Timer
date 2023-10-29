@@ -28,16 +28,23 @@ const std::string getPath()
 
 std::string changeExtensionAndAddPath(std::string fileName)
 {
+    // This is incase someone saves while doing `--no_prompt`
+    int index = 0;
+    
+    if (fileName[0] == '-' && fileName[1] == 's'){
+        index += 2;
+    }
+
     std::string finalFileName;
-    for (int i = 2; i < fileName.length(); i++)
-    { // Starts at index 2 because of -s.
-        if (fileName[i] == '.')
+    for (; index < fileName.length(); index++)
+    { 
+        if (fileName[index] == '.')
         {
             break;
         }
         else
         {
-            finalFileName += fileName[i];
+            finalFileName += fileName[index];
         }
     }
     return getPath() + finalFileName + ".CLI_T_S"; // CLI_T_S means CLI Timer Session.

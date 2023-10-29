@@ -75,7 +75,7 @@ bool shouldPrompt(cmdLineArgs){
     for (int i = 1; i < argc; ++i)
         if (std::string(argv[i]) == "--no_prompt"){
             if (shouldSave(argc, argv)){
-                std::cout<<"You are saving to a file; this means you will need prompting; therefore you will be prompted."<<std::endl;
+                std::cout<<"You are saving to a file; this means you will need prompting; therefore you will be prompted.\nHowever you can type 'save' if you do want to save to a file with `--no_prompt`"<<std::endl;
                 return true;
             } else {
                 return false;
@@ -94,6 +94,7 @@ void setup(struct should &Options, cmdLineArgs){
     \n\nArgument [-s] is for saving to a file which name will come directly after [-s] (e.g. CLI_Timer 3 -s3x3_One_Handed)\
     \nIt will save to a .CLI_T_S (CLI_Timer_Session) file. Check README.md to see where it goes on your OS.\
     \n\nArgument [--no_prompt] will just generate a scramble, not ask for a time (for this reason you can't have [-s] with this), wait for an enter, then generate another one.\
+    \nAlthough you can type in 'save' if you really want to save that time.\
     \n\nCLI_Timer (--version)\nOutputs the current version of CLI_Timer\n\nCLI_Timer (help)\nOutputs this.\
     \n\nAny issues, put them on the GitHub repo.";
 
@@ -104,11 +105,9 @@ void setup(struct should &Options, cmdLineArgs){
         std::cout<<helpMSG<<std::endl;
         exit(EXIT_SUCCESS);
     } else if (std::string(argv[1]) == "--version"){
-        std::cout<<"CLI_Timer version: 1.9.2\n\n";
-        std::cout<<"Changes: fixed (then removed the fix for) non-existant memory leaks."<<std::endl;
-        std::cout<<"After inputting 'q' (or 'Q') with `--no_propmt` you can quit."<<std::endl;
-        std::cout<<"Better default saving place"<<std::endl;
-        std::cout<<"Fixed potential fail saving to %%APPDATA%% folder."<<std::endl;
+        std::cout<<"CLI_Timer version: 1.9.3\n\n";
+        std::cout<<"Changes: Made it possible to save to a file with `--no_prompt` by typing 'save'"<<std::endl;
+        std::cout<< "This required changing how file name was 'calculated'" <<std::endl;
         exit(EXIT_SUCCESS);
     }
 

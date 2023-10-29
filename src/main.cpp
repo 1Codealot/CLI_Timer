@@ -2,6 +2,7 @@
 #include "Scrambles.hpp"
 #include "fileIO.hpp"
 #include "TimeStrToFloat.hpp"
+#include <iostream>
 
 using namespace std;
 
@@ -83,8 +84,26 @@ int main(int argc, char const *argv[])
 
 			if (buffer == "Q" || buffer == "q"){
 				exit(EXIT_SUCCESS);
-			}
+			} 
 
+            else if (buffer == "save") {
+                cout << "What file would you like to save to? " << endl;
+                
+                string fileName;
+                getline(cin, fileName);
+                
+                float solveTime = getTime();			
+                
+			    string penalty = getPenalty();
+                
+                string comment;
+				cout << "Enter in a comment (or don't you can leave blank)\n";
+				
+                getline(cin, comment);
+                 
+                save_to_file(fileName, currentScramble, solveTime, penalty, comment);
+			}   
+    
 			continue;
 		}
 
