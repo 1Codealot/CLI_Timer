@@ -121,9 +121,8 @@ void setup(struct should &Options, cmdLineArgs){
         std::cout<<helpMSG<<std::endl;
         exit(EXIT_SUCCESS);
     } else if (std::string(argv[1]) == "--version"){
-        std::cout<<"CLI_Timer version: 1.9.3\n\n";
-        std::cout<<"Changes: Made it possible to save to a file with `--no_prompt` by typing 'save'"<<std::endl;
-        std::cout<< "This required changing how file name was 'calculated'" <<std::endl;
+        std::cout<<"CLI_Timer version: 1.10.0\n\n";
+        std::cout<<"Changes: Added `--count` argument."<<std::endl;
         exit(EXIT_SUCCESS);
     }
 

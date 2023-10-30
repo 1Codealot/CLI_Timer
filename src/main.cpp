@@ -122,7 +122,7 @@ int main(int argc, char const *argv[])
                 save_to_file(Args.fileName, currentScramble, solveTime, penalty, comment);
 			}
 		}
-	} while (Args.shouldContinue);
+	} while (Args.shouldContinue && --Args.scrambleCount != 0);
 
     return 0;
 }
