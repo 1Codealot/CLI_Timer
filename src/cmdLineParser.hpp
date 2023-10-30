@@ -9,6 +9,7 @@ struct should{
     std::string fileName;
     bool shouldContinue;
     bool shouldPrompt;
+    int scrambleCount;
 };
 
 char getCubeType(cmdLineArgs){
@@ -57,8 +58,22 @@ std::string getFileName(cmdLineArgs){
     return "";
 }
 
+
+int getCount(cmdLineArgs){
+    //TODO make command line args a string vector.
+    for (int i = 1; i < argc; i++)
+    {
+        std::string currArg = std::string(argv[i]);
+        if (currArg.substr(0, 7) == "--count")
+        {
+            return std::stoi(currArg.substr(7, currArg.size()));
+        }
+    }
+    return -1;
+}
+
 bool shouldContinue(cmdLineArgs){
-    if (shouldSave(argc, argv))
+    if (shouldSave(argc, argv) || getCount(argc, argv) >= 1)
     {
         return true;
     }
@@ -88,10 +103,11 @@ void setup(struct should &Options, cmdLineArgs){
     // Pre-checks
     // These are for like `help` or `--version`
 
-    std::string helpMSG = "How to use CLI_Timer.\nCLI_Timer (cube type) [c] | [-s{session name}] | [--no_prompt]\
+    std::string helpMSG = "How to use CLI_Timer.\nCLI_Timer (cube type) [--count{number}] | [c] | [-s{session name}] | [--no_prompt]\
     \n\nArgument (cube type) means an NxN of (2)x2 (3)x3 to (7)x7 or (S)kewb, (P)yraminx, (M)egaminx, or (C)lock.\
-    It is required (why else would you use it?)\n\n[c] means [c]ontinuous, meaning it won't stop after generating one scramble\
-    \n\nArgument [-s] is for saving to a file which name will come directly after [-s] (e.g. CLI_Timer 3 -s3x3_One_Handed)\
+    It is required (why else would you use it?)\n\n[c] means [c]ontinuous, meaning it won't stop after generating one scramble.\
+    \n--count{number} can be used to specify how many scrambles you want. Continuous is impiled. It will then quit (with code 0).\
+    \n\nArgument [-s] is for saving to a file which name will come directly after [-s] (e.g. CLI_Timer 3 -s3x3_One_Handed).\
     \nIt will save to a .CLI_T_S (CLI_Timer_Session) file. Check README.md to see where it goes on your OS.\
     \n\nArgument [--no_prompt] will just generate a scramble, not ask for a time (for this reason you can't have [-s] with this), wait for an enter, then generate another one.\
     \nAlthough you can type in 'save' if you really want to save that time.\
@@ -116,4 +132,5 @@ void setup(struct should &Options, cmdLineArgs){
     Options.fileName = getFileName(argc, argv);
     Options.shouldContinue = shouldContinue(argc, argv);
     Options.shouldPrompt = shouldPrompt(argc, argv);
+    Options.scrambleCount = getCount(argc, argv);
 }

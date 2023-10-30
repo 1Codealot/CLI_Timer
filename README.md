@@ -51,6 +51,13 @@ If you do `CLI_Timer 2 -sSession --no_prompt` it will say "You can't save withou
 
 <hr>
 
+`--count{number}`
+This will generate {number} amount of scrambles and then quit.<br>
+Example: `CLI_Timer 7 --count5 -s7x7_average`
+<br>
+###### Note: `c` argument is impiled.
+<hr>
+
 ### Other commands 
 
 `help`
