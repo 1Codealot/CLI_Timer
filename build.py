@@ -23,8 +23,11 @@ if __name__ == '__main__':
                 main_path = arg[2:]
             elif prefix == "-o":
                 output_path = arg[2:]
+            elif prefix == "-x": # For extra commands like -Wall. Usage: `./build.py -x-Wall -x-O3"` or `./build.py -x"-Wall -O3"
+                output_path = arg[2:]
             else:
-                print(f"Did not understand argument: {arg} (maybe try lowercase or put the path immediately after {prefix})")
+                print(f"Did not understand argument: {arg} (maybe try lowercase or put the path immediately after {prefix})\nExiting.")
+                sys.exit(1)
 
     command_to_run = compile_command_template.format(compiler, main_path, output_path)
 
