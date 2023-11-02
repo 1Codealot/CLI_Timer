@@ -2,13 +2,14 @@
 
 """
 I hate makefiles, build scripts are better.
+I also don't like PEP 8.
 """
 
 import os, sys
 
-compiler = "g++"
-main_path = "./src/main.cpp"
-output_path = "./Final_Build/CLI_Timer"
+compiler = "g++"                        # Use argument `-c{/path/to/compiler}` to specify compiler
+main_path = "./src/main.cpp"            # Use argument `-i{/path/to/mainfile}` to specify the main.cpp file to use
+output_path = "./Final_Build/CLI_Timer" # Use argument `-o{/path/to/output_file_name}` to specify where you want it to compile to.
 
 compile_command_template = "{} {} -o {}"
 

@@ -2,6 +2,9 @@
 
 This is a Rubik's cube training timer (some what similar to cstimer) used in the command line. 
 
+# Building
+Download / clone this repo then do `cd CLI_Timer` then run `./build.py` and specify things (Docs for build.py are in it's file.)
+
 # Commands
 
 ### Implemented
