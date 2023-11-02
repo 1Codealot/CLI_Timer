@@ -125,6 +125,7 @@ void setup(struct should &Options, cmdLineArgs){
         std::cout<<"Changes: Added `--count` argument."<<std::endl;
         std::cout<<"Added link to Issues. (https://github.com/1Codealot/CLI_Timer/issues)"<<std::endl;
         std::cout<<"Made build.py instead of a makefile."<<std::endl;
+        std::cout<<"Removed annoying warning."<<std::endl;
         exit(EXIT_SUCCESS);
     }
 

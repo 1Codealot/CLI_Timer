@@ -29,7 +29,7 @@ const std::string getPath()
 std::string changeExtensionAndAddPath(std::string fileName)
 {
     // This is incase someone saves while doing `--no_prompt`
-    int index = 0;
+    long unsigned int index = 0;
     
     if (fileName[0] == '-' && fileName[1] == 's'){
         index += 2;
