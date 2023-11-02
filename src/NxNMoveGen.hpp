@@ -16,15 +16,15 @@ constexpr char baseMoves[6] = {'F', 'U', 'R', 'B', 'L', 'D'};
 constexpr char directions[3] = {' ', '\'', '2'}; // If ' ' Ignore, can't have ''
 constexpr char wideSizes[3] = {' ', '2', '3'};
 
-struct move
+typedef struct
 {
     char base;      // U F R B L D
     char direction; // ' 2
     char wsize;     // 0 2 3
-};
+} puzzle_move;
 
-void createMove(struct move &newMove, char moveType)
-{ // no idea why I need struct move... in the func args.
+void createMove(puzzle_move &newMove, char moveType)
+{
     // Create empty move outside this func then pass it in here
     newMove.base = baseMoves[getRandomNum(0, 5)];
     newMove.direction = directions[getRandomNum(0, 2)]; // For skewb I can regen it
@@ -81,7 +81,7 @@ void createMove(struct move &newMove, char moveType)
 
 }
 
-std::string getRepresentation(struct move *pMove)
+std::string getRepresentation(puzzle_move *pMove)
 {
     std::string finalMove;
     finalMove += pMove->base;

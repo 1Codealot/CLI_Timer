@@ -1,11 +1,11 @@
 #include "NxNMoveGen.hpp"
 
-bool canUseMove(struct move *pMove1, struct move *pMove2)
+bool canUseMove(puzzle_move *pMove1, puzzle_move *pMove2)
 { // Two x Two
     return pMove1->base != pMove2->base;
 }
 
-bool canUseMove(struct move *pMove1, struct move *pMove2, struct move *pMove3)
+bool canUseMove(puzzle_move *pMove1, puzzle_move *pMove2, puzzle_move *pMove3)
 {
     if (!canUseMove(pMove2, pMove3))
     {
@@ -57,8 +57,8 @@ You need a minimum of 2 references to a move struct.
 std::string Two_By_Two()
 {
     std::string scramble;
-    struct move Move{};
-    struct move PrevMove{};
+    puzzle_move Move{};
+    puzzle_move PrevMove{};
     int moveCount = getRandomNum(9, 13);
 
     // So PrevMove is initalised.
@@ -80,9 +80,9 @@ std::string Two_By_Two()
 std::string Three_By_Three()
 {
     std::string scramble;
-    struct move Move{};
-    struct move PrevMove{};
-    struct move TwoPrevMove{};
+    puzzle_move Move{};
+    puzzle_move PrevMove{};
+    puzzle_move TwoPrevMove{};
     int moveCount = getRandomNum(19, 27);
 
     // So TwoPrevMove is initialised
@@ -112,9 +112,9 @@ std::string Three_By_Three()
 std::string Four_By_Four()
 {
     std::string scramble;
-    struct move Move{};
-    struct move PrevMove{};
-    struct move TwoPrevMove{};
+    puzzle_move Move{};
+    puzzle_move PrevMove{};
+    puzzle_move TwoPrevMove{};
     int moveCount = getRandomNum(38, 43);
 
     // So TwoPrevMove is initialised
@@ -144,9 +144,9 @@ std::string Four_By_Four()
 std::string Five_By_Five()
 {
     std::string scramble;
-    struct move Move{};
-    struct move PrevMove{};
-    struct move TwoPrevMove{};
+    puzzle_move Move{};
+    puzzle_move PrevMove{};
+    puzzle_move TwoPrevMove{};
     int moveCount = getRandomNum(48, 53);
 
     // So TwoPrevMove is initialised
@@ -176,9 +176,9 @@ std::string Five_By_Five()
 std::string Six_By_Six()
 {
     std::string scramble;
-    struct move Move{};
-    struct move PrevMove{};
-    struct move TwoPrevMove{};
+    puzzle_move Move{};
+    puzzle_move PrevMove{};
+    puzzle_move TwoPrevMove{};
     int moveCount = getRandomNum(58, 63);
 
     // So TwoPrevMove is initialised
@@ -208,9 +208,9 @@ std::string Six_By_Six()
 std::string Seven_By_Seven()
 {
     std::string scramble;
-    struct move Move{};
-    struct move PrevMove{};
-    struct move TwoPrevMove{};
+    puzzle_move Move{};
+    puzzle_move PrevMove{};
+    puzzle_move TwoPrevMove{};
     int moveCount = getRandomNum(68, 73);
 
     // So TwoPrevMove is initialised
@@ -240,8 +240,8 @@ std::string Seven_By_Seven()
 std::string Skewb()
 {
     std::string scramble;
-    struct move Move{};
-    struct move PrevMove{};
+    puzzle_move Move{};
+    puzzle_move PrevMove{};
     int moveCount = getRandomNum(9, 13);
 
     // So PrevMove is initalised.

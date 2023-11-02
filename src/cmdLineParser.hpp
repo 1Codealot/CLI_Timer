@@ -126,6 +126,7 @@ void setup(struct should &Options, cmdLineArgs){
         std::cout<<"Added link to Issues. (https://github.com/1Codealot/CLI_Timer/issues)"<<std::endl;
         std::cout<<"Made build.py instead of a makefile."<<std::endl;
         std::cout<<"Removed annoying warning."<<std::endl;
+        std::cout<<"Made puzzle_move typedef"<<std::endl;
         exit(EXIT_SUCCESS);
     }
 
