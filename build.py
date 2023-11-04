@@ -39,7 +39,14 @@ if __name__ == '__main__':
     confirm = input(f"Running command: {command_to_run}\nIs this OK? \nI will also delete an older version (if it exists) by running `os.remove({output_path})`\n[Y/n]\n")
 
     if len(confirm) == 0 or confirm.lower()[0] == "y":
-        os.remove(output_path)
+        try:
+            os.remove(output_path)
+        except FileNotFoundError:
+            print("Nothing to remove...")
+        else:
+            print("Something went wrong while deleting...")
+            exit(1)
+
         os.system(command=command_to_run)
     else:
         sys.exit(0)
