@@ -36,9 +36,10 @@ if __name__ == '__main__':
     for e in extras:
         command_to_run += " " + e
 
-    confirm = input(f"Running command: {command_to_run}\nIs this OK? [Y/n]\n")
+    confirm = input(f"Running command: {command_to_run}\nIs this OK? \nI will also delete an older version (if it exists) by running `os.remove({output_path})`\n[Y/n]\n")
 
     if len(confirm) == 0 or confirm.lower()[0] == "y":
+        os.remove(output_path)
         os.system(command=command_to_run)
     else:
         sys.exit(0)
