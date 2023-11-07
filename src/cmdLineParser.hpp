@@ -121,12 +121,8 @@ void setup(struct should &Options, cmdLineArgs){
         std::cout<<helpMSG<<std::endl;
         exit(EXIT_SUCCESS);
     } else if (std::string(argv[1]) == "--version"){
-        std::cout<<"CLI_Timer version: 1.10.0\n\n";
-        std::cout<<"Changes: Added `--count` argument."<<std::endl;
-        std::cout<<"Added link to Issues. (https://github.com/1Codealot/CLI_Timer/issues)"<<std::endl;
-        std::cout<<"Made build.py instead of a makefile."<<std::endl;
-        std::cout<<"Removed annoying warning."<<std::endl;
-        std::cout<<"Made puzzle_move typedef"<<std::endl;
+        std::cout<<"CLI_Timer version: 1.10.1\n\n";
+        std::cout<<"Fixed bug when entering in one decimal place."<<std::endl;
         exit(EXIT_SUCCESS);
     }
 
