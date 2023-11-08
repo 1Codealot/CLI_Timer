@@ -22,7 +22,7 @@ char getCubeType(cmdLineArgs){
             // I could do some magic ASCII checking (i.e. if (*argv[i]) is between ASCII nums for '2' to '7')
             // However that wouldn't make much sense
             // Although c++ isn't meant to be understood easily
-            if ((*argv[i] == '2' || *argv[i] == '3' || *argv[i] == '4' || *argv[i] == '5' || *argv[i] == '6' || *argv[i] == '7' || *argv[i] == 'P' || *argv[i] == 'M' || *argv[i] == 'S' || *argv[i] == 'C') && (*argv[i] != 'c')) {
+            if ((*argv[i] == '2' || *argv[i] == '3' || *argv[i] == '4' || *argv[i] == '5' || *argv[i] == '6' || *argv[i] == '7' || *argv[i] == 'P' || *argv[i] == 'M' || *argv[i] == 'S' || *argv[i] == 'C' || *argv[i] == 'Q') && (*argv[i] != 'c')) {
                 return *argv[i];
             }
         }

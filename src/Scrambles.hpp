@@ -1,4 +1,5 @@
 #include "NxNMoveGen.hpp"
+#include "square_one.hpp"
 
 bool canUseMove(puzzle_move *pMove1, puzzle_move *pMove2)
 { // Two x Two
@@ -403,6 +404,9 @@ std::string generate_scramble(const char cube){
 
         case 'K':
             return Clock();
+
+        case 'Q':
+            return sq1::generateScramble();
 
         default:
             return "Unknown puzzle";
