@@ -25,8 +25,9 @@ megaminx <br>
 `P` <br>
 pyraminx <br>
 `C` <br>
-clock.
-<br>
+clock. <br>
+`Q` <br>
+square-1
 
 <hr>
 
@@ -81,9 +82,7 @@ Outputs the current version.
 You can enter in times in the format of HH:MM:SS.DD or the regex `(((\d)?\d(:)?)?(\d\d(:)?))?((\d){1,2}(\.)?)?(\d){1,2}`
 ###### NOTE: May be wrong as I'm not great at regex.
 
-<br>
+<hr>
 
-# To be implemented
-
-`Q` <br>
-square one (Don't tell anyone i might be working on it 🤫) 
+# License
+This code is mostly under the MIT license, however a section of this code (specifically the square-1 code) is under the GNU General Public License v3.0 (repo: <https://github.com/thewca/tnoodle-lib>). <br>ANY ISSUES WITH THIS PLEASE TELL ME AND I WILL REMOVE IT!!!! 
