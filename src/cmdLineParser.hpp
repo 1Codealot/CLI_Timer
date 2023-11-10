@@ -104,7 +104,7 @@ void setup(struct should &Options, cmdLineArgs){
     // These are for like `help` or `--version`
 
     std::string helpMSG = "How to use CLI_Timer.\nCLI_Timer (cube type) [--count{number}] | [c] | [-s{session name}] | [--no_prompt]\
-    \n\nArgument (cube type) means an NxN of (2)x2 (3)x3 to (7)x7 or (S)kewb, (P)yraminx, (M)egaminx, or (C)lock.\
+    \n\nArgument (cube type) means an NxN of (2)x2 (3)x3 to (7)x7 or (S)kewb, (P)yraminx, (M)egaminx, (C)lock or s(Q)uare-1.\
     It is required (why else would you use it?)\n\n[c] means [c]ontinuous, meaning it won't stop after generating one scramble.\
     \n--count{number} can be used to specify how many scrambles you want. Continuous is impiled. It will then quit (with code 0).\
     \n\nArgument [-s] is for saving to a file which name will come directly after [-s] (e.g. CLI_Timer 3 -s3x3_One_Handed).\
@@ -112,7 +112,8 @@ void setup(struct should &Options, cmdLineArgs){
     \n\nArgument [--no_prompt] will just generate a scramble, not ask for a time (for this reason you can't have [-s] with this), wait for an enter, then generate another one.\
     \nAlthough you can type in 'save' if you really want to save that time.\
     \n\nCLI_Timer (--version)\nOutputs the current version of CLI_Timer\n\nCLI_Timer (help)\nOutputs this.\
-    \n\nAny issues, put them on the GitHub repo: https://github.com/1Codealot/CLI_Timer/issues";
+    \n\nAny issues, put them on the GitHub repo: https://github.com/1Codealot/CLI_Timer/issues\
+    \n\nLICENCES: Main: MIT licences.\nSquare-1 code: GNU General Public License v3.0 (repo: <https://github.com/thewca/tnoodle-lib>)";
 
     if (argc == 1){
         std::cout<<helpMSG<<std::endl;
@@ -121,8 +122,8 @@ void setup(struct should &Options, cmdLineArgs){
         std::cout<<helpMSG<<std::endl;
         exit(EXIT_SUCCESS);
     } else if (std::string(argv[1]) == "--version"){
-        std::cout<<"CLI_Timer version: 1.10.1\n\n";
-        std::cout<<"Fixed bug when entering in one decimal place."<<std::endl;
+        std::cout<<"CLI_Timer version: 1.11\n\n";
+        std::cout<<"Added s(Q)uare-1"<<std::endl;
         exit(EXIT_SUCCESS);
     }
 
