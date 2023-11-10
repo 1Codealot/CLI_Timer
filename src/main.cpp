@@ -77,6 +77,12 @@ int main(int argc, char const *argv[])
 
 		cout << currentScramble;
 
+		if (Args.shouldSave)
+		{
+			cout << "\t\t Current session avg: " << fixed << setprecision(2) << calculateAvg(Args.fileName);
+		}
+		
+
 		if (!Args.shouldPrompt)
 		{
 			string buffer;

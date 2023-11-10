@@ -54,17 +54,47 @@ void save_to_file(std::string sessionName, std::string& scramble, float time, st
     std::ofstream fileToSaveTo(changeExtensionAndAddPath(sessionName), std::fstream::app);
 
     if (penalty == "DNF" || penalty == "dnf"){
-        fileToSaveTo<<scramble<<"§DNF("<<std::fixed<<std::setprecision(2)<<time<<")§"<<comment<<std::endl;
+        fileToSaveTo<<scramble<<"§DNF("<<std::fixed<<std::setprecision(2)<<time<<")~"<<comment<<std::endl;
     }
     else if (penalty == "+2")
     {
-        fileToSaveTo<<scramble<<"§"<<std::fixed<<std::setprecision(2)<<(time+2)<<"+§"<<comment<<std::endl;
+        fileToSaveTo<<scramble<<"§"<<std::fixed<<std::setprecision(2)<<(time+2)<<"+~"<<comment<<std::endl;
     }
     else
     {
-        fileToSaveTo<<scramble<<"§"<<std::fixed<<std::setprecision(2)<<time<<"§"<<comment<<std::endl;
+        fileToSaveTo<<scramble<<"§"<<std::fixed<<std::setprecision(2)<<time<<"~"<<comment<<std::endl;
     }
 
     fileToSaveTo.close();
+
+}
+
+float calculateAvg(std::string fileName){
+
+    fileName = changeExtensionAndAddPath(fileName);
+
+    float total = 0;
+    unsigned int lines = 0;
+
+    std::string currLine;
+
+    std::ifstream sessionFile(fileName);
+
+    while (getline(sessionFile, currLine))
+    {
+        // Find time
+        
+        std::string timeSubStr = 
+            currLine.substr(
+                currLine.find("§") + 2, 
+                (currLine.find("~") + 2) - (currLine.find("§") + 2) - 2
+        );
+
+        total += std::stof(timeSubStr);
+
+        lines++;
+    }
+
+    return total / lines;
 
 }
