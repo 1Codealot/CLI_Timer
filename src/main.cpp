@@ -78,7 +78,7 @@ int main(int argc, char const *argv[])
 
 		cout << currentScramble;
 
-		if (Args.shouldPrompt)
+		if (Args.shouldPrompt && Args.shouldShowAvg)
 		{
 			if (Args.shouldSave)
 			{
