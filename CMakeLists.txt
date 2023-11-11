@@ -6,4 +6,4 @@ set(CMAKE_CXX_STANDARD 23)
 add_executable(CLI_Timer ./src/main.cpp)
 
 # Set compiler flags
-target_compile_options(CLI_Timer PRIVATE -Wall -O3)
+target_compile_options(CLI_Timer PRIVATE -Wall -Wextra -Wpedantic -O3)
