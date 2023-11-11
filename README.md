@@ -62,6 +62,12 @@ Example: `CLI_Timer 7 --count5 -s7x7_average`
 ###### Note: `c` argument is impiled.
 <hr>
 
+`--no_avg`
+This will hide showing your current session average.<br>
+`--no_prompt` impilies this.
+ 
+<hr>
+
 ### Other commands 
 
 `help`
