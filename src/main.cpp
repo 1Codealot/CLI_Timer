@@ -69,6 +69,7 @@ int main(int argc, char const *argv[])
 
 	struct should Args{};
 	setup(Args, argc, argv);
+	std::vector<float> timesVector;
 
 	do
 	{ // while (Args.shouldContinue);
@@ -77,11 +78,17 @@ int main(int argc, char const *argv[])
 
 		cout << currentScramble;
 
-		if (Args.shouldSave)
+		if (Args.shouldPrompt)
 		{
-			cout << "\t\t Current session avg: " << fixed << setprecision(2) << calculateAvg(Args.fileName);
-		}
-		
+			if (Args.shouldSave)
+			{
+				cout << "\t\t Current session avg: " << fixed << setprecision(2) << calculateAvg(Args.fileName);
+			}
+			else
+			{
+				cout << "\t\t Current session avg: " << fixed << setprecision(2) << calculateAvg(timesVector);
+			}
+		}	
 
 		if (!Args.shouldPrompt)
 		{
@@ -126,6 +133,10 @@ int main(int argc, char const *argv[])
 
 				getline(cin, comment);
                 save_to_file(Args.fileName, currentScramble, solveTime, penalty, comment);
+			}
+			else
+			{
+				timesVector.push_back(solveTime);
 			}
 		}
 	} while (Args.shouldContinue && --Args.scrambleCount != 0);

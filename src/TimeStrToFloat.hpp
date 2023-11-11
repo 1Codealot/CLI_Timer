@@ -4,9 +4,12 @@ float timeStrToFloatSecs(std::string time_in){
 
     size_t pos = time_in.find('.');
 
-    if (pos != time_in.length() - 3){ // Fix to edge case when a user put in something like 1.1 where it would say 0.11 instead of 1.1(0)
-        time_in.append("0");
-    }
+    // Removed as it was more buggy than not.
+    // TODO: Actually make it work
+
+    // if (pos != time_in.length() - 3){ // Fix to edge case when a user put in something like 1.1 where it would say 0.11 instead of 1.1(0)
+    //     time_in.append("0");
+    // }
 
     while (pos != std::string::npos){
         time_in.erase(pos, 1);

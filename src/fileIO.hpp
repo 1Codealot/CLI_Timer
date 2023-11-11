@@ -1,6 +1,7 @@
 #include <string>
 #include <filesystem>
 #include <fstream>
+#include <vector>
 
 const std::string getPath()
 {
@@ -96,5 +97,18 @@ float calculateAvg(std::string fileName){
     }
 
     return total / lines;
+
+}
+
+float calculateAvg(std::vector<float>& times){
+
+    float total = 0;
+
+    for (float currTime : times)
+    {
+        total += currTime;
+    }
+
+    return total / times.size();
 
 }

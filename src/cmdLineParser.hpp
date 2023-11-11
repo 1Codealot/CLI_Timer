@@ -112,6 +112,7 @@ void setup(struct should &Options, cmdLineArgs){
     \nIt is also the only way to have averages displayed.\
     \n\nArgument [--no_prompt] will just generate a scramble, not ask for a time (for this reason you can't have [-s] with this), wait for an enter, then generate another one.\
     \nAlthough you can type in 'save' if you really want to save that time.\
+    \nAlso you won't have averages with this.\
     \n\nCLI_Timer (--version)\nOutputs the current version of CLI_Timer\n\nCLI_Timer (help)\nOutputs this.\
     \n\nAny issues, put them on the GitHub repo: https://github.com/1Codealot/CLI_Timer/issues\
     \n\nLICENCES: Main: MIT licences.\nSquare-1 code: GNU General Public License v3.0 (repo: <https://github.com/thewca/tnoodle-lib>)";
@@ -123,8 +124,8 @@ void setup(struct should &Options, cmdLineArgs){
         std::cout<<helpMSG<<std::endl;
         exit(EXIT_SUCCESS);
     } else if (std::string(argv[1]) == "--version"){
-        std::cout<<"CLI_Timer version: 1.12.0.1\n\n";
-        std::cout<<"Changes: Starting to add averages"<<std::endl;
+        std::cout<<"CLI_Timer version: 1.12.0.2\n\n";
+        std::cout<<"Changes: Added file averages AND temporary session averages"<<std::endl;
         exit(EXIT_SUCCESS);
     }
 
