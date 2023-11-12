@@ -3,7 +3,7 @@
 #include <fstream>
 #include <vector>
 
-const std::string getPath()
+static const std::string getPath()
 {
 #ifdef _WIN32
     std::string appDataPath = std::getenv("%%APPDATA%");
@@ -27,7 +27,7 @@ const std::string getPath()
     return targetDir;
 }
 
-std::string changeExtensionAndAddPath(std::string fileName)
+static std::string changeExtensionAndAddPath(std::string fileName)
 {
     // This is incase someone saves while doing `--no_prompt`
     long unsigned int index = 0;

@@ -8,19 +8,19 @@ namespace sq1 {
 
 std::random_device rng;
 
-int getRandomTurnCount(){
+static int getRandomTurnCount(){
     // -5 to +6
     return (rng() % (6 + 1 - (-5))) + (-5);
 }
 
-void doSlash(std::vector<int>& pieces){
+static void doSlash(std::vector<int>& pieces){
     for (int i = 0; i < 6; i++)
     {
         std::swap(pieces.at(6+i), pieces.at(12+i));   
     }
 }
 
-bool canSlash(const std::vector<int>& pieces){
+static bool canSlash(const std::vector<int>& pieces){
     if(pieces.at(0) == pieces.at(11)) {
         return false;
     }
@@ -36,7 +36,7 @@ bool canSlash(const std::vector<int>& pieces){
     return true;
 }
 
-std::vector<int> doRotateTopAndBottom(std::vector<int> pieces, int top, int bottom){
+static std::vector<int> doRotateTopAndBottom(std::vector<int> pieces, int top, int bottom){
     top = ((-top % 12) + 12) % 12;
 
     std::vector<int> newPieces = std::vector<int>(pieces);

@@ -13,7 +13,7 @@ struct should{
     bool shouldShowAvg;
 };
 
-char getCubeType(cmdLineArgs){
+static char getCubeType(cmdLineArgs){
     if(argc == 1){
         std::cout<<"You need a cube type.";
         exit(EXIT_FAILURE);
@@ -32,7 +32,7 @@ char getCubeType(cmdLineArgs){
     }
 }
 
-bool shouldSave(cmdLineArgs){
+static bool shouldSave(cmdLineArgs){
     for (int i = 1; i < argc; ++i) {
         if (argv[i][0] == '-' && argv[i][1] == 's'){
             return true;
@@ -41,7 +41,7 @@ bool shouldSave(cmdLineArgs){
     return false;
 }
 
-std::string getFileName(cmdLineArgs){
+static std::string getFileName(cmdLineArgs){
     if (shouldSave(argc, argv)) {
         // Find the file.
         for (int i = 1; i < argc; ++i){
@@ -60,7 +60,7 @@ std::string getFileName(cmdLineArgs){
 }
 
 
-int getCount(cmdLineArgs){
+static int getCount(cmdLineArgs){
     //TODO make command line args a string vector.
     for (int i = 1; i < argc; i++)
     {
@@ -73,7 +73,7 @@ int getCount(cmdLineArgs){
     return -1;
 }
 
-bool shouldContinue(cmdLineArgs){
+static bool shouldContinue(cmdLineArgs){
     if (shouldSave(argc, argv) || getCount(argc, argv) >= 1)
     {
         return true;
@@ -87,7 +87,7 @@ bool shouldContinue(cmdLineArgs){
     return false;
 }
 
-bool shouldPrompt(cmdLineArgs){
+static bool shouldPrompt(cmdLineArgs){
     for (int i = 1; i < argc; ++i)
         if (std::string(argv[i]) == "--no_prompt"){
             if (shouldSave(argc, argv)){
@@ -100,7 +100,7 @@ bool shouldPrompt(cmdLineArgs){
     return true;
 }
 
-bool shouldShowAvg(cmdLineArgs){
+static bool shouldShowAvg(cmdLineArgs){
     for (int i = 1; i < argc; ++i){
         if (std::string(argv[i]) == "--no_avg" || std::string(argv[i]) == "--no_prompt")
         {

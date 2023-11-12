@@ -1,12 +1,12 @@
 #include "NxNMoveGen.hpp"
 #include "square_one.hpp"
 
-bool canUseMove(puzzle_move *pMove1, puzzle_move *pMove2)
+static bool canUseMove(puzzle_move *pMove1, puzzle_move *pMove2)
 { // Two x Two
     return pMove1->base != pMove2->base;
 }
 
-bool canUseMove(puzzle_move *pMove1, puzzle_move *pMove2, puzzle_move *pMove3)
+static bool canUseMove(puzzle_move *pMove1, puzzle_move *pMove2, puzzle_move *pMove3)
 {
     if (!canUseMove(pMove2, pMove3))
     {
@@ -55,7 +55,7 @@ do{
 You need a minimum of 2 references to a move struct.
 */
 
-std::string Two_By_Two()
+static std::string Two_By_Two()
 {
     std::string scramble;
     puzzle_move Move{};
@@ -78,7 +78,7 @@ std::string Two_By_Two()
     return scramble;
 }
 
-std::string Three_By_Three()
+static std::string Three_By_Three()
 {
     std::string scramble;
     puzzle_move Move{};
@@ -110,7 +110,7 @@ std::string Three_By_Three()
     return scramble;
 }
 
-std::string Four_By_Four()
+static std::string Four_By_Four()
 {
     std::string scramble;
     puzzle_move Move{};
@@ -142,7 +142,7 @@ std::string Four_By_Four()
     return scramble;
 }
 
-std::string Five_By_Five()
+static std::string Five_By_Five()
 {
     std::string scramble;
     puzzle_move Move{};
@@ -174,7 +174,7 @@ std::string Five_By_Five()
     return scramble;
 }
 
-std::string Six_By_Six()
+static std::string Six_By_Six()
 {
     std::string scramble;
     puzzle_move Move{};
@@ -206,7 +206,7 @@ std::string Six_By_Six()
     return scramble;
 }
 
-std::string Seven_By_Seven()
+static std::string Seven_By_Seven()
 {
     std::string scramble;
     puzzle_move Move{};
@@ -238,7 +238,7 @@ std::string Seven_By_Seven()
     return scramble;
 }
 
-std::string Skewb()
+static std::string Skewb()
 {
     std::string scramble;
     puzzle_move Move{};
@@ -261,7 +261,7 @@ std::string Skewb()
     return scramble;
 }
 
-std::string Megaminx()
+static std::string Megaminx()
 {
     bool Dpp;
     std::string scramble;
@@ -304,7 +304,7 @@ std::string Megaminx()
     return scramble;
 }
 
-std::string Pyraminx()
+static std::string Pyraminx()
 {
     char tips[] = {'u', 'l', 'r', 'b'};
     std::string scramble;
@@ -331,7 +331,7 @@ std::string Pyraminx()
     return scramble;
 }
 
-std::string Clock()
+static std::string Clock()
 {
     std::string hours[] = {"5-", "4-", "3-", "2-", "1-", "0+", "1+", "2+", "3+", "4+", "5+", "6+"};
     std::string scramble;
