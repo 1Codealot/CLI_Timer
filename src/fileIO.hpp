@@ -95,12 +95,14 @@ float calculateAvg(std::string fileName){
 
         lines++;
     }
+    if (lines == 0) return 0.0f;
 
     return total / lines;
 
 }
 
 float calculateAvg(std::vector<float>& times){
+   if (times.size() == 0) return 0.0f;
 
     float total = 0;
 
