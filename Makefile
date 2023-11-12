@@ -1,6 +1,6 @@
 CPPC = g++
 
-CPPFLAGS = -O3 -Wall -Wextra -Wpedantic -std=c++23
+CPPFLAGS = -O3 -Wall -Wextra -Wpedantic -std=c++20
 
 Main_Path  = ./src/main.cpp
 Build_Dir  = ./Final_Build/
