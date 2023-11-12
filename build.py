@@ -1,5 +1,7 @@
 #!/bin/python3
 
+############################### DEPRICATED; I FELL TO THE DARK SIDE :(######################################################
+
 """
 I hate makefiles, build scripts are better.
 I also don't like PEP 8.
