@@ -136,9 +136,8 @@ void setup(struct should &Options, cmdLineArgs){
         std::cout<<helpMSG<<std::endl;
         exit(EXIT_SUCCESS);
     } else if (std::string(argv[1]) == "--version"){
-        std::cout<<"CLI_Timer version: 1.12\n\n";
-        std::cout<<"Changes: Added file averages AND temporary session averages"<<std::endl;
-        std::cout<<"Added [--no_avg] to not show averages"<<std::endl;
+        std::cout<<"CLI_Timer version: 1.12.1\n\n";
+        std::cout<<"Changes: made the start average 0 (instead of dividing by 0, making -nan)"<<std::endl;
         exit(EXIT_SUCCESS);
     }
 
