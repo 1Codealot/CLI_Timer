@@ -10,7 +10,7 @@ inline std::random_device rng;
 
 static int getRandomNum(const int min, const int max)
 {
-    return (rng() % (max + 1 - min)) + min;
+    return rng() % (max + 1 - min) + min;
 }
 
 constexpr char baseMoves[6] = {'F', 'U', 'R', 'B', 'L', 'D'};

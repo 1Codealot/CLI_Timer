@@ -2,9 +2,10 @@
 #include <string>
 #include <filesystem>
 #include <fstream>
+#include <utility>
 #include <vector>
 
-static const std::string getPath()
+static std::string getPath()
 {
 #ifdef _WIN32
     std::string appDataPath = std::getenv("%%APPDATA%");
@@ -52,8 +53,8 @@ static std::string changeExtensionAndAddPath(std::string fileName)
     return getPath() + finalFileName + ".CLI_T_S"; // CLI_T_S means CLI Timer Session.
 }
 
-inline void save_to_file(std::string sessionName, std::string& scramble, float time, std::string& penalty, std::string& comment) {
-    std::ofstream fileToSaveTo(changeExtensionAndAddPath(sessionName), std::fstream::app);
+inline void save_to_file(std::string sessionName, const std::string& scramble, const float time, const std::string& penalty, const std::string& comment) {
+    std::ofstream fileToSaveTo(changeExtensionAndAddPath(std::move(sessionName)), std::fstream::app);
 
     if (penalty == "DNF" || penalty == "dnf"){
         fileToSaveTo<<scramble<<"§DNF("<<std::fixed<<std::setprecision(2)<<time<<")~"<<comment<<std::endl;
@@ -89,7 +90,7 @@ inline float calculateAvg(std::string fileName){
         std::string timeSubStr = 
             currLine.substr(
                 currLine.find("§") + 2, 
-                (currLine.find("~") + 2) - (currLine.find("§") + 2) - 2
+                (currLine.find('~') + 2) - (currLine.find("§") + 2) - 2
         );
 
         total += std::stof(timeSubStr);
@@ -103,7 +104,7 @@ inline float calculateAvg(std::string fileName){
 }
 
 inline float calculateAvg(const std::vector<float>& times){
-   if (times.size() == 0) return 0.0f;
+   if (times.empty()) return 0.0f;
 
     float total = 0;
 

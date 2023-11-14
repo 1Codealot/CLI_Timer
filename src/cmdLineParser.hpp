@@ -144,6 +144,7 @@ inline void setup(struct should &Options, cmdLineArgs){
         std::cout<<"\tadded header guards"<<std::endl;
         std::cout<<"\tadded `inline` to functions"<<std::endl;
         std::cout<<"\tadded `const` to stuff."<<std::endl;
+        std::cout<<"and more"<<std::endl;
 
         exit(EXIT_SUCCESS);
     }

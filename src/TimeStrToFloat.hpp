@@ -58,8 +58,7 @@ inline float timeStrToFloatSecs(std::string time_in){
     HMSD[1] += HMSD[0]*60;
     HMSD[2] += HMSD[1]*60;
 
-    float const final_secs = (float)HMSD[2] + ((float)HMSD[3]/100);
-    return final_secs;
+    return static_cast<float>(HMSD[2]) + static_cast<float>(HMSD[3])/100;
 }
 
 inline std::string outputTime(std::string time_in){

@@ -39,10 +39,9 @@ static bool canUseMove(const puzzle_move *pMove1, const puzzle_move *pMove2, con
             return true;
         }
     }
-    else
-    {
-        return true;
-    }
+
+    return true;
+
 }
 
 /*
@@ -307,14 +306,13 @@ static std::string Megaminx()
 
 static std::string Pyraminx()
 {
-    const char tips[] = {'u', 'l', 'r', 'b'};
+    constexpr char tips[] = {'u', 'l', 'r', 'b'};
     std::string scramble;
     scramble += Skewb();
 
     for (int i = 0; i < 3; i++)
     {
-        int direction = getRandomNum(1, 3);
-        if (direction == 1)
+        if (const int direction = getRandomNum(1, 3); direction == 1)
         {
             continue;
         }
@@ -335,9 +333,7 @@ static std::string Pyraminx()
 static std::string Clock()
 {
     const std::string hours[] = {"5-", "4-", "3-", "2-", "1-", "0+", "1+", "2+", "3+", "4+", "5+", "6+"};
-    std::string scramble;
-
-    scramble  = "UR" + hours[getRandomNum(0, 11)] + " ";
+    std::string scramble = "UR" + hours[getRandomNum(0, 11)] + " ";
     scramble += "DR" + hours[getRandomNum(0, 11)] + " ";
     scramble += "DL" + hours[getRandomNum(0, 11)] + " ";
     scramble += "UL" + hours[getRandomNum(0, 11)] + " ";
