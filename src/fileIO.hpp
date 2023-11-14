@@ -102,12 +102,12 @@ inline float calculateAvg(std::string fileName){
 
 }
 
-inline float calculateAvg(std::vector<float>& times){
+inline float calculateAvg(const std::vector<float>& times){
    if (times.size() == 0) return 0.0f;
 
     float total = 0;
 
-    for (float currTime : times)
+    for (const float currTime : times)
     {
         total += currTime;
     }

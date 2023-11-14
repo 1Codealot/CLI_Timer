@@ -2,12 +2,12 @@
 #include "NxNMoveGen.hpp"
 #include "square_one.hpp"
 
-static bool canUseMove(puzzle_move *pMove1, puzzle_move *pMove2)
+static bool canUseMove(const puzzle_move *pMove1, const puzzle_move *pMove2)
 { // Two x Two
     return pMove1->base != pMove2->base;
 }
 
-static bool canUseMove(puzzle_move *pMove1, puzzle_move *pMove2, puzzle_move *pMove3)
+static bool canUseMove(const puzzle_move *pMove1, const puzzle_move *pMove2, const puzzle_move *pMove3)
 {
     if (!canUseMove(pMove2, pMove3))
     {
@@ -61,7 +61,7 @@ static std::string Two_By_Two()
     std::string scramble;
     puzzle_move Move{};
     puzzle_move PrevMove{};
-    int moveCount = getRandomNum(9, 13);
+    const int moveCount = getRandomNum(9, 13);
 
     // So PrevMove is initalised.
     createMove(PrevMove, '2');
@@ -85,7 +85,7 @@ static std::string Three_By_Three()
     puzzle_move Move{};
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
-    int moveCount = getRandomNum(19, 27);
+    const int moveCount = getRandomNum(19, 27);
 
     // So TwoPrevMove is initialised
     createMove(TwoPrevMove, '3');
@@ -117,7 +117,7 @@ static std::string Four_By_Four()
     puzzle_move Move{};
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
-    int moveCount = getRandomNum(38, 43);
+    const int moveCount = getRandomNum(38, 43);
 
     // So TwoPrevMove is initialised
     createMove(TwoPrevMove, '4');
@@ -149,7 +149,7 @@ static std::string Five_By_Five()
     puzzle_move Move{};
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
-    int moveCount = getRandomNum(48, 53);
+    const int moveCount = getRandomNum(48, 53);
 
     // So TwoPrevMove is initialised
     createMove(TwoPrevMove, '5');
@@ -181,7 +181,7 @@ static std::string Six_By_Six()
     puzzle_move Move{};
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
-    int moveCount = getRandomNum(58, 63);
+    const int moveCount = getRandomNum(58, 63);
 
     // So TwoPrevMove is initialised
     createMove(TwoPrevMove, '6');
@@ -213,7 +213,7 @@ static std::string Seven_By_Seven()
     puzzle_move Move{};
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
-    int moveCount = getRandomNum(68, 73);
+    const int moveCount = getRandomNum(68, 73);
 
     // So TwoPrevMove is initialised
     createMove(TwoPrevMove, '7');
@@ -244,7 +244,7 @@ static std::string Skewb()
     std::string scramble;
     puzzle_move Move{};
     puzzle_move PrevMove{};
-    int moveCount = getRandomNum(9, 13);
+    const int moveCount = getRandomNum(9, 13);
 
     // So PrevMove is initalised.
     createMove(PrevMove, 'S');
@@ -307,7 +307,7 @@ static std::string Megaminx()
 
 static std::string Pyraminx()
 {
-    char tips[] = {'u', 'l', 'r', 'b'};
+    const char tips[] = {'u', 'l', 'r', 'b'};
     std::string scramble;
     scramble += Skewb();
 
@@ -334,7 +334,7 @@ static std::string Pyraminx()
 
 static std::string Clock()
 {
-    std::string hours[] = {"5-", "4-", "3-", "2-", "1-", "0+", "1+", "2+", "3+", "4+", "5+", "6+"};
+    const std::string hours[] = {"5-", "4-", "3-", "2-", "1-", "0+", "1+", "2+", "3+", "4+", "5+", "6+"};
     std::string scramble;
 
     scramble  = "UR" + hours[getRandomNum(0, 11)] + " ";

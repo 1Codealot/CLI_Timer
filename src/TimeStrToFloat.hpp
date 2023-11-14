@@ -43,9 +43,9 @@ inline float timeStrToFloatSecs(std::string time_in){
 
     for (int i = 0; i <= 6; i+=2)
     {
-        int digit1 = std::stoi(std::string(1, time_in.at(i))) * 10;
-        int digit2 = std::stoi(std::string(1, time_in.at(i + 1)));
-        int asdf = digit1 + digit2;
+        const int digit1 = std::stoi(std::string(1, time_in.at(i))) * 10;
+        const int digit2 = std::stoi(std::string(1, time_in.at(i + 1)));
+        const int asdf = digit1 + digit2;
         HMSD[part] = asdf;
         
         part++;
@@ -58,7 +58,7 @@ inline float timeStrToFloatSecs(std::string time_in){
     HMSD[1] += HMSD[0]*60;
     HMSD[2] += HMSD[1]*60;
 
-    float final_secs = (float)HMSD[2] + ((float)HMSD[3]/100);
+    float const final_secs = (float)HMSD[2] + ((float)HMSD[3]/100);
     return final_secs;
 }
 
