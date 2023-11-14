@@ -32,7 +32,7 @@ static bool canSlash(const std::vector<int>& pieces){
     if(pieces.at(12) == pieces.at(23)) {
         return false;
     }
-    if(pieces.at(18) == pieces.at(17) {
+    if(pieces.at(18) == pieces.at(17)) {
         return false;
     }
     return true;
