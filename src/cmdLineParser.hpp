@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <string>
 
@@ -138,6 +139,10 @@ void setup(struct should &Options, cmdLineArgs){
     } else if (std::string(argv[1]) == "--version"){
         std::cout<<"CLI_Timer version: 1.12.1\n\n";
         std::cout<<"Changes: made the start average 0 (instead of dividing by 0, making -nan)"<<std::endl;
+        std::cout<<"Small code changes:"<<std::endl;
+        std::cout<<"\tadded `static` to functions"<<std::endl;
+        std::cout<<"\tadded header guards"<<std::endl;
+
         exit(EXIT_SUCCESS);
     }
 

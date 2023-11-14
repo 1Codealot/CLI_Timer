@@ -1,3 +1,4 @@
+#pragma once
 #include "NxNMoveGen.hpp"
 #include "square_one.hpp"
 
@@ -376,19 +377,19 @@ std::string generate_scramble(const char cube){
     switch (cube)
     {
         case '2':
-            return Two_By_Two();    
+            return Two_By_Two();
 
         case '3':
-            return Three_By_Three();            
+            return Three_By_Three();
 
         case '4':
-            return Four_By_Four();            
+            return Four_By_Four();
 
         case '5':
-            return Five_By_Five();            
+            return Five_By_Five();
 
         case '6':
-            return Six_By_Six();           
+            return Six_By_Six();
 
         case '7':
             return Seven_By_Seven();
@@ -410,6 +411,6 @@ std::string generate_scramble(const char cube){
 
         default:
             return "Unknown puzzle";
-            
+
     }
 }

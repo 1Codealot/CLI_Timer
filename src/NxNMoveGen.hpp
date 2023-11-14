@@ -1,6 +1,7 @@
 /*
 This code is here to deprecate the original Scrambles.hpp and stringCleanup.hpp
 */
+#pragma once
 
 #include <string>
 #include <random>

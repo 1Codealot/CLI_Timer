@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 
 float timeStrToFloatSecs(std::string time_in){
