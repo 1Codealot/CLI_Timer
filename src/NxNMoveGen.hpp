@@ -6,7 +6,7 @@ This code is here to deprecate the original Scrambles.hpp and stringCleanup.hpp
 #include <string>
 #include <random>
 
-std::random_device rng;
+inline std::random_device rng;
 
 static int getRandomNum(int min, int max)
 {
@@ -24,7 +24,7 @@ typedef struct
     char wsize;     // 0 2 3
 } puzzle_move;
 
-void createMove(puzzle_move &newMove, char moveType)
+inline void createMove(puzzle_move &newMove, char moveType)
 {
     // Create empty move outside this func then pass it in here
     newMove.base = baseMoves[getRandomNum(0, 5)];
@@ -82,7 +82,7 @@ void createMove(puzzle_move &newMove, char moveType)
 
 }
 
-std::string getRepresentation(puzzle_move *pMove)
+inline std::string getRepresentation(puzzle_move *pMove)
 {
     std::string finalMove;
     finalMove += pMove->base;

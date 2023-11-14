@@ -111,7 +111,7 @@ static bool shouldShowAvg(cmdLineArgs){
     return true;
 }
 
-void setup(struct should &Options, cmdLineArgs){
+inline void setup(struct should &Options, cmdLineArgs){
     // Pre-checks
     // These are for like `help` or `--version`
 
@@ -142,6 +142,7 @@ void setup(struct should &Options, cmdLineArgs){
         std::cout<<"Small code changes:"<<std::endl;
         std::cout<<"\tadded `static` to functions"<<std::endl;
         std::cout<<"\tadded header guards"<<std::endl;
+        std::cout<<"\tadded `inline` to functions"<<std::endl;
 
         exit(EXIT_SUCCESS);
     }

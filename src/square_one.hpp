@@ -7,7 +7,7 @@ namespace sq1 {
 // Code sourced from <https://github.com/thewca/tnoodle-lib/blob/master/scrambles/src/main/java/org/worldcubeassociation/tnoodle/puzzle/SquareOnePuzzle.java>
 // It is also under the GNU General Public License v3.0 <https://github.com/thewca/tnoodle-lib/blob/master/LICENSE>
 
-std::random_device rng;
+inline std::random_device rng;
 
 static int getRandomTurnCount(){
     // -5 to +6
@@ -69,7 +69,7 @@ static std::vector<int> doRotateTopAndBottom(std::vector<int> pieces, int top, i
     return newPieces;
 }
 
-std::string generateScramble(){
+inline std::string generateScramble(){
     std::string scramble;
     std::vector<int> pieces{ 0, 0, 1, 2, 2, 3, 4, 4, 5, 6, 6, 7, 8, 9, 9, 10, 11, 11, 12, 13, 13, 14, 15, 15 };
 

@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-float timeStrToFloatSecs(std::string time_in){
+inline float timeStrToFloatSecs(std::string time_in){
 
     size_t pos = time_in.find('.');
 
@@ -62,7 +62,7 @@ float timeStrToFloatSecs(std::string time_in){
     return final_secs;
 }
 
-std::string outputTime(std::string time_in){
+inline std::string outputTime(std::string time_in){
     size_t pos = time_in.find('.');
 
     while (pos != std::string::npos){

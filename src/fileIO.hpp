@@ -52,7 +52,7 @@ static std::string changeExtensionAndAddPath(std::string fileName)
     return getPath() + finalFileName + ".CLI_T_S"; // CLI_T_S means CLI Timer Session.
 }
 
-void save_to_file(std::string sessionName, std::string& scramble, float time, std::string& penalty, std::string& comment) {
+inline void save_to_file(std::string sessionName, std::string& scramble, float time, std::string& penalty, std::string& comment) {
     std::ofstream fileToSaveTo(changeExtensionAndAddPath(sessionName), std::fstream::app);
 
     if (penalty == "DNF" || penalty == "dnf"){
@@ -71,7 +71,7 @@ void save_to_file(std::string sessionName, std::string& scramble, float time, st
 
 }
 
-float calculateAvg(std::string fileName){
+inline float calculateAvg(std::string fileName){
 
     fileName = changeExtensionAndAddPath(fileName);
 
@@ -102,7 +102,7 @@ float calculateAvg(std::string fileName){
 
 }
 
-float calculateAvg(std::vector<float>& times){
+inline float calculateAvg(std::vector<float>& times){
    if (times.size() == 0) return 0.0f;
 
     float total = 0;

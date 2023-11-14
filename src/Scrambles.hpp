@@ -373,7 +373,7 @@ static std::string Clock()
 }
 
 // Use this one
-std::string generate_scramble(const char cube){
+inline std::string generate_scramble(const char cube){
     switch (cube)
     {
         case '2':
