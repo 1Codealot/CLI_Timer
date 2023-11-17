@@ -118,7 +118,7 @@ static bool needEnter(cmdLineArgs){
         if (std::string(argv[i]) == "--no_enter"){
             // This is *very* bad. oops.
             if(shouldPrompt(argc, argv) || (getCount(argc, argv) < 1)){
-                std::cout<<"Enter is needed for prompting or unlimited number of scrambles";
+                std::cout<<"Enter is needed for prompting or unlimited number of scrambles\n";
                 return true;
             } else
             {
