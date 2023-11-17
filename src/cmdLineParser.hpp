@@ -145,7 +145,7 @@ inline void setup(struct should &Options, cmdLineArgs){
     \nAlthough you can type in 'save' if you really want to save that time.\
     \nAlso you won't have averages with this.\
     \n\nArgument [--no_avg] means that it will not show the averages\
-    \n\nArrgument [--no_enter] will instantly output n scrambles (with the argument [--count{n}]).\
+    \n\nArgument [--no_enter] will instantly output n scrambles (with the argument [--count{n}]).\ 
     \nYou MUST have [--no_prompt] and [--count].\
     \n\nCLI_Timer (--version)\nOutputs the current version of CLI_Timer\n\nCLI_Timer (help)\nOutputs this.\
     \n\nAny issues, put them on the GitHub repo: https://github.com/1Codealot/CLI_Timer/issues\

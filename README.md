@@ -70,6 +70,10 @@ This will hide showing your current session average.<br>
  
 <hr>
 
+`--no_enter` will instantly output n scrambles (with the argument `--count{n}`). You MUST have [--no_prompt] and [--count].
+
+<hr>
+
 ### Other commands 
 
 `help`
