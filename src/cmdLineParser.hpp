@@ -19,7 +19,7 @@ struct should{
 
 static char getCubeType(std::vector<std::string> &args){
     // Go through all the argv finding a  1 length single char
-    for (int i = 0; i < args.size(); ++i) {
+    for (size_t i = 0; i < args.size(); ++i) {
         // I could do some magic ASCII checking (i.e. if (*argv[i]) is between ASCII nums for '2' to '7')
         // However that wouldn't make much sense
         // Although c++ isn't meant to be understood easily
@@ -33,7 +33,7 @@ static char getCubeType(std::vector<std::string> &args){
 
 
 static bool shouldSave(std::vector<std::string> &args){
-    for (int i = 0; i < args.size(); ++i) {
+    for (size_t i = 0; i < args.size(); ++i) {
        if (args.at(i).substr(0, 2) == "-s"){
 	    return true;
         }
@@ -44,7 +44,7 @@ static bool shouldSave(std::vector<std::string> &args){
 static std::string getFileName(std::vector<std::string> &args){
     if (shouldSave(args)) {
         // Find the file.
-        for (int i = 0; i < args.size(); ++i){
+        for (size_t i = 0; i < args.size(); ++i){
             if (args.at(i).substr(0,2) == "-s"){
                 std::string fileName = args.at(i);
                 if (fileName.length() <= 2){
@@ -61,7 +61,7 @@ static std::string getFileName(std::vector<std::string> &args){
 
 
 static int getCount(std::vector<std::string> &args){
-    for (int i = 0; i < args.size(); i++)
+    for (size_t i = 0; i < args.size(); i++)
     {
         std::string currArg = args.at(i);
         if (currArg.substr(0, 7) == "--count")
@@ -79,7 +79,7 @@ static bool shouldContinue(std::vector<std::string> &args){
     }
     
     // Oops, turned on python mode. lmao
-    for (int i = 0; i < args.size(); ++i)
+    for (size_t i = 0; i < args.size(); ++i)
         if (args.at(i) == "c")
             return true;
 
@@ -87,7 +87,7 @@ static bool shouldContinue(std::vector<std::string> &args){
 }
 
 static bool shouldPrompt(std::vector<std::string> &args){
-    for (int i = 0; i < args.size(); ++i)
+    for (size_t i = 0; i < args.size(); ++i)
         if (args.at(i) == "--no_prompt"){
             if (shouldSave(args)){
                 std::cout<<"You are saving to a file; this means you will need prompting; therefore you will be prompted.\nHowever you can type 'save' if you do want to save to a file with `--no_prompt`"<<std::endl;
@@ -100,7 +100,7 @@ static bool shouldPrompt(std::vector<std::string> &args){
 }
 
 static bool shouldShowAvg(std::vector<std::string> &args){
-    for (int i = 0; i < args.size(); ++i){
+    for (size_t i = 0; i < args.size(); ++i){
         if (args.at(i) == "--no_avg" || args.at(i) == "--no_prompt")
         {
             return false;
@@ -110,7 +110,7 @@ static bool shouldShowAvg(std::vector<std::string> &args){
 }
 
 static bool needEnter(std::vector<std::string> &args){
-    for (int i = 0; i < args.size(); i++)
+    for (size_t i = 0; i < args.size(); i++)
     {
         if (args.at(i) == "--no_enter"){
             // This is *very* bad. oops.
@@ -142,7 +142,7 @@ inline void setup(struct should &Options, cmdLineArgs){
     \nAlthough you can type in 'save' if you really want to save that time.\
     \nAlso you won't have averages with this.\
     \n\nArgument [--no_avg] means that it will not show the averages\
-    \n\nArgument [--no_enter] will instantly output n scrambles (with the argument [--count{n}]).\ 
+    \n\nArgument [--no_enter] will instantly output n scrambles (with the argument [--count{n}]).\
     \nYou MUST have [--no_prompt] and [--count].\
     \n\nCLI_Timer (--version)\nOutputs the current version of CLI_Timer\n\nCLI_Timer (help)\nOutputs this.\
     \n\nAny issues, put them on the GitHub repo: https://github.com/1Codealot/CLI_Timer/issues\
@@ -152,7 +152,7 @@ inline void setup(struct should &Options, cmdLineArgs){
     std::vector<std::string> arguments;
 
     //init vector
-    for (size_t i=1; i!=argc; i++){
+    for (int i=1; i!=argc; i++){
         arguments.push_back(std::string(argv[i]));
     }
 
@@ -166,6 +166,7 @@ inline void setup(struct should &Options, cmdLineArgs){
     } else if (arguments.at(0) == "--version"){
         std::cout<<"CLI_Timer version: 1.13\n\n";
         std::cout<<"Added using a vector for the arguments."<<std::endl;
+        std::cout<<"Removed some warnings (from my code; STL stuff still warns but IDK why)."<<std::endl;
         
 
         exit(EXIT_SUCCESS);

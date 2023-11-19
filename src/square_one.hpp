@@ -74,7 +74,7 @@ inline std::string generateScramble(){
     std::string scramble;
     std::vector<int> pieces{ 0, 0, 1, 2, 2, 3, 4, 4, 5, 6, 6, 7, 8, 9, 9, 10, 11, 11, 12, 13, 13, 14, 15, 15 };
 
-    for (int x = 0; x <= rng() % 6 + 11; x++){
+    for (size_t x = 0; x <= rng() % 6 + 11; x++){
 
         int top = 0;
         int bottom = 0;
