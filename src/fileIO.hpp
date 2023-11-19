@@ -2,7 +2,6 @@
 #include <string>
 #include <filesystem>
 #include <fstream>
-#include <utility>
 #include <vector>
 
 static std::string getPath()

@@ -1,5 +1,4 @@
 #pragma once
-#include <cstddef>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -167,6 +166,7 @@ inline void setup(struct should &Options, cmdLineArgs){
         std::cout<<"CLI_Timer version: 1.13\n\n";
         std::cout<<"Added using a vector for the arguments."<<std::endl;
         std::cout<<"Removed some warnings (from my code; STL stuff still warns but IDK why)."<<std::endl;
+        std::cout<<"Removed useless `#include`s."<<std::endl;
         
 
         exit(EXIT_SUCCESS);

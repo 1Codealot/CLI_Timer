@@ -2,7 +2,6 @@
 #include "Scrambles.hpp"
 #include "fileIO.hpp"
 #include "TimeStrToFloat.hpp"
-#include <iostream>
 
 using namespace std;
 
