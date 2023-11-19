@@ -1,6 +1,8 @@
 #pragma once
+#include <cstddef>
 #include <iostream>
 #include <string>
+#include <vector>
 
 #define cmdLineArgs int argc, const char *argv[]
 
@@ -15,40 +17,36 @@ struct should{
     bool needEnter;
 };
 
-static char getCubeType(cmdLineArgs){
-    if(argc == 1){
-        std::cout<<"You need a cube type.";
-        exit(EXIT_FAILURE);
-    } else {
-        // Go through all the argv finding a  1 length single char
-        for (int i = 1; i < argc; ++i) {
-            // I could do some magic ASCII checking (i.e. if (*argv[i]) is between ASCII nums for '2' to '7')
-            // However that wouldn't make much sense
-            // Although c++ isn't meant to be understood easily
-            if ((*argv[i] == '2' || *argv[i] == '3' || *argv[i] == '4' || *argv[i] == '5' || *argv[i] == '6' || *argv[i] == '7' || *argv[i] == 'P' || *argv[i] == 'M' || *argv[i] == 'S' || *argv[i] == 'C' || *argv[i] == 'Q') && (*argv[i] != 'c')) {
-                return *argv[i];
-            }
+static char getCubeType(std::vector<std::string> &args){
+    // Go through all the argv finding a  1 length single char
+    for (int i = 0; i < args.size(); ++i) {
+        // I could do some magic ASCII checking (i.e. if (*argv[i]) is between ASCII nums for '2' to '7')
+        // However that wouldn't make much sense
+        // Although c++ isn't meant to be understood easily
+        if ((args.at(i) == "2" || args.at(i) == "3" || args.at(i) == "4" || args.at(i) == "5" || args.at(i) == "6" || args.at(i) == "7" || args.at(i) == "P" || args.at(i) == "M" || args.at(i) == "S" || args.at(i) == "C" || args.at(i) == "Q") && (args.at(i) != "c")) {
+            return (char) args.at(i).at(0);
         }
-        std::cout<<"Cube type not found.";
-        exit(EXIT_FAILURE);
     }
+    std::cout<<"Cube type not found.";
+    exit(EXIT_FAILURE);
 }
 
-static bool shouldSave(cmdLineArgs){
-    for (int i = 1; i < argc; ++i) {
-        if (argv[i][0] == '-' && argv[i][1] == 's'){
-            return true;
+
+static bool shouldSave(std::vector<std::string> &args){
+    for (int i = 0; i < args.size(); ++i) {
+       if (args.at(i).substr(0, 2) == "-s"){
+	    return true;
         }
     }
     return false;
 }
 
-static std::string getFileName(cmdLineArgs){
-    if (shouldSave(argc, argv)) {
+static std::string getFileName(std::vector<std::string> &args){
+    if (shouldSave(args)) {
         // Find the file.
-        for (int i = 1; i < argc; ++i){
-            if (argv[i][0] == '-' && argv[i][1] == 's'){
-                std::string fileName = std::string(argv[i]);
+        for (int i = 0; i < args.size(); ++i){
+            if (args.at(i).substr(0,2) == "-s"){
+                std::string fileName = args.at(i);
                 if (fileName.length() <= 2){
                     std::cerr<<"You tried to save to a file but you didn't give it a name\n\n";
                     exit(EXIT_FAILURE);
@@ -62,11 +60,10 @@ static std::string getFileName(cmdLineArgs){
 }
 
 
-static int getCount(cmdLineArgs){
-    //TODO make command line args a string vector.
-    for (int i = 1; i < argc; i++)
+static int getCount(std::vector<std::string> &args){
+    for (int i = 0; i < args.size(); i++)
     {
-        std::string currArg = std::string(argv[i]);
+        std::string currArg = args.at(i);
         if (currArg.substr(0, 7) == "--count")
         {
             return std::stoi(currArg.substr(7, currArg.size()));
@@ -75,24 +72,24 @@ static int getCount(cmdLineArgs){
     return -1;
 }
 
-static bool shouldContinue(cmdLineArgs){
-    if (shouldSave(argc, argv) || getCount(argc, argv) >= 1)
+static bool shouldContinue(std::vector<std::string> &args){
+    if (shouldSave(args) || getCount(args) >= 1)
     {
         return true;
     }
     
     // Oops, turned on python mode. lmao
-    for (int i = 1; i < argc; ++i)
-        if (*argv[i] == 'c')
+    for (int i = 0; i < args.size(); ++i)
+        if (args.at(i) == "c")
             return true;
 
     return false;
 }
 
-static bool shouldPrompt(cmdLineArgs){
-    for (int i = 1; i < argc; ++i)
-        if (std::string(argv[i]) == "--no_prompt"){
-            if (shouldSave(argc, argv)){
+static bool shouldPrompt(std::vector<std::string> &args){
+    for (int i = 0; i < args.size(); ++i)
+        if (args.at(i) == "--no_prompt"){
+            if (shouldSave(args)){
                 std::cout<<"You are saving to a file; this means you will need prompting; therefore you will be prompted.\nHowever you can type 'save' if you do want to save to a file with `--no_prompt`"<<std::endl;
                 return true;
             } else {
@@ -102,9 +99,9 @@ static bool shouldPrompt(cmdLineArgs){
     return true;
 }
 
-static bool shouldShowAvg(cmdLineArgs){
-    for (int i = 1; i < argc; ++i){
-        if (std::string(argv[i]) == "--no_avg" || std::string(argv[i]) == "--no_prompt")
+static bool shouldShowAvg(std::vector<std::string> &args){
+    for (int i = 0; i < args.size(); ++i){
+        if (args.at(i) == "--no_avg" || args.at(i) == "--no_prompt")
         {
             return false;
         }
@@ -112,12 +109,12 @@ static bool shouldShowAvg(cmdLineArgs){
     return true;
 }
 
-static bool needEnter(cmdLineArgs){
-    for (int i = 1; i < argc; i++)
+static bool needEnter(std::vector<std::string> &args){
+    for (int i = 0; i < args.size(); i++)
     {
-        if (std::string(argv[i]) == "--no_enter"){
+        if (args.at(i) == "--no_enter"){
             // This is *very* bad. oops.
-            if(shouldPrompt(argc, argv) || (getCount(argc, argv) < 1)){
+            if(shouldPrompt(args) || (getCount(args) < 1)){
                 std::cout<<"Enter is needed for prompting or unlimited number of scrambles\n";
                 return true;
             } else
@@ -151,26 +148,35 @@ inline void setup(struct should &Options, cmdLineArgs){
     \n\nAny issues, put them on the GitHub repo: https://github.com/1Codealot/CLI_Timer/issues\
     \n\nLICENCES: Main: MIT licences.\nSquare-1 code: GNU General Public License v3.0 (repo: <https://github.com/thewca/tnoodle-lib>)" }; // Used braces so that I can fold it.
 
+    //this will make everything easier
+    std::vector<std::string> arguments;
+
+    //init vector
+    for (size_t i=1; i!=argc; i++){
+        arguments.push_back(std::string(argv[i]));
+    }
+
+
     if (argc == 1){
         std::cout<<helpMSG<<std::endl;
         exit(EXIT_SUCCESS);
-    } else if (std::string(argv[1]) == "help") {
+    } else if (arguments.at(0) == "help") {
         std::cout<<helpMSG<<std::endl;
         exit(EXIT_SUCCESS);
-    } else if (std::string(argv[1]) == "--version"){
-        std::cout<<"CLI_Timer version: 1.12.2\n\n";
-        std::cout<<"Added `--no_enter`"<<std::endl;
+    } else if (arguments.at(0) == "--version"){
+        std::cout<<"CLI_Timer version: 1.13\n\n";
+        std::cout<<"Added using a vector for the arguments."<<std::endl;
         
 
         exit(EXIT_SUCCESS);
     }
 
-    Options.cubeType = getCubeType(argc, argv);
-    Options.shouldSave = shouldSave(argc, argv);
-    Options.fileName = getFileName(argc, argv);
-    Options.shouldContinue = shouldContinue(argc, argv);
-    Options.shouldPrompt = shouldPrompt(argc, argv);
-    Options.scrambleCount = getCount(argc, argv);
-    Options.shouldShowAvg = shouldShowAvg(argc, argv);
-    Options.needEnter = needEnter(argc, argv);
+    Options.cubeType = getCubeType(arguments);
+    Options.shouldSave = shouldSave(arguments);
+    Options.fileName = getFileName(arguments);
+    Options.shouldContinue = shouldContinue(arguments);
+    Options.shouldPrompt = shouldPrompt(arguments);
+    Options.scrambleCount = getCount(arguments);
+    Options.shouldShowAvg = shouldShowAvg(arguments);
+    Options.needEnter = needEnter(arguments);
 }
