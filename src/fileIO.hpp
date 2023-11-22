@@ -32,14 +32,15 @@ static std::string changeExtensionAndAddPath(std::string fileName)
 {
     // This is incase someone saves while doing `--no_prompt`
     long unsigned int index = 0;
-    
-    if (fileName[0] == '-' && fileName[1] == 's'){
+
+    if (fileName[0] == '-' && fileName[1] == 's')
+    {
         index += 2;
     }
 
     std::string finalFileName;
     for (; index < fileName.length(); index++)
-    { 
+    {
         if (fileName[index] == '.')
         {
             break;
@@ -52,26 +53,28 @@ static std::string changeExtensionAndAddPath(std::string fileName)
     return getPath() + finalFileName + ".CLI_T_S"; // CLI_T_S means CLI Timer Session.
 }
 
-inline void save_to_file(std::string sessionName, const std::string& scramble, const float time, const std::string& penalty, const std::string& comment) {
+inline void save_to_file(std::string sessionName, const std::string &scramble, const float time, const std::string &penalty, const std::string &comment)
+{
     std::ofstream fileToSaveTo(changeExtensionAndAddPath(std::move(sessionName)), std::fstream::app);
 
-    if (penalty == "DNF" || penalty == "dnf"){
-        fileToSaveTo<<scramble<<"§DNF("<<std::fixed<<std::setprecision(2)<<time<<")~"<<comment<<std::endl;
+    if (penalty == "DNF" || penalty == "dnf")
+    {
+        fileToSaveTo << scramble << "§DNF(" << std::fixed << std::setprecision(2) << time << ")~" << comment << std::endl;
     }
     else if (penalty == "+2")
     {
-        fileToSaveTo<<scramble<<"§"<<std::fixed<<std::setprecision(2)<<(time+2)<<"+~"<<comment<<std::endl;
+        fileToSaveTo << scramble << "§" << std::fixed << std::setprecision(2) << (time + 2) << "+~" << comment << std::endl;
     }
     else
     {
-        fileToSaveTo<<scramble<<"§"<<std::fixed<<std::setprecision(2)<<time<<"~"<<comment<<std::endl;
+        fileToSaveTo << scramble << "§" << std::fixed << std::setprecision(2) << time << "~" << comment << std::endl;
     }
 
     fileToSaveTo.close();
-
 }
 
-inline float calculateAvg(std::string fileName){
+inline float calculateAvg(std::string fileName)
+{
 
     fileName = changeExtensionAndAddPath(fileName);
 
@@ -85,25 +88,26 @@ inline float calculateAvg(std::string fileName){
     while (getline(sessionFile, currLine))
     {
         // Find time
-        
-        std::string timeSubStr = 
+
+        std::string timeSubStr =
             currLine.substr(
-                currLine.find("§") + 2, 
-                (currLine.find('~') + 2) - (currLine.find("§") + 2) - 2
-        );
+                currLine.find("§") + 2,
+                (currLine.find('~') + 2) - (currLine.find("§") + 2) - 2);
 
         total += std::stof(timeSubStr);
 
         lines++;
     }
-    if (lines == 0) return 0.0f;
+    if (lines == 0)
+        return 0.0f;
 
     return total / lines;
-
 }
 
-inline float calculateAvg(const std::vector<float>& times){
-   if (times.empty()) return 0.0f;
+inline float calculateAvg(const std::vector<float> &times)
+{
+    if (times.empty())
+        return 0.0f;
 
     float total = 0;
 
@@ -113,5 +117,4 @@ inline float calculateAvg(const std::vector<float>& times){
     }
 
     return total / times.size();
-
 }

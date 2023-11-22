@@ -6,17 +6,19 @@
 using namespace std;
 
 // Prompting
-float getTime(){
+float getTime()
+{
 	string inputtedTime;
 	string correct;
 
 	cout << "\nEnter your time: ";
 	cin >> inputtedTime;
 
-    if (inputtedTime[0] == 'Q' || inputtedTime[0] == 'q'){
-		cout<<endl;
-        exit(EXIT_SUCCESS);
-    }
+	if (inputtedTime[0] == 'Q' || inputtedTime[0] == 'q')
+	{
+		cout << endl;
+		exit(EXIT_SUCCESS);
+	}
 
 	float real_time_secs = timeStrToFloatSecs(inputtedTime);
 
@@ -36,7 +38,8 @@ float getTime(){
 	}
 }
 
-string getPenalty(){
+string getPenalty()
+{
 	string penalty;
 
 	cout << "Enter an penalty (OK/+2/dnf)\n";
@@ -66,7 +69,9 @@ int main(int argc, char const *argv[])
 		return 1;
 	}
 
-	struct should Args{};
+	struct should Args
+	{
+	};
 	setup(Args, argc, argv);
 	std::vector<float> timesVector;
 
@@ -87,45 +92,48 @@ int main(int argc, char const *argv[])
 			{
 				cout << "\t\t Current session avg: " << fixed << setprecision(2) << calculateAvg(timesVector);
 			}
-		}	
+		}
 
 		cout << std::endl;
 
 		if (!Args.shouldPrompt)
 		{
-			if (Args.needEnter){
+			if (Args.needEnter)
+			{
 				string buffer;
 				getline(cin, buffer);
 
-				if (buffer == "Q" || buffer == "q"){
+				if (buffer == "Q" || buffer == "q")
+				{
 					exit(EXIT_SUCCESS);
-				} 
+				}
 
-				else if (buffer == "save") {
+				else if (buffer == "save")
+				{
 					cout << "What file would you like to save to? " << endl;
-					
+
 					string fileName;
 					getline(cin, fileName);
-					
-					float solveTime = getTime();			
-					
+
+					float solveTime = getTime();
+
 					string penalty = getPenalty();
-					
+
 					string comment;
 					cout << "Enter in a comment (or don't you can leave blank)\n";
-					
+
 					getline(cin, comment);
-					
+
 					save_to_file(fileName, currentScramble, solveTime, penalty, comment);
-				} 
-			}  
-    
+				}
+			}
+
 			continue;
 		}
 
 		else
 		{
-			float solveTime = getTime();			
+			float solveTime = getTime();
 
 			string penalty = getPenalty();
 
@@ -135,7 +143,7 @@ int main(int argc, char const *argv[])
 				cout << "Enter in a comment (or don't you can leave blank)\n";
 
 				getline(cin, comment);
-                save_to_file(Args.fileName, currentScramble, solveTime, penalty, comment);
+				save_to_file(Args.fileName, currentScramble, solveTime, penalty, comment);
 			}
 			else
 			{
@@ -144,5 +152,5 @@ int main(int argc, char const *argv[])
 		}
 	} while (Args.shouldContinue && --Args.scrambleCount != 0);
 
-    return 0;
+	return 0;
 }

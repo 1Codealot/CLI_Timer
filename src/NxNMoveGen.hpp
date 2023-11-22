@@ -79,7 +79,6 @@ inline void createMove(puzzle_move &newMove, const char moveType)
         newMove.wsize = 'D';
         // Done as i cba to create a custom exception
     }
-
 }
 
 inline std::string getRepresentation(const puzzle_move *pMove)

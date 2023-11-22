@@ -41,7 +41,6 @@ static bool canUseMove(const puzzle_move *pMove1, const puzzle_move *pMove2, con
     }
 
     return true;
-
 }
 
 /*
@@ -337,15 +336,15 @@ static std::string Clock()
     scramble += "DR" + hours[getRandomNum(0, 11)] + " ";
     scramble += "DL" + hours[getRandomNum(0, 11)] + " ";
     scramble += "UL" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "U"  + hours[getRandomNum(0, 11)] + " ";
-    scramble += "R"  + hours[getRandomNum(0, 11)] + " ";
-    scramble += "D"  + hours[getRandomNum(0, 11)] + " ";
-    scramble += "L"  + hours[getRandomNum(0, 11)] + " ";
+    scramble += "U" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "R" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "D" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "L" + hours[getRandomNum(0, 11)] + " ";
     scramble += "ALL" + hours[getRandomNum(0, 11)] + " " + "y2" + " ";
-    scramble += "U"  + hours[getRandomNum(0, 11)] + " ";
-    scramble += "R"  + hours[getRandomNum(0, 11)] + " ";
-    scramble += "D"  + hours[getRandomNum(0, 11)] + " ";
-    scramble += "L"  + hours[getRandomNum(0, 11)] + " ";
+    scramble += "U" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "R" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "D" + hours[getRandomNum(0, 11)] + " ";
+    scramble += "L" + hours[getRandomNum(0, 11)] + " ";
     scramble += "ALL" + hours[getRandomNum(0, 11)] + " ";
 
     if (getRandomNum(0, 1) == 1)
@@ -369,44 +368,44 @@ static std::string Clock()
 }
 
 // Use this one
-inline std::string generate_scramble(const char cube){
+inline std::string generate_scramble(const char cube)
+{
     switch (cube)
     {
-        case '2':
-            return Two_By_Two();
+    case '2':
+        return Two_By_Two();
 
-        case '3':
-            return Three_By_Three();
+    case '3':
+        return Three_By_Three();
 
-        case '4':
-            return Four_By_Four();
+    case '4':
+        return Four_By_Four();
 
-        case '5':
-            return Five_By_Five();
+    case '5':
+        return Five_By_Five();
 
-        case '6':
-            return Six_By_Six();
+    case '6':
+        return Six_By_Six();
 
-        case '7':
-            return Seven_By_Seven();
+    case '7':
+        return Seven_By_Seven();
 
-        case 'S':
-            return Skewb();
+    case 'S':
+        return Skewb();
 
-        case 'P':
-            return Pyraminx();
+    case 'P':
+        return Pyraminx();
 
-        case 'M':
-            return Megaminx();
+    case 'M':
+        return Megaminx();
 
-        case 'K':
-            return Clock();
+    case 'K':
+        return Clock();
 
-        case 'Q':
-            return sq1::generateScramble();
+    case 'Q':
+        return sq1::generateScramble();
 
-        default:
-            return "Unknown puzzle";
-
+    default:
+        return "Unknown puzzle";
     }
 }
