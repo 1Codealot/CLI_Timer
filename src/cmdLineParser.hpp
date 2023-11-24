@@ -15,6 +15,7 @@ struct should
     int scrambleCount;
     bool shouldShowAvg;
     bool needEnter;
+    bool blindfolded;
 };
 
 static char getCubeType(std::vector<std::string> &args)
@@ -150,6 +151,25 @@ static bool needEnter(std::vector<std::string> &args)
     return true;
 }
 
+static bool blindfolded(std::vector<std::string> &args){
+    for (size_t i = 0; i < args.size(); i++)
+    {
+        if (args.at(i) == "-b" || args.at(i) == "-B")
+        {
+            if (getCubeType(args) == '3' || getCubeType(args) == '4' || getCubeType(args) == '5')
+            {
+                return true;    
+            }
+            else
+            {
+                std::cout << "No blindfolded support for cubes that aren't 3x3 or 4x4 or 5x5.\n";
+                return false;
+            }      
+        }
+    }
+    return false;
+}
+
 inline void setup(struct should &Options, cmdLineArgs)
 {
     // Pre-checks
@@ -195,6 +215,7 @@ inline void setup(struct should &Options, cmdLineArgs)
     {
         std::cout << "CLI_Timer version: 1.13.1\n\n";
         std::cout << "Did some formatting." << std::endl;
+        std::cout << "Added: blindfolded for 3x3, 4x4 and 5x5." << std::endl;
 
         exit(EXIT_SUCCESS);
     }
@@ -207,4 +228,5 @@ inline void setup(struct should &Options, cmdLineArgs)
     Options.scrambleCount = getCount(arguments);
     Options.shouldShowAvg = shouldShowAvg(arguments);
     Options.needEnter = needEnter(arguments);
+    Options.blindfolded = blindfolded(arguments);
 }

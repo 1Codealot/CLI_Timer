@@ -77,7 +77,7 @@ int main(int argc, char const *argv[])
 
 	do
 	{ // while (Args.shouldContinue);
-		string currentScramble = generate_scramble(Args.cubeType);
+		string currentScramble = generate_scramble(Args.cubeType, Args.blindfolded);
 		// Get scramble
 
 		cout << currentScramble;

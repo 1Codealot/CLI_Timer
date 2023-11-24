@@ -77,7 +77,7 @@ static std::string Two_By_Two()
     return scramble;
 }
 
-static std::string Three_By_Three()
+static std::string Three_By_Three(bool blind)
 {
     std::string scramble;
     puzzle_move Move{};
@@ -109,7 +109,7 @@ static std::string Three_By_Three()
     return scramble;
 }
 
-static std::string Four_By_Four()
+static std::string Four_By_Four(bool blind)
 {
     std::string scramble;
     puzzle_move Move{};
@@ -124,9 +124,10 @@ static std::string Four_By_Four()
     do
     {
         createMove(PrevMove, '4');
-    } while (!canUseMove(&TwoPrevMove, &PrevMove));
+    } while (!canUseMove(&TwoPrevMove, &PrevMove));    
 
-    for (int n = 0; n < moveCount; n++)
+    int cubeRotateCount = getRandomNum(1,2);
+    for (int n = 0+cubeRotateCount*blind; n < moveCount; n++)
     {
 
         do
@@ -138,10 +139,28 @@ static std::string Four_By_Four()
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
+    if(blind)
+    {
+	for(int k = 0; k < cubeRotateCount; k++)
+	{
+	    scramble += ('x' + k);
+	    int dir = getRandomNum(1,3);
+	    if(dir == 2)
+	    {
+		scramble += '2';
+	    }
+	    else if(dir == 3)
+	    {
+		scramble += '\'';
+	    }
+	    scramble += ' ';
+	}
+    
+    } 
     return scramble;
 }
 
-static std::string Five_By_Five()
+static std::string Five_By_Five(bool blind)
 {
     std::string scramble;
     puzzle_move Move{};
@@ -368,7 +387,7 @@ static std::string Clock()
 }
 
 // Use this one
-inline std::string generate_scramble(const char cube)
+inline std::string generate_scramble(const char cube, bool blind)
 {
     switch (cube)
     {
@@ -376,13 +395,13 @@ inline std::string generate_scramble(const char cube)
         return Two_By_Two();
 
     case '3':
-        return Three_By_Three();
+        return Three_By_Three(blind);
 
     case '4':
-        return Four_By_Four();
+        return Four_By_Four(blind);
 
     case '5':
-        return Five_By_Five();
+        return Five_By_Five(blind);
 
     case '6':
         return Six_By_Six();
