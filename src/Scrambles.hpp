@@ -77,7 +77,7 @@ static std::string Two_By_Two()
     return scramble;
 }
 
-static std::string Three_By_Three(bool blind)
+static std::string Three_By_Three(const bool blind)
 {
     std::string scramble;
     puzzle_move Move{};
@@ -122,6 +122,49 @@ static std::string Three_By_Three(bool blind)
             PrevMove = Move;
         }
     }
+    return scramble;
+}
+
+static std::string FMC(){
+    // R' U' F ... R' U' F
+
+    std::string scramble;
+
+    const puzzle_move R_Prime{'R', '\'', ' '};
+    const puzzle_move U_Prime{'U', '\'', ' '};
+    const puzzle_move F      {'F', ' ', ' '};
+
+    scramble += getRepresentation(&R_Prime) + ' ' + getRepresentation(&U_Prime) + ' ' + getRepresentation(&F) + ' ';
+
+    puzzle_move Move = F;
+    puzzle_move PrevMove = U_Prime;
+    puzzle_move TwoPrevMove = R_Prime;
+    const int moveCount = getRandomNum(19, 27) - 6;
+
+    TwoPrevMove = PrevMove;
+    PrevMove = Move;
+
+    for (int i = 0; i < moveCount-1; i++)
+    {
+        do
+        {
+            createMove(Move, '3');
+        } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
+
+        scramble += getRepresentation(&Move) + ' ';
+        TwoPrevMove = PrevMove;
+        PrevMove = Move;
+    }
+
+    // Generate last 3 moves. Make sure that the first R' is compatible with the last 2 moves.
+
+    do
+    {
+        createMove(Move, '3');
+    } while (!canUseMove(&PrevMove, &Move, &R_Prime));
+
+    scramble += getRepresentation(&Move) + ' ' + getRepresentation(&R_Prime) + ' ' + getRepresentation(&U_Prime) + ' ' + getRepresentation(&F) + ' ';
+
     return scramble;
 }
 
@@ -419,7 +462,7 @@ static std::string Clock()
 }
 
 // Use this one
-inline std::string generate_scramble(const char cube, bool blind)
+inline std::string generate_scramble(const char cube, const bool blind, const bool fmc)
 {
     switch (cube)
     {
@@ -427,7 +470,14 @@ inline std::string generate_scramble(const char cube, bool blind)
         return Two_By_Two();
 
     case '3':
-        return Three_By_Three(blind);
+        if(fmc)
+        {
+            return FMC();
+        }
+        else
+        {
+            return Three_By_Three(blind);
+        }
 
     case '4':
         return Four_By_Four(blind);

@@ -69,15 +69,14 @@ int main(int argc, char const *argv[])
 		return 1;
 	}
 
-	struct should Args
-	{
-	};
+	struct should Args{};
+
 	setup(Args, argc, argv);
 	std::vector<float> timesVector;
 
 	do
 	{ // while (Args.shouldContinue);
-		string currentScramble = generate_scramble(Args.cubeType, Args.blindfolded);
+		string currentScramble = generate_scramble(Args.cubeType, Args.blindfolded, Args.fmc);
 		// Get scramble
 
 		cout << currentScramble;
