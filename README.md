@@ -35,7 +35,7 @@ square-1
 
 #### Event modifiers
 `-b` (or `-B`) will generate scrambles for blindfolded events for 3x3, 4x4 and 5x5.
-###### NOTE: May work of FMC
+###### NOTE: May work on FMC
 
 <hr>
 
