@@ -175,9 +175,10 @@ inline void setup(struct should &Options, cmdLineArgs)
     // Pre-checks
     // These are for like `help` or `--version`
 
-    std::string helpMSG{"How to use CLI_Timer.\nCLI_Timer (cube type) [--count{number}] [--no_enter] | [c] | [-s{session name}] | [--no_prompt] | [--no_avg] \
+    std::string helpMSG{"How to use CLI_Timer.\nCLI_Timer (cube type) [-b]  [--count{number}] [--no_enter] | [c] | [-s{session name}] | [--no_prompt] | [--no_avg] \
     \n\nArgument (cube type) means an NxN of (2)x2 (3)x3 to (7)x7 or (S)kewb, (P)yraminx, (M)egaminx, (C)lock or s(Q)uare-1.\
     It is required (why else would you use it?)\n\n[c] means [c]ontinuous, meaning it won't stop after generating one scramble.\
+    \n\nArgument [-b] gives scrambles for blindfolded solves for 3x3, 4x4 and 5x5\
     \n--count{number} can be used to specify how many scrambles you want. Continuous is impiled. It will then quit (with code 0).\
     \n\nArgument [-s] is for saving to a file which name will come directly after [-s] (e.g. CLI_Timer 3 -s3x3_One_Handed).\
     \nIt will save to a .CLI_T_S (CLI_Timer_Session) file. Check README.md to see where it goes on your OS.\
