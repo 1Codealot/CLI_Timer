@@ -33,6 +33,12 @@ square-1
 
 <hr>
 
+#### Event modifiers
+`-b` (or `-B`) will generate scrambles for blindfolded events for 3x3, 4x4 and 5x5.
+###### NOTE: May work of FMC
+
+<hr>
+
 `c`
 continuous means that after entering a time (which currently does nothing) it'll produce a new scramble of the same type. (If `c` is not inputted it'll only do one scramble and exit after a time is inputted)
 
