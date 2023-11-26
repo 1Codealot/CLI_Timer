@@ -1,0 +1,23 @@
+name: UBUNTU_CROSS
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install dependencies for cross-compilation
+      run: sudo apt-get install -y g++-mingw-w64-x86-64
+
+    - name: Build
+      run: make cross STD=20
+
+

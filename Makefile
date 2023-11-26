@@ -18,3 +18,10 @@ all:
 		$(TARGET): $(TARGET).cpp 
 			$(CPPC) $(CPPFLAGS) -o $(Build_Path) $(Main_Path)
 
+cross:
+	mkdir -p $(Build_Dir)
+		$(TARGET): $(TARGET).cpp 
+			$(CPPC) $(CPPFLAGS) -o $(Build_Path) $(Main_Path)
+				x86_64-w64-mingw32-g++ $(CPPFLAGS) -o $(Build_Path)_Windows.exe $(Main_Path)
+				# TODO: Add support for other macos
+

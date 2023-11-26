@@ -3,7 +3,8 @@
 This is a Rubik's cube training timer (some what similar to cstimer) used in the command line. 
 
 # Building
-Just run `make`!
+Just run `make`! <br><br>
+You can also run `make cross` to compile it for your main OS and windows. (This has a dependancy on Linux, for that you must run `sudo apt-get install g++-mingw-w64-x86-64`)
 
 ###### NOTE: You *can* use build.py but make is better.
 
