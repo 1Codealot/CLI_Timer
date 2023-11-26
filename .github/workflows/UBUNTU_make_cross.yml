@@ -1,4 +1,4 @@
-name: UBUNTU
+name: UBUNTU_CROSS
 
 on:
   push:
