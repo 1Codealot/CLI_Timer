@@ -28,10 +28,21 @@ static char getCubeType(std::vector<std::string> &args)
         // However that wouldn't make much sense
         // Although c++ isn't meant to be understood easily
 
-        // TODO: Move to a switch statement.
-        if ((args.at(i) == "2" || args.at(i) == "3" || args.at(i) == "4" || args.at(i) == "5" || args.at(i) == "6" || args.at(i) == "7" || args.at(i) == "P" || args.at(i) == "M" || args.at(i) == "S" || args.at(i) == "C" || args.at(i) == "Q") && (args.at(i) != "c"))
-        {
-            return (char)args.at(i).at(0);
+        switch(args.at(i).at(0)){
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case 'P':
+            case 'M':
+            case 'S':
+            case 'C':
+            case 'Q':
+                return args.at(i).at(0);
+            default:
+                break;
         }
     }
     std::cout << "Cube type not found.";
@@ -245,10 +256,10 @@ inline void setup(struct should &Options, cmdLineArgs)
     }
     else if (arguments.at(0) == "--version")
     {
-        std::cout << "CLI_Timer version: 1.13.1\n\n";
-        std::cout << "Did some formatting." << std::endl;
-        std::cout << "Added: blindfolded for 3x3, 4x4 and 5x5." << std::endl;
-        std::cout << "Added: FMC (The ugliest function ever!)" << std::endl;
+        std::cout << "CLI_Timer version: 1.13.2\n\n";
+        std::cout << "Changed getting cube type to a switch statement." << std::endl;
+        std::cout << "Fixed Clock not being recognised as a puzzle." << std::endl;
+        std::cout << "Fixed Square-1 not sometimes having (0, 0)." << std::endl;
 
         exit(EXIT_SUCCESS);
     }
