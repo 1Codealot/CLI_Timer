@@ -27,6 +27,8 @@ static char getCubeType(std::vector<std::string> &args)
         // I could do some magic ASCII checking (i.e. if (*argv[i]) is between ASCII nums for '2' to '7')
         // However that wouldn't make much sense
         // Although c++ isn't meant to be understood easily
+
+        // TODO: Move to a switch statement.
         if ((args.at(i) == "2" || args.at(i) == "3" || args.at(i) == "4" || args.at(i) == "5" || args.at(i) == "6" || args.at(i) == "7" || args.at(i) == "P" || args.at(i) == "M" || args.at(i) == "S" || args.at(i) == "C" || args.at(i) == "Q") && (args.at(i) != "c"))
         {
             return (char)args.at(i).at(0);

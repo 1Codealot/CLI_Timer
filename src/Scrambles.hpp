@@ -500,7 +500,7 @@ inline std::string generate_scramble(const char cube, const bool blind, const bo
     case 'M':
         return Megaminx();
 
-    case 'K':
+    case 'C':
         return Clock();
 
     case 'Q':
