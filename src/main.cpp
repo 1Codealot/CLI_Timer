@@ -5,6 +5,46 @@
 
 using namespace std;
 
+void output(std::string scramble, float avg)
+{
+	// avg must be > 0 otherwise I will not output it.
+
+    std::vector<std::string> scrambleLines;
+
+    int startPos = 0;
+    int endPos = 0;
+    while (endPos < scramble.length())
+    {
+        endPos = startPos + 30;
+        if (endPos >= scramble.length())
+        {
+            endPos = scramble.length();
+        }
+        else
+        {
+            while (endPos > startPos && scramble[endPos] != ' ')
+            {
+                endPos--;
+            }
+        }
+        scrambleLines.push_back(scramble.substr(startPos, endPos - startPos));
+        startPos = endPos + 1;
+    }
+
+	if (avg > 0){
+		// Re assign avg to 2 decimal places
+		std::string avgAsStr = std::to_string(avg);
+		avgAsStr = avgAsStr.substr(0, avgAsStr.find('.') + 3);
+
+		scrambleLines[0] += "\t\t Current average: " + avgAsStr;
+	}
+
+    for (const auto& line : scrambleLines)
+    {
+        std::cout << line << std::endl;
+    }
+}
+
 // Prompting
 float getTime()
 {
@@ -79,21 +119,18 @@ int main(int argc, char const *argv[])
 		string currentScramble = generate_scramble(Args.cubeType, Args.blindfolded, Args.fmc);
 		// Get scramble
 
-		cout << currentScramble;
+		float avg = -1;
 
-		if (Args.shouldPrompt && Args.shouldShowAvg)
+		if (Args.shouldSave)
 		{
-			if (Args.shouldSave)
-			{
-				cout << "\t\t Current session avg: " << fixed << setprecision(2) << calculateAvg(Args.fileName);
-			}
-			else
-			{
-				cout << "\t\t Current session avg: " << fixed << setprecision(2) << calculateAvg(timesVector);
-			}
+			avg = calculateAvg(Args.fileName);
+			output(currentScramble, avg);
 		}
-
-		cout << std::endl;
+		else
+		{
+			avg = calculateAvg(timesVector);
+			output(currentScramble, calculateAvg(timesVector));
+		}
 
 		if (!Args.shouldPrompt)
 		{
