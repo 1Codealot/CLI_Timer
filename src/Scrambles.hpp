@@ -109,7 +109,7 @@ static std::string Three_By_Three(const bool blind)
 
     if (blind)
     {
-        for (size_t i = 0; i < cubeWideCount; i++)
+        for (int i = 0; i < cubeWideCount; i++)
         {   
             do
             {
@@ -251,7 +251,7 @@ static std::string Five_By_Five(bool blind)
 
     if (blind)
     {
-        for (size_t i = 0; i < cubeWideCount; i++)
+        for (int i = 0; i < cubeWideCount; i++)
         {   
             do
             {

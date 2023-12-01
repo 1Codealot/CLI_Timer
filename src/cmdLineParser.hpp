@@ -261,6 +261,7 @@ inline void setup(struct should &Options, cmdLineArgs)
         std::cout << "Fixed Clock not being recognised as a puzzle." << std::endl;
         std::cout << "Fixed Square-1 not sometimes having (0, 0)." << std::endl;
         std::cout << "Made scramble outputting nicer with average." << std::endl;
+        std::cout << "Fixed some more warnings." << std::endl;
 
         exit(EXIT_SUCCESS);
     }

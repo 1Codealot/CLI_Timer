@@ -11,8 +11,8 @@ void output(std::string scramble, float avg)
 
     std::vector<std::string> scrambleLines;
 
-    int startPos = 0;
-    int endPos = 0;
+    size_t startPos = 0;
+    size_t endPos = 0;
     while (endPos < scramble.length())
     {
         endPos = startPos + 30;
