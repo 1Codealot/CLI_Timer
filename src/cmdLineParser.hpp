@@ -256,12 +256,8 @@ inline void setup(struct should &Options, cmdLineArgs)
     }
     else if (arguments.at(0) == "--version")
     {
-        std::cout << "CLI_Timer version: 1.13.2\n\n";
-        std::cout << "Changed getting cube type to a switch statement." << std::endl;
-        std::cout << "Fixed Clock not being recognised as a puzzle." << std::endl;
-        std::cout << "Fixed Square-1 not sometimes having (0, 0)." << std::endl;
-        std::cout << "Made scramble outputting nicer with average." << std::endl;
-        std::cout << "Fixed some more warnings." << std::endl;
+        std::cout << "CLI_Timer version: 1.13.2.1\n\n";
+        std::cout << "Small fix for outputting square-1." << std::endl;
 
         exit(EXIT_SUCCESS);
     }

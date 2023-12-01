@@ -11,23 +11,28 @@ void output(std::string scramble, float avg)
 
     std::vector<std::string> scrambleLines;
 
+	constexpr int lineLen = 30;
+
+	const char charToLookFor = scramble.find('/') != std::string::npos ? '/' : ' ';
+
     size_t startPos = 0;
     size_t endPos = 0;
+
     while (endPos < scramble.length())
     {
-        endPos = startPos + 30;
+        endPos = startPos + lineLen;
         if (endPos >= scramble.length())
         {
             endPos = scramble.length();
         }
         else
         {
-            while (endPos > startPos && scramble[endPos] != ' ')
+            while (endPos > startPos && scramble[endPos] != charToLookFor)
             {
                 endPos--;
             }
         }
-        scrambleLines.push_back(scramble.substr(startPos, endPos - startPos));
+        scrambleLines.push_back((scramble.substr(startPos, endPos - startPos + (charToLookFor == '/' ? 1 : 0))));
         startPos = endPos + 1;
     }
 
@@ -39,8 +44,13 @@ void output(std::string scramble, float avg)
 		scrambleLines[0] += "\t\t Current average: " + avgAsStr;
 	}
 
-    for (const auto& line : scrambleLines)
+    for (std::string& line : scrambleLines)
     {
+		if (line.at(0) == ' ')
+		{
+			line.erase(0, 1);
+		}
+
         std::cout << line << std::endl;
     }
 }
