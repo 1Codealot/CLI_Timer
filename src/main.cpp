@@ -3,8 +3,6 @@
 #include "fileIO.hpp"
 #include "TimeStrToFloat.hpp"
 
-using namespace std;
-
 void output(std::string scramble, float avg)
 {
 	// avg must be > 0 otherwise I will not output it.
@@ -58,25 +56,25 @@ void output(std::string scramble, float avg)
 // Prompting
 float getTime()
 {
-	string inputtedTime;
-	string correct;
+	std::string inputtedTime;
+	std::string correct;
 
-	cout << "\nEnter your time: ";
-	cin >> inputtedTime;
+	std::cout << "\nEnter your time: ";
+	std::cin >> inputtedTime;
 
 	if (inputtedTime[0] == 'Q' || inputtedTime[0] == 'q')
 	{
-		cout << endl;
+		std::cout << std::endl;
 		exit(EXIT_SUCCESS);
 	}
 
 	float real_time_secs = timeStrToFloatSecs(inputtedTime);
 
-	cout << "\nYou entered in " << outputTime(inputtedTime) << " (which is also " << fixed << setprecision(2) << real_time_secs << " seconds)\nIs this correct? (Y/n)\n";
+	std::cout << "\nYou entered in " << outputTime(inputtedTime) << " (which is also " << std::fixed << std::setprecision(2) << real_time_secs << " seconds)\nIs this correct? (Y/n)\n";
 
-	cin.ignore();
+	std::cin.ignore();
 
-	getline(cin, correct);
+	std::getline(std::cin, correct);
 
 	if (correct.empty() || correct[0] == 'Y' || correct[0] == 'y')
 	{
@@ -88,13 +86,13 @@ float getTime()
 	}
 }
 
-string getPenalty()
+std::string getPenalty()
 {
-	string penalty;
+	std::string penalty;
 
-	cout << "Enter an penalty (OK/+2/dnf)\n";
+	std::cout << "Enter an penalty (OK/+2/dnf)\n";
 
-	getline(cin, penalty);
+	std::getline(std::cin, penalty);
 
 	if (penalty.empty())
 	{
@@ -112,13 +110,7 @@ string getPenalty()
 
 int main(int argc, char const *argv[])
 {
-
-	if (argc == 1)
-	{
-		cerr << "You fogor commands lul.";
-		return 1;
-	}
-
+	// Parse command line arguments
 	struct should Args{};
 
 	setup(Args, argc, argv);
@@ -126,7 +118,7 @@ int main(int argc, char const *argv[])
 
 	do
 	{ // while (Args.shouldContinue);
-		string currentScramble = generate_scramble(Args.cubeType, Args.blindfolded, Args.fmc);
+		std::string currentScramble = generate_scramble(Args.cubeType, Args.blindfolded, Args.fmc);
 		// Get scramble
 
 		float avg = -1;
@@ -146,8 +138,8 @@ int main(int argc, char const *argv[])
 		{
 			if (Args.needEnter)
 			{
-				string buffer;
-				getline(cin, buffer);
+				std::string buffer;
+				getline(std::cin, buffer);
 
 				if (buffer == "Q" || buffer == "q")
 				{
@@ -156,19 +148,19 @@ int main(int argc, char const *argv[])
 
 				else if (buffer == "save")
 				{
-					cout << "What file would you like to save to? " << endl;
+					std::cout << "What file would you like to save to? " << std::endl;
 
-					string fileName;
-					getline(cin, fileName);
+					std::string fileName;
+					getline(std::cin, fileName);
 
 					float solveTime = getTime();
 
-					string penalty = getPenalty();
+					std::string penalty = getPenalty();
 
-					string comment;
-					cout << "Enter in a comment (or don't you can leave blank)\n";
+					std::string comment;
+					std::cout << "Enter in a comment (or don't you can leave blank)\n";
 
-					getline(cin, comment);
+					std::getline(std::cin, comment);
 
 					save_to_file(fileName, currentScramble, solveTime, penalty, comment);
 				}
@@ -181,14 +173,14 @@ int main(int argc, char const *argv[])
 		{
 			float solveTime = getTime();
 
-			string penalty = getPenalty();
+			std::string penalty = getPenalty();
 
 			if (Args.shouldSave)
 			{
-				string comment;
-				cout << "Enter in a comment (or don't you can leave blank)\n";
+				std::string comment;
+				std::cout << "Enter in a comment (or don't you can leave blank)\n";
 
-				getline(cin, comment);
+				getline(std::cin, comment);
 				save_to_file(Args.fileName, currentScramble, solveTime, penalty, comment);
 			}
 			else

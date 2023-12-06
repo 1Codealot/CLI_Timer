@@ -256,8 +256,9 @@ inline void setup(struct should &Options, cmdLineArgs)
     }
     else if (arguments.at(0) == "--version")
     {
-        std::cout << "CLI_Timer version: 1.13.2.1\n\n";
-        std::cout << "Small fix for outputting square-1." << std::endl;
+        std::cout << "CLI_Timer version: 1.13.2.2\n\n";
+        std::cout << "Removed `using namespace std;`" << std::endl;
+        std::cout << "Removed chack for 1 arg in main" << std::endl;
 
         exit(EXIT_SUCCESS);
     }
