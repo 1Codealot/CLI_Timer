@@ -24,25 +24,22 @@ static char getCubeType(std::vector<std::string> &args)
     // Go through all the argv finding a  1 length single char
     for (size_t i = 0; i < args.size(); ++i)
     {
-        // I could do some magic ASCII checking (i.e. if (*argv[i]) is between ASCII nums for '2' to '7')
-        // However that wouldn't make much sense
-        // Although c++ isn't meant to be understood easily
-
-        switch(args.at(i).at(0)){
-            case '2':
-            case '3':
-            case '4':
-            case '5':
-            case '6':
-            case '7':
-            case 'P':
-            case 'M':
-            case 'S':
-            case 'C':
-            case 'Q':
-                return args.at(i).at(0);
-            default:
-                break;
+        switch (args.at(i).at(0))
+        {
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case 'P':
+        case 'M':
+        case 'S':
+        case 'C':
+        case 'Q':
+            return args.at(i).at(0);
+        default:
+            break;
         }
     }
     std::cout << "Cube type not found.";
@@ -165,26 +162,28 @@ static bool needEnter(std::vector<std::string> &args)
     return true;
 }
 
-static bool blindfolded(std::vector<std::string> &args){
+static bool blindfolded(std::vector<std::string> &args)
+{
     for (size_t i = 0; i < args.size(); i++)
     {
         if (args.at(i) == "-b" || args.at(i) == "-B")
         {
             if (getCubeType(args) == '3' || getCubeType(args) == '4' || getCubeType(args) == '5')
             {
-                return true;    
+                return true;
             }
             else
             {
                 std::cout << "No blindfolded support for cubes that aren't 3x3 or 4x4 or 5x5.\n";
                 return false;
-            }      
+            }
         }
     }
     return false;
 }
 
-static bool fmc(std::vector<std::string> &args){
+static bool fmc(std::vector<std::string> &args)
+{
     for (size_t i = 0; i < args.size(); i++)
     {
         if (args.at(i).substr(0, 2) == "-f" || args.at(i).substr(0, 2) == "-F")

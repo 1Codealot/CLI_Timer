@@ -7,34 +7,35 @@ void output(std::string scramble, float avg)
 {
 	// avg must be > 0 otherwise I will not output it.
 
-    std::vector<std::string> scrambleLines;
+	std::vector<std::string> scrambleLines;
 
 	constexpr int lineLen = 30;
 
 	const char charToLookFor = scramble.find('/') != std::string::npos ? '/' : ' ';
 
-    size_t startPos = 0;
-    size_t endPos = 0;
+	size_t startPos = 0;
+	size_t endPos = 0;
 
-    while (endPos < scramble.length())
-    {
-        endPos = startPos + lineLen;
-        if (endPos >= scramble.length())
-        {
-            endPos = scramble.length();
-        }
-        else
-        {
-            while (endPos > startPos && scramble[endPos] != charToLookFor)
-            {
-                endPos--;
-            }
-        }
-        scrambleLines.push_back((scramble.substr(startPos, endPos - startPos + (charToLookFor == '/' ? 1 : 0))));
-        startPos = endPos + 1;
-    }
+	while (endPos < scramble.length())
+	{
+		endPos = startPos + lineLen;
+		if (endPos >= scramble.length())
+		{
+			endPos = scramble.length();
+		}
+		else
+		{
+			while (endPos > startPos && scramble[endPos] != charToLookFor)
+			{
+				endPos--;
+			}
+		}
+		scrambleLines.push_back((scramble.substr(startPos, endPos - startPos + (charToLookFor == '/' ? 1 : 0))));
+		startPos = endPos + 1;
+	}
 
-	if (avg > 0){
+	if (avg > 0)
+	{
 		// Re assign avg to 2 decimal places
 		std::string avgAsStr = std::to_string(avg);
 		avgAsStr = avgAsStr.substr(0, avgAsStr.find('.') + 3);
@@ -42,15 +43,15 @@ void output(std::string scramble, float avg)
 		scrambleLines[0] += "\t\t Current average: " + avgAsStr;
 	}
 
-    for (std::string& line : scrambleLines)
-    {
+	for (std::string &line : scrambleLines)
+	{
 		if (line.at(0) == ' ')
 		{
 			line.erase(0, 1);
 		}
 
-        std::cout << line << std::endl;
-    }
+		std::cout << line << std::endl;
+	}
 }
 
 // Prompting
@@ -111,7 +112,9 @@ std::string getPenalty()
 int main(int argc, char const *argv[])
 {
 	// Parse command line arguments
-	struct should Args{};
+	struct should Args
+	{
+	};
 
 	setup(Args, argc, argv);
 	std::vector<float> timesVector;

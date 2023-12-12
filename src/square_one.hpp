@@ -89,10 +89,11 @@ namespace sq1
             int bottom = 0;
             do
             {
-                do{
+                do
+                {
                     top = getRandomTurnCount();
                     bottom = getRandomTurnCount();
-                }while(top == 0 && bottom == 0);
+                } while (top == 0 && bottom == 0);
 
             } while (!canSlash(doRotateTopAndBottom(pieces, top, bottom)));
 

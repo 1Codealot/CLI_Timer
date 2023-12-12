@@ -94,8 +94,8 @@ static std::string Three_By_Three(const bool blind)
         createMove(PrevMove, '3');
     } while (!canUseMove(&TwoPrevMove, &PrevMove));
 
-    int cubeWideCount = getRandomNum(1,2);
-    for (int n = 0+cubeWideCount*blind; n < moveCount; n++)
+    int cubeWideCount = getRandomNum(1, 2);
+    for (int n = 0 + cubeWideCount * blind; n < moveCount; n++)
     {
         do
         {
@@ -110,7 +110,7 @@ static std::string Three_By_Three(const bool blind)
     if (blind)
     {
         for (int i = 0; i < cubeWideCount; i++)
-        {   
+        {
             do
             {
                 createMove(Move, '2'); // 2x2 for U, F and R moves.
@@ -125,14 +125,15 @@ static std::string Three_By_Three(const bool blind)
     return scramble;
 }
 
-static std::string FMC(){
+static std::string FMC()
+{
     // R' U' F ... R' U' F
 
     std::string scramble;
 
     const puzzle_move R_Prime{'R', '\'', ' '};
     const puzzle_move U_Prime{'U', '\'', ' '};
-    const puzzle_move F      {'F', ' ', ' '};
+    const puzzle_move F{'F', ' ', ' '};
 
     scramble += getRepresentation(&R_Prime) + ' ' + getRepresentation(&U_Prime) + ' ' + getRepresentation(&F) + ' ';
 
@@ -144,7 +145,7 @@ static std::string FMC(){
     TwoPrevMove = PrevMove;
     PrevMove = Move;
 
-    for (int i = 0; i < moveCount-1; i++)
+    for (int i = 0; i < moveCount - 1; i++)
     {
         do
         {
@@ -183,10 +184,10 @@ static std::string Four_By_Four(bool blind)
     do
     {
         createMove(PrevMove, '4');
-    } while (!canUseMove(&TwoPrevMove, &PrevMove));    
+    } while (!canUseMove(&TwoPrevMove, &PrevMove));
 
-    int cubeRotateCount = getRandomNum(1,2);
-    for (int n = 0+cubeRotateCount*blind; n < moveCount; n++)
+    int cubeRotateCount = getRandomNum(1, 2);
+    for (int n = 0 + cubeRotateCount * blind; n < moveCount; n++)
     {
 
         do
@@ -199,23 +200,23 @@ static std::string Four_By_Four(bool blind)
         PrevMove = Move; //
     }
 
-    if(blind)
+    if (blind)
     {
-        for(int k = 0; k < cubeRotateCount; k++)
+        for (int k = 0; k < cubeRotateCount; k++)
         {
             scramble += ('x' + k);
-            int dir = getRandomNum(1,3);
-            if(dir == 2)
+            int dir = getRandomNum(1, 3);
+            if (dir == 2)
             {
-            scramble += '2';
+                scramble += '2';
             }
-            else if(dir == 3)
+            else if (dir == 3)
             {
-            scramble += '\'';
+                scramble += '\'';
             }
             scramble += ' ';
         }
-    } 
+    }
     return scramble;
 }
 
@@ -236,8 +237,8 @@ static std::string Five_By_Five(bool blind)
         createMove(PrevMove, '5');
     } while (!canUseMove(&TwoPrevMove, &PrevMove));
 
-    int cubeWideCount = getRandomNum(1,2);
-    for (int n = 0+cubeWideCount*blind; n < moveCount; n++)
+    int cubeWideCount = getRandomNum(1, 2);
+    for (int n = 0 + cubeWideCount * blind; n < moveCount; n++)
     {
         do
         {
@@ -252,7 +253,7 @@ static std::string Five_By_Five(bool blind)
     if (blind)
     {
         for (int i = 0; i < cubeWideCount; i++)
-        {   
+        {
             do
             {
                 createMove(Move, '2'); // 2x2 for U, F and R moves.
@@ -470,7 +471,7 @@ inline std::string generate_scramble(const char cube, const bool blind, const bo
         return Two_By_Two();
 
     case '3':
-        if(fmc)
+        if (fmc)
         {
             return FMC();
         }
