@@ -257,7 +257,7 @@ inline void setup(struct should &Options, cmdLineArgs)
     {
         std::cout << "CLI_Timer version: 1.13.2.2\n\n";
         std::cout << "Removed `using namespace std;`" << std::endl;
-        std::cout << "Removed chack for 1 arg in main" << std::endl;
+        std::cout << "Removed check for 1 arg in main" << std::endl;
 
         exit(EXIT_SUCCESS);
     }
