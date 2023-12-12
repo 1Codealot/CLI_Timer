@@ -255,9 +255,8 @@ inline void setup(struct should &Options, cmdLineArgs)
     }
     else if (arguments.at(0) == "--version")
     {
-        std::cout << "CLI_Timer version: 1.13.2.2\n\n";
-        std::cout << "Removed `using namespace std;`" << std::endl;
-        std::cout << "Removed check for 1 arg in main" << std::endl;
+        std::cout << "CLI_Timer version: 1.14\n\n";
+        std::cout << "Scramble outputs ⅓ of the screen + avg to right" << std::endl;
 
         exit(EXIT_SUCCESS);
     }
