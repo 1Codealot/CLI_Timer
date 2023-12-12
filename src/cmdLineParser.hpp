@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+#include "outputting.hpp"
+
 #define cmdLineArgs int argc, const char *argv[]
 
 struct should
@@ -215,25 +217,7 @@ inline void setup(struct should &Options, cmdLineArgs)
     // Pre-checks
     // These are for like `help` or `--version`
 
-    std::string helpMSG{"How to use CLI_Timer.\nCLI_Timer (cube type) [-b] | [-f(mc))] [--count{number}] [--no_enter] | [c] | [-s{session name}] | [--no_prompt] | [--no_avg] \
-    \n\nArgument (cube type) means an NxN of (2)x2 (3)x3 to (7)x7 or (S)kewb, (P)yraminx, (M)egaminx, (C)lock or s(Q)uare-1.\
-    It is required (why else would you use it?)\n\n[c] means [c]ontinuous, meaning it won't stop after generating one scramble.\
-    \n\nArgument [-b] gives scrambles for blindfolded solves for 3x3, 4x4 and 5x5 \
-    \n\nArgument [-f(mc)] gives scrambles for fmc for 3x3. \
-    \n--count{number} can be used to specify how many scrambles you want. Continuous is impiled. It will then quit (with code 0).\
-    \n\nArgument [-s] is for saving to a file which name will come directly after [-s] (e.g. CLI_Timer 3 -s3x3_One_Handed).\
-    \nIt will save to a .CLI_T_S (CLI_Timer_Session) file. Check README.md to see where it goes on your OS.\
-    \nIt is also the only way to have averages displayed.\
-    \n\nArgument [--no_prompt] will just generate a scramble, not ask for a time (for this reason you can't have [-s] with this), wait for an enter, then generate another one.\
-    \nAlthough you can type in 'save' if you really want to save that time.\
-    \nAlso you won't have averages with this.\
-    \n\nArgument [--no_avg] means that it will not show the averages\
-    \n\nArgument [--no_enter] will instantly output n scrambles (with the argument [--count{n}]).\
-    \nYou MUST have [--no_prompt] and [--count].\
-    \n\nCLI_Timer (--version)\nOutputs the current version of CLI_Timer\n\nCLI_Timer (help)\nOutputs this.\
-    \n\nAny issues, put them on the GitHub repo: https://github.com/1Codealot/CLI_Timer/issues\
-    \n\nLICENCES: Main: MIT licences.\nSquare-1 code: GNU General Public License v3.0 (repo: <https://github.com/thewca/tnoodle-lib>)"}; // Used braces so that I can fold it.
-
+    
     // this will make everything easier
     std::vector<std::string> arguments;
 
@@ -245,19 +229,17 @@ inline void setup(struct should &Options, cmdLineArgs)
 
     if (argc == 1)
     {
-        std::cout << helpMSG << std::endl;
+        outputHelp();
         exit(EXIT_SUCCESS);
     }
     else if (arguments.at(0) == "help")
     {
-        std::cout << helpMSG << std::endl;
+        outputHelp();
         exit(EXIT_SUCCESS);
     }
     else if (arguments.at(0) == "--version")
     {
-        std::cout << "CLI_Timer version: 1.14\n\n";
-        std::cout << "Scramble outputs ⅓ of the screen + avg to right" << std::endl;
-
+        outputVersion();
         exit(EXIT_SUCCESS);
     }
 
