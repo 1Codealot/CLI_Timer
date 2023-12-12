@@ -14,7 +14,7 @@
     #include <unistd.h>
 #endif
 
-int get_terminal_width(void){
+inline static int get_terminal_width(void){
     #ifdef _WIN32
         CONSOLE_SCREEN_BUFFER_INFO csbi;
         int columns;
@@ -41,7 +41,7 @@ int get_terminal_width(void){
 // End credit
 
 
-void output(std::string scramble, float avg)
+inline void output(std::string scramble, float avg)
 {
 	// avg must be > 0 otherwise I will not output it.
 
@@ -96,7 +96,7 @@ void output(std::string scramble, float avg)
 }
 
 // Prompting
-float getTime()
+inline float getTime()
 {
 	std::string inputtedTime;
 	std::string correct;
@@ -128,7 +128,7 @@ float getTime()
 	}
 }
 
-std::string getPenalty()
+inline std::string getPenalty()
 {
 	std::string penalty;
 
@@ -150,7 +150,7 @@ std::string getPenalty()
 	}
 }
 
-void outputHelp()
+inline void outputHelp()
 {
 	std::cout << "How to use CLI_Timer.\nCLI_Timer (cube type) [-b] | [-f(mc))] [--count{number}] [--no_enter] | [c] | [-s{session name}] | [--no_prompt] | [--no_avg] \
     \n\nArgument (cube type) means an NxN of (2)x2 (3)x3 to (7)x7 or (S)kewb, (P)yraminx, (M)egaminx, (C)lock or s(Q)uare-1.\
@@ -172,9 +172,10 @@ void outputHelp()
     \n\nLICENCES: Main: MIT licences.\nSquare-1 code: GNU General Public License v3.0 (repo: <https://github.com/thewca/tnoodle-lib>)";
 }
 
-void outputVersion()
+inline void outputVersion()
 {
 	std::cout << "CLI_Timer version: 1.14\n\n";
     std::cout << "Scramble outputs ⅓ of the screen + avg to right" << std::endl;
 	std::cout << "Moved the outputting code to another file." << std::endl;
+	std::cout << "Added static and inline to outputting.hpp" << std::endl;
 }
