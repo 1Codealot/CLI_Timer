@@ -86,9 +86,11 @@ void output(std::string scramble, float avg)
 
 	for (std::string &line : scrambleLines)
 	{
-		if (line.at(0) == ' ')
-		{
-			line.erase(0, 1);
+		if(line.length() < 0){
+			if (line.at(0) == ' ')
+			{
+				line.erase(0, 1);
+			}
 		}
 
 		std::cout << line << std::endl;
@@ -177,4 +179,5 @@ void outputVersion()
 	std::cout << "CLI_Timer version: 1.14\n\n";
     std::cout << "Scramble outputs ⅓ of the screen + avg to right" << std::endl;
 	std::cout << "Moved the outputting code to another file." << std::endl;
+	std::cout << "Fixed a bug if something was of length 0." << std::endl;
 }
