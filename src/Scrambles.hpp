@@ -56,7 +56,7 @@ You need a minimum of 2 references to a move struct.
 
 static std::string Two_By_Two()
 {
-    std::string scramble;
+    std::ostringstream scramble;
     puzzle_move Move{};
     puzzle_move PrevMove{};
     const int moveCount = getRandomNum(9, 13);
@@ -71,15 +71,15 @@ static std::string Two_By_Two()
             createMove(Move, '2');
         } while (!canUseMove(&PrevMove, &Move));
 
-        scramble += getRepresentation(&Move) + ' ';
+        scramble << Move << ' ';
         PrevMove = Move; // Don't forget this!! :DDDDDDDDDD
     }
-    return scramble;
+    return scramble.str();
 }
 
 static std::string Three_By_Three(const bool blind)
 {
-    std::string scramble;
+    std::ostringstream scramble;
     puzzle_move Move{};
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
@@ -102,7 +102,7 @@ static std::string Three_By_Three(const bool blind)
             createMove(Move, '3');
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
-        scramble += getRepresentation(&Move) + ' ';
+        scramble << Move << ' ';
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
@@ -117,12 +117,12 @@ static std::string Three_By_Three(const bool blind)
             } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
             Move.wsize = '2';
-            scramble += getRepresentation(&Move) + ' ';
+            scramble << Move << ' ';
             TwoPrevMove = PrevMove;
             PrevMove = Move;
         }
     }
-    return scramble;
+    return scramble.str();
 }
 
 static std::string FMC()
@@ -135,6 +135,8 @@ static std::string FMC()
     const puzzle_move U_Prime{'U', '\'', ' '};
     const puzzle_move F{'F', ' ', ' '};
 
+    // This is unchanged because for some reason c++ doesn't like it when I do scramble << R_Prime << ' '.
+    // No it's not because I'm using a std::string instead of a std::ostringstream.
     scramble += getRepresentation(&R_Prime) + ' ' + getRepresentation(&U_Prime) + ' ' + getRepresentation(&F) + ' ';
 
     puzzle_move Move = F;
@@ -171,7 +173,7 @@ static std::string FMC()
 
 static std::string Four_By_Four(bool blind)
 {
-    std::string scramble;
+    std::ostringstream scramble;
     puzzle_move Move{};
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
@@ -195,7 +197,7 @@ static std::string Four_By_Four(bool blind)
             createMove(Move, '4');
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
-        scramble += getRepresentation(&Move) + " ";
+        scramble << Move << " ";
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
@@ -204,25 +206,25 @@ static std::string Four_By_Four(bool blind)
     {
         for (int k = 0; k < cubeRotateCount; k++)
         {
-            scramble += ('x' + k);
+            scramble << (char)('x' + k);
             int dir = getRandomNum(1, 3);
             if (dir == 2)
             {
-                scramble += '2';
+                scramble << '2';
             }
             else if (dir == 3)
             {
-                scramble += '\'';
+                scramble << '\'';
             }
-            scramble += ' ';
+            scramble << ' ';
         }
     }
-    return scramble;
+    return scramble.str();
 }
 
 static std::string Five_By_Five(bool blind)
 {
-    std::string scramble;
+    std::ostringstream scramble;
     puzzle_move Move{};
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
@@ -245,7 +247,7 @@ static std::string Five_By_Five(bool blind)
             createMove(Move, '5');
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
-        scramble += getRepresentation(&Move) + " ";
+        scramble << Move << " ";
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
@@ -260,17 +262,17 @@ static std::string Five_By_Five(bool blind)
             } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
             Move.wsize = '3';
-            scramble += getRepresentation(&Move) + ' ';
+            scramble << Move << ' ';
             TwoPrevMove = PrevMove;
             PrevMove = Move;
         }
     }
-    return scramble;
+    return scramble.str();
 }
 
 static std::string Six_By_Six()
 {
-    std::string scramble;
+    std::ostringstream scramble;
     puzzle_move Move{};
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
@@ -293,16 +295,16 @@ static std::string Six_By_Six()
             createMove(Move, '6');
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
-        scramble += getRepresentation(&Move) + " ";
+        scramble << Move << " ";
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
-    return scramble;
+    return scramble.str();
 }
 
 static std::string Seven_By_Seven()
 {
-    std::string scramble;
+    std::ostringstream scramble;
     puzzle_move Move{};
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
@@ -325,16 +327,16 @@ static std::string Seven_By_Seven()
             createMove(Move, '7');
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
-        scramble += getRepresentation(&Move) + " ";
+        scramble << Move << " ";
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
-    return scramble;
+    return scramble.str();
 }
 
 static std::string Skewb()
 {
-    std::string scramble;
+    std::ostringstream scramble;
     puzzle_move Move{};
     puzzle_move PrevMove{};
     const int moveCount = getRandomNum(9, 13);
@@ -349,60 +351,60 @@ static std::string Skewb()
             createMove(Move, 'S');
         } while (!canUseMove(&PrevMove, &Move));
 
-        scramble += getRepresentation(&Move) + ' ';
+        scramble << Move << ' ';
         PrevMove = Move; // Don't forget this!! :DDDDDDDDDD
     }
-    return scramble;
+    return scramble.str();
 }
 
 static std::string Megaminx()
 {
     bool Dpp;
-    std::string scramble;
+    std::ostringstream scramble;
 
     for (int i = 0; i < 5; i++)
     {
         for (int n = 0; n < 7; n++)
         {
-            scramble += "R";
+            scramble << "R";
             if (getRandomNum(0, 1) == 0)
             {
-                scramble += "++ ";
+                scramble << "++ ";
             }
             else
             {
-                scramble += "-- ";
+                scramble << "-- ";
             }
 
-            scramble += "D";
+            scramble << "D";
             if (getRandomNum(0, 1) == 0)
             {
-                scramble += "++ ";
+                scramble << "++ ";
                 Dpp = true;
             }
             else
             {
-                scramble += "-- ";
+                scramble << "-- ";
                 Dpp = false;
             }
         }
         if (Dpp)
         {
-            scramble += "U \n";
+            scramble << "U \n";
         }
         else
         {
-            scramble += "U' \n";
+            scramble << "U' \n";
         }
     }
-    return scramble;
+    return scramble.str();
 }
 
 static std::string Pyraminx()
 {
     constexpr char tips[] = {'u', 'l', 'r', 'b'};
-    std::string scramble;
-    scramble += Skewb();
+    std::ostringstream scramble;
+    scramble << Skewb();
 
     for (int i = 0; i < 3; i++)
     {
@@ -412,54 +414,55 @@ static std::string Pyraminx()
         }
         else if (direction == 2)
         {
-            scramble += tips[i];
-            scramble += " ";
+            scramble << tips[i];
+            scramble << " ";
         }
         else if (direction == 3)
         {
-            scramble += tips[i];
-            scramble += "' ";
+            scramble << tips[i];
+            scramble << "' ";
         }
     }
-    return scramble;
+    return scramble.str();
 }
 
 static std::string Clock()
 {
     const std::string hours[] = {"5-", "4-", "3-", "2-", "1-", "0+", "1+", "2+", "3+", "4+", "5+", "6+"};
-    std::string scramble = "UR" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "DR" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "DL" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "UL" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "U" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "R" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "D" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "L" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "ALL" + hours[getRandomNum(0, 11)] + " " + "y2" + " ";
-    scramble += "U" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "R" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "D" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "L" + hours[getRandomNum(0, 11)] + " ";
-    scramble += "ALL" + hours[getRandomNum(0, 11)] + " ";
+    std::ostringstream scramble;
+    scramble << "UR" << hours[getRandomNum(0, 11)] << " "
+    << "DR" << hours[getRandomNum(0, 11)] << " "
+    << "DL" << hours[getRandomNum(0, 11)] << " "
+    << "UL" << hours[getRandomNum(0, 11)] << " "
+    << "U" << hours[getRandomNum(0, 11)] << " "
+    << "R" << hours[getRandomNum(0, 11)] << " "
+    << "D" << hours[getRandomNum(0, 11)] << " "
+    << "L" << hours[getRandomNum(0, 11)] << " "
+    << "ALL" << hours[getRandomNum(0, 11)] << " " << "y2" << " "
+    << "U" << hours[getRandomNum(0, 11)] << " "
+    << "R" << hours[getRandomNum(0, 11)] << " "
+    << "D" << hours[getRandomNum(0, 11)] << " "
+    << "L" << hours[getRandomNum(0, 11)] << " "
+    << "ALL" << hours[getRandomNum(0, 11)] << " ";
 
     if (getRandomNum(0, 1) == 1)
     {
-        scramble += "UR ";
+        scramble << "UR ";
     }
     if (getRandomNum(0, 1) == 1)
     {
-        scramble += "DR ";
+        scramble << "DR ";
     }
     if (getRandomNum(0, 1) == 1)
     {
-        scramble += "DL ";
+        scramble << "DL ";
     }
     if (getRandomNum(0, 1) == 1)
     {
-        scramble += "UL ";
+        scramble << "UL ";
     }
 
-    return scramble;
+    return scramble.str();
 }
 
 // Use this one

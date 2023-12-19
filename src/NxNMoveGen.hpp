@@ -3,7 +3,7 @@ This code is here to deprecate the original Scrambles.hpp and stringCleanup.hpp
 */
 #pragma once
 
-#include <string>
+#include <sstream>
 #include <random>
 
 inline std::random_device rng;
@@ -81,7 +81,7 @@ inline void createMove(puzzle_move &newMove, const char moveType)
     }
 }
 
-inline std::string getRepresentation(const puzzle_move *pMove)
+static inline std::string getRepresentation(const puzzle_move *pMove)
 {
     std::string finalMove;
     finalMove += pMove->base;
@@ -106,4 +106,9 @@ inline std::string getRepresentation(const puzzle_move *pMove)
     }
 
     return finalMove;
+}
+
+std::ostringstream& operator<< (std::ostringstream& oss, const puzzle_move& pMove){
+    oss << getRepresentation(&pMove);
+    return oss;
 }

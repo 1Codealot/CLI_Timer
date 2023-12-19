@@ -180,4 +180,5 @@ void outputVersion()
     std::cout << "Scramble outputs ⅓ of the screen + avg to right" << std::endl;
 	std::cout << "Moved the outputting code to another file." << std::endl;
 	std::cout << "Fixed a bug if something was of length 0." << std::endl;
+	std::cout << "Used std::stringstream instead of std::string" << std::endl;
 }
