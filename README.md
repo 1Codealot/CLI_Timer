@@ -10,6 +10,7 @@ You can also run `make cross` to compile it for your main OS and windows. (This 
 
 # Installing
 Watch this video: <https://www.youtube.com/watchv=MJK5mLUz24A> <br>
+Or run `sudo make install` (on Linux). <br>
 Sadly, I don't have a way to install (or compile) it on mac. If you know how to install it on mac, please tell me!
 
 # Commands

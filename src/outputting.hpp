@@ -171,7 +171,7 @@ void outputHelp()
     \nYou MUST have [--no_prompt] and [--count].\
     \n\nCLI_Timer (--version)\nOutputs the current version of CLI_Timer\n\nCLI_Timer (help)\nOutputs this.\
     \n\nAny issues, put them on the GitHub repo: https://github.com/1Codealot/CLI_Timer/issues\
-    \n\nLICENCES: Main: MIT licences.\nSquare-1 code: GNU General Public License v3.0 (repo: <https://github.com/thewca/tnoodle-lib>)";
+    \n\nLICENCES: Main: MIT licence.\nSquare-1 code: GNU General Public License v3.0 (repo: <https://github.com/thewca/tnoodle-lib>)";
 }
 
 void outputVersion()
@@ -181,4 +181,5 @@ void outputVersion()
 	std::cout << "Moved the outputting code to another file." << std::endl;
 	std::cout << "Fixed a bug if something was of length 0." << std::endl;
 	std::cout << "Used std::stringstream instead of std::string" << std::endl;
+	std::cout << "Added make un/install" << std::endl;
 }
