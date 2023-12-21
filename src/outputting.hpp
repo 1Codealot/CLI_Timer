@@ -25,7 +25,7 @@ int get_terminal_width(void){
 
         return columns;
 
-    #elif __linux__
+    #elif __linux__ || __APPLE__
         struct winsize w;
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 
@@ -176,10 +176,6 @@ void outputHelp()
 
 void outputVersion()
 {
-	std::cout << "CLI_Timer version: 1.14\n\n";
-    std::cout << "Scramble outputs ⅓ of the screen + avg to right" << std::endl;
-	std::cout << "Moved the outputting code to another file." << std::endl;
-	std::cout << "Fixed a bug if something was of length 0." << std::endl;
-	std::cout << "Used std::stringstream instead of std::string" << std::endl;
-	std::cout << "Added make un/install" << std::endl;
+	std::cout << "CLI_Timer version: 1.14.1\n\n";
+    std::cout << "Made getting terminal width function work on Mac." << std::endl;
 }
