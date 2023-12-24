@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
 	do
 	{ // while (Args.shouldContinue);
 		std::string currentScramble = generate_scramble(Args.cubeType, Args.blindfolded, Args.fmc);
-		
+
 		if (Args.shouldSave)
 		{
 			//avg = calculateAvg(Args.fileName);

@@ -40,7 +40,7 @@ int get_terminal_width(void){
 
 // End credit
 
-float calcualteAvg(std::vector<float>& times, int count=0)
+inline float calcualteMean(std::vector<float>& times, int count=0)
 {
 	float avg = 0.00f;
 
@@ -89,9 +89,7 @@ void output(std::string scramble, std::vector<float>& times)
 		startPos = endPos + 1;
 	}
 
-	float mean = calcualteAvg(times);
-
-	std::clog << "Mean: " << mean << std::endl;
+	float mean = calcualteMean(times);
 
 	if (mean > 0)
 	{
