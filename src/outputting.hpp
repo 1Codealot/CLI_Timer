@@ -40,8 +40,25 @@ int get_terminal_width(void){
 
 // End credit
 
+float calcualteAvg(std::vector<float>& times, int count=0)
+{
+	float avg = 0.00f;
 
-void output(std::string scramble, float avg)
+	if (count == 0)
+	{
+		count = times.size();
+	}
+
+	for(int n : times)
+	{
+		avg += n;
+	}
+
+	avg /= count;
+	return avg;	
+}
+
+void output(std::string scramble, std::vector<float>& times)
 {
 	// avg must be > 0 otherwise I will not output it.
 
@@ -72,16 +89,20 @@ void output(std::string scramble, float avg)
 		startPos = endPos + 1;
 	}
 
-	if (avg > 0)
+	float mean = calcualteAvg(times);
+
+	std::clog << "Mean: " << mean << std::endl;
+
+	if (mean > 0)
 	{
 		// Re assign avg to 2 decimal places
-		std::string avgAsStr = std::to_string(avg);
+		std::string avgAsStr = std::to_string(mean);
 		avgAsStr = avgAsStr.substr(0, avgAsStr.find('.') + 3);
 
-        int spaces = width - scrambleLines[0].length() - 18 - avgAsStr.length();
+        int spaces = width - scrambleLines[0].length() - 15 - avgAsStr.length();
 
         scrambleLines[0] += std::string(spaces, ' ');
-		scrambleLines[0] += "Current average: " + avgAsStr;
+		scrambleLines[0] += "Current mean: " + avgAsStr;
 	}
 
 	for (std::string &line : scrambleLines)
@@ -176,6 +197,6 @@ void outputHelp()
 
 void outputVersion()
 {
-	std::cout << "CLI_Timer version: 1.14.1\n\n";
-    std::cout << "Made getting terminal width function work on Mac." << std::endl;
+	std::cout << "CLI_Timer version: 1.15\n\n";
+    std::cout << "Changed how outputting mean works. Kinda..." << std::endl;
 }

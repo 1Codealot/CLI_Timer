@@ -15,19 +15,16 @@ int main(int argc, char const *argv[])
 	do
 	{ // while (Args.shouldContinue);
 		std::string currentScramble = generate_scramble(Args.cubeType, Args.blindfolded, Args.fmc);
-		// Get scramble
-
-		float avg = -1;
-
+		
 		if (Args.shouldSave)
 		{
-			avg = calculateAvg(Args.fileName);
-			output(currentScramble, avg);
+			//avg = calculateAvg(Args.fileName);
+			output(currentScramble, timesVector);
 		}
 		else
 		{
-			avg = calculateAvg(timesVector);
-			output(currentScramble, calculateAvg(timesVector));
+			// avg = calculateAvg(timesVector);
+			output(currentScramble, timesVector);
 		}
 
 		if (!Args.shouldPrompt)
