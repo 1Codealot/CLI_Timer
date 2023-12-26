@@ -2,6 +2,8 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
+#include <algorithm>
+#include <cmath>
 #include "TimeStrToFloat.hpp"
 
 // Credit:
@@ -40,7 +42,7 @@ int get_terminal_width(void){
 
 // End credit
 
-inline float calcualteMean(std::vector<float>& times, int count=0)
+inline float calculateMean(std::vector<float>& times, int count=0)
 {
 	float avg = 0.00f;
 
@@ -49,13 +51,42 @@ inline float calcualteMean(std::vector<float>& times, int count=0)
 		count = times.size();
 	}
 
-	for(int n : times)
+	for(float n : times)
 	{
 		avg += n;
 	}
 
-	avg /= count;
+	avg /= (float)count;
 	return avg;	
+}
+
+inline float calculateAvg(std::vector<float>& times, size_t count=0)
+{
+	// TODO: Check the size of times is >= count.
+
+	int countToRemove = floor((times.size() / 10) + 1);
+
+	if(times.size() < count)
+	{
+		return 0;
+	}
+
+	std::vector<float> latestTimes;
+
+    for (size_t i = times.size() - count; i < times.size(); i++)
+    {
+        latestTimes.push_back(times.at(i));
+    }
+
+    std::sort(latestTimes.begin(), latestTimes.end());
+
+	for (int i = 0; i < countToRemove; i++)
+	{
+		latestTimes.erase(latestTimes.begin());
+		latestTimes.erase(latestTimes.end() - 1);
+	}
+
+	return calculateMean(latestTimes);
 }
 
 void output(std::string scramble, std::vector<float>& times)
@@ -89,9 +120,14 @@ void output(std::string scramble, std::vector<float>& times)
 		startPos = endPos + 1;
 	}
 
-	float mean = calcualteMean(times);
+	float mean = calculateMean(times);
+	float ao5 = calculateAvg(times, 5);
+	// float ao12 = calcualteAvg(times, 12);
+	// float ao50 = calcualteAvg(times, 50);
+	// float ao100 = calcualteAvg(times, 100);
+	// No need for more. If you do; just re-complie with more. lol.
 
-	if (mean > 0)
+	if (mean == mean) // If nan then !true = false.
 	{
 		// Re assign avg to 2 decimal places
 		std::string avgAsStr = std::to_string(mean);
@@ -99,8 +135,25 @@ void output(std::string scramble, std::vector<float>& times)
 
         int spaces = width - scrambleLines[0].length() - 15 - avgAsStr.length();
 
-        scrambleLines[0] += std::string(spaces, ' ');
-		scrambleLines[0] += "Current mean: " + avgAsStr;
+        scrambleLines.at(0) += std::string(spaces, ' ');
+		scrambleLines.at(0) += "Current mean: " + avgAsStr;
+	}
+
+	if (ao5 != 0)
+	{
+		// Re assign avg to 2 decimal places
+		std::string avgAsStr = std::to_string(ao5);
+		avgAsStr = avgAsStr.substr(0, avgAsStr.find('.') + 3);
+
+		int spaces = width - scrambleLines[1].length() - 14 - avgAsStr.length();
+
+		if (scrambleLines.size() < 2)
+		{
+			scrambleLines.push_back("");
+		}
+
+		scrambleLines.at(1) += std::string(spaces, ' ');
+		scrambleLines.at(1) += "Current ao5: " + avgAsStr;
 	}
 
 	for (std::string &line : scrambleLines)
