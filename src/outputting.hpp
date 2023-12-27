@@ -89,6 +89,43 @@ inline float calculateAvg(std::vector<float>& times, size_t count=0)
 	return calculateMean(latestTimes);
 }
 
+void appendAvg(std::vector<std::string>& scrambleLines, float avg, std::string avgName)
+{
+	// Smaller level = higher up.
+	int level = 0;
+
+	if (avgName == "ao5")
+	{
+		level = 1;
+	}
+	else if (avgName == "ao12")
+	{
+		level = 2;
+	}
+	else if (avgName == "ao50")
+	{
+		level = 3;
+	}
+	else if (avgName == "ao100")
+	{
+		level = 4;
+	}
+
+	std::string avgAsStr = std::to_string(avg);
+	
+	if (scrambleLines.size() < level+1)
+	{
+		scrambleLines.push_back("");
+	}
+
+	std::string avgText = "Current " + avgName + ": " + avgAsStr;
+
+	int spaces = get_terminal_width() - scrambleLines.at(level).length() - avgText.length();
+
+	scrambleLines.at(level) += std::string(spaces, ' ') + avgText;
+
+}
+
 void output(std::string scramble, std::vector<float>& times)
 {
 	// avg must be > 0 otherwise I will not output it.
@@ -120,42 +157,21 @@ void output(std::string scramble, std::vector<float>& times)
 		startPos = endPos + 1;
 	}
 
-	float mean = calculateMean(times);
-	float ao5 = calculateAvg(times, 5);
-	// float ao12 = calcualteAvg(times, 12);
-	// float ao50 = calcualteAvg(times, 50);
-	// float ao100 = calcualteAvg(times, 100);
+	float averages[5] = {
+	calculateMean(times), 
+	calculateAvg(times, 5), 
+	calculateAvg(times, 12), 
+	calculateAvg(times, 50), 
+	calculateAvg(times, 100)
+	};
+
 	// No need for more. If you do; just re-complie with more. lol.
 
-	if (mean == mean) // If nan then !true = false.
-	{
-		// Re assign avg to 2 decimal places
-		std::string avgAsStr = std::to_string(mean);
-		avgAsStr = avgAsStr.substr(0, avgAsStr.find('.') + 3);
-
-        int spaces = width - scrambleLines[0].length() - 15 - avgAsStr.length();
-
-        scrambleLines.at(0) += std::string(spaces, ' ');
-		scrambleLines.at(0) += "Current mean: " + avgAsStr;
+	for (size_t i = 0; i < 5; i++)
+	{                                                //MFW Copilot does nested ternary operators lmao.
+		appendAvg(scrambleLines, averages[i], i == 0 ? "avg" : i == 1 ? "ao5" : i == 2 ? "ao12" : i == 3 ? "ao50" : "ao100");
 	}
-
-	if (ao5 != 0)
-	{
-		// Re assign avg to 2 decimal places
-		std::string avgAsStr = std::to_string(ao5);
-		avgAsStr = avgAsStr.substr(0, avgAsStr.find('.') + 3);
-
-		int spaces = width - scrambleLines[1].length() - 14 - avgAsStr.length();
-
-		if (scrambleLines.size() < 2)
-		{
-			scrambleLines.push_back("");
-		}
-
-		scrambleLines.at(1) += std::string(spaces, ' ');
-		scrambleLines.at(1) += "Current ao5: " + avgAsStr;
-	}
-
+	
 	for (std::string &line : scrambleLines)
 	{
 		if(line.length() < 0){
@@ -249,5 +265,6 @@ void outputHelp()
 void outputVersion()
 {
 	std::cout << "CLI_Timer version: 1.15\n\n";
-    std::cout << "Changed how outputting mean works. Kinda..." << std::endl;
+    std::cout << "Changed how outputting mean works." << std::endl;
+	std::cout << "Added ao5, 12, 50 and 100" << std::endl;
 }
