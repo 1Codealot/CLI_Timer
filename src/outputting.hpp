@@ -131,7 +131,7 @@ void appendAvg(std::vector<std::string>& scrambleLines, float avg, std::string a
 
 }
 
-void output(std::string scramble, std::vector<float>& times)
+void output(std::string scramble, std::vector<float>& times, bool showAvg)
 {
 	// avg must be > 0 otherwise I will not output it.
 
@@ -162,19 +162,20 @@ void output(std::string scramble, std::vector<float>& times)
 		startPos = endPos + 1;
 	}
 
-	float mean = calculateMean(times);
-	float ao5 = calculateAvg(times, 5);
-	float ao12 = calculateAvg(times, 12);
-	float ao50 = calculateAvg(times, 50);
-	float ao100 = calculateAvg(times, 100);
-	// No need for more. If you do; just re-complie with more. lol.
+	if(showAvg){
+		float mean = calculateMean(times);
+		float ao5 = calculateAvg(times, 5);
+		float ao12 = calculateAvg(times, 12);
+		float ao50 = calculateAvg(times, 50);
+		float ao100 = calculateAvg(times, 100);
+		// No need for more. If you do; just re-complie with more. lol.
 
-	appendAvg(scrambleLines, mean, "mean");
-	appendAvg(scrambleLines, ao5, "ao5");
-	appendAvg(scrambleLines, ao12, "ao12");
-	appendAvg(scrambleLines, ao50, "ao50");
-	appendAvg(scrambleLines, ao100, "ao100");
-
+		appendAvg(scrambleLines, mean, "mean");
+		appendAvg(scrambleLines, ao5, "ao5");
+		appendAvg(scrambleLines, ao12, "ao12");
+		appendAvg(scrambleLines, ao50, "ao50");
+		appendAvg(scrambleLines, ao100, "ao100");
+	}
 
 	for (std::string &line : scrambleLines)
 	{
@@ -268,9 +269,7 @@ void outputHelp()
 
 void outputVersion()
 {
-	std::cout << "CLI_Timer version: 1.15\n\n";
-    std::cout << "Changed how outputting mean works." << std::endl;
-	std::cout << "Added ao5, 12, 50 and 100" << std::endl;
-	std::cout << "Made outputting mean (and averages) look better" << std::endl;
-	std::cout << "Removed warnings" << std::endl;
+	std::cout << "CLI_Timer version: 1.15.1\n\n";
+
+	std::cout << "Added `--no_avg` functionality back." << std::endl
 }

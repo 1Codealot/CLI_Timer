@@ -19,12 +19,12 @@ int main(int argc, char const *argv[])
 		if (Args.shouldSave)
 		{
 			//avg = calculateAvg(Args.fileName);
-			output(currentScramble, timesVector);
+			output(currentScramble, timesVector, Args.shouldShowAvg);
 		}
 		else
 		{
 			// avg = calculateAvg(timesVector);
-			output(currentScramble, timesVector);
+			output(currentScramble, timesVector, Args.shouldShowAvg);
 		}
 
 		if (!Args.shouldPrompt)
