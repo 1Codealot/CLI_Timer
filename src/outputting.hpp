@@ -271,5 +271,5 @@ void outputVersion()
 {
 	std::cout << "CLI_Timer version: 1.15.1\n\n";
 
-	std::cout << "Added `--no_avg` functionality back." << std::endl
+	std::cout << "Added `--no_avg` functionality back." << std::endl;
 }
