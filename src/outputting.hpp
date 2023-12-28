@@ -116,7 +116,7 @@ void appendAvg(std::vector<std::string>& scrambleLines, float avg, std::string a
 		avgAsStr = "0.00";
 	}
 	
-	avgAsStr = outputTime(avgAsStr.substr(0, avgAsStr.find('.') + 3));
+	avgAsStr = outputTimePretty(avgAsStr.substr(0, avgAsStr.find('.') + 3));
 	
 	if (scrambleLines.size() < level+1)
 	{

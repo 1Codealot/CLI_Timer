@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <format>
 
 inline float timeStrToFloatSecs(std::string time_in)
 {
@@ -102,14 +101,65 @@ inline std::string outputTime(std::string time_in)
 inline std::string outputTimePretty(float time_in)
 {
     // Turn it into seconds
-    int deciseconds = time_in - static_cast<int>(time_in);
+
+
+    int deciseconds = (time_in - static_cast<int>(time_in))*100;
     int seconds = static_cast<int>(time_in) % 60;   
     int minutes = static_cast<int>(time_in) / 60;
     int hours = minutes / 60;
     minutes %= 60;
 
-    std::string output = std::format("{:02}:{:02}:{:02}.{:02}", hours, minutes, seconds, deciseconds);
+    // Man i wish i had std::format :(
+    std::string output = "";
+    if (hours > 0)
+    {
+        if (hours > 10)
+        {
+            output += "0";
+        }
+        
+        output += std::to_string(hours) + ":";
+    }
+    
+    if (minutes > 0)
+    {
+        if (minutes < 10)
+        {
+            output += "0";
+        }
+        
+        output += std::to_string(minutes) + ":";
+    }
 
+    if (seconds > 0)
+    {
+        if (seconds < 10)
+        {
+            output += "0";
+        }
+        
+        output += std::to_string(seconds) + ".";
+    }
+    else
+    {
+        output += "00.";
+    }
+
+    if (deciseconds > 0)
+    {
+        if (deciseconds < 10)
+        {
+            output += "0";
+        }
+        
+        output += std::to_string(deciseconds);
+    }
+    else
+    {
+        output += "00";
+    }
+    
+    return output;
 }
 
 inline std::string outputTimePretty(std::string time_in){
