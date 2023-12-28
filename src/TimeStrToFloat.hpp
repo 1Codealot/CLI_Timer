@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <format>
 
 inline float timeStrToFloatSecs(std::string time_in)
 {
@@ -96,4 +97,21 @@ inline std::string outputTime(std::string time_in)
     }
 
     return time_in;
+}
+
+inline std::string outputTimePretty(float time_in)
+{
+    // Turn it into seconds
+    int deciseconds = time_in - static_cast<int>(time_in);
+    int seconds = static_cast<int>(time_in) % 60;   
+    int minutes = static_cast<int>(time_in) / 60;
+    int hours = minutes / 60;
+    minutes %= 60;
+
+    std::string output = std::format("{:02}:{:02}:{:02}.{:02}", hours, minutes, seconds, deciseconds);
+
+}
+
+inline std::string outputTimePretty(std::string time_in){
+    return outputTimePretty(timeStrToFloatSecs(time_in));
 }
