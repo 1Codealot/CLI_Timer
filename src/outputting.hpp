@@ -92,7 +92,7 @@ inline float calculateAvg(std::vector<float>& times, size_t count=0)
 void appendAvg(std::vector<std::string>& scrambleLines, float avg, std::string avgName)
 {
 	// Smaller level = higher up.
-	int level = 0;
+	size_t level = 0;
 
 	if (avgName == "ao5")
 	{
@@ -178,7 +178,7 @@ void output(std::string scramble, std::vector<float>& times)
 
 	for (std::string &line : scrambleLines)
 	{
-		if(line.length() < 0){
+		if(!line.empty()){
 			if (line.at(0) == ' ')
 			{
 				line.erase(0, 1);
@@ -272,4 +272,5 @@ void outputVersion()
     std::cout << "Changed how outputting mean works." << std::endl;
 	std::cout << "Added ao5, 12, 50 and 100" << std::endl;
 	std::cout << "Made outputting mean (and averages) look better" << std::endl;
+	std::cout << "Removed warnings" << std::endl;
 }

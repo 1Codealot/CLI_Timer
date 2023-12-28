@@ -100,7 +100,11 @@ namespace sq1
             pieces = doRotateTopAndBottom(pieces, top, bottom);
             doSlash(pieces);
 
-            scramble += "(" + std::to_string(top) + ", " + std::to_string(bottom) + ") / ";
+            scramble += "(";
+            scramble += std::to_string(top);
+            scramble += ", ";                  // This is done to remove a warning.
+            scramble += std::to_string(bottom);
+            scramble += ") / ";
         }
         if (rng() % 2 == 0)
         {
