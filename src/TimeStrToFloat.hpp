@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <cmath>
 
 inline float timeStrToFloatSecs(std::string time_in)
 {
@@ -98,70 +99,44 @@ inline std::string outputTime(std::string time_in)
     return time_in;
 }
 
-inline std::string outputTimePretty(float time_in)
+inline std::string outputTimePretty(float time_in_seconds)
 {
-    // Turn it into seconds
-
-
-    int deciseconds = (time_in - static_cast<int>(time_in))*100;
-    int seconds = static_cast<int>(time_in) % 60;   
-    int minutes = static_cast<int>(time_in) / 60;
-    int hours = minutes / 60;
-    minutes %= 60;
-
-    // Man i wish i had std::format :(
-    std::string output = "";
-    if (hours > 0)
-    {
-        if (hours > 10)
-        {
-            output += "0";
-        }
-        
-        output += std::to_string(hours) + ":";
-    }
+    std::string output{""};
     
-    if (minutes > 0)
-    {
-        if (minutes < 10)
-        {
-            output += "0";
-        }
-        
-        output += std::to_string(minutes) + ":";
+    // Thanks: https://www.w3resource.com/c-programming-exercises/basic-declarations-and-expressions/c-programming-basic-exercises-17.php
+
+    int hours = time_in_seconds / 3600;
+    int minutes =  (time_in_seconds -(3600*hours)) / 60;
+    float seconds = time_in_seconds - (3600*hours) - (60*minutes);
+
+    //Make seconds to 2 decimal places    
+
+    std::string seconds_str = std::to_string(seconds);
+    seconds_str = seconds_str.substr(0, seconds_str.find(".") + 3);
+
+    // Actually outputting
+    output += std::to_string(hours);
+    output += ":";
+
+    if (minutes < 10){
+        output += "0";
+    }
+    output += std::to_string(minutes);
+    output += ":";
+
+    if (seconds < 10){
+        output += "0";
     }
 
-    if (seconds > 0)
-    {
-        if (seconds < 10)
-        {
-            output += "0";
-        }
-        
-        output += std::to_string(seconds) + ".";
-    }
-    else
-    {
-        output += "00.";
+    output += seconds_str;
+
+    if(seconds_str.length() == 3){
+        output += "0";
     }
 
-    if (deciseconds > 0)
-    {
-        if (deciseconds < 10)
-        {
-            output += "0";
-        }
-        
-        output += std::to_string(deciseconds);
-    }
-    else
-    {
-        output += "00";
-    }
-    
     return output;
 }
 
-inline std::string outputTimePretty(std::string time_in){
-    return outputTimePretty(timeStrToFloatSecs(time_in));
-}
+// inline std::string outputTimePretty(std::string time_in){
+//     return outputTimePretty(timeStrToFloatSecs(time_in));
+// }

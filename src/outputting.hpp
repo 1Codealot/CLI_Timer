@@ -110,13 +110,12 @@ void appendAvg(std::vector<std::string>& scrambleLines, float avg, std::string a
 	{
 		level = 4;
 	}
-
-	std::string avgAsStr = std::to_string(avg);
-	if(avgAsStr == "-nan"){
-		avgAsStr = "0.00";
-	}
 	
-	avgAsStr = outputTimePretty(avgAsStr.substr(0, avgAsStr.find('.') + 3));
+	if(std::to_string(avg) == "-nan"){
+		avg = 0.00f;
+	}
+
+	std::string avgAsStr = outputTimePretty(avg);
 	
 	if (scrambleLines.size() < level+1)
 	{
@@ -126,6 +125,7 @@ void appendAvg(std::vector<std::string>& scrambleLines, float avg, std::string a
 	std::string avgText = "Current " + avgName + ": " + avgAsStr;
 
 	int spaces = get_terminal_width() - scrambleLines.at(level).length() - avgText.length();
+	spaces += (scrambleLines.at(level).empty());
 
 	scrambleLines.at(level) += std::string(spaces, ' ') + avgText;
 
@@ -272,4 +272,5 @@ void outputVersion()
 	std::cout << "CLI_Timer version: 1.15.1\n\n";
 
 	std::cout << "Added `--no_avg` functionality back." << std::endl;
+	std::cout << "Fixed some bug with outputting mean / avgs." << std::endl;
 }
