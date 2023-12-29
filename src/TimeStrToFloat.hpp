@@ -80,9 +80,18 @@ inline std::string outputTime(std::string time_in)
 
     time_in.insert(0, 8 - time_in.length(), '0');
 
-    time_in.insert(2, ":");
-    time_in.insert(5, ":");
-    time_in.insert(8, ".");
+    if (time_in.length() >= 2) {
+        time_in[2] = ':';
+    }
+
+    if (time_in.length() >= 5) {
+        time_in[5] = ':';
+    }
+
+    if (time_in.length() >= 8) {
+        time_in[8] = '.';
+    }
+
 
     // sigfigs
 

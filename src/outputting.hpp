@@ -273,4 +273,5 @@ void outputVersion()
 
 	std::cout << "Added `--no_avg` functionality back." << std::endl;
 	std::cout << "Fixed some bug with outputting mean / avgs." << std::endl;
+	std::cout << "Fixed a warning." << std::endl;
 }
