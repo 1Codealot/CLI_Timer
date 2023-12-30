@@ -66,6 +66,11 @@ int main(int argc, char const *argv[])
 		{
 			float solveTime = getTime();
 
+			if (solveTime == -1)
+			{
+				continue;
+			}
+
 			std::string penalty = getPenalty();
 
 			if (Args.shouldSave)

@@ -199,6 +199,11 @@ float getTime()
 	std::cout << "\nEnter your time: ";
 	std::cin >> inputtedTime;
 
+	if (inputtedTime == "next" || inputtedTime == "skip")
+	{
+		return -1;
+	}
+
 	if (inputtedTime[0] == 'Q' || inputtedTime[0] == 'q')
 	{
 		std::cout << std::endl;
@@ -269,9 +274,7 @@ void outputHelp()
 
 void outputVersion()
 {
-	std::cout << "CLI_Timer version: 1.15.1\n\n";
+	std::cout << "CLI_Timer version: 1.16\n\n";
 
-	std::cout << "Added `--no_avg` functionality back." << std::endl;
-	std::cout << "Fixed some bug with outputting mean / avgs." << std::endl;
-	std::cout << "Fixed a warning." << std::endl;
+	std::cout << "Added next or skip to skip." << std::endl;
 }
