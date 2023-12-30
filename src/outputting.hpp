@@ -277,4 +277,5 @@ void outputVersion()
 	std::cout << "CLI_Timer version: 1.16\n\n";
 
 	std::cout << "Added next or skip to skip." << std::endl;
+	std::cout << "Un-\"fixed\" a warning." << std::endl;
 }
