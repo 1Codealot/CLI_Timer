@@ -278,4 +278,5 @@ void outputVersion()
 
 	std::cout << "Added next or skip to skip." << std::endl;
 	std::cout << "Un-\"fixed\" a warning." << std::endl;
+    std::cout << "Fixed bug with getting mean when saving to a file." << std::endl;
 }

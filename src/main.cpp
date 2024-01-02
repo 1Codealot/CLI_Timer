@@ -13,19 +13,16 @@ int main(int argc, char const *argv[])
 	std::vector<float> timesVector;
 
 	do
-	{ // while (Args.shouldContinue);
+	{ // while (Args.shouldContinue && --Args.scrambleCount != 0);
+
+        //Populate vector from file
+        if(Args.shouldSave){
+            timesVector = readTimesFromFile(Args.fileName);
+        }
+
 		std::string currentScramble = generate_scramble(Args.cubeType, Args.blindfolded, Args.fmc);
 
-		if (Args.shouldSave)
-		{
-			//avg = calculateAvg(Args.fileName);
-			output(currentScramble, timesVector, Args.shouldShowAvg);
-		}
-		else
-		{
-			// avg = calculateAvg(timesVector);
-			output(currentScramble, timesVector, Args.shouldShowAvg);
-		}
+		output(currentScramble, timesVector, Args.shouldShowAvg);
 
 		if (!Args.shouldPrompt)
 		{
