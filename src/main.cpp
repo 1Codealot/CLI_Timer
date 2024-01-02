@@ -12,13 +12,13 @@ int main(int argc, char const *argv[])
 	setup(Args, argc, argv);
 	std::vector<float> timesVector;
 
-	do
-	{ // while (Args.shouldContinue && --Args.scrambleCount != 0);
-
         //Populate vector from file
         if(Args.shouldSave){
             timesVector = readTimesFromFile(Args.fileName);
         }
+
+	do
+	{ // while (Args.shouldContinue && --Args.scrambleCount != 0);
 
 		std::string currentScramble = generate_scramble(Args.cubeType, Args.blindfolded, Args.fmc);
 
@@ -77,11 +77,11 @@ int main(int argc, char const *argv[])
 
 				getline(std::cin, comment);
 				save_to_file(Args.fileName, currentScramble, solveTime, penalty, comment);
+			
 			}
-			else
-			{
-				timesVector.push_back(solveTime);
-			}
+			
+			timesVector.push_back(solveTime);
+			
 		}
 	} while (Args.shouldContinue && --Args.scrambleCount != 0);
 
