@@ -4,7 +4,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <cmath>
-#include "TimeStrToFloat.hpp"
+#include "convert_times_to_be_used.hpp"
 
 // Credit:
 // https://stackoverflow.com/questions/23369503/get-size-of-terminal-window-rows-columns

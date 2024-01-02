@@ -1,6 +1,6 @@
-#include "cmdLineParser.hpp"
-#include "Scrambles.hpp"
-#include "fileIO.hpp"
+#include "command_line_parser.hpp"
+#include "scrambles.hpp"
+#include "file_IO.hpp"
 
 int main(int argc, char const *argv[])
 {
