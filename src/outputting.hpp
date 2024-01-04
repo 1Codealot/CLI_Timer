@@ -42,7 +42,7 @@ int get_terminal_width(void){
 
 // End credit
 
-inline float calculateMean(std::vector<float>& times, int count=0)
+inline float calculateMean(std::vector<float>& times, int count=0, bool punishDNFs=false)
 {
 	float avg = 0.00f;
 
@@ -53,6 +53,16 @@ inline float calculateMean(std::vector<float>& times, int count=0)
 
 	for(float n : times)
 	{
+        if(punishDNFs){
+            if(n == std::numeric_limits<float>::max()){
+                return -1;
+            }
+        } else {
+            if(n == std::numeric_limits<float>::max()){
+                count--;
+                continue;
+            }
+        }
 		avg += n;
 	}
 
@@ -86,7 +96,7 @@ inline float calculateAvg(std::vector<float>& times, size_t count=0)
 		latestTimes.erase(latestTimes.end() - 1);
 	}
 
-	return calculateMean(latestTimes);
+	return calculateMean(latestTimes, latestTimes.size(), true);
 }
 
 void appendAvg(std::vector<std::string>& scrambleLines, float avg, std::string avgName)
@@ -115,7 +125,13 @@ void appendAvg(std::vector<std::string>& scrambleLines, float avg, std::string a
 		avg = 0.00f;
 	}
 
-	std::string avgAsStr = outputTimePretty(avg);
+	std::string avgAsStr;
+
+    if(avg == -1){
+        avgAsStr = "DNF";
+    } else {
+        avgAsStr = outputTimePretty(avg);
+    }
 	
 	if (scrambleLines.size() < level+1)
 	{
@@ -279,4 +295,5 @@ void outputVersion()
 	std::cout << "Added next or skip to skip." << std::endl;
 	std::cout << "Un-\"fixed\" a warning." << std::endl;
     std::cout << "Fixed bug with getting mean when saving to a file." << std::endl;
+    std::cout << "Made you get punished for DNFs." << std::endl;
 }

@@ -80,6 +80,11 @@ int main(int argc, char const *argv[])
 			
 			}
 			
+			if (penalty == "DNF"||penalty == "dnf")
+			{
+			    // Re-assign solveTime to max value of `int`
+				solveTime = std::numeric_limits<float>::max();
+			}
 			timesVector.push_back(solveTime);
 			
 		}
