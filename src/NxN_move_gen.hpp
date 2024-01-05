@@ -13,16 +13,42 @@ static int getRandomNum(const int min, const int max)
     return rng() % (max + 1 - min) + min;
 }
 
-constexpr char baseMoves[6] = {'F', 'U', 'R', 'B', 'L', 'D'};
-constexpr char directions[3] = {' ', '\'', '2'}; // If ' ' Ignore, can't have ''
-constexpr char wideSizes[3] = {' ', '2', '3'};
+//constexpr char baseMoves[6] = {'F', 'U', 'R', 'B', 'L', 'D'};
+//constexpr char directions[3] = {' ', '\'', '2'}; // If ' ' Ignore, can't have ''
+//constexpr char wideSizes[3] = {' ', '2', '3'};
+
+// use enum class instead
+
+enum class baseMoves
+{
+    F,
+    U,
+    R,
+    B,
+    L,
+    D
+};
+
+enum class directions
+{
+    CW,
+    ACW,
+    DOUBLE
+};
+
+enum class wideSizes
+{
+    NONE,
+    WIDE,
+    WIDE2
+};
 
 typedef struct
 {
-    char base;      // U F R B L D
-    char direction; // ' 2
-    char wsize;     // 0 2 3
-} puzzle_move;
+    baseMoves base;
+    directions direction;
+    wideSizes wsize;
+}puzzle_move;
 
 inline void createMove(puzzle_move &newMove, const char moveType)
 {
