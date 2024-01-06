@@ -24,9 +24,9 @@ struct should
 static char getCubeType(std::vector<std::string> &args)
 {
     // Go through all the argv finding a  1 length single char
-    for (size_t i = 0; i < args.size(); ++i)
+    for (auto & arg : args)
     {
-        switch (args.at(i).at(0))
+        switch (arg.at(0))
         {
         case '2':
         case '3':
@@ -39,7 +39,7 @@ static char getCubeType(std::vector<std::string> &args)
         case 'S':
         case 'C':
         case 'Q':
-            return args.at(i).at(0);
+            return arg.at(0);
         default:
             break;
         }
@@ -50,9 +50,9 @@ static char getCubeType(std::vector<std::string> &args)
 
 static bool shouldSave(std::vector<std::string> &args)
 {
-    for (size_t i = 0; i < args.size(); ++i)
+    for (const auto & arg : args)
     {
-        if (args.at(i).substr(0, 2) == "-s")
+        if (arg.substr(0, 2) == "-s")
         {
             return true;
         }
@@ -65,11 +65,11 @@ static std::string getFileName(std::vector<std::string> &args)
     if (shouldSave(args))
     {
         // Find the file.
-        for (size_t i = 0; i < args.size(); ++i)
+        for (const auto & arg : args)
         {
-            if (args.at(i).substr(0, 2) == "-s")
+            if (arg.substr(0, 2) == "-s")
             {
-                std::string fileName = args.at(i);
+                std::string fileName = arg;
                 if (fileName.length() <= 2)
                 {
                     std::cerr << "You tried to save to a file but you didn't give it a name\n\n";
@@ -87,9 +87,8 @@ static std::string getFileName(std::vector<std::string> &args)
 
 static int getCount(std::vector<std::string> &args)
 {
-    for (size_t i = 0; i < args.size(); i++)
+    for (const auto& currArg : args)
     {
-        std::string currArg = args.at(i);
         if (currArg.substr(0, 7) == "--count")
         {
             return std::stoi(currArg.substr(7, currArg.size()));
@@ -106,8 +105,8 @@ static bool shouldContinue(std::vector<std::string> &args)
     }
 
     // Oops, turned on python mode. lmao
-    for (size_t i = 0; i < args.size(); ++i)
-        if (args.at(i) == "c")
+    for (const auto & arg : args)
+        if (arg == "c")
             return true;
 
     return false;
@@ -133,9 +132,9 @@ static bool shouldPrompt(std::vector<std::string> &args)
 
 static bool shouldShowAvg(std::vector<std::string> &args)
 {
-    for (size_t i = 0; i < args.size(); ++i)
+    for (const auto & arg : args)
     {
-        if (args.at(i) == "--no_avg" || args.at(i) == "--no_prompt")
+        if (arg == "--no_avg" || arg == "--no_prompt")
         {
             return false;
         }

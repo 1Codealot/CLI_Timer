@@ -99,7 +99,7 @@ inline float calculateAvg(std::vector<float>& times, size_t count=0)
 	return calculateMean(latestTimes, latestTimes.size(), true);
 }
 
-void appendAvg(std::vector<std::string>& scrambleLines, float avg, std::string avgName)
+void appendAvg(std::vector<std::string>& scrambleLines, float avg, const std::string& avgName)
 {
 	// Smaller level = higher up.
 	size_t level = 0;
@@ -135,7 +135,7 @@ void appendAvg(std::vector<std::string>& scrambleLines, float avg, std::string a
 	
 	if (scrambleLines.size() < level+1)
 	{
-		scrambleLines.push_back("");
+		scrambleLines.emplace_back("");
 	}
 
 	std::string avgText = "Current " + avgName + ": " + avgAsStr;
@@ -293,4 +293,5 @@ void outputVersion()
 	std::cout << "CLI_Timer version: 1.17\n\n";
 
 	std::cout << "Using enums for move parts" << std::endl;
+    std::cout << "Used range-based for loops" << std::endl;
 }
