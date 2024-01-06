@@ -16,7 +16,7 @@
     #include <unistd.h>
 #endif
 
-int get_terminal_width(void){
+int get_terminal_width(){
     #ifdef _WIN32
         CONSOLE_SCREEN_BUFFER_INFO csbi;
         int columns;
@@ -28,7 +28,7 @@ int get_terminal_width(void){
         return columns;
 
     #elif __linux__ || __APPLE__
-        struct winsize w;
+        struct winsize w{};
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 
         int columns = w.ws_col;
@@ -42,7 +42,7 @@ int get_terminal_width(void){
 
 // End credit
 
-inline float calculateMean(std::vector<float>& times, int count=0, bool punishDNFs=false)
+inline float calculateMean(std::vector<float>& times, size_t count=0, bool punishDNFs=false)
 {
 	float avg = 0.00f;
 
@@ -140,7 +140,7 @@ void appendAvg(std::vector<std::string>& scrambleLines, float avg, const std::st
 
 	std::string avgText = "Current " + avgName + ": " + avgAsStr;
 
-	int spaces = get_terminal_width() - scrambleLines.at(level).length() - avgText.length();
+	size_t spaces = get_terminal_width() - scrambleLines.at(level).length() - avgText.length();
 	spaces += (scrambleLines.at(level).empty());
 
 	scrambleLines.at(level) += std::string(spaces, ' ') + avgText;

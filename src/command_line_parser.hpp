@@ -223,7 +223,7 @@ inline void setup(struct should &Options, cmdLineArgs)
     // init vector
     for (int i = 1; i != argc; i++)
     {
-        arguments.push_back(std::string(argv[i]));
+        arguments.emplace_back(argv[i]);
     }
 
     if (argc == 1)

@@ -8,7 +8,7 @@ This code is here to deprecate the original Scrambles.hpp and stringCleanup.hpp
 
 inline std::random_device rng;
 
-static int getRandomNum(const int min, const int max)
+static size_t getRandomNum(const int min, const int max)
 {
     return rng() % (max + 1 - min) + min;
 }
@@ -39,7 +39,7 @@ enum class wideSizes
 
 // SMH i wish i could overload `[]` for enums
 
-constexpr baseMoves getElemFromEnumOfBaseMoves(int index){
+constexpr baseMoves getElemFromEnumOfBaseMoves(size_t index){
     switch (index) {
         case 0:
             return baseMoves::F;
@@ -58,7 +58,7 @@ constexpr baseMoves getElemFromEnumOfBaseMoves(int index){
     }
 }
 
-constexpr directions getElemFromEnumOfDirections(int index){
+constexpr directions getElemFromEnumOfDirections(size_t index){
     switch (index) {
         case 0:
             return directions::CW;
@@ -71,7 +71,7 @@ constexpr directions getElemFromEnumOfDirections(int index){
     }
 }
 
-constexpr wideSizes getElemFromEnumOfWidthSizes(int index){
+constexpr wideSizes getElemFromEnumOfWidthSizes(size_t index){
     switch (index) {
         case 0:
             return wideSizes::NONE;

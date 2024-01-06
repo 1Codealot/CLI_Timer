@@ -101,7 +101,7 @@ inline std::string outputTime(std::string time_in)
 
 inline std::string outputTimePretty(float time_in_seconds)
 {
-    std::string output{""};
+    std::string output;
     
     // Thanks: https://www.w3resource.com/c-programming-exercises/basic-declarations-and-expressions/c-programming-basic-exercises-17.php
 
@@ -112,7 +112,7 @@ inline std::string outputTimePretty(float time_in_seconds)
     //Make seconds to 2 decimal places    
 
     std::string seconds_str = std::to_string(seconds);
-    seconds_str = seconds_str.substr(0, seconds_str.find(".") + 3);
+    seconds_str = seconds_str.substr(0, seconds_str.find('.') + 3);
 
     // Actually outputting
     output += std::to_string(hours);
