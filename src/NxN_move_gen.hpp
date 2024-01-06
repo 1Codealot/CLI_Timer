@@ -13,12 +13,6 @@ static int getRandomNum(const int min, const int max)
     return rng() % (max + 1 - min) + min;
 }
 
-//constexpr char baseMoves[6] = {'F', 'U', 'R', 'B', 'L', 'D'};
-//constexpr char directions[3] = {' ', '\'', '2'}; // If ' ' Ignore, can't have ''
-//constexpr char wideSizes[3] = {' ', '2', '3'};
-
-// use enum class instead
-
 enum class baseMoves
 {
     F,
@@ -43,82 +37,145 @@ enum class wideSizes
     WIDE2
 };
 
+// SMH i wish i could overload `[]` for enums
+
+constexpr baseMoves getElemFromEnumOfBaseMoves(int index){
+    switch (index) {
+        case 0:
+            return baseMoves::F;
+        case 1:
+            return baseMoves::U;
+        case 2:
+            return baseMoves::R;
+        case 3:
+            return baseMoves::B;
+        case 4:
+            return baseMoves::L;
+        case 5:
+            return baseMoves::D;
+        default:
+            throw std::invalid_argument("Invalid index");
+    }
+}
+
+constexpr directions getElemFromEnumOfDirections(int index){
+    switch (index) {
+        case 0:
+            return directions::CW;
+        case 1:
+            return directions::ACW;
+        case 2:
+            return directions::DOUBLE;
+        default:
+            throw std::invalid_argument("Invalid index");
+    }
+}
+
+constexpr wideSizes getElemFromEnumOfWidthSizes(int index){
+    switch (index) {
+        case 0:
+            return wideSizes::NONE;
+        case 1:
+            return wideSizes::WIDE;
+        case 2:
+            return wideSizes::WIDE2;
+        default:
+            throw std::invalid_argument("Invalid index");
+    }
+}
+
+
 typedef struct
 {
     baseMoves base;
     directions direction;
     wideSizes wsize;
-}puzzle_move;
+} puzzle_move;
 
 inline void createMove(puzzle_move &newMove, const char moveType)
 {
     // Create empty move outside this func then pass it in here
-    newMove.base = baseMoves[getRandomNum(0, 5)];
-    newMove.direction = directions[getRandomNum(0, 2)]; // For skewb I can regen it
-    newMove.wsize = wideSizes[0];                       // YAYYY :/
+    newMove.base = getElemFromEnumOfBaseMoves(getRandomNum(0, 5));
+    newMove.direction = getElemFromEnumOfDirections(getRandomNum(0, 2));
+    newMove.wsize = getElemFromEnumOfWidthSizes(0);                       // YAYYY :/
     switch (moveType)
     {
     case '2':
-        newMove.base = baseMoves[getRandomNum(0, 2)];
-        newMove.wsize = wideSizes[0];
+        newMove.base = getElemFromEnumOfBaseMoves(getRandomNum(0, 2));
         break;
 
     case '3':
-        newMove.wsize = wideSizes[0];
         break;
 
     case '4':
-        if (newMove.base == 'U' || newMove.base == 'F' || newMove.base == 'R')
+        if (newMove.base == baseMoves::U || newMove.base == baseMoves::F || newMove.base == baseMoves::R)
         {
-            newMove.wsize = wideSizes[getRandomNum(0, 1)];
+            newMove.wsize = getElemFromEnumOfWidthSizes(getRandomNum(0, 1));
         }
         break;
 
     case '5':
-        newMove.wsize = wideSizes[getRandomNum(0, 1)];
+        newMove.wsize = getElemFromEnumOfWidthSizes(getRandomNum(0, 1));
         break; // World record case.
 
     case '6':
-        if (newMove.base == 'U' || newMove.base == 'F' || newMove.base == 'R')
+        if (newMove.base == baseMoves::U || newMove.base == baseMoves::F || newMove.base == baseMoves::R)
         {
-            newMove.wsize = wideSizes[getRandomNum(0, 2)];
+            newMove.wsize = getElemFromEnumOfWidthSizes(getRandomNum(0, 2));
         }
-        else if (newMove.base == 'B' || newMove.base == 'L' || newMove.base == 'D')
+        else
         {
-            newMove.wsize = wideSizes[getRandomNum(0, 1)];
+            newMove.wsize = getElemFromEnumOfWidthSizes(getRandomNum(0, 1));
         }
         break;
 
     case '7':
-        newMove.wsize = wideSizes[getRandomNum(0, 2)];
+        newMove.wsize = newMove.wsize = getElemFromEnumOfWidthSizes(getRandomNum(0, 2));
         break; // New world record
 
     case 'S':
-        newMove.base = baseMoves[getRandomNum(1, 4)];
-        newMove.direction = directions[getRandomNum(0, 1)];
-        newMove.wsize = wideSizes[0];
+        newMove.base = getElemFromEnumOfBaseMoves(getRandomNum(1, 4));
+        newMove.direction = getElemFromEnumOfDirections(getRandomNum(0, 1));
         break;
 
     default:
-        newMove.base = 'B';
-        newMove.direction = 'A';
-        newMove.wsize = 'D';
-        // Done as i cba to create a custom exception
+        throw std::invalid_argument("Invalid cube type");
     }
 }
 
 static inline std::string getRepresentation(const puzzle_move *pMove)
 {
     std::string finalMove;
-    finalMove += pMove->base;
+    switch(pMove->base){
+        case baseMoves::F:
+            finalMove = "F";
+            break;
+        case baseMoves::U:
+            finalMove = "U";
+            break;
+        case baseMoves::R:
+            finalMove = "R";
+            break;
+        case baseMoves::B:
+            finalMove = "B";
+            break;
+        case baseMoves::L:
+            finalMove = "L";
+            break;
+        case baseMoves::D:
+            finalMove = "D";
+            break;
+        default:
+            throw std::invalid_argument("Invalid base move");
+    }
 
     switch (pMove->wsize)
     {
-    case wideSizes[1]:
+    case wideSizes::WIDE:
         finalMove += "w";
         break;
 
-    case wideSizes[2]:
+    case wideSizes::WIDE2:
         finalMove = "3" + finalMove + "w";
         break;
 
@@ -126,9 +183,17 @@ static inline std::string getRepresentation(const puzzle_move *pMove)
         break;
     }
 
-    if (pMove->direction != ' ')
-    {
-        finalMove += pMove->direction;
+    switch (pMove->direction) {
+        case directions::ACW:
+            finalMove += "'";
+            break;
+
+        case directions::DOUBLE:
+            finalMove += "2";
+            break;
+
+        default:
+            break;
     }
 
     return finalMove;
