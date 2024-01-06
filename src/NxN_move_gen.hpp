@@ -130,7 +130,7 @@ inline void createMove(puzzle_move &newMove, const char moveType)
         break;
 
     case '7':
-        newMove.wsize = newMove.wsize = getElemFromEnumOfWidthSizes(getRandomNum(0, 2));
+        newMove.wsize = getElemFromEnumOfWidthSizes(getRandomNum(0, 2));
         break; // New world record
 
     case 'S':

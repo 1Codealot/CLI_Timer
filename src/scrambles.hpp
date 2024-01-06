@@ -17,23 +17,23 @@ static bool canUseMove(const puzzle_move *pMove1, const puzzle_move *pMove2, con
     {
         switch (pMove3->base)
         {
-        case 'U':
-            return !(pMove1->base == 'U' && pMove2->base == 'D');
+            case baseMoves::U:
+                return !(pMove1->base == baseMoves::U && pMove2->base == baseMoves::D);
 
-        case 'F':
-            return !(pMove1->base == 'F' && pMove2->base == 'B');
+            case baseMoves::F:
+                return !(pMove1->base == baseMoves::F && pMove2->base == baseMoves::B);
 
-        case 'R':
-            return !(pMove1->base == 'R' && pMove2->base == 'L');
+            case baseMoves::R:
+                return !(pMove1->base == baseMoves::R && pMove2->base == baseMoves::L);
 
-        case 'D':
-            return !(pMove2->base == 'U' && pMove1->base == 'D');
+            case baseMoves::D:
+                return !(pMove2->base == baseMoves::U && pMove1->base == baseMoves::D);
 
-        case 'B':
-            return !(pMove2->base == 'F' && pMove1->base == 'B');
+            case baseMoves::B:
+                return !(pMove2->base == baseMoves::F && pMove1->base == baseMoves::B);
 
-        case 'L':
-            return !(pMove2->base == 'R' && pMove1->base == 'L');
+            case baseMoves::L:
+                return !(pMove2->base == baseMoves::R && pMove1->base == baseMoves::L);
 
         default:
             return true;
@@ -116,7 +116,7 @@ static std::string Three_By_Three(const bool blind)
                 createMove(Move, '2'); // 2x2 for U, F and R moves.
             } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
-            Move.wsize = '2';
+            Move.wsize = wideSizes::WIDE;
             scramble << Move << ' ';
             TwoPrevMove = PrevMove;
             PrevMove = Move;
@@ -131,9 +131,9 @@ static std::string FMC()
 
     std::string scramble;
 
-    const puzzle_move R_Prime{'R', '\'', ' '};
-    const puzzle_move U_Prime{'U', '\'', ' '};
-    const puzzle_move F{'F', ' ', ' '};
+    const puzzle_move R_Prime {baseMoves::R, directions::ACW, wideSizes::NONE};
+    const puzzle_move U_Prime {baseMoves::U, directions::ACW, wideSizes::NONE};
+    const puzzle_move F       {baseMoves::F, directions::CW,  wideSizes::NONE};
 
     // This is unchanged because for some reason c++ doesn't like it when I do scramble << R_Prime << ' '.
     // No it's not because I'm using a std::string instead of a std::ostringstream.
@@ -261,7 +261,7 @@ static std::string Five_By_Five(bool blind)
                 createMove(Move, '2'); // 2x2 for U, F and R moves.
             } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
-            Move.wsize = '3';
+            Move.wsize = wideSizes::WIDE2;
             scramble << Move << ' ';
             TwoPrevMove = PrevMove;
             PrevMove = Move;
