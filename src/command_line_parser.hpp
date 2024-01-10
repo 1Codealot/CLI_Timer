@@ -19,6 +19,7 @@ struct should
     bool needEnter;
     bool blindfolded;
     bool fmc;
+    bool shouldFormat;
 };
 
 static char getCubeType(std::vector<std::string> &args)
@@ -211,6 +212,18 @@ static bool fmc(std::vector<std::string> &args)
     return false;
 }
 
+static bool shouldFormat(std::vector<std::string> &args)
+{
+    for (size_t i = 0; i < args.size(); i++)
+    {
+	    if (args.at(i) == "--no_format")
+	    {
+	        return false;
+	    }
+    }
+    return true;
+}
+
 inline void setup(struct should &Options, cmdLineArgs)
 {
     // Pre-checks
@@ -252,4 +265,5 @@ inline void setup(struct should &Options, cmdLineArgs)
     Options.needEnter = needEnter(arguments);
     Options.blindfolded = blindfolded(arguments);
     Options.fmc = fmc(arguments);
+    Options.shouldFormat = shouldFormat(arguments);
 }
