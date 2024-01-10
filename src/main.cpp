@@ -21,9 +21,15 @@ int main(int argc, char const *argv[])
 	{ // while (Args.shouldContinue && --Args.scrambleCount != 0);
 
 		std::string currentScramble = generate_scramble(Args.cubeType, Args.blindfolded, Args.fmc);
-
-		output(currentScramble, timesVector, Args.shouldShowAvg);
-
+		
+		if (!Args.shouldFormat)
+		{
+			std::cout << currentScramble << std::endl;
+		} 
+		else
+		{
+			output(currentScramble, timesVector, Args.shouldShowAvg);
+		}
 		if (!Args.shouldPrompt)
 		{
 			if (Args.needEnter)
