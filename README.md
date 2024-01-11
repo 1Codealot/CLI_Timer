@@ -89,6 +89,10 @@ This will hide showing your current session average.<br>
 
 <hr>
 
+`--no_format` removes the formatting (e.g. scramble taking up 1/3rd of the terminal and showing averages).
+
+<hr>
+
 ### Other commands 
 
 `help`
