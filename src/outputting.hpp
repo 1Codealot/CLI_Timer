@@ -291,9 +291,7 @@ void outputHelp()
 
 void outputVersion()
 {
-	std::cout << "CLI_Timer version: 1.17\n\n";
+	std::cout << "CLI_Timer version: 2.0\n\n";
 
-	std::cout << "Using enums for move parts" << std::endl;
-    std::cout << "Used range-based for loops" << std::endl;
-	std::cout << "Added `--no_format`" << std::endl;
+	std::cout << "Use a vector to hold moves" << std::endl;
 }
