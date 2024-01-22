@@ -196,6 +196,7 @@ static std::string Four_By_Four(bool blind)
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
     const int moveCount = getRandomNum(38, 43);
+    int wideMoveCount = getRandomNum(12, 16); // n*3 to n*4
 
     // So TwoPrevMove is initialised
     createMove(TwoPrevMove, '4');
@@ -216,10 +217,29 @@ static std::string Four_By_Four(bool blind)
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
         scramble.push_back(Move);
+
+        if(Move.wsize != wideSizes::NONE)
+        {
+            wideMoveCount--;
+        }
+
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
 
+    // Randomly add wide moves
+    int moveIndex = getRandomNum(0, scramble.size() - 1);
+
+    while (wideMoveCount > 0)
+    {
+        do
+        {
+            scramble.at(moveIndex).wsize = wideSizes::WIDE;
+        } while (scramble.at(moveIndex).wsize == wideSizes::NONE);
+        
+        wideMoveCount--;        
+    }
+    
     std::string outputScramble = moveVectorToString(scramble);
 
     if (blind)
