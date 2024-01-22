@@ -269,6 +269,7 @@ static std::string Five_By_Five(bool blind)
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
     const int moveCount = getRandomNum(48, 53);
+    int wideMoveCount = getRandomNum(15, 20);
 
     // So TwoPrevMove is initialised
     createMove(TwoPrevMove, '5');
@@ -288,8 +289,27 @@ static std::string Five_By_Five(bool blind)
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
         scramble.push_back(Move);
+
+        if(Move.wsize != wideSizes::NONE)
+        {
+            wideMoveCount--;
+        }
+
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
+    }
+
+    // Randomly add wide moves
+    int moveIndex = getRandomNum(0, scramble.size() - 1);
+
+    while (wideMoveCount > 0)
+    {
+        do
+        {
+            scramble.at(moveIndex).wsize = wideSizes::WIDE;
+        } while (scramble.at(moveIndex).wsize == wideSizes::NONE);
+        
+        wideMoveCount--;        
     }
 
     if (blind)
@@ -318,6 +338,7 @@ static std::string Six_By_Six()
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
     const int moveCount = getRandomNum(58, 63);
+    int wideMoveCount = getRandomNum(18, 24);
 
     // So TwoPrevMove is initialised
     createMove(TwoPrevMove, '6');
@@ -337,9 +358,30 @@ static std::string Six_By_Six()
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
         scramble.push_back(Move);
+
+        if(Move.wsize != wideSizes::NONE)
+        {
+            wideMoveCount--;
+        }
+        
+
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
+
+    // Randomly add wide moves
+    int moveIndex = getRandomNum(0, scramble.size() - 1);
+
+    while (wideMoveCount > 0)
+    {
+        do
+        {
+            scramble.at(moveIndex).wsize = wideSizes::WIDE;
+        } while (scramble.at(moveIndex).wsize == wideSizes::NONE);
+        
+        wideMoveCount--;        
+    }
+
     return moveVectorToString(scramble);
 }
 
@@ -350,6 +392,7 @@ static std::string Seven_By_Seven()
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
     const int moveCount = getRandomNum(68, 73);
+    int wideMoveCount = getRandomNum(21, 28);
 
     // So TwoPrevMove is initialised
     createMove(TwoPrevMove, '7');
@@ -370,9 +413,28 @@ static std::string Seven_By_Seven()
 
         scramble.push_back(Move);
 
+        if(Move.wsize != wideSizes::NONE)
+        {
+            wideMoveCount--;
+        }
+
         TwoPrevMove = PrevMove;
-        PrevMove = Move; //
+        PrevMove = Move; 
     }
+
+    // Randomly add wide moves
+    int moveIndex = getRandomNum(0, scramble.size() - 1);
+
+    while (wideMoveCount > 0)
+    {
+        do
+        {
+            scramble.at(moveIndex).wsize = wideSizes::WIDE;
+        } while (scramble.at(moveIndex).wsize == wideSizes::NONE);
+        
+        wideMoveCount--;        
+    }
+
     return moveVectorToString(scramble);
 }
 
