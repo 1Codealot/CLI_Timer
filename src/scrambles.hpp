@@ -54,15 +54,27 @@ do{
 You need a minimum of 2 references to a move struct.
 */
 
+std::string moveVectorToString(const std::vector<puzzle_move> &moves)
+{
+    std::string scramble;
+    for (const puzzle_move &move : moves)
+    {
+        scramble += getRepresentation(&move) + ' ';
+    }
+    return scramble;
+}
+
 static std::string Two_By_Two()
 {
-    std::ostringstream scramble;
+    std::vector<puzzle_move> scramble;
     puzzle_move Move{};
     puzzle_move PrevMove{};
     const int moveCount = getRandomNum(9, 13);
 
     // So PrevMove is initalised.
     createMove(PrevMove, '2');
+
+    scramble.push_back(PrevMove);
 
     for (int n = 0; n < moveCount; n++)
     {
@@ -71,15 +83,15 @@ static std::string Two_By_Two()
             createMove(Move, '2');
         } while (!canUseMove(&PrevMove, &Move));
 
-        scramble << Move << ' ';
+        scramble.push_back(Move);
         PrevMove = Move; // Don't forget this!! :DDDDDDDDDD
     }
-    return scramble.str();
+    return moveVectorToString(scramble);
 }
 
 static std::string Three_By_Three(const bool blind)
 {
-    std::ostringstream scramble;
+    std::vector<puzzle_move> scramble;
     puzzle_move Move{};
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
@@ -102,7 +114,8 @@ static std::string Three_By_Three(const bool blind)
             createMove(Move, '3');
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
-        scramble << Move << ' ';
+        scramble.push_back(Move);
+
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
@@ -117,27 +130,29 @@ static std::string Three_By_Three(const bool blind)
             } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
             Move.wsize = wideSizes::WIDE;
-            scramble << Move << ' ';
+            
+            scramble.push_back(Move);
+
             TwoPrevMove = PrevMove;
             PrevMove = Move;
         }
     }
-    return scramble.str();
+    return moveVectorToString(scramble);
 }
 
 static std::string FMC()
 {
     // R' U' F ... R' U' F
 
-    std::string scramble;
+    std::vector<puzzle_move> scramble;
 
     const puzzle_move R_Prime {baseMoves::R, directions::ACW, wideSizes::NONE};
     const puzzle_move U_Prime {baseMoves::U, directions::ACW, wideSizes::NONE};
     const puzzle_move F       {baseMoves::F, directions::CW,  wideSizes::NONE};
 
-    // This is unchanged because for some reason c++ doesn't like it when I do scramble << R_Prime << ' '.
-    // No it's not because I'm using a std::string instead of a std::ostringstream.
-    scramble += getRepresentation(&R_Prime) + ' ' + getRepresentation(&U_Prime) + ' ' + getRepresentation(&F) + ' ';
+    scramble.push_back(R_Prime);
+    scramble.push_back(U_Prime);
+    scramble.push_back(F);
 
     puzzle_move Move = F;
     puzzle_move PrevMove = U_Prime;
@@ -154,7 +169,7 @@ static std::string FMC()
             createMove(Move, '3');
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
-        scramble += getRepresentation(&Move) + ' ';
+        scramble.push_back(Move);
         TwoPrevMove = PrevMove;
         PrevMove = Move;
     }
@@ -166,14 +181,17 @@ static std::string FMC()
         createMove(Move, '3');
     } while (!canUseMove(&PrevMove, &Move, &R_Prime));
 
-    scramble += getRepresentation(&Move) + ' ' + getRepresentation(&R_Prime) + ' ' + getRepresentation(&U_Prime) + ' ' + getRepresentation(&F) + ' ';
+    scramble.push_back(Move);
+    scramble.push_back(R_Prime);
+    scramble.push_back(U_Prime);
+    scramble.push_back(F);
 
-    return scramble;
+    return moveVectorToString(scramble);
 }
 
 static std::string Four_By_Four(bool blind)
 {
-    std::ostringstream scramble;
+    std::vector<puzzle_move> scramble;
     puzzle_move Move{};
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
@@ -197,34 +215,36 @@ static std::string Four_By_Four(bool blind)
             createMove(Move, '4');
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
-        scramble << Move << " ";
+        scramble.push_back(Move);
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
+
+    std::string outputScramble = moveVectorToString(scramble);
 
     if (blind)
     {
         for (int k = 0; k < cubeRotateCount; k++)
         {
-            scramble << (char)('x' + k);
+            outputScramble += (char)('x' + k);
             int dir = getRandomNum(1, 3);
             if (dir == 2)
             {
-                scramble << '2';
+                outputScramble += '2';
             }
             else if (dir == 3)
             {
-                scramble << '\'';
+                outputScramble += '\'';
             }
-            scramble << ' ';
+            outputScramble += ' ';
         }
     }
-    return scramble.str();
+    return outputScramble;
 }
 
 static std::string Five_By_Five(bool blind)
 {
-    std::ostringstream scramble;
+    std::vector<puzzle_move> scramble;
     puzzle_move Move{};
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
@@ -247,7 +267,7 @@ static std::string Five_By_Five(bool blind)
             createMove(Move, '5');
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
-        scramble << Move << " ";
+        scramble.push_back(Move);
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
@@ -262,17 +282,18 @@ static std::string Five_By_Five(bool blind)
             } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
             Move.wsize = wideSizes::WIDE2;
-            scramble << Move << ' ';
+            scramble.push_back(Move);
+
             TwoPrevMove = PrevMove;
             PrevMove = Move;
         }
     }
-    return scramble.str();
+    return moveVectorToString(scramble);
 }
 
 static std::string Six_By_Six()
 {
-    std::ostringstream scramble;
+    std::vector<puzzle_move> scramble;
     puzzle_move Move{};
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
@@ -295,16 +316,16 @@ static std::string Six_By_Six()
             createMove(Move, '6');
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
-        scramble << Move << " ";
+        scramble.push_back(Move);
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
-    return scramble.str();
+    return moveVectorToString(scramble);
 }
 
 static std::string Seven_By_Seven()
 {
-    std::ostringstream scramble;
+    std::vector<puzzle_move> scramble;
     puzzle_move Move{};
     puzzle_move PrevMove{};
     puzzle_move TwoPrevMove{};
@@ -327,16 +348,17 @@ static std::string Seven_By_Seven()
             createMove(Move, '7');
         } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
-        scramble << Move << " ";
+        scramble.push_back(Move);
+
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
     }
-    return scramble.str();
+    return moveVectorToString(scramble);
 }
 
 static std::string Skewb()
 {
-    std::ostringstream scramble;
+    std::vector<puzzle_move> scramble;
     puzzle_move Move{};
     puzzle_move PrevMove{};
     const int moveCount = getRandomNum(9, 13);
@@ -351,10 +373,10 @@ static std::string Skewb()
             createMove(Move, 'S');
         } while (!canUseMove(&PrevMove, &Move));
 
-        scramble << Move << ' ';
+        scramble.push_back(Move);
         PrevMove = Move; // Don't forget this!! :DDDDDDDDDD
     }
-    return scramble.str();
+    return moveVectorToString(scramble);
 }
 
 static std::string Megaminx()
