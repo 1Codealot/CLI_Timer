@@ -1,11 +1,12 @@
 CPPC = g++
 
-Main_Path  = ./src/main.cpp
-Build_Dir  = ./Final_Build/
-Build_Path = $(Build_Dir)CLI_Timer
-Install_Path = /bin/CLI_Timer
+Main_Path    = ./src/main.cpp
+Build_Dir    = ./Final_Build/
+Final_Name   = CLI_Timer
+Build_Path   = $(Build_Dir)$(Final_Name)
+Install_Path = /bin/$(Final_Name)
 
-STD        ?= 23
+STD         ?= 23
 
 CPPFLAGS = -O3 -Wall -Wextra -Wpedantic
 
@@ -24,7 +25,12 @@ cross:
 	mkdir -p $(Build_Dir)
 		$(TARGET): $(TARGET).cpp 
 			$(CPPC) $(CPPFLAGS) -o $(Build_Path) $(Main_Path)
-				x86_64-w64-mingw32-g++ $(CPPFLAGS) -o $(Build_Path)_Windows.exe $(Main_Path) -static-libgcc -static-libstdc++ 
+				x86_64-w64-mingw32-g++ $(CPPFLAGS) -o $(Build_Path)_Windows.exe $(Main_Path) -static-libgcc -static-libstdc++
+
+debug:
+	mkdir -p $(Build_Dir)
+		$(TARGET): $(TARGET).cpp 
+			$(CPPC) $(CPPFLAGS) -ggdb -o $(Build_Path) $(Main_Path)
 
 install:
 	cp $(Build_Path) $(Install_Path)
