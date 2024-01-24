@@ -8,7 +8,8 @@ Install_Path = /bin/$(Final_Name)
 
 STD         ?= 23
 
-CPPFLAGS = -O3 -Wall -Wextra -Wpedantic
+# Sadly the multi threading means no -O flags.
+CPPFLAGS = -Wall -Wextra -Wpedantic
 
 ifdef STD
     CPPFLAGS += -std=c++$(STD)

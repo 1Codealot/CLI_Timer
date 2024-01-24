@@ -1,6 +1,6 @@
 #include "command_line_parser.hpp"
-#include "scrambles.hpp"
 #include "file_IO.hpp"
+#include "multithreaded_cache.hpp"
 
 int main(int argc, char const *argv[])
 {
@@ -12,15 +12,23 @@ int main(int argc, char const *argv[])
 	setup(Args, argc, argv);
 	std::vector<float> timesVector;
 
-        //Populate vector from file
-        if(Args.shouldSave){
-            timesVector = readTimesFromFile(Args.fileName);
-        }
+	std::queue<std::string> cache;
+	
+	// start thread for cacheing
+	std::thread cache_updater(update_cache, &cache, Args.cubeType, Args.blindfolded, Args.fmc);
+
+    //Populate vector from file
+	if(Args.shouldSave){
+		timesVector = readTimesFromFile(Args.fileName);
+	}
+
+	std::this_thread::sleep_for(std::chrono::milliseconds(50));
 
 	do
 	{ // while (Args.shouldContinue && --Args.scrambleCount != 0);
 
-		std::string currentScramble = generate_scramble(Args.cubeType, Args.blindfolded, Args.fmc);
+		std::string currentScramble = cache.front();
+		cache.pop();
 		
 		if (!Args.shouldFormat)
 		{
