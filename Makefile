@@ -22,11 +22,13 @@ all:
 		$(TARGET): $(TARGET).cpp 
 			$(CPPC) $(CPPFLAGS) -o $(Build_Path) $(Main_Path)
 
-cross:
-	mkdir -p $(Build_Dir)
-		$(TARGET): $(TARGET).cpp 
-			$(CPPC) $(CPPFLAGS) -o $(Build_Path) $(Main_Path)
-				x86_64-w64-mingw32-g++ $(CPPFLAGS) -o $(Build_Path)_Windows.exe $(Main_Path) -static-libgcc -static-libstdc++
+# This was for cross compiling to windows however, the multi threading is impossible.
+
+# cross:
+# 	mkdir -p $(Build_Dir)
+# 		$(TARGET): $(TARGET).cpp 
+# 			$(CPPC) $(CPPFLAGS) -o $(Build_Path) $(Main_Path)
+# 				x86_64-w64-mingw32-g++ $(CPPFLAGS) -o $(Build_Path)_Windows.exe $(Main_Path) -static-libgcc -static-libstdc++
 
 debug:
 	mkdir -p $(Build_Dir)
