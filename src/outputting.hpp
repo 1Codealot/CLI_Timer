@@ -295,4 +295,5 @@ void outputVersion()
 	std::cout << "CLI_Timer version: 2.0\n\n";
 
 	std::cout << "Use a vector to hold moves" << std::endl;
+	std::cout << "Added a cache to hold scrambles" << std::endl;
 }
