@@ -13,7 +13,7 @@ int main(int argc, char const *argv[])
 	std::queue<std::string> cache;
 	
 	// start thread for caching
-	auto cache_updater = std::async(std::launch::async, &cache, &Args);
+	auto cache_updater = std::async(std::launch::async, update_cache, &cache, &Args);
 
     //Populate vector from file
 	if(Args.shouldSave){
