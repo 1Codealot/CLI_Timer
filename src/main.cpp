@@ -1,22 +1,18 @@
-#include <thread> // Maybe this will fix the make cross issue?
-#include "command_line_parser.hpp"
 #include "file_IO.hpp"
 #include "multithreaded_cache.hpp"
 
 int main(int argc, char const *argv[])
 {
 	// Parse command line arguments
-	struct should Args
-	{
-	};
+	struct should Args{};
 
 	setup(Args, argc, argv);
 	std::vector<float> timesVector;
 
 	std::queue<std::string> cache;
 	
-	// start thread for cacheing
-	std::thread cache_updater(update_cache, &cache, Args.cubeType, Args.blindfolded, Args.fmc);
+	// start thread for caching
+	auto cache_updater = std::async(std::launch::async, &cache, &Args);
 
     //Populate vector from file
 	if(Args.shouldSave){
