@@ -8,7 +8,7 @@
 
 void update_cache(std::queue<std::string> *cache, struct should *Args)
 {
-    while (true)
+    while (Args->shouldContinue && Args->scrambleCount != 0)
     {
         if (cache->size() < Args->cache_size)
         {
