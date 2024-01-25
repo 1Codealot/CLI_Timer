@@ -15,7 +15,7 @@ void update_cache(std::queue<std::string> *cache, struct should *Args)
     {
         if (cache->size() < CACHE_SIZE)
         {
-            cache->push(generate_scramble(Args->cube, Args->blind, Args->fmc));
+            cache->push(generate_scramble(Args->cubeType, Args->blindfolded, Args->fmc));
             std::this_thread::sleep_for(std::chrono::milliseconds(200));
         }
     }
