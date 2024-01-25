@@ -268,7 +268,7 @@ std::string getPenalty()
 
 void outputHelp()
 {
-	std::cout << "How to use CLI_Timer.\nCLI_Timer (cube type) [-b] | [-f(mc))] [--count{number}] [--no_enter] | [c] | [-s{session name}] | [--no_prompt] | [--no_avg] [--no_format] \
+	std::cout << "How to use CLI_Timer.\nCLI_Timer (cube type) [-b] | [-f(mc))] [--count{number}] [--no_enter] [--cache_size{n}] | [c] | [-s{session name}] | [--no_prompt] | [--no_avg] [--no_format]  \
     \n\nArgument (cube type) means an NxN of (2)x2 (3)x3 to (7)x7 or (S)kewb, (P)yraminx, (M)egaminx, (C)lock or s(Q)uare-1.\
     It is required (why else would you use it?)\n\n[c] means [c]ontinuous, meaning it won't stop after generating one scramble.\
     \n\nArgument [-b] gives scrambles for blindfolded solves for 3x3, 4x4 and 5x5 \
@@ -284,6 +284,7 @@ void outputHelp()
     \n\nArgument [--no_enter] will instantly output n scrambles (with the argument [--count{n}]).\
     \nYou MUST have [--no_prompt] and [--count].\
 	\n\nArgument [--no_format] removes the formatting (e.g. scramble taking up 1/3rd of the terminal and showing averages).\
+	\n\nArgument [--cache_size{n}] allows the cache to store {n} scrambles for the (cube type) puzzle. \
     \n\nCLI_Timer (--version)\nOutputs the current version of CLI_Timer\n\nCLI_Timer (help)\nOutputs this.\
     \n\nAny issues, put them on the GitHub repo: https://github.com/1Codealot/CLI_Timer/issues\
     \n\nLICENCES: Main: MIT licence.\nSquare-1 code: GNU General Public License v3.0 (repo: <https://github.com/thewca/tnoodle-lib>)\n";

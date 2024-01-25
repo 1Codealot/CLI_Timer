@@ -93,6 +93,10 @@ This will hide showing your current session average.<br>
 
 <hr>
 
+`--cache_size{number}` will set the cache size to {number}. This means it will store {number} scrambles in the cache. The default is 50.
+
+<hr>
+
 ### Other commands 
 
 `help`
