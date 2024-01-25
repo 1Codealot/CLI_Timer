@@ -20,6 +20,7 @@ struct should
     bool blindfolded;
     bool fmc;
     bool shouldFormat;
+    size_t cache_size;
 };
 
 static char getCubeType(std::vector<std::string> &args)
@@ -224,6 +225,18 @@ static bool shouldFormat(std::vector<std::string> &args)
     return true;
 }
 
+static size_t getCacheSize(std::vector<std::string> &args)
+{
+    for (size_t i = 0; i < args.size(); i++)
+    {
+        if (args.at(i).substr(0, 12) == "--cache_size")
+        {
+            return std::stoi(args.at(i).substr(12, args.at(i).size()));
+        }
+    }
+    return 50; // Cache size of 50 by default
+}
+
 inline void setup(struct should &Options, cmdLineArgs)
 {
     // Pre-checks
@@ -266,4 +279,5 @@ inline void setup(struct should &Options, cmdLineArgs)
     Options.blindfolded = blindfolded(arguments);
     Options.fmc = fmc(arguments);
     Options.shouldFormat = shouldFormat(arguments);
+    Options.cache_size = getCacheSize(arguments);
 }
