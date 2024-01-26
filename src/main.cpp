@@ -1,26 +1,38 @@
-#include "command_line_parser.hpp"
-#include "scrambles.hpp"
+#include <future>
+#include <thread>
 #include "file_IO.hpp"
+#include "multithreaded_cache.hpp"
 
 int main(int argc, char const *argv[])
 {
 	// Parse command line arguments
-	struct should Args
-	{
-	};
+	struct should Args{};
 
 	setup(Args, argc, argv);
 	std::vector<float> timesVector;
 
-        //Populate vector from file
-        if(Args.shouldSave){
-            timesVector = readTimesFromFile(Args.fileName);
-        }
+	std::queue<std::string> cache;
+	
+	// start thread for caching
+	auto cache_updater = std::async(std::launch::async, update_cache, &cache, &Args);
+
+    //Populate vector from file
+	if(Args.shouldSave){
+		timesVector = readTimesFromFile(Args.fileName);
+	}
+
+	std::this_thread::sleep_for(std::chrono::milliseconds(50));
 
 	do
 	{ // while (Args.shouldContinue && --Args.scrambleCount != 0);
 
-		std::string currentScramble = generate_scramble(Args.cubeType, Args.blindfolded, Args.fmc);
+		while(cache.empty()){
+			// Avoids data races that may occur where cache is empty resulting in UB in popping.
+			std::this_thread::sleep_for(std::chrono::milliseconds(5));
+		}
+
+		std::string currentScramble = cache.front();
+		cache.pop();
 		
 		if (!Args.shouldFormat)
 		{
