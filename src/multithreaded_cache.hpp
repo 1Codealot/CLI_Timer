@@ -6,7 +6,7 @@
 #include "scrambles.hpp"
 #include "command_line_parser.hpp"
 
-void update_cache(std::queue<std::string> *cache, struct should *Args)
+void update_cache(std::queue<std::string> *cache, const struct should *Args)
 {
     while (Args->shouldContinue && Args->scrambleCount != 0)
     {
