@@ -16,8 +16,3 @@ jobs:
 
     - name: Build
       run: make
-
-    - name: Build with Clang
-      run: make CPPC=clang++ Final_Name=CLI_Timer_clang
-
-
