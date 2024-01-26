@@ -26,6 +26,11 @@ int main(int argc, char const *argv[])
 	do
 	{ // while (Args.shouldContinue && --Args.scrambleCount != 0);
 
+		while(cache.empty()){
+			// Avoids data races that may occur where cache is empty resulting in UB in popping.
+			std::this_thread::sleep_for(std::chrono::milliseconds(5));
+		}
+
 		std::string currentScramble = cache.front();
 		cache.pop();
 		
