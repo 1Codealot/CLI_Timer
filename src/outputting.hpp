@@ -296,4 +296,5 @@ void outputVersion()
 
 	std::cout << "Use a vector to hold moves" << std::endl;
 	std::cout << "Added a cache to hold scrambles" << std::endl;
+	std::cout << "Fixed +2 being ignored bug" << std::endl;
 }

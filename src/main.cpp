@@ -100,10 +100,10 @@ int main(int argc, char const *argv[])
 			
 			if (penalty == "DNF"||penalty == "dnf")
 			{
-			    // Re-assign solveTime to max value of `int`
+			    // Re-assign solveTime to max value of `float`
 				solveTime = std::numeric_limits<float>::max();
 			}
-			timesVector.push_back(solveTime);
+			timesVector.push_back(solveTime + 2 * (penalty == "+2"));
 			
 		}
 	} while (Args.shouldContinue && --Args.scrambleCount != 0);
