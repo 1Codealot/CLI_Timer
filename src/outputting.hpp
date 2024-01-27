@@ -173,9 +173,9 @@ void output(std::string scramble, std::vector<float>& times, bool showAvg)
 			if(isMegaminx){
 				// check that the nearest U or U' is closer than the width/3
 				if(scramble.substr(startPos, endPos - startPos).find('U') != std::string::npos){
-					endPos = startPos + scramble.substr(startPos, endPos - startPos).find('U');
+					endPos = startPos + scramble.substr(startPos, endPos - startPos).find('U')+2;
 				} else if(scramble.substr(startPos, endPos - startPos).find("U'") != std::string::npos){
-					endPos = startPos + scramble.substr(startPos, endPos - startPos).find("U'");
+					endPos = startPos + scramble.substr(startPos, endPos - startPos).find("U'")+3;
 				}
 			}
 			while (endPos > startPos && scramble.at(endPos) != charToLookFor)
@@ -186,13 +186,6 @@ void output(std::string scramble, std::vector<float>& times, bool showAvg)
 		scrambleLines.push_back((scramble.substr(startPos, endPos - startPos + (charToLookFor == '/' ? 1 : 0))));
 		startPos = endPos + 1;
 	}
-
-	// Debug
-	std::clog << "debug: \n";
-	for(std::string& line : scrambleLines){
-		std::clog << line << std::endl;
-	}
-	std::clog << "end debug\n";
 
 	if(showAvg){
 		float mean = calculateMean(times);
