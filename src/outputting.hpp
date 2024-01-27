@@ -144,7 +144,6 @@ void appendAvg(std::vector<std::string>& scrambleLines, float avg, const std::st
 	spaces += (scrambleLines.at(level).empty());
 
 	scrambleLines.at(level) += std::string(spaces, ' ') + avgText;
-
 }
 
 void output(std::string scramble, std::vector<float>& times, bool showAvg)
@@ -169,7 +168,7 @@ void output(std::string scramble, std::vector<float>& times, bool showAvg)
 		}
 		else
 		{
-			while (endPos > startPos && scramble[endPos] != charToLookFor)
+			while (endPos > startPos && scramble.at(endPos) != charToLookFor)
 			{
 				endPos--;
 			}
@@ -177,6 +176,13 @@ void output(std::string scramble, std::vector<float>& times, bool showAvg)
 		scrambleLines.push_back((scramble.substr(startPos, endPos - startPos + (charToLookFor == '/' ? 1 : 0))));
 		startPos = endPos + 1;
 	}
+
+	// Debug
+	std::clog << "debug: \n";
+	for(std::string& line : scrambleLines){
+		std::clog << line << std::endl;
+	}
+	std::clog << "end debug\n";
 
 	if(showAvg){
 		float mean = calculateMean(times);
