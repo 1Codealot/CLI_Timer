@@ -1,4 +1,4 @@
-name: UBUNTU_Binary
+name: UBUNTU_Upload_Binary
 
 on:
     push:
@@ -11,14 +11,14 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@v3
+        
         - name: Build
-          run: make
+          run: make Final_Name=CLI_Timer_Linux
 
-
-        - uses: actions/upload-artifact@v4
-          with:
-            compression-level: 0
-            name: UBUNTU
-            path: ./Final_Build/CLI_Timer
+        - name: upload to release
+          env:
+            GH_TOKEN: ${{ github.token }}
+          run: gh release upload ${{github.ref_name}} ./Final_Build/CLI_Timer_Linux
+        
         
         
