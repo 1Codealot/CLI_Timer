@@ -183,9 +183,20 @@ void output(std::string scramble, std::vector<float>& times, bool showAvg)
 				endPos--;
 			}
 		}
-		scrambleLines.push_back((scramble.substr(startPos, endPos - startPos + (charToLookFor == '/' ? 1 : 0))));
+		scrambleLines.push_back((scramble.substr(startPos, endPos - startPos + (charToLookFor == '/'))));
 		startPos = endPos + 1;
 	}
+
+
+	for (std::string &line : scrambleLines)
+	{
+		if(!line.empty()){
+			if (line.at(0) == ' ')
+			{
+				line.erase(0, 1);				
+			}
+		}		
+	}	
 
 	if(showAvg){
 		float mean = calculateMean(times);
@@ -204,13 +215,14 @@ void output(std::string scramble, std::vector<float>& times, bool showAvg)
 
 	for (std::string &line : scrambleLines)
 	{
+		// I don't know why I have to do this.
+		// I literally do this like 22 lines above.
 		if(!line.empty()){
 			if (line.at(0) == ' ')
 			{
 				line.erase(0, 1);
 			}
 		}
-
 		std::cout << line << std::endl;
 	}
 }
