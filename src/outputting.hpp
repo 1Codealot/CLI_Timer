@@ -42,6 +42,17 @@ int get_terminal_width(){
 
 // End credit
 
+void clearScreen()
+{
+	#ifdef _WIN32
+		system("cls");
+	#elif __linux__ || __APPLE__
+		system("clear");
+	#endif
+
+	std::cout << "\n";
+}
+
 inline float calculateMean(std::vector<float>& times, size_t count=0, bool punishDNFs=false)
 {
 	float avg = 0.00f;
