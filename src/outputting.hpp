@@ -224,6 +224,8 @@ void output(std::string scramble, std::vector<float>& times, bool showAvg)
 		appendAvg(scrambleLines, ao100, "ao100");
 	}
 
+	scrambleLines.push_back("\nEnter your time: ");
+
 	for (std::string &line : scrambleLines)
 	{
 		// I don't know why I have to do this.
@@ -244,7 +246,6 @@ float getTime()
 	std::string inputtedTime;
 	std::string correct;
 
-	std::cout << "\nEnter your time: ";
 	std::cin >> inputtedTime;
 
 	if (inputtedTime == "next" || inputtedTime == "skip")
