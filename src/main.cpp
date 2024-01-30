@@ -1,7 +1,7 @@
 #include <future>
 #include <thread>
 #include "file_IO.hpp"
-#include "multithreaded_cache.hpp"
+#include "async_stuff.hpp"
 
 int main(int argc, char const *argv[])
 {
@@ -10,7 +10,8 @@ int main(int argc, char const *argv[])
 
 	setup(Args, argc, argv);
 	std::vector<float> timesVector;
-
+	
+	std::string currentScramble;
 	std::queue<std::string> cache;
 	
 	// start thread for caching
@@ -33,7 +34,7 @@ int main(int argc, char const *argv[])
 			std::this_thread::sleep_for(std::chrono::milliseconds(5));
 		}
 
-		std::string currentScramble = cache.front();
+		currentScramble = cache.front();
 		cache.pop();
 		
 		if (!Args.shouldFormat)
