@@ -17,6 +17,9 @@ int main(int argc, char const *argv[])
 	// start thread for caching
 	auto cache_updater = std::async(std::launch::async, update_cache, &cache, &Args);
 
+
+	auto terminal_updater = std::async(std::launch::async, update_terminal, &currentScramble, &timesVector, &Args);
+
     //Populate vector from file
 	if(Args.shouldSave){
 		timesVector = readTimesFromFile(Args.fileName);
