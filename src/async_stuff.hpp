@@ -20,10 +20,13 @@ void update_cache(std::queue<std::string> *cache, const should *Args)
 
 static int lastTerminalWidth = get_terminal_width();
 
-void update_terminal(std::string *scramble, const should *Args){
+void update_terminal(std::string *scramble, std::vector<float> *timesVector, const should *Args){
     while (Args->shouldContinue && Args->scrambleCount != 0){
         if (lastTerminalWidth != get_terminal_width()){
             lastTerminalWidth = get_terminal_width();
+            clearScreen();
+
+            output(*currentScramble, *timesVector, Args->shouldShowAvg);
         }
     }
 }
