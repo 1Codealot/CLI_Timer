@@ -6,7 +6,7 @@ Final_Name   = CLI_Timer
 Build_Path   = $(Build_Dir)$(Final_Name)
 Install_Path = /bin/$(Final_Name)
 
-STD         ?= 23
+STD         ?= 2b
 
 CPPFLAGS = -Wall -Wextra -Wpedantic -O2
 
