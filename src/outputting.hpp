@@ -4,6 +4,8 @@
 #include <iomanip>
 #include <algorithm>
 #include <cmath>
+#include <syncstream>
+
 #include "convert_times_to_be_used.hpp"
 
 std::osyncstream synced_cout(std::cout);
