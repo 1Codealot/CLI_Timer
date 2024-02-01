@@ -9,6 +9,7 @@
 	#include <experimental/syncstream>
 #else
 	#include <syncstream>
+#endif // __APPLE__
 
 #include "convert_times_to_be_used.hpp"
 
