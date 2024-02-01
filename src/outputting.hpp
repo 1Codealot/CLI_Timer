@@ -4,12 +4,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <cmath>
-
-#ifdef  __APPLE__
-	#include <experimental/syncstream>
-#else
-	#include <syncstream>
-#endif // __APPLE__
+#include <syncstream>
 
 #include "convert_times_to_be_used.hpp"
 
