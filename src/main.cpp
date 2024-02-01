@@ -42,7 +42,7 @@ int main(int argc, char const *argv[])
 		
 		if (!Args.shouldFormat)
 		{
-			std::cout << currentScramble << std::endl;
+			synced_cout << currentScramble << std::endl;
 		} 
 		else
 		{
@@ -62,7 +62,7 @@ int main(int argc, char const *argv[])
 
 				else if (buffer == "save")
 				{
-					std::cout << "What file would you like to save to? " << std::endl;
+					synced_cout << "What file would you like to save to? " << std::endl;
 
 					std::string fileName;
 					getline(std::cin, fileName);
@@ -72,7 +72,7 @@ int main(int argc, char const *argv[])
 					std::string penalty = getPenalty();
 
 					std::string comment;
-					std::cout << "Enter in a comment (or don't you can leave blank)\n";
+					synced_cout << "Enter in a comment (or don't you can leave blank)\n";
 
 					std::getline(std::cin, comment);
 
@@ -97,7 +97,7 @@ int main(int argc, char const *argv[])
 			if (Args.shouldSave)
 			{
 				std::string comment;
-				std::cout << "Enter in a comment (or don't you can leave blank)\n";
+				synced_cout << "Enter in a comment (or don't you can leave blank)\n";
 
 				getline(std::cin, comment);
 				save_to_file(Args.fileName, currentScramble, solveTime, penalty, comment);

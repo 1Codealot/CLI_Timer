@@ -6,6 +6,8 @@
 #include <cmath>
 #include "convert_times_to_be_used.hpp"
 
+std::osyncstream synced_cout(std::cout);
+
 // Credit:
 // https://stackoverflow.com/questions/23369503/get-size-of-terminal-window-rows-columns
 
@@ -50,7 +52,7 @@ void clearScreen()
 		system("clear");
 	#endif
 
-	std::cout << "\n";
+	synced_cout << "\n";
 }
 
 inline float calculateMean(std::vector<float>& times, size_t count=0, bool punishDNFs=false)
@@ -236,7 +238,7 @@ void output(std::string scramble, std::vector<float>& times, bool showAvg)
 				line.erase(0, 1);
 			}
 		}
-		std::cout << line << std::endl;
+		synced_cout << line << std::endl;
 	}
 }
 
@@ -255,13 +257,13 @@ float getTime()
 
 	if (inputtedTime[0] == 'Q' || inputtedTime[0] == 'q')
 	{
-		std::cout << std::endl;
+		synced_cout << std::endl;
 		exit(EXIT_SUCCESS);
 	}
 
 	float real_time_secs = timeStrToFloatSecs(inputtedTime);
 
-	std::cout << "\nYou entered in " << outputTime(inputtedTime) << " (which is also " << std::fixed << std::setprecision(2) << real_time_secs << " seconds)\nIs this correct? (Y/n)\n";
+	synced_cout << "\nYou entered in " << outputTime(inputtedTime) << " (which is also " << std::fixed << std::setprecision(2) << real_time_secs << " seconds)\nIs this correct? (Y/n)\n";
 
 	std::cin.ignore();
 
@@ -281,7 +283,7 @@ std::string getPenalty()
 {
 	std::string penalty;
 
-	std::cout << "Enter an penalty (OK/+2/dnf)\n";
+	synced_cout << "Enter an penalty (OK/+2/dnf)\n";
 
 	std::getline(std::cin, penalty);
 
@@ -301,7 +303,7 @@ std::string getPenalty()
 
 void outputHelp()
 {
-	std::cout << "How to use CLI_Timer.\nCLI_Timer (cube type) [-b] | [-f(mc))] [--count{number}] [--no_enter] [--cache_size{n}] | [c] | [-s{session name}] | [--no_prompt] | [--no_avg] [--no_format]  \
+	synced_cout << "How to use CLI_Timer.\nCLI_Timer (cube type) [-b] | [-f(mc))] [--count{number}] [--no_enter] [--cache_size{n}] | [c] | [-s{session name}] | [--no_prompt] | [--no_avg] [--no_format]  \
     \n\nArgument (cube type) means an NxN of (2)x2 (3)x3 to (7)x7 or (S)kewb, (P)yraminx, (M)egaminx, (C)lock or s(Q)uare-1.\
     It is required (why else would you use it?)\n\n[c] means [c]ontinuous, meaning it won't stop after generating one scramble.\
     \n\nArgument [-b] gives scrambles for blindfolded solves for 3x3, 4x4 and 5x5 \
@@ -325,10 +327,10 @@ void outputHelp()
 
 void outputVersion()
 {
-	std::cout << "CLI_Timer version: 2.0\n\n";
+	synced_cout << "CLI_Timer version: 2.0\n\n";
 
-	std::cout << "Use a vector to hold moves" << std::endl;
-	std::cout << "Added a cache to hold scrambles" << std::endl;
-	std::cout << "Fixed +2 being ignored bug" << std::endl;
-	std::cout << "Fixed bug with megaminx outputting. And square-1" << std::endl;
+	synced_cout << "Use a vector to hold moves" << std::endl;
+	synced_cout << "Added a cache to hold scrambles" << std::endl;
+	synced_cout << "Fixed +2 being ignored bug" << std::endl;
+	synced_cout << "Fixed bug with megaminx outputting. And square-1" << std::endl;
 }

@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include <string>
 #include <vector>
 
@@ -46,7 +45,7 @@ static char getCubeType(std::vector<std::string> &args)
             break;
         }
     }
-    std::cout << "Cube type not found.";
+    synced_cout << "Cube type not found.";
     exit(EXIT_FAILURE);
 }
 
@@ -121,7 +120,7 @@ static bool shouldPrompt(std::vector<std::string> &args)
         {
             if (shouldSave(args))
             {
-                std::cout << "You are saving to a file; this means you will need prompting; therefore you will be prompted.\nHowever you can type 'save' if you do want to save to a file with `--no_prompt`" << std::endl;
+                synced_cout << "You are saving to a file; this means you will need prompting; therefore you will be prompted.\nHowever you can type 'save' if you do want to save to a file with `--no_prompt`" << std::endl;
                 return true;
             }
             else
@@ -153,7 +152,7 @@ static bool needEnter(std::vector<std::string> &args)
             // This is *very* bad. oops.
             if (shouldPrompt(args) || (getCount(args) < 1))
             {
-                std::cout << "Enter is needed for prompting or unlimited number of scrambles\n";
+                synced_cout << "Enter is needed for prompting or unlimited number of scrambles\n";
                 return true;
             }
             else
@@ -177,7 +176,7 @@ static bool blindfolded(std::vector<std::string> &args)
             }
             else
             {
-                std::cout << "No blindfolded support for cubes that aren't 3x3 or 4x4 or 5x5.\n";
+                synced_cout << "No blindfolded support for cubes that aren't 3x3 or 4x4 or 5x5.\n";
                 return false;
             }
         }
@@ -199,13 +198,13 @@ static bool fmc(std::vector<std::string> &args)
                 }
                 else
                 {
-                    std::cout << "Incompatible arguments: -f cannot be used with non-blindfolded cubes.\n";
+                    synced_cout << "Incompatible arguments: -f cannot be used with non-blindfolded cubes.\n";
                     return false;
                 }
             }
             else
             {
-                std::cout << "Incompatible arguments: -f can only be used with 3x3 cubes.\n";
+                synced_cout << "Incompatible arguments: -f can only be used with 3x3 cubes.\n";
                 return false;
             }
         }
