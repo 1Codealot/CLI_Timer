@@ -1,4 +1,4 @@
-CPPC = g++
+CPPC = g++-12
 
 Main_Path    = ./src/main.cpp
 Build_Dir    = ./Final_Build/
