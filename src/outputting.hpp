@@ -319,4 +319,5 @@ void outputVersion()
 	std::cout << "Added a cache to hold scrambles" << std::endl;
 	std::cout << "Fixed +2 being ignored bug" << std::endl;
 	std::cout << "Fixed bug with megaminx outputting. And square-1" << std::endl;
+	std::cout << "Fixed bug with 4x4 having moves like Bw" << std::endl;
 }
