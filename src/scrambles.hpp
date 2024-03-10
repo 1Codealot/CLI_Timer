@@ -227,15 +227,20 @@ static std::string Four_By_Four(bool blind)
         PrevMove = Move; //
     }
 
-    // Randomly add wide moves
-    int moveIndex = getRandomNum(0, scramble.size() - 1);
+    int moveIndex;
 
     while (wideMoveCount > 0)
     {
         do
         {
+            moveIndex = getRandomNum(0, scramble.size() - 1);
+
             scramble.at(moveIndex).wsize = wideSizes::WIDE;
-        } while (scramble.at(moveIndex).wsize == wideSizes::NONE);
+
+        } while (scramble.at(moveIndex).wsize == wideSizes::NONE && 
+		(scramble.at(moveIndex).base == baseMoves::U || 
+		 scramble.at(moveIndex).base == baseMoves::F ||
+		 scramble.at(moveIndex).base == baseMoves::R));
         
         wideMoveCount--;        
     }
