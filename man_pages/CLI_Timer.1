@@ -1,0 +1,121 @@
+.TH CLI_Timer 7 "15 March 2024" "1.0" "CLI_Timer man page"
+.SH NAME
+CLI_Timer \- A Rubik's cube scramble generator for the command line.
+.SH SYNOPSIS
+CLI_Timer (cube type) [-s{name}] [c] | [--count{n}]
+.sp 0
+          [[-b] | [-f(mc)]] [(--no_prompt) [--no_enter]]
+.sp 0
+          [--cache_size{n}] [--no_avg] [--no_format]
+.sp 0
+          [--help] [--version]
+.sp 1
+.B
+NOTE:
+These arguments can be in any order.
+ 
+
+.SH DESCRIPTION
+This is a CLI tool for generating and recording rubik's cube-like 
+.sp 0
+puzzles scrambles (Like https://cstimer.net/). All you need is a timer.
+.sp 0
+Written in C++
+
+.SH OPTIONS
+(cube type) can be one of:
+(\fB2\fP)x2,
+(\fB3\fP)x3, (\fB4\fP)x4, (\fB5\fP)x5, (\fB6\fP)x6, (\fB7\fP)x7,
+.sp 0
+(\fBP\fP)yraminx, (\fBS\fP)kewb, s(\fBQ\fP)uare-1, (\fBM\fP)egaminx or (\fBC\fP)lock.
+
+.PP
+[\fB-s\fP{name}] Is used to save the session to a file with the given name.
+.sp 0
+It saves to (on linux) /home/your_username/.config/CLI_Timer_Sessions/name.CLI_T_S
+.sp 0
+It saves: Scramble, Time, Penalties, and Comments.
+.PP
+[\fBc\fP] continually generates scrambles until the user stops the program. (By typing exit or ctrl+c)
+.PP
+[\fB--count\fP{n}] generates n scrambles and then stops.
+.PP
+[\fB-b\fP] is used to generate blindfolded scrambles. This is only for cube types 3x3, 4x4 and 5x5.
+.PP
+[\fB-f\fP(mc)] is used to generate FMC scrambles. This is only for cube type 3x3.
+.sp 0
+Technically can be the regex `-f(.*)`
+.PP
+[\fB--no_prompt\fP] is used to disable the prompt for the user to enter a time.
+.sp 0
+You still need to press enter to generate the next scramble.
+.sp 0
+You can also type "save" to save the current scramble and time.
+.sp 0
+As well as "exit" to exit the program.
+.PP
+[\fB--no_enter\fP] is used to disable the need to press enter to generate the next scramble.
+.sp 0
+Requires --no_prompt and --count{n} to be enabled.
+.PP
+[\fB--cache_size\fP{n}] is used to set the cache size for the scrambles.
+.sp 0
+Allows the program to store {n} scrambles in the background whilst you are solving.
+.sp 0
+Default {n} is 50
+.PP
+[\fB--no_avg\fP] is used to disable showing the average time.
+.PP
+[\fB--no_format\fP] is used to disable the formatting of the scramble.
+.sp 0
+Automatically uses --no_avg
+.PP
+[\fB--help\fP] is used to show the help message.
+.PP
+[\fB--version\fP] is used to show the version of the program.
+.sp 2
+.PP
+How the terminal will look when prompted for a time:
+.sp 2
+.sp 0
+-------------------------------------------------------------------
+.sp 0
+|Some long scramble which has been         Curren mean: 0:00:00.00|
+.sp 0
+|formatted nicely.                         Current ao5: 0:00:00.00|
+.sp 0
+|                                         Current ao12: 0:00:00.00|
+.sp 0
+|                                         Current ao50: 0:00:00.00|
+.sp 0
+|                                        Current ao100: 0:00:00.00|
+.sp 0
+|Enter your time: HH:MM:SS.ss                                     |
+.sp 0
+-------------------------------------------------------------------
+.SH EXAMPLES
+.PP
+Generate a 3x3 scramble and save the session to a file called "session 1":
+.sp 0
+.I CLI_Timer 3 -s"session 1"
+.PP
+Generate 5 4x4 scrambles:
+.sp 0
+.I CLI_Timer 4 --count5
+.PP
+Continually generate 3x3 FMC scrambles:
+.sp 0
+.I CLI_Timer c 3 -fmc
+.PP
+Quickly generate 500 Megaminx scrambles:
+.sp 0
+.I CLI_Timer --count500 --no_prompt --no_enter M
+.PP
+Remove the formatting of the scramble:
+.sp 0
+.I CLI_Timer Q --no_format C
+
+.SH BUGS
+https://github.com/1Codealot/CLI_Timer/issues
+.SH AUTHOR
+1cubealot (or 1codealot) www.1cubealot.uk
