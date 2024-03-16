@@ -289,7 +289,7 @@ std::string getPenalty()
 
 void outputHelp()
 {
-	std::cout << "How to use CLI_Timer.\nCLI_Timer (cube type) [-b] | [-f(mc))] [--count{number}] [--no_enter] [--cache_size{n}] | [c] | [-s{session name}] | [--no_prompt] | [--no_avg] [--no_format]  \
+	std::cout << "How to use CLI_Timer.\nCLI_Timer (cube type) [-b] | [-f(mc)] [--count{number}] [--no_enter] [--cache_size{n}] | [c] | [-s{session name}] | [--no_prompt] | [--no_avg] [--no_format]  \
     \n\nArgument (cube type) means an NxN of (2)x2 (3)x3 to (7)x7 or (S)kewb, (P)yraminx, (M)egaminx, (C)lock or s(Q)uare-1.\
     It is required (why else would you use it?)\n\n[c] means [c]ontinuous, meaning it won't stop after generating one scramble.\
     \n\nArgument [-b] gives scrambles for blindfolded solves for 3x3, 4x4 and 5x5 \
@@ -320,4 +320,5 @@ void outputVersion()
 	std::cout << "Fixed +2 being ignored bug" << std::endl;
 	std::cout << "Fixed bug with megaminx outputting. And square-1" << std::endl;
 	std::cout << "Fixed bug with 4x4 having moves like Bw" << std::endl;
+	std::cout << "Wrote a man page." << std::endl;
 }
