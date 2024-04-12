@@ -21,6 +21,7 @@ struct should
     bool fmc;
     bool shouldFormat;
     size_t cache_size;
+    long seed;
 };
 
 static char getCubeType(std::vector<std::string> &args)
@@ -237,6 +238,34 @@ static size_t getCacheSize(std::vector<std::string> &args)
     return 50; // Cache size of 50 by default
 }
 
+static long getSeed(std::vector<std::string> &args){
+    std::string seed_flag;
+    for (const std::string& arg : args)
+    {
+        if (arg.substr(0, 6) == "--seed")
+        {
+            seed_flag = arg;
+        }
+    }
+
+    if(seed_flag.empty()){
+        return -1;
+    }
+
+    std::string seed;
+    for (char c : seed_flag.substr(6)) {
+        if('0' <= c && c <= '9'){
+            seed += c;
+        }
+        else{           // This adds the ASCII num of `c` as a string
+            seed += std::to_string(c);
+        }
+    }
+
+    return std::stol(seed);
+}
+
+
 inline void setup(struct should &Options, cmdLineArgs)
 {
     // Pre-checks
@@ -280,4 +309,5 @@ inline void setup(struct should &Options, cmdLineArgs)
     Options.fmc = fmc(arguments);
     Options.shouldFormat = shouldFormat(arguments);
     Options.cache_size = getCacheSize(arguments);
+    Options.seed = getSeed(arguments);
 }
