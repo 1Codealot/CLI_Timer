@@ -8,7 +8,7 @@ Install_Path = /bin/$(Final_Name)
 
 STD         ?= 23
 
-CPPFLAGS = -Wall -Wextra -Wpedantic -O2
+CPPFLAGS = -Wall -Wextra -Wpedantic -O3
 
 ifdef STD
     CPPFLAGS += -std=c++$(STD)
