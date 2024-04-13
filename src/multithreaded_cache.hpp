@@ -1,7 +1,6 @@
 #pragma once
 #include <queue>
 #include <string>
-#include <chrono>
 
 #include "scrambles.hpp"
 #include "command_line_parser.hpp"

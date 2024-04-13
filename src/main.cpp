@@ -21,6 +21,12 @@ int main(int argc, char const *argv[])
 		timesVector = readTimesFromFile(Args.fileName);
 	}
 
+	if (Args.seed != -1)
+	{
+		rng.seed(Args.seed);
+	}
+	
+
 	std::this_thread::sleep_for(std::chrono::milliseconds(50));
 
 	do
