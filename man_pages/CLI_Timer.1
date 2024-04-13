@@ -1,4 +1,4 @@
-.TH CLI_Timer 7 "16 March 2024" "1.0" "CLI_Timer man page"
+.TH CLI_Timer 7 "13 April 2024" "1.1" "CLI_Timer man page"
 .SH NAME
 CLI_Timer \- A Rubik's cube scramble generator for the command line.
 .SH SYNOPSIS
@@ -6,9 +6,9 @@ CLI_Timer (cube type) [-s{name}] [c] | [--count{n}]
 .sp 0
           [[-b] | [-f(mc)]] [(--no_prompt) [--no_enter]]
 .sp 0
-          [--cache_size{n}] [--no_avg] [--no_format]
+          [--cache_size{n}] [--no_avg] [--no_format] [--seed{s}]
 .sp 0
-          [--help] [--version]
+          [help] [--version]
 .sp 1
 .B
 NOTE:
@@ -70,7 +70,13 @@ Default {n} is 50
 .sp 0
 Automatically uses --no_avg
 .PP
-[\fB--help\fP] is used to show the help message.
+[\fB--seed\fP{s}] is used to set the seed. The seed is a long. 
+.sp 0
+Any non-numeric characters (including "-") are turned into their ASCII value, and that 
+.sp 0 
+number is concatenated into the seed.
+.PP
+[\fBhelp\fP] is used to show the help message.
 .PP
 [\fB--version\fP] is used to show the version of the program.
 .sp 2
