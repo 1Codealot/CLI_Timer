@@ -7,7 +7,7 @@ This code is here to deprecate the original Scrambles.hpp and stringCleanup.hpp
 
 #include "self_random.hpp"
 
-inline std::random_device rng;
+self_random rng;
 
 static size_t getRandomNum(const int min, const int max)
 {
