@@ -240,6 +240,8 @@ static size_t getCacheSize(std::vector<std::string> &args)
 
 static long getSeed(std::vector<std::string> &args){
     std::string seed_flag;
+    bool hasNonNum = false;
+
     for (const std::string& arg : args)
     {
         if (arg.substr(0, 6) == "--seed")
@@ -259,10 +261,18 @@ static long getSeed(std::vector<std::string> &args){
         }
         else{           // This adds the ASCII num of `c` as a string
             seed += std::to_string(c);
+            hasNonNum = true;
         }
     }
 
-    return std::stol(seed);
+    long actual = std::stol(seed);
+
+    if (hasNonNum)
+    {
+        std::clog << "WARNING: Seed has non-numeric values (including \"-\").\nIt has been coverted to: " << actual << ".\n";
+    }
+    
+    return actual;
 }
 
 
