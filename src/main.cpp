@@ -36,8 +36,6 @@ int main(int argc, char const *argv[])
 			std::this_thread::sleep_for(std::chrono::milliseconds(5));
 		}
 
-		DEBUG_LOG
-
 		std::string currentScramble = cache.front();
 		cache.pop();
 		
