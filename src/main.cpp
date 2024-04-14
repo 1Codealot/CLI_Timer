@@ -25,17 +25,18 @@ int main(int argc, char const *argv[])
 	{
 		rng.seed(Args.seed);
 	}
-	
 
-	std::this_thread::sleep_for(std::chrono::milliseconds(50));
+	// So that the cache begins with at least one scramble.
+	cache.push(generate_scramble(Args.cubeType, Args.blindfolded, Args.fmc));
 
 	do
 	{ // while (Args.shouldContinue && --Args.scrambleCount != 0);
-
 		while(cache.empty()){
 			// Avoids data races that may occur where cache is empty resulting in UB in popping.
 			std::this_thread::sleep_for(std::chrono::milliseconds(5));
 		}
+
+		DEBUG_LOG
 
 		std::string currentScramble = cache.front();
 		cache.pop();

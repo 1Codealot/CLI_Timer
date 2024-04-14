@@ -6,6 +6,8 @@
 #include <cmath>
 #include "convert_times_to_be_used.hpp"
 
+#define DEBUG_LOG std::clog << __FILE__ << ": " << __LINE__ << std::endl;
+
 // Credit:
 // https://stackoverflow.com/questions/23369503/get-size-of-terminal-window-rows-columns
 
