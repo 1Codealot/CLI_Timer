@@ -143,7 +143,7 @@ static std::string Three_By_Three(const bool blind)
 static std::string MBLD(struct BLD blind)
 {
     std::stringstream out;
-    for(int c = 0; c < blind.count; c++)
+    for(int c = 1; c < blind.count+1; c++)
     {
         out << c << ": " << Three_By_Three(blind.on) << "\n"; 
     }
@@ -599,7 +599,7 @@ inline std::string generate_scramble(const char cube, const struct BLD blind, co
         }
         else
         {   
-            if(blind.count < 1){
+            if(blind.count == 1){
                 return Three_By_Three(blind.on);
             } else {
                 return MBLD(blind);
