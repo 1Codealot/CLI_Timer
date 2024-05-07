@@ -209,7 +209,7 @@ static struct BLD blindfolded(std::vector<std::string> &args)
             }
         }
         else if(to_uppercase(args.at(i).substr(0,5)) == "-MBLD"){
-            if(getCubeType(args) == 3){
+            if(getCubeType(args) == '3'){
                 return {
                     .on = true,
                     .count = std::stoi(args.at(i).substr(5))
