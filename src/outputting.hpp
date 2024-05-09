@@ -122,6 +122,17 @@ void appendAvg(std::vector<std::string>& scrambleLines, float avg, const std::st
 	{
 		level = 4;
 	}
+
+	// Check that at level index has no newline in it.
+	// If it does we must split it into 2 separate ones lines in scrambleLines
+	if (scrambleLines.at(level).contains("\n"))
+	{
+		std::string firstLine = scrambleLines.at(level).substr(0, scrambleLines.at(level).find("\n"));
+		std::string secondLine = scrambleLines.at(level).substr(scrambleLines.at(level).find("\n") + 1);
+
+		scrambleLines.at(level) = firstLine;
+		scrambleLines.insert(scrambleLines.begin() + level + 1, secondLine);
+	}
 	
 	if(std::to_string(avg) == "-nan"){
 		avg = 0.00f;
