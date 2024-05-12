@@ -599,7 +599,7 @@ inline std::string generate_scramble(const char cube, const struct BLD blind, co
         }
         else
         {   
-            if(blind.count == 1){
+            if(blind.count <= 1){
                 return Three_By_Three(blind.on);
             } else {
                 return MBLD(blind);
