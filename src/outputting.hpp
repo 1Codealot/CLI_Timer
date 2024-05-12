@@ -170,13 +170,20 @@ std::vector<std::string> split_to_lines(const std::string& scramble, int width){
 	std::string buff;
 	int target_width = width / 3;
 
+	bool isMegaminx = (scramble.at(1) == scramble.at(2)) && (scramble.at(1) == '+' || scramble.at(1) == '-');
+	bool isMBLD = scramble.at(1) == ':';
+	bool isSq1 = scramble.at(0) == '(';
+
 	for (size_t i = 0; i < scramble.size(); i++)
 	{
 		buff += scramble.at(i);
 		if (i % target_width == 0 && i != 0)
 		{
-			lines.push_back(buff);
-			buff = "";
+			// Deletes up to the last white space
+			size_t last_space = buff.find_last_of(" \n");
+
+			lines.push_back(buff.substr(0, last_space));
+			buff = buff.erase(0, last_space+1);
 		}
 	}
 		
