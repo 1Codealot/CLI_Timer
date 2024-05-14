@@ -182,8 +182,13 @@ std::vector<std::string> split_to_lines(const std::string& scramble, int width){
 
 		if (i % target_width == 0 && i != 0)
 		{
-			lines.push_back(buff.substr(0, buff.find_last_of(' ')));
-			buff = buff.substr(buff.find_last_of(' '));
+			if(!isSq1){
+				lines.push_back(buff.substr(0, buff.find_last_of(' ')));
+				buff = buff.substr(buff.find_last_of(' '));
+			} else {
+				lines.push_back(buff.substr(0, buff.find_last_of('/')+1));
+				buff = buff.substr(buff.find_last_of('/')+1);
+			}
 		}
 		else if (isMegaminx && scramble.at(i) == 'U')
 		{
