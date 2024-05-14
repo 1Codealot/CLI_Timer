@@ -168,7 +168,7 @@ void appendAvg(std::vector<std::string>& scrambleLines, float avg, const std::st
 std::vector<std::string> split_to_lines(const std::string& scramble, int width){
 	std::vector<std::string> lines;
 	std::string buff;
-	int target_width = width / 3;
+	size_t target_width = width / 3;
 
 	bool isMegaminx = (scramble.at(1) == scramble.at(2)) && (scramble.at(1) == '+' || scramble.at(1) == '-');
 	bool isMBLD = scramble.at(1) == ':';
@@ -176,14 +176,23 @@ std::vector<std::string> split_to_lines(const std::string& scramble, int width){
 
 	for (size_t i = 0; i < scramble.size(); i++)
 	{
-		buff += scramble.at(i);
+		if(!(isMegaminx && scramble.at(i) == '\'')){
+			buff += scramble.at(i);
+		}
+
 		if (i % target_width == 0 && i != 0)
 		{
-			// Deletes up to the last white space
-			size_t last_space = buff.find_last_of(" \n");
-
-			lines.push_back(buff.substr(0, last_space));
-			buff = buff.erase(0, last_space+1);
+			lines.push_back(buff.substr(0, buff.find_last_of(' ')));
+			buff = buff.substr(buff.find_last_of(' '));
+		}
+		else if (isMegaminx && scramble.at(i) == 'U')
+		{
+			if(i < scramble.size() - 1 && scramble.at(i+1) == '\'')
+			{
+				buff += '\'';
+			}
+			lines.push_back(buff);
+			buff = "";			
 		}
 	}
 		
