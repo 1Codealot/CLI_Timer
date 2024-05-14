@@ -552,24 +552,7 @@ static std::string Clock()
     << "R" << hours[getRandomNum(0, 11)] << " "
     << "D" << hours[getRandomNum(0, 11)] << " "
     << "L" << hours[getRandomNum(0, 11)] << " "
-    << "ALL" << hours[getRandomNum(0, 11)] << " ";
-
-    if (getRandomNum(0, 1) == 1)
-    {
-        scramble << "UR ";
-    }
-    if (getRandomNum(0, 1) == 1)
-    {
-        scramble << "DR ";
-    }
-    if (getRandomNum(0, 1) == 1)
-    {
-        scramble << "DL ";
-    }
-    if (getRandomNum(0, 1) == 1)
-    {
-        scramble << "UL ";
-    }
+    << "ALL" << hours[getRandomNum(0, 11)];
 
     return scramble.str();
 }
