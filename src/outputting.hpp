@@ -325,4 +325,5 @@ void outputVersion()
 	std::cout << "Fixed bug with 4x4 having moves like Bw" << std::endl;
 	std::cout << "Wrote a man page." << std::endl;
 	std::cout << "Added --seed flag." << std::endl;
+	std::cout << "Changed clock due to new WCA regulations." << std::endl;
 }
