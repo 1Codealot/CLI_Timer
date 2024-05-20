@@ -165,48 +165,44 @@ void appendAvg(std::vector<std::string>& scrambleLines, float avg, const std::st
 	scrambleLines.at(level) += std::string(spaces, ' ') + avgText;
 }
 
-std::vector<std::string> split_to_lines(const std::string& scramble, int width){
-	std::vector<std::string> lines;
-	std::string buff;
+std::vector<std::string> split_to_lines(std::string& scramble, int width){
 	size_t target_width = width / 3;
 
-	bool isMegaminx = (scramble.at(1) == scramble.at(2)) && (scramble.at(1) == '+' || scramble.at(1) == '-');
-	bool isMBLD = scramble.at(1) == ':';
+	size_t last_new_line = 0;
+	size_t index = 0;
+
 	bool isSq1 = scramble.at(0) == '(';
 
-	for (size_t i = 0; i < scramble.size(); i++)
+	while (index != scramble.size())
 	{
-		if(!(isMegaminx && scramble.at(i) == '\'')){
-			buff += scramble.at(i);
+		if (scramble.at(index) == '\n')
+		{
+			last_new_line = index;
 		}
-
-		if (i % target_width == 0 && i != 0)
+		
+		if (index - last_new_line == target_width)
 		{
 			if(!isSq1){
-				lines.push_back(buff.substr(0, buff.find_last_of(' ')));
-				buff = buff.substr(buff.find_last_of(' '));
-			} else {
-				lines.push_back(buff.substr(0, buff.find_last_of('/')+1));
-				buff = buff.substr(buff.find_last_of('/')+1);
+				// Find last space before index
+				size_t last_space = scramble.rfind(' ', index);
+				scramble.at(last_space) = '\n';
+				last_new_line = last_space;
 			}
-		}
-		else if (isMegaminx && scramble.at(i) == 'U')
-		{
-			if(i < scramble.size() - 1 && scramble.at(i+1) == '\'')
+			else
 			{
-				buff += '\'';
+				size_t last_space = scramble.rfind('/', index);
+				scramble.at(last_space + 1) = '\n';
+				last_new_line = last_space;
 			}
-			lines.push_back(buff);
-			buff = "";			
+			
 		}
+		index++;
 	}
-		
-	lines.push_back(buff);
 
-	return lines;
+	return {scramble};
 }
 
-void output(const std::string& scramble, std::vector<float>& times, bool showAvg)
+void output(std::string& scramble, std::vector<float>& times, bool showAvg)
 {
 	// avg must be > 0 otherwise I will not output it.
 

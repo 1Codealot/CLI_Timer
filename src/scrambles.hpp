@@ -509,11 +509,11 @@ static std::string Megaminx()
         }
         if (Dpp)
         {
-            scramble << "U ";
+            scramble << "U \n";
         }
         else
         {
-            scramble << "U' ";
+            scramble << "U' \n";
         }
     }
     return scramble.str();
