@@ -299,10 +299,11 @@ std::string getPenalty()
 
 void outputHelp()
 {
-	std::cout << "How to use CLI_Timer.\nCLI_Timer (cube type) [-b] | [-f(mc)] [--count{number}] [--no_enter] [--cache_size{n}] | [c] | [-s{session name}] | [--no_prompt] | [--no_avg] [--no_format] [--seed{s}] \
+	std::cout << "How to use CLI_Timer.\nCLI_Timer (cube type) [-b] | [-MBLD{count}] | [-f(mc)] [--count{number}] [--no_enter] [--cache_size{n}] | [c] | [-s{session name}] | [--no_prompt] | [--no_avg] [--no_format] [--seed{s}] \
     \n\nArgument (cube type) means an NxN of (2)x2 (3)x3 to (7)x7 or (S)kewb, (P)yraminx, (M)egaminx, (C)lock or s(Q)uare-1.\
     It is required (why else would you use it?)\n\n[c] means [c]ontinuous, meaning it won't stop after generating one scramble.\
     \n\nArgument [-b] gives scrambles for blindfolded solves for 3x3, 4x4 and 5x5 \
+	\nArgument [-MBLD{count}] creates blindfolded scrambles for `count` cubes for multiblind.\
     \n\nArgument [-f(mc)] gives scrambles for fmc for 3x3. \
     \n--count{number} can be used to specify how many scrambles you want. Continuous is impiled. It will then quit (with code 0).\
     \n\nArgument [-s] is for saving to a file which name will come directly after [-s] (e.g. CLI_Timer 3 -s3x3_One_Handed).\
