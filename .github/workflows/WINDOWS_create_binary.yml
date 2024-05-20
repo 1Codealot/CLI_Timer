@@ -13,7 +13,8 @@ jobs:
         - uses: actions/checkout@v3
         
         - name: Build
-          run: make Final_Name=CLI_Timer_Windows.exe
+          run: make -static-libgcc -static-libstdc++
+ Final_Name=CLI_Timer_Windows.exe
 
         - name: upload to release
           env:
