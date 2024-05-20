@@ -16,3 +16,6 @@ jobs:
 
     - name: Build
       run: make
+
+    - name: Install man page
+      run: sudo make -C ./man_pages && make -C ./man_pages clean

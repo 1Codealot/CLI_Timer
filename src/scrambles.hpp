@@ -117,7 +117,7 @@ static std::string Three_By_Three(const bool blind)
         scramble.push_back(Move);
 
         TwoPrevMove = PrevMove;
-        PrevMove = Move; //
+        PrevMove = Move;
     }
 
     if (blind)
@@ -138,6 +138,16 @@ static std::string Three_By_Three(const bool blind)
         }
     }
     return moveVectorToString(scramble);
+}
+
+static std::string MBLD(struct BLD blind)
+{
+    std::stringstream out;
+    for(int c = 1; c < blind.count+1; c++)
+    {
+        out << c << ": " << Three_By_Three(blind.on) << "\n"; 
+    }
+    return out.str();
 }
 
 static std::string FMC()
@@ -227,15 +237,20 @@ static std::string Four_By_Four(bool blind)
         PrevMove = Move; //
     }
 
-    // Randomly add wide moves
-    int moveIndex = getRandomNum(0, scramble.size() - 1);
+    int moveIndex;
 
     while (wideMoveCount > 0)
     {
         do
         {
+            moveIndex = getRandomNum(0, scramble.size() - 1);
+
             scramble.at(moveIndex).wsize = wideSizes::WIDE;
-        } while (scramble.at(moveIndex).wsize == wideSizes::NONE);
+
+        } while (scramble.at(moveIndex).wsize == wideSizes::NONE && 
+		(scramble.at(moveIndex).base == baseMoves::U || 
+		 scramble.at(moveIndex).base == baseMoves::F ||
+		 scramble.at(moveIndex).base == baseMoves::R));
         
         wideMoveCount--;        
     }
@@ -547,30 +562,13 @@ static std::string Clock()
     << "R" << hours[getRandomNum(0, 11)] << " "
     << "D" << hours[getRandomNum(0, 11)] << " "
     << "L" << hours[getRandomNum(0, 11)] << " "
-    << "ALL" << hours[getRandomNum(0, 11)] << " ";
-
-    if (getRandomNum(0, 1) == 1)
-    {
-        scramble << "UR ";
-    }
-    if (getRandomNum(0, 1) == 1)
-    {
-        scramble << "DR ";
-    }
-    if (getRandomNum(0, 1) == 1)
-    {
-        scramble << "DL ";
-    }
-    if (getRandomNum(0, 1) == 1)
-    {
-        scramble << "UL ";
-    }
+    << "ALL" << hours[getRandomNum(0, 11)];
 
     return scramble.str();
 }
 
 // Use this one
-inline std::string generate_scramble(const char cube, const bool blind, const bool fmc)
+inline std::string generate_scramble(const char cube, const struct BLD blind, const bool fmc)
 {
     switch (cube)
     {
@@ -583,15 +581,19 @@ inline std::string generate_scramble(const char cube, const bool blind, const bo
             return FMC();
         }
         else
-        {
-            return Three_By_Three(blind);
+        {   
+            if(blind.count <= 1){
+                return Three_By_Three(blind.on);
+            } else {
+                return MBLD(blind);
+            }
         }
 
     case '4':
-        return Four_By_Four(blind);
+        return Four_By_Four(blind.on);
 
     case '5':
-        return Five_By_Five(blind);
+        return Five_By_Five(blind.on);
 
     case '6':
         return Six_By_Six();

@@ -8,18 +8,12 @@ Install_Path = /bin/$(Final_Name)
 
 STD         ?= 2b
 
-CPPFLAGS = -Wall -Wextra -Wpedantic -O2
-
-ifdef STD
-    CPPFLAGS += -std=c++$(STD)
-endif
-
-CPPFLAGS += -std=c++$(STD)
+CPPFLAGS = -Wall -Wextra -Wpedantic -O3
 
 all:
 	mkdir -p $(Build_Dir)
 		$(TARGET): $(TARGET).cpp 
-			$(CPPC) $(CPPFLAGS) -o $(Build_Path) $(Main_Path)
+			$(CPPC) $(CPPFLAGS) -std=c++$(STD) -o $(Build_Path) $(Main_Path)
 
 # This was for cross compiling to windows however, the multi threading is impossible.
 
@@ -32,7 +26,8 @@ all:
 debug:
 	mkdir -p $(Build_Dir)
 		$(TARGET): $(TARGET).cpp 
-			$(CPPC) $(CPPFLAGS) -ggdb -o $(Build_Path) $(Main_Path)
+			$(CPPC) $(CPPFLAGS) -ggdb -O0 -o $(Build_Path) $(Main_Path)
+
 
 install:
 	cp $(Build_Path) $(Install_Path)

@@ -97,6 +97,10 @@ This will hide showing your current session average.<br>
 
 <hr>
 
+`--seed{s}` allows you to set a custom seed. Any non numbers (including "-") will have their ASCII numeric value converted into a string.
+
+<hr>
+
 ### Other commands 
 
 `help`

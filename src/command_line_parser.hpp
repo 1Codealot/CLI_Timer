@@ -1,4 +1,5 @@
 #pragma once
+#include <cctype>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -6,6 +7,12 @@
 #include "outputting.hpp"
 
 #define cmdLineArgs int argc, const char *argv[]
+
+struct BLD
+{
+    bool on;
+    int count;
+};
 
 struct should
 {
@@ -17,10 +24,11 @@ struct should
     int scrambleCount;
     bool shouldShowAvg;
     bool needEnter;
-    bool blindfolded;
+    struct BLD blindfolded;
     bool fmc;
     bool shouldFormat;
     size_t cache_size;
+    long seed;
 };
 
 static char getCubeType(std::vector<std::string> &args)
@@ -165,7 +173,20 @@ static bool needEnter(std::vector<std::string> &args)
     return true;
 }
 
-static bool blindfolded(std::vector<std::string> &args)
+//TODO: Use more often!
+std::string to_uppercase(std::string str){
+    std::string out;
+    for (char c : str) {
+        if(std::islower(c)) {
+            out += std::toupper(c);
+        } else {
+            out += c;
+        }
+    }
+    return out;
+}
+
+static struct BLD blindfolded(std::vector<std::string> &args)
 {
     for (size_t i = 0; i < args.size(); i++)
     {
@@ -173,16 +194,39 @@ static bool blindfolded(std::vector<std::string> &args)
         {
             if (getCubeType(args) == '3' || getCubeType(args) == '4' || getCubeType(args) == '5')
             {
-                return true;
+                return {
+                    .on = true,
+                    .count = 1
+                };
             }
             else
             {
                 std::cout << "No blindfolded support for cubes that aren't 3x3 or 4x4 or 5x5.\n";
-                return false;
+                return {
+                    .on = false,
+                    .count = 0
+                };
+            }
+        }
+        else if(to_uppercase(args.at(i).substr(0,5)) == "-MBLD"){
+            if(getCubeType(args) == '3'){
+                return {
+                    .on = true,
+                    .count = std::stoi(args.at(i).substr(5))
+                };
+            } else {
+                std::cout << "Multiblind support is only for 3x3\nAlso you are insane for doing it on non 3x3s\n";
+                return {
+                    .on = false,
+                    .count = 0
+                };
             }
         }
     }
-    return false;
+    return {
+        .on = false,
+        .count = 0
+    };
 }
 
 static bool fmc(std::vector<std::string> &args)
@@ -193,7 +237,7 @@ static bool fmc(std::vector<std::string> &args)
         {
             if (getCubeType(args) == '3')
             {
-                if (!blindfolded(args))
+                if (!blindfolded(args).on)
                 {
                     return true;
                 }
@@ -237,12 +281,50 @@ static size_t getCacheSize(std::vector<std::string> &args)
     return 50; // Cache size of 50 by default
 }
 
+static long getSeed(std::vector<std::string> &args){
+    std::string seed_flag;
+    bool hasNonNum = false;
+
+    for (const std::string& arg : args)
+    {
+        if (arg.substr(0, 6) == "--seed")
+        {
+            seed_flag = arg;
+        }
+    }
+
+    if(seed_flag.empty()){
+        return -1;
+    }
+
+    std::string seed;
+    for (char c : seed_flag.substr(6)) {
+        if('0' <= c && c <= '9'){
+            seed += c;
+        }
+        else{           // This adds the ASCII num of `c` as a string
+            seed += std::to_string(c);
+            hasNonNum = true;
+        }
+    }
+
+    long actual = std::stol(seed);
+
+    if (hasNonNum)
+    {
+        std::clog << "WARNING: Seed has non-numeric values (including \"-\").\nIt has been coverted to: " << actual << ".\n";
+    }
+
+    return actual;
+}
+
+
 inline void setup(struct should &Options, cmdLineArgs)
 {
     // Pre-checks
     // These are for like `help` or `--version`
 
-    
+
     // this will make everything easier
     std::vector<std::string> arguments;
 
@@ -280,4 +362,5 @@ inline void setup(struct should &Options, cmdLineArgs)
     Options.fmc = fmc(arguments);
     Options.shouldFormat = shouldFormat(arguments);
     Options.cache_size = getCacheSize(arguments);
+    Options.seed = getSeed(arguments);
 }

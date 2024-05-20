@@ -1,10 +1,9 @@
 #pragma once
 #include <queue>
 #include <string>
-#include <chrono>
 
-#include "scrambles.hpp"
 #include "command_line_parser.hpp"
+#include "scrambles.hpp"
 
 void update_cache(std::queue<std::string> *cache, const struct should *Args)
 {

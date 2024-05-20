@@ -14,18 +14,23 @@ int main(int argc, char const *argv[])
 	std::queue<std::string> cache;
 	
 	// start thread for caching
-	auto cache_updater = std::async(std::launch::async, update_cache, &cache, &Args);
+	[[maybe_unused]] auto cache_updater = std::async(std::launch::async, update_cache, &cache, &Args);
 
     //Populate vector from file
 	if(Args.shouldSave){
 		timesVector = readTimesFromFile(Args.fileName);
 	}
 
-	std::this_thread::sleep_for(std::chrono::milliseconds(50));
+	if (Args.seed != -1)
+	{
+		rng.seed(Args.seed);
+	}
+
+	// So that the cache begins with at least one scramble.
+	cache.push(generate_scramble(Args.cubeType, Args.blindfolded, Args.fmc));
 
 	do
 	{ // while (Args.shouldContinue && --Args.scrambleCount != 0);
-
 		while(cache.empty()){
 			// Avoids data races that may occur where cache is empty resulting in UB in popping.
 			std::this_thread::sleep_for(std::chrono::milliseconds(5));
@@ -100,10 +105,10 @@ int main(int argc, char const *argv[])
 			
 			if (penalty == "DNF"||penalty == "dnf")
 			{
-			    // Re-assign solveTime to max value of `int`
+			    // Re-assign solveTime to max value of `float`
 				solveTime = std::numeric_limits<float>::max();
 			}
-			timesVector.push_back(solveTime);
+			timesVector.push_back(solveTime + 2 * (penalty == "+2"));
 			
 		}
 	} while (Args.shouldContinue && --Args.scrambleCount != 0);
