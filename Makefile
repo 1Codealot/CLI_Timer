@@ -26,7 +26,8 @@ all:
 debug:
 	mkdir -p $(Build_Dir)
 		$(TARGET): $(TARGET).cpp 
-			$(CPPC) $(CPPFLAGS) -std=c++$(STD) -O0 -ggdb -o $(Build_Path) $(Main_Path)
+			$(CPPC) $(CPPFLAGS) -ggdb -O0 -o $(Build_Path) $(Main_Path)
+
 
 install:
 	cp $(Build_Path) $(Install_Path)

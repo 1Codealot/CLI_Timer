@@ -122,6 +122,23 @@ void appendAvg(std::vector<std::string>& scrambleLines, float avg, const std::st
 	{
 		level = 4;
 	}
+
+	if (level >= scrambleLines.size())
+	{
+		scrambleLines.push_back("");
+	}
+	
+
+	// Check that at level index has no newline in it.
+	// If it does we must split it into 2 separate ones lines in scrambleLines
+	if (scrambleLines.at(level).find("\n") != std::string::npos)
+	{
+		std::string firstLine = scrambleLines.at(level).substr(0, scrambleLines.at(level).find("\n"));
+		std::string secondLine = scrambleLines.at(level).substr(scrambleLines.at(level).find("\n") + 1);
+
+		scrambleLines.at(level) = firstLine;
+		scrambleLines.insert(scrambleLines.begin() + level + 1, secondLine);
+	}
 	
 	if(std::to_string(avg) == "-nan"){
 		avg = 0.00f;
@@ -148,57 +165,48 @@ void appendAvg(std::vector<std::string>& scrambleLines, float avg, const std::st
 	scrambleLines.at(level) += std::string(spaces, ' ') + avgText;
 }
 
-void output(std::string scramble, std::vector<float>& times, bool showAvg)
+std::vector<std::string> split_to_lines(std::string& scramble, int width){
+	size_t target_width = width / 3;
+
+	size_t last_new_line = 0;
+	size_t index = 0;
+
+	bool isSq1 = scramble.at(0) == '(';
+
+	while (index != scramble.size())
+	{
+		if (scramble.at(index) == '\n')
+		{
+			last_new_line = index;
+		}
+		
+		if (index - last_new_line == target_width)
+		{
+			if(!isSq1){
+				// Find last space before index
+				size_t last_space = scramble.rfind(' ', index);
+				scramble.at(last_space) = '\n';
+				last_new_line = last_space;
+			}
+			else
+			{
+				size_t last_space = scramble.rfind('/', index);
+				scramble.at(last_space + 1) = '\n';
+				last_new_line = last_space;
+			}
+			
+		}
+		index++;
+	}
+
+	return {scramble};
+}
+
+void output(std::string& scramble, std::vector<float>& times, bool showAvg)
 {
 	// avg must be > 0 otherwise I will not output it.
 
-	bool isMegaminx = (scramble.at(1) == '+' || scramble.at(1) == '-') && scramble.at(2) == scramble.at(1); // Beautiful.
-
-	std::vector<std::string> scrambleLines;
-
-	int width = get_terminal_width();
-
-	const char charToLookFor = scramble.find('/') != std::string::npos ? '/' : ' ';
-
-	size_t startPos = 0;
-	size_t endPos = 0;
-
-	while (endPos < scramble.length())
-	{
-		endPos = startPos + width/3;
-		if (endPos >= scramble.length())
-		{
-			endPos = scramble.length();
-		}
-		else
-		{
-			if(isMegaminx){
-				// check that the nearest U or U' is closer than the width/3
-				if(scramble.substr(startPos, endPos - startPos).find('U') != std::string::npos){
-					endPos = startPos + scramble.substr(startPos, endPos - startPos).find('U')+2;
-				} else if(scramble.substr(startPos, endPos - startPos).find("U'") != std::string::npos){
-					endPos = startPos + scramble.substr(startPos, endPos - startPos).find("U'")+3;
-				}
-			}
-			while (endPos > startPos && scramble.at(endPos) != charToLookFor)
-			{
-				endPos--;
-			}
-		}
-		scrambleLines.push_back((scramble.substr(startPos, endPos - startPos + (charToLookFor == '/'))));
-		startPos = endPos + 1;
-	}
-
-
-	for (std::string &line : scrambleLines)
-	{
-		if(!line.empty()){
-			if (line.at(0) == ' ')
-			{
-				line.erase(0, 1);				
-			}
-		}		
-	}	
+	std::vector<std::string> scrambleLines = split_to_lines(scramble, get_terminal_width());
 
 	if(showAvg){
 		float mean = calculateMean(times);

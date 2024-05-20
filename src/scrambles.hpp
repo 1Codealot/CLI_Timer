@@ -117,7 +117,7 @@ static std::string Three_By_Three(const bool blind)
         scramble.push_back(Move);
 
         TwoPrevMove = PrevMove;
-        PrevMove = Move; //
+        PrevMove = Move;
     }
 
     if (blind)
@@ -138,6 +138,16 @@ static std::string Three_By_Three(const bool blind)
         }
     }
     return moveVectorToString(scramble);
+}
+
+static std::string MBLD(struct BLD blind)
+{
+    std::stringstream out;
+    for(int c = 1; c < blind.count+1; c++)
+    {
+        out << c << ": " << Three_By_Three(blind.on) << "\n"; 
+    }
+    return out.str();
 }
 
 static std::string FMC()
@@ -499,11 +509,11 @@ static std::string Megaminx()
         }
         if (Dpp)
         {
-            scramble << "U ";
+            scramble << "U \n";
         }
         else
         {
-            scramble << "U' ";
+            scramble << "U' \n";
         }
     }
     return scramble.str();
@@ -558,7 +568,7 @@ static std::string Clock()
 }
 
 // Use this one
-inline std::string generate_scramble(const char cube, const bool blind, const bool fmc)
+inline std::string generate_scramble(const char cube, const struct BLD blind, const bool fmc)
 {
     switch (cube)
     {
@@ -571,15 +581,19 @@ inline std::string generate_scramble(const char cube, const bool blind, const bo
             return FMC();
         }
         else
-        {
-            return Three_By_Three(blind);
+        {   
+            if(blind.count <= 1){
+                return Three_By_Three(blind.on);
+            } else {
+                return MBLD(blind);
+            }
         }
 
     case '4':
-        return Four_By_Four(blind);
+        return Four_By_Four(blind.on);
 
     case '5':
-        return Five_By_Five(blind);
+        return Five_By_Five(blind.on);
 
     case '6':
         return Six_By_Six();
