@@ -334,4 +334,5 @@ void outputVersion()
 	std::cout << "Wrote a man page." << std::endl;
 	std::cout << "Added --seed flag." << std::endl;
 	std::cout << "Changed clock due to new WCA regulations." << std::endl;
+	std::cout << "Added Multi Blind (by completely messing up all of the outputting code)" << std::endl;
 }
