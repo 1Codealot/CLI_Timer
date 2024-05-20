@@ -1,10 +1,10 @@
-.TH CLI_Timer 7 "13 April 2024" "1.2" "CLI_Timer man page"
+.TH CLI_Timer 7 "20 May 2024" "1.3" "CLI_Timer man page"
 .SH NAME
 CLI_Timer \- A Rubik's cube scramble generator for the command line.
 .SH SYNOPSIS
 CLI_Timer (cube type) [-s{name}] [c] | [--count{n}]
 .sp 0
-          [[-b] | [-f(mc)]] [(--no_prompt) [--no_enter]]
+          [[-b] | [-MBLD{count}] | [-f(mc)]] [(--no_prompt) [--no_enter]]
 .sp 0
           [--cache_size{n}] [--no_avg] [--no_format] [--seed{s}]
 .sp 0
@@ -41,6 +41,8 @@ It saves: Scramble, Time, Penalties, and Comments.
 [\fB--count\fP{n}] generates n scrambles and then stops.
 .PP
 [\fB-b\fP] is used to generate blindfolded scrambles. This is only for cube types 3x3, 4x4 and 5x5.
+.PP
+[\fB-MBLD\fP{count}] creates blindfolded scrambles for `count` cubes for multiblind.
 .PP
 [\fB-f\fP(mc)] is used to generate FMC scrambles. This is only for cube type 3x3.
 .sp 0
