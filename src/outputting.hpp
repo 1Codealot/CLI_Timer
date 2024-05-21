@@ -339,15 +339,7 @@ void outputHelp()
 
 void outputVersion()
 {
-	std::cout << "CLI_Timer version: 2.0\n\n";
+	std::cout << "CLI_Timer version: 2.1\n\n";
 
-	std::cout << "Use a vector to hold moves" << std::endl;
-	std::cout << "Added a cache to hold scrambles" << std::endl;
-	std::cout << "Fixed +2 being ignored bug" << std::endl;
-	std::cout << "Fixed bug with megaminx outputting. And square-1" << std::endl;
-	std::cout << "Fixed bug with 4x4 having moves like Bw" << std::endl;
-	std::cout << "Wrote a man page." << std::endl;
-	std::cout << "Added --seed flag." << std::endl;
-	std::cout << "Changed clock due to new WCA regulations." << std::endl;
-	std::cout << "Added Multi Blind (by completely messing up all of the outputting code)" << std::endl;
+	std::cout << "Fixed bug with `--seed` doing nothing for square-1" << std::endl;
 }

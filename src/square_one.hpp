@@ -1,14 +1,11 @@
 #pragma once
 #include <vector>
-#include <random>
 #include <string>
 
 namespace sq1
 {
     // Code sourced from <https://github.com/thewca/tnoodle-lib/blob/master/scrambles/src/main/java/org/worldcubeassociation/tnoodle/puzzle/SquareOnePuzzle.java>
     // It is also under the GNU General Public License v3.0 <https://github.com/thewca/tnoodle-lib/blob/master/LICENSE>
-
-    inline std::random_device rng;
 
     static int getRandomTurnCount()
     {

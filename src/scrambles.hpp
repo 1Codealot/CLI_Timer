@@ -1,6 +1,12 @@
 #pragma once
+#include "self_random.hpp"
+
+self_random rng; 
+
 #include "NxN_move_gen.hpp"
 #include "square_one.hpp"
+
+// Oh yeah!! Weird header stuff my beloved!!!
 
 static bool canUseMove(const puzzle_move *pMove1, const puzzle_move *pMove2)
 { // Two x Two
