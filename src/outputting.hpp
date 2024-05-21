@@ -12,39 +12,42 @@
 // https://stackoverflow.com/questions/23369503/get-size-of-terminal-window-rows-columns
 
 #ifdef _WIN32
-    #include <windows.h>
+#include <windows.h>
 #elif __linux__ || __APPLE__
-    #include <sys/ioctl.h>
-    #include <unistd.h>
+#include <sys/ioctl.h>
+#include <unistd.h>
 #endif
 
-int get_terminal_width(){
-    #ifdef _WIN32
-        CONSOLE_SCREEN_BUFFER_INFO csbi;
-        int columns;
+int get_terminal_width()
+{
+#ifdef _WIN32
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	int columns;
 
-        GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
 
-        columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+	columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
 
-        return columns;
+	return columns;
 
-    #elif __linux__ || __APPLE__
-        struct winsize w{};
-        ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+#elif __linux__ || __APPLE__
+	struct winsize w
+	{
+	};
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 
-        int columns = w.ws_col;
-        return columns;
+	int columns = w.ws_col;
+	return columns;
 
-    #else
-        return 30;
+#else
+	return 30;
 
-    #endif
+#endif
 }
 
 // End credit
 
-inline float calculateMean(std::vector<float>& times, size_t count=0, bool punishDNFs=false)
+inline float calculateMean(std::vector<float> &times, size_t count = 0, bool punishDNFs = false)
 {
 	float avg = 0.00f;
 
@@ -53,44 +56,49 @@ inline float calculateMean(std::vector<float>& times, size_t count=0, bool punis
 		count = times.size();
 	}
 
-	for(float n : times)
+	for (float n : times)
 	{
-        if(punishDNFs){
-            if(n == std::numeric_limits<float>::max()){
-                return -1;
-            }
-        } else {
-            if(n == std::numeric_limits<float>::max()){
-                count--;
-                continue;
-            }
-        }
+		if (punishDNFs)
+		{
+			if (n == std::numeric_limits<float>::max())
+			{
+				return -1;
+			}
+		}
+		else
+		{
+			if (n == std::numeric_limits<float>::max())
+			{
+				count--;
+				continue;
+			}
+		}
 		avg += n;
 	}
 
 	avg /= (float)count;
-	return avg;	
+	return avg;
 }
 
-inline float calculateAvg(std::vector<float>& times, size_t count=0)
+inline float calculateAvg(std::vector<float> &times, size_t count = 0)
 {
 	// TODO: Check the size of times is >= count.
 
 	int countToRemove = floor((times.size() / 10) + 1);
 
-	if(times.size() < count)
+	if (times.size() < count)
 	{
 		return 0;
 	}
 
 	std::vector<float> latestTimes;
 
-    for (size_t i = times.size() - count; i < times.size(); i++)
-    {
-        latestTimes.push_back(times.at(i));
-    }
+	for (size_t i = times.size() - count; i < times.size(); i++)
+	{
+		latestTimes.push_back(times.at(i));
+	}
 
-    std::sort(latestTimes.begin(), latestTimes.end());
+	std::sort(latestTimes.begin(), latestTimes.end());
 
 	for (int i = 0; i < countToRemove; i++)
 	{
@@ -101,7 +109,7 @@ inline float calculateAvg(std::vector<float>& times, size_t count=0)
 	return calculateMean(latestTimes, latestTimes.size(), true);
 }
 
-void appendAvg(std::vector<std::string>& scrambleLines, float avg, const std::string& avgName)
+void appendAvg(std::vector<std::string> &scrambleLines, float avg, const std::string &avgName)
 {
 	// Smaller level = higher up.
 	size_t level = 0;
@@ -127,7 +135,6 @@ void appendAvg(std::vector<std::string>& scrambleLines, float avg, const std::st
 	{
 		scrambleLines.push_back("");
 	}
-	
 
 	// Check that at level index has no newline in it.
 	// If it does we must split it into 2 separate ones lines in scrambleLines
@@ -139,20 +146,24 @@ void appendAvg(std::vector<std::string>& scrambleLines, float avg, const std::st
 		scrambleLines.at(level) = firstLine;
 		scrambleLines.insert(scrambleLines.begin() + level + 1, secondLine);
 	}
-	
-	if(std::to_string(avg) == "-nan"){
+
+	if (std::to_string(avg) == "-nan")
+	{
 		avg = 0.00f;
 	}
 
 	std::string avgAsStr;
 
-    if(avg == -1){
-        avgAsStr = "DNF";
-    } else {
-        avgAsStr = outputTimePretty(avg);
-    }
-	
-	if (scrambleLines.size() < level+1)
+	if (avg == -1)
+	{
+		avgAsStr = "DNF";
+	}
+	else
+	{
+		avgAsStr = outputTimePretty(avg);
+	}
+
+	if (scrambleLines.size() < level + 1)
 	{
 		scrambleLines.emplace_back("");
 	}
@@ -165,7 +176,8 @@ void appendAvg(std::vector<std::string>& scrambleLines, float avg, const std::st
 	scrambleLines.at(level) += std::string(spaces, ' ') + avgText;
 }
 
-std::vector<std::string> split_to_lines(std::string& scramble, int width){
+std::vector<std::string> split_to_lines(std::string &scramble, int width)
+{
 	size_t target_width = width / 3;
 
 	size_t last_new_line = 0;
@@ -179,10 +191,11 @@ std::vector<std::string> split_to_lines(std::string& scramble, int width){
 		{
 			last_new_line = index;
 		}
-		
+
 		if (index - last_new_line == target_width)
 		{
-			if(!isSq1){
+			if (!isSq1)
+			{
 				// Find last space before index
 				size_t last_space = scramble.rfind(' ', index);
 				scramble.at(last_space) = '\n';
@@ -194,7 +207,6 @@ std::vector<std::string> split_to_lines(std::string& scramble, int width){
 				scramble.at(last_space + 1) = '\n';
 				last_new_line = last_space;
 			}
-			
 		}
 		index++;
 	}
@@ -202,13 +214,14 @@ std::vector<std::string> split_to_lines(std::string& scramble, int width){
 	return {scramble};
 }
 
-void output(std::string& scramble, std::vector<float>& times, bool showAvg)
+void output(std::string &scramble, std::vector<float> &times, bool showAvg)
 {
 	// avg must be > 0 otherwise I will not output it.
 
 	std::vector<std::string> scrambleLines = split_to_lines(scramble, get_terminal_width());
 
-	if(showAvg){
+	if (showAvg)
+	{
 		float mean = calculateMean(times);
 		float ao5 = calculateAvg(times, 5);
 		float ao12 = calculateAvg(times, 12);
@@ -227,7 +240,8 @@ void output(std::string& scramble, std::vector<float>& times, bool showAvg)
 	{
 		// I don't know why I have to do this.
 		// I literally do this like 22 lines above.
-		if(!line.empty()){
+		if (!line.empty())
+		{
 			if (line.at(0) == ' ')
 			{
 				line.erase(0, 1);

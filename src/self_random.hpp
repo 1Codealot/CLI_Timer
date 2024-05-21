@@ -6,12 +6,13 @@ class self_random
 {
 private:
     size_t state;
+
 public:
     self_random();
     ~self_random();
 
     size_t operator()();
-    void seed(size_t s) {this->state = s;}
+    void seed(size_t s) { this->state = s; }
 };
 
 self_random::self_random()
@@ -23,9 +24,10 @@ self_random::~self_random()
 {
 }
 
-size_t self_random::operator()(){
+size_t self_random::operator()()
+{
     // https://en.wikipedia.org/wiki/Xorshift#Example_implementation
-    if (sizeof(size_t) == 32/8) // 32 bit
+    if (sizeof(size_t) == 32 / 8) // 32 bit
     {
         size_t x = this->state;
         x ^= x << 13;
@@ -34,7 +36,7 @@ size_t self_random::operator()(){
         this->state = x;
         return x;
     }
-    else // 64 bit, no (official) support for not 64 or 32 bit but no one uses those 
+    else // 64 bit, no (official) support for not 64 or 32 bit but no one uses those
     {
         size_t x = this->state;
         x ^= x << 13;
@@ -43,5 +45,4 @@ size_t self_random::operator()(){
         this->state = x;
         return x;
     }
-    
 }

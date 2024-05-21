@@ -34,7 +34,7 @@ struct should
 static char getCubeType(std::vector<std::string> &args)
 {
     // Go through all the argv finding a  1 length single char
-    for (auto & arg : args)
+    for (auto &arg : args)
     {
         switch (arg.at(0))
         {
@@ -60,7 +60,7 @@ static char getCubeType(std::vector<std::string> &args)
 
 static bool shouldSave(std::vector<std::string> &args)
 {
-    for (const auto & arg : args)
+    for (const auto &arg : args)
     {
         if (arg.substr(0, 2) == "-s")
         {
@@ -75,7 +75,7 @@ static std::string getFileName(std::vector<std::string> &args)
     if (shouldSave(args))
     {
         // Find the file.
-        for (const auto & arg : args)
+        for (const auto &arg : args)
         {
             if (arg.substr(0, 2) == "-s")
             {
@@ -97,7 +97,7 @@ static std::string getFileName(std::vector<std::string> &args)
 
 static int getCount(std::vector<std::string> &args)
 {
-    for (const auto& currArg : args)
+    for (const auto &currArg : args)
     {
         if (currArg.substr(0, 7) == "--count")
         {
@@ -115,7 +115,7 @@ static bool shouldContinue(std::vector<std::string> &args)
     }
 
     // Oops, turned on python mode. lmao
-    for (const auto & arg : args)
+    for (const auto &arg : args)
         if (arg == "c")
             return true;
 
@@ -142,7 +142,7 @@ static bool shouldPrompt(std::vector<std::string> &args)
 
 static bool shouldShowAvg(std::vector<std::string> &args)
 {
-    for (const auto & arg : args)
+    for (const auto &arg : args)
     {
         if (arg == "--no_avg" || arg == "--no_prompt")
         {
@@ -173,13 +173,18 @@ static bool needEnter(std::vector<std::string> &args)
     return true;
 }
 
-//TODO: Use more often!
-std::string to_uppercase(std::string str){
+// TODO: Use more often!
+std::string to_uppercase(std::string str)
+{
     std::string out;
-    for (char c : str) {
-        if(std::islower(c)) {
+    for (char c : str)
+    {
+        if (std::islower(c))
+        {
             out += std::toupper(c);
-        } else {
+        }
+        else
+        {
             out += c;
         }
     }
@@ -196,37 +201,36 @@ static struct BLD blindfolded(std::vector<std::string> &args)
             {
                 return {
                     .on = true,
-                    .count = 1
-                };
+                    .count = 1};
             }
             else
             {
                 std::cout << "No blindfolded support for cubes that aren't 3x3 or 4x4 or 5x5.\n";
                 return {
                     .on = false,
-                    .count = 0
-                };
+                    .count = 0};
             }
         }
-        else if(to_uppercase(args.at(i).substr(0,5)) == "-MBLD"){
-            if(getCubeType(args) == '3'){
+        else if (to_uppercase(args.at(i).substr(0, 5)) == "-MBLD")
+        {
+            if (getCubeType(args) == '3')
+            {
                 return {
                     .on = true,
-                    .count = std::stoi(args.at(i).substr(5))
-                };
-            } else {
+                    .count = std::stoi(args.at(i).substr(5))};
+            }
+            else
+            {
                 std::cout << "Multiblind support is only for 3x3\nAlso you are insane for doing it on non 3x3s\n";
                 return {
                     .on = false,
-                    .count = 0
-                };
+                    .count = 0};
             }
         }
     }
     return {
         .on = false,
-        .count = 0
-    };
+        .count = 0};
 }
 
 static bool fmc(std::vector<std::string> &args)
@@ -261,10 +265,10 @@ static bool shouldFormat(std::vector<std::string> &args)
 {
     for (size_t i = 0; i < args.size(); i++)
     {
-	    if (args.at(i) == "--no_format")
-	    {
-	        return false;
-	    }
+        if (args.at(i) == "--no_format")
+        {
+            return false;
+        }
     }
     return true;
 }
@@ -281,11 +285,12 @@ static size_t getCacheSize(std::vector<std::string> &args)
     return 50; // Cache size of 50 by default
 }
 
-static long getSeed(std::vector<std::string> &args){
+static long getSeed(std::vector<std::string> &args)
+{
     std::string seed_flag;
     bool hasNonNum = false;
 
-    for (const std::string& arg : args)
+    for (const std::string &arg : args)
     {
         if (arg.substr(0, 6) == "--seed")
         {
@@ -293,16 +298,20 @@ static long getSeed(std::vector<std::string> &args){
         }
     }
 
-    if(seed_flag.empty()){
+    if (seed_flag.empty())
+    {
         return -1;
     }
 
     std::string seed;
-    for (char c : seed_flag.substr(6)) {
-        if('0' <= c && c <= '9'){
+    for (char c : seed_flag.substr(6))
+    {
+        if ('0' <= c && c <= '9')
+        {
             seed += c;
         }
-        else{           // This adds the ASCII num of `c` as a string
+        else
+        { // This adds the ASCII num of `c` as a string
             seed += std::to_string(c);
             hasNonNum = true;
         }
@@ -318,12 +327,10 @@ static long getSeed(std::vector<std::string> &args){
     return actual;
 }
 
-
 inline void setup(struct should &Options, cmdLineArgs)
 {
     // Pre-checks
     // These are for like `help` or `--version`
-
 
     // this will make everything easier
     std::vector<std::string> arguments;

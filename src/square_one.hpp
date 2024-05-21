@@ -102,7 +102,7 @@ namespace sq1
 
             scramble += "(";
             scramble += std::to_string(top);
-            scramble += ", ";                  // This is done to remove a warning.
+            scramble += ", "; // This is done to remove a warning.
             scramble += std::to_string(bottom);
             scramble += ") / ";
         }

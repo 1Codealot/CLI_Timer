@@ -17,23 +17,23 @@ static bool canUseMove(const puzzle_move *pMove1, const puzzle_move *pMove2, con
     {
         switch (pMove3->base)
         {
-            case baseMoves::U:
-                return !(pMove1->base == baseMoves::U && pMove2->base == baseMoves::D);
+        case baseMoves::U:
+            return !(pMove1->base == baseMoves::U && pMove2->base == baseMoves::D);
 
-            case baseMoves::F:
-                return !(pMove1->base == baseMoves::F && pMove2->base == baseMoves::B);
+        case baseMoves::F:
+            return !(pMove1->base == baseMoves::F && pMove2->base == baseMoves::B);
 
-            case baseMoves::R:
-                return !(pMove1->base == baseMoves::R && pMove2->base == baseMoves::L);
+        case baseMoves::R:
+            return !(pMove1->base == baseMoves::R && pMove2->base == baseMoves::L);
 
-            case baseMoves::D:
-                return !(pMove2->base == baseMoves::U && pMove1->base == baseMoves::D);
+        case baseMoves::D:
+            return !(pMove2->base == baseMoves::U && pMove1->base == baseMoves::D);
 
-            case baseMoves::B:
-                return !(pMove2->base == baseMoves::F && pMove1->base == baseMoves::B);
+        case baseMoves::B:
+            return !(pMove2->base == baseMoves::F && pMove1->base == baseMoves::B);
 
-            case baseMoves::L:
-                return !(pMove2->base == baseMoves::R && pMove1->base == baseMoves::L);
+        case baseMoves::L:
+            return !(pMove2->base == baseMoves::R && pMove1->base == baseMoves::L);
 
         default:
             return true;
@@ -130,7 +130,7 @@ static std::string Three_By_Three(const bool blind)
             } while (!canUseMove(&TwoPrevMove, &PrevMove, &Move));
 
             Move.wsize = wideSizes::WIDE;
-            
+
             scramble.push_back(Move);
 
             TwoPrevMove = PrevMove;
@@ -143,9 +143,9 @@ static std::string Three_By_Three(const bool blind)
 static std::string MBLD(struct BLD blind)
 {
     std::stringstream out;
-    for(int c = 1; c < blind.count+1; c++)
+    for (int c = 1; c < blind.count + 1; c++)
     {
-        out << c << ": " << Three_By_Three(blind.on) << "\n"; 
+        out << c << ": " << Three_By_Three(blind.on) << "\n";
     }
     return out.str();
 }
@@ -156,9 +156,9 @@ static std::string FMC()
 
     std::vector<puzzle_move> scramble;
 
-    const puzzle_move R_Prime {baseMoves::R, directions::ACW, wideSizes::NONE};
-    const puzzle_move U_Prime {baseMoves::U, directions::ACW, wideSizes::NONE};
-    const puzzle_move F       {baseMoves::F, directions::CW,  wideSizes::NONE};
+    const puzzle_move R_Prime{baseMoves::R, directions::ACW, wideSizes::NONE};
+    const puzzle_move U_Prime{baseMoves::U, directions::ACW, wideSizes::NONE};
+    const puzzle_move F{baseMoves::F, directions::CW, wideSizes::NONE};
 
     scramble.push_back(R_Prime);
     scramble.push_back(U_Prime);
@@ -228,7 +228,7 @@ static std::string Four_By_Four(bool blind)
 
         scramble.push_back(Move);
 
-        if(Move.wsize != wideSizes::NONE)
+        if (Move.wsize != wideSizes::NONE)
         {
             wideMoveCount--;
         }
@@ -247,14 +247,14 @@ static std::string Four_By_Four(bool blind)
 
             scramble.at(moveIndex).wsize = wideSizes::WIDE;
 
-        } while (scramble.at(moveIndex).wsize == wideSizes::NONE && 
-		(scramble.at(moveIndex).base == baseMoves::U || 
-		 scramble.at(moveIndex).base == baseMoves::F ||
-		 scramble.at(moveIndex).base == baseMoves::R));
-        
-        wideMoveCount--;        
+        } while (scramble.at(moveIndex).wsize == wideSizes::NONE &&
+                 (scramble.at(moveIndex).base == baseMoves::U ||
+                  scramble.at(moveIndex).base == baseMoves::F ||
+                  scramble.at(moveIndex).base == baseMoves::R));
+
+        wideMoveCount--;
     }
-    
+
     std::string outputScramble = moveVectorToString(scramble);
 
     if (blind)
@@ -305,7 +305,7 @@ static std::string Five_By_Five(bool blind)
 
         scramble.push_back(Move);
 
-        if(Move.wsize != wideSizes::NONE)
+        if (Move.wsize != wideSizes::NONE)
         {
             wideMoveCount--;
         }
@@ -323,8 +323,8 @@ static std::string Five_By_Five(bool blind)
         {
             scramble.at(moveIndex).wsize = wideSizes::WIDE;
         } while (scramble.at(moveIndex).wsize == wideSizes::NONE);
-        
-        wideMoveCount--;        
+
+        wideMoveCount--;
     }
 
     if (blind)
@@ -374,11 +374,10 @@ static std::string Six_By_Six()
 
         scramble.push_back(Move);
 
-        if(Move.wsize != wideSizes::NONE)
+        if (Move.wsize != wideSizes::NONE)
         {
             wideMoveCount--;
         }
-        
 
         TwoPrevMove = PrevMove;
         PrevMove = Move; //
@@ -393,8 +392,8 @@ static std::string Six_By_Six()
         {
             scramble.at(moveIndex).wsize = wideSizes::WIDE;
         } while (scramble.at(moveIndex).wsize == wideSizes::NONE);
-        
-        wideMoveCount--;        
+
+        wideMoveCount--;
     }
 
     return moveVectorToString(scramble);
@@ -428,13 +427,13 @@ static std::string Seven_By_Seven()
 
         scramble.push_back(Move);
 
-        if(Move.wsize != wideSizes::NONE)
+        if (Move.wsize != wideSizes::NONE)
         {
             wideMoveCount--;
         }
 
         TwoPrevMove = PrevMove;
-        PrevMove = Move; 
+        PrevMove = Move;
     }
 
     // Randomly add wide moves
@@ -446,8 +445,8 @@ static std::string Seven_By_Seven()
         {
             scramble.at(moveIndex).wsize = wideSizes::WIDE;
         } while (scramble.at(moveIndex).wsize == wideSizes::NONE);
-        
-        wideMoveCount--;        
+
+        wideMoveCount--;
     }
 
     return moveVectorToString(scramble);
@@ -550,19 +549,19 @@ static std::string Clock()
     const std::string hours[] = {"5-", "4-", "3-", "2-", "1-", "0+", "1+", "2+", "3+", "4+", "5+", "6+"};
     std::ostringstream scramble;
     scramble << "UR" << hours[getRandomNum(0, 11)] << " "
-    << "DR" << hours[getRandomNum(0, 11)] << " "
-    << "DL" << hours[getRandomNum(0, 11)] << " "
-    << "UL" << hours[getRandomNum(0, 11)] << " "
-    << "U" << hours[getRandomNum(0, 11)] << " "
-    << "R" << hours[getRandomNum(0, 11)] << " "
-    << "D" << hours[getRandomNum(0, 11)] << " "
-    << "L" << hours[getRandomNum(0, 11)] << " "
-    << "ALL" << hours[getRandomNum(0, 11)] << " " << "y2" << " "
-    << "U" << hours[getRandomNum(0, 11)] << " "
-    << "R" << hours[getRandomNum(0, 11)] << " "
-    << "D" << hours[getRandomNum(0, 11)] << " "
-    << "L" << hours[getRandomNum(0, 11)] << " "
-    << "ALL" << hours[getRandomNum(0, 11)];
+             << "DR" << hours[getRandomNum(0, 11)] << " "
+             << "DL" << hours[getRandomNum(0, 11)] << " "
+             << "UL" << hours[getRandomNum(0, 11)] << " "
+             << "U" << hours[getRandomNum(0, 11)] << " "
+             << "R" << hours[getRandomNum(0, 11)] << " "
+             << "D" << hours[getRandomNum(0, 11)] << " "
+             << "L" << hours[getRandomNum(0, 11)] << " "
+             << "ALL" << hours[getRandomNum(0, 11)] << " " << "y2" << " "
+             << "U" << hours[getRandomNum(0, 11)] << " "
+             << "R" << hours[getRandomNum(0, 11)] << " "
+             << "D" << hours[getRandomNum(0, 11)] << " "
+             << "L" << hours[getRandomNum(0, 11)] << " "
+             << "ALL" << hours[getRandomNum(0, 11)];
 
     return scramble.str();
 }
@@ -581,10 +580,13 @@ inline std::string generate_scramble(const char cube, const struct BLD blind, co
             return FMC();
         }
         else
-        {   
-            if(blind.count <= 1){
+        {
+            if (blind.count <= 1)
+            {
                 return Three_By_Three(blind.on);
-            } else {
+            }
+            else
+            {
                 return MBLD(blind);
             }
         }

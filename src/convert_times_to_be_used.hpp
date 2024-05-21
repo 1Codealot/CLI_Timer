@@ -102,14 +102,14 @@ inline std::string outputTime(std::string time_in)
 inline std::string outputTimePretty(float time_in_seconds)
 {
     std::string output;
-    
+
     // Thanks: https://www.w3resource.com/c-programming-exercises/basic-declarations-and-expressions/c-programming-basic-exercises-17.php
 
     int hours = time_in_seconds / 3600;
-    int minutes =  (time_in_seconds -(3600*hours)) / 60;
-    float seconds = time_in_seconds - (3600*hours) - (60*minutes);
+    int minutes = (time_in_seconds - (3600 * hours)) / 60;
+    float seconds = time_in_seconds - (3600 * hours) - (60 * minutes);
 
-    //Make seconds to 2 decimal places    
+    // Make seconds to 2 decimal places
 
     std::string seconds_str = std::to_string(seconds);
     seconds_str = seconds_str.substr(0, seconds_str.find('.') + 3);
@@ -118,19 +118,22 @@ inline std::string outputTimePretty(float time_in_seconds)
     output += std::to_string(hours);
     output += ":";
 
-    if (minutes < 10){
+    if (minutes < 10)
+    {
         output += "0";
     }
     output += std::to_string(minutes);
     output += ":";
 
-    if (seconds < 10){
+    if (seconds < 10)
+    {
         output += "0";
     }
 
     output += seconds_str;
 
-    if(seconds_str.length() == 3){
+    if (seconds_str.length() == 3)
+    {
         output += "0";
     }
 

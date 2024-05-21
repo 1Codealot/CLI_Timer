@@ -73,7 +73,8 @@ inline void save_to_file(std::string sessionName, const std::string &scramble, c
     fileToSaveTo.close();
 }
 
-inline std::vector<float> readTimesFromFile(std::string fileName){
+inline std::vector<float> readTimesFromFile(std::string fileName)
+{
     fileName = changeExtensionAndAddPath(fileName);
 
     std::vector<float> outputVec;
@@ -81,10 +82,11 @@ inline std::vector<float> readTimesFromFile(std::string fileName){
 
     std::ifstream sessionFile(fileName);
 
-    while (getline(sessionFile, currLine)){
-            outputVec.push_back(std::stof(currLine.substr(
-                currLine.find("§") + 2,
-                (currLine.find('~') + 2) - (currLine.find("§") + 2) - 2)));
+    while (getline(sessionFile, currLine))
+    {
+        outputVec.push_back(std::stof(currLine.substr(
+            currLine.find("§") + 2,
+            (currLine.find('~') + 2) - (currLine.find("§") + 2) - 2)));
     }
     return outputVec;
 }

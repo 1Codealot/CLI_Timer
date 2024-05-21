@@ -40,51 +40,56 @@ enum class wideSizes
 
 // SMH i wish i could overload `[]` for enums
 
-constexpr baseMoves getElemFromEnumOfBaseMoves(size_t index){
-    switch (index) {
-        case 0:
-            return baseMoves::F;
-        case 1:
-            return baseMoves::U;
-        case 2:
-            return baseMoves::R;
-        case 3:
-            return baseMoves::B;
-        case 4:
-            return baseMoves::L;
-        case 5:
-            return baseMoves::D;
-        default:
-            throw std::invalid_argument("Invalid index");
+constexpr baseMoves getElemFromEnumOfBaseMoves(size_t index)
+{
+    switch (index)
+    {
+    case 0:
+        return baseMoves::F;
+    case 1:
+        return baseMoves::U;
+    case 2:
+        return baseMoves::R;
+    case 3:
+        return baseMoves::B;
+    case 4:
+        return baseMoves::L;
+    case 5:
+        return baseMoves::D;
+    default:
+        throw std::invalid_argument("Invalid index");
     }
 }
 
-constexpr directions getElemFromEnumOfDirections(size_t index){
-    switch (index) {
-        case 0:
-            return directions::CW;
-        case 1:
-            return directions::ACW;
-        case 2:
-            return directions::DOUBLE;
-        default:
-            throw std::invalid_argument("Invalid index");
+constexpr directions getElemFromEnumOfDirections(size_t index)
+{
+    switch (index)
+    {
+    case 0:
+        return directions::CW;
+    case 1:
+        return directions::ACW;
+    case 2:
+        return directions::DOUBLE;
+    default:
+        throw std::invalid_argument("Invalid index");
     }
 }
 
-constexpr wideSizes getElemFromEnumOfWidthSizes(size_t index){
-    switch (index) {
-        case 0:
-            return wideSizes::NONE;
-        case 1:
-            return wideSizes::WIDE;
-        case 2:
-            return wideSizes::WIDE2;
-        default:
-            throw std::invalid_argument("Invalid index");
+constexpr wideSizes getElemFromEnumOfWidthSizes(size_t index)
+{
+    switch (index)
+    {
+    case 0:
+        return wideSizes::NONE;
+    case 1:
+        return wideSizes::WIDE;
+    case 2:
+        return wideSizes::WIDE2;
+    default:
+        throw std::invalid_argument("Invalid index");
     }
 }
-
 
 typedef struct
 {
@@ -98,7 +103,7 @@ inline void createMove(puzzle_move &newMove, const char moveType)
     // Create empty move outside this func then pass it in here
     newMove.base = getElemFromEnumOfBaseMoves(getRandomNum(0, 5));
     newMove.direction = getElemFromEnumOfDirections(getRandomNum(0, 2));
-    newMove.wsize = getElemFromEnumOfWidthSizes(0);                       // YAYYY :/
+    newMove.wsize = getElemFromEnumOfWidthSizes(0); // YAYYY :/
     switch (moveType)
     {
     case '2':
@@ -147,27 +152,28 @@ inline void createMove(puzzle_move &newMove, const char moveType)
 static inline std::string getRepresentation(const puzzle_move *pMove)
 {
     std::string finalMove;
-    switch(pMove->base){
-        case baseMoves::F:
-            finalMove = "F";
-            break;
-        case baseMoves::U:
-            finalMove = "U";
-            break;
-        case baseMoves::R:
-            finalMove = "R";
-            break;
-        case baseMoves::B:
-            finalMove = "B";
-            break;
-        case baseMoves::L:
-            finalMove = "L";
-            break;
-        case baseMoves::D:
-            finalMove = "D";
-            break;
-        default:
-            throw std::invalid_argument("Invalid base move");
+    switch (pMove->base)
+    {
+    case baseMoves::F:
+        finalMove = "F";
+        break;
+    case baseMoves::U:
+        finalMove = "U";
+        break;
+    case baseMoves::R:
+        finalMove = "R";
+        break;
+    case baseMoves::B:
+        finalMove = "B";
+        break;
+    case baseMoves::L:
+        finalMove = "L";
+        break;
+    case baseMoves::D:
+        finalMove = "D";
+        break;
+    default:
+        throw std::invalid_argument("Invalid base move");
     }
 
     switch (pMove->wsize)
@@ -184,23 +190,25 @@ static inline std::string getRepresentation(const puzzle_move *pMove)
         break;
     }
 
-    switch (pMove->direction) {
-        case directions::ACW:
-            finalMove += "'";
-            break;
+    switch (pMove->direction)
+    {
+    case directions::ACW:
+        finalMove += "'";
+        break;
 
-        case directions::DOUBLE:
-            finalMove += "2";
-            break;
+    case directions::DOUBLE:
+        finalMove += "2";
+        break;
 
-        default:
-            break;
+    default:
+        break;
     }
 
     return finalMove;
 }
 
-std::ostringstream& operator<< (std::ostringstream& oss, const puzzle_move& pMove){
+std::ostringstream &operator<<(std::ostringstream &oss, const puzzle_move &pMove)
+{
     oss << getRepresentation(&pMove);
     return oss;
 }
