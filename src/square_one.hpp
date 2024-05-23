@@ -82,8 +82,8 @@ namespace sq1
         for (size_t x = 0; x <= rng() % 6 + 11; x++)
         {
 
-            int top = 0;
-            int bottom = 0;
+            int top;
+            int bottom;
             do
             {
                 do

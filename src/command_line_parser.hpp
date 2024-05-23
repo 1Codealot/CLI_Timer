@@ -174,7 +174,7 @@ static bool needEnter(std::vector<std::string> &args)
 }
 
 // TODO: Use more often!
-std::string to_uppercase(std::string str)
+std::string to_uppercase(const std::string& str)
 {
     std::string out;
     for (char c : str)
@@ -341,12 +341,7 @@ inline void setup(struct should &Options, cmdLineArgs)
         arguments.emplace_back(argv[i]);
     }
 
-    if (argc == 1)
-    {
-        outputHelp();
-        exit(EXIT_SUCCESS);
-    }
-    else if (arguments.at(0) == "help")
+    if (argc == 1 || arguments.at(0) == "help")
     {
         outputHelp();
         exit(EXIT_SUCCESS);

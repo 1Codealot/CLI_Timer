@@ -532,7 +532,7 @@ static std::string Pyraminx()
 
     for (int i = 0; i < 3; i++)
     {
-        if (const int direction = getRandomNum(1, 3); direction == 1)
+        if (const size_t direction = getRandomNum(1, 3); direction == 1)
         {
             continue;
         }

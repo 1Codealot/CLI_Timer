@@ -133,15 +133,15 @@ void appendAvg(std::vector<std::string> &scrambleLines, float avg, const std::st
 
 	if (level >= scrambleLines.size())
 	{
-		scrambleLines.push_back("");
+		scrambleLines.emplace_back("");
 	}
 
 	// Check that at level index has no newline in it.
 	// If it does we must split it into 2 separate ones lines in scrambleLines
-	if (scrambleLines.at(level).find("\n") != std::string::npos)
+	if (scrambleLines.at(level).find('\n') != std::string::npos)
 	{
-		std::string firstLine = scrambleLines.at(level).substr(0, scrambleLines.at(level).find("\n"));
-		std::string secondLine = scrambleLines.at(level).substr(scrambleLines.at(level).find("\n") + 1);
+		std::string firstLine = scrambleLines.at(level).substr(0, scrambleLines.at(level).find('\n'));
+		std::string secondLine = scrambleLines.at(level).substr(scrambleLines.at(level).find('\n') + 1);
 
 		scrambleLines.at(level) = firstLine;
 		scrambleLines.insert(scrambleLines.begin() + level + 1, secondLine);

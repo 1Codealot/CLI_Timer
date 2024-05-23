@@ -21,13 +21,12 @@ self_random::self_random()
 }
 
 self_random::~self_random()
-{
-}
+= default;
 
 size_t self_random::operator()()
 {
     // https://en.wikipedia.org/wiki/Xorshift#Example_implementation
-    if (sizeof(size_t) == 32 / 8) // 32 bit
+    if constexpr (sizeof(size_t) == 32 / 8) // 32 bit
     {
         size_t x = this->state;
         x ^= x << 13;
