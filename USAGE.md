@@ -24,7 +24,9 @@ square-1
 <hr>
 
 #### Event modifiers
-`-b` (or `-B`) will generate scrambles for blindfolded events for 3x3, 4x4 and 5x5.
+`-b` (or `-B`) will generate scrambles for blindfolded events for 3x3, 4x4 and 5x5.<br>
+`-MBLD{count}` will generate 3BLD scrambles for {count puzzles} at once. <br>
+
 
 <hr>
 
