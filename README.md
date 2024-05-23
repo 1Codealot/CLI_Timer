@@ -72,7 +72,7 @@ If you do `CLI_Timer 2 -sSession --no_prompt` it will say "You can't save withou
 This will generate {number} amount of scrambles and then quit.<br>
 Example: `CLI_Timer 7 --count5 -s7x7_average`
 <br>
-###### Note: `c` argument is impiled.
+<sub> Note: `c` argument is impiled. </sub>
 <hr>
 
 `--no_avg`
@@ -111,11 +111,11 @@ Outputs the current version.
 `CLI_Timer.exe 5 c` This will continually generate scrambles for a 5x5. This will NOT save to a file. <br>
 `CLI_Timer.exe M -sMegaminx_Session` This will continually generate scrambles for megaminx. This will save to a file called Megaminx_Session.CLI_T_S.
 
-<sub>NOTE: as of now, the commands no longer need to be in any order (i hope)</sub>
+<sub>NOTE: The commands do not need to be in any order.</sub>
 
 # Entering in times
 You can enter in times in the format of HH:MM:SS.DD (the `.` and `:`s are optional)<br>
-for example `123456` is the same as `(00:)12:34.56`
+For example `123456` is the same as `(00:)12:34.56`
 
 <hr>
 
