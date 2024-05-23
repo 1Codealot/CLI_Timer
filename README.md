@@ -3,10 +3,7 @@
 This is a Rubik's cube training timer (some what similar to cstimer) used in the command line. 
 
 # Building
-Just run `make`! <br><br>
-You can also run `make cross` to compile it for your main OS and windows. (This has a dependancy on Linux, for that you must run `sudo apt-get install g++-mingw-w64-x86-64`)
-
-###### NOTE: You *can* use build.py but make is better.
+Just run `make`! <br>
 
 # Installing
 Watch this video: [<https://www.youtube.com/watch?v=MJK5mLUz24A>](https://www.youtube.com/watch?v=MJK5mLUz24A) <br>
@@ -15,7 +12,6 @@ Sadly, I don't have a way to install (or compile) it on mac. If you know how to 
 
 # Commands
 
-### Implemented
 ##### NxN cube types
 `2`
 `3`
@@ -115,11 +111,11 @@ Outputs the current version.
 `CLI_Timer.exe 5 c` This will continually generate scrambles for a 5x5. This will NOT save to a file. <br>
 `CLI_Timer.exe M -sMegaminx_Session` This will continually generate scrambles for megaminx. This will save to a file called Megaminx_Session.CLI_T_S.
 
-###### NOTE: as of now, the commands no longer need to be in any order (i hope)
+<sub>NOTE: as of now, the commands no longer need to be in any order (i hope)</sub>
 
 # Entering in times
-You can enter in times in the format of HH:MM:SS.DD or the regex `(((\d)?\d(:)?)?(\d\d(:)?))?((\d){1,2}(\.)?)?(\d){1,2}`
-###### NOTE: May be wrong as I'm not great at regex.
+You can enter in times in the format of HH:MM:SS.DD (the `.` and `:`s are optional)<br>
+for example `123456` is the same as `(00:)12:34.56`
 
 <hr>
 
