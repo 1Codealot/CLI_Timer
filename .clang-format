@@ -100,9 +100,9 @@ IndentCaseLabels: false
 # type
 IndentWrappedFunctionNames: false
 
-# Align pointer to the right
+# Align pointer to the left
 # int *a;
-PointerAlignment: Right
+PointerAlignment: Left 
 
 # Don't insert a space after a cast
 # x = (int32)y;    not    x = (int32) y;

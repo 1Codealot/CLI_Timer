@@ -31,8 +31,7 @@ int get_terminal_width()
 	return columns;
 
 #elif __linux__ || __APPLE__
-	struct winsize w
-	{
+	struct winsize w {
 	};
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 
@@ -47,28 +46,21 @@ int get_terminal_width()
 
 // End credit
 
-inline float calculateMean(std::vector<float> &times, size_t count = 0, bool punishDNFs = false)
+inline float calculateMean(std::vector<float>& times, size_t count = 0, bool punishDNFs = false)
 {
 	float avg = 0.00f;
 
-	if (count == 0)
-	{
+	if (count == 0) {
 		count = times.size();
 	}
 
-	for (float n : times)
-	{
-		if (punishDNFs)
-		{
-			if (n == std::numeric_limits<float>::max())
-			{
+	for (float n : times) {
+		if (punishDNFs) {
+			if (n == std::numeric_limits<float>::max()) {
 				return -1;
 			}
-		}
-		else
-		{
-			if (n == std::numeric_limits<float>::max())
-			{
+		} else {
+			if (n == std::numeric_limits<float>::max()) {
 				count--;
 				continue;
 			}
@@ -80,28 +72,25 @@ inline float calculateMean(std::vector<float> &times, size_t count = 0, bool pun
 	return avg;
 }
 
-inline float calculateAvg(std::vector<float> &times, size_t count = 0)
+inline float calculateAvg(std::vector<float>& times, size_t count = 0)
 {
 	// TODO: Check the size of times is >= count.
 
 	int countToRemove = floor((times.size() / 10) + 1);
 
-	if (times.size() < count)
-	{
+	if (times.size() < count) {
 		return 0;
 	}
 
 	std::vector<float> latestTimes;
 
-	for (size_t i = times.size() - count; i < times.size(); i++)
-	{
+	for (size_t i = times.size() - count; i < times.size(); i++) {
 		latestTimes.push_back(times.at(i));
 	}
 
 	std::sort(latestTimes.begin(), latestTimes.end());
 
-	for (int i = 0; i < countToRemove; i++)
-	{
+	for (int i = 0; i < countToRemove; i++) {
 		latestTimes.erase(latestTimes.begin());
 		latestTimes.erase(latestTimes.end() - 1);
 	}
@@ -109,62 +98,50 @@ inline float calculateAvg(std::vector<float> &times, size_t count = 0)
 	return calculateMean(latestTimes, latestTimes.size(), true);
 }
 
-void appendAvg(std::vector<std::string> &scrambleLines, float avg, const std::string &avgName)
+void appendAvg(std::vector<std::string>& scrambleLines, float avg, const std::string& avgName)
 {
 	// Smaller level = higher up.
 	size_t level = 0;
 
-	if (avgName == "ao5")
-	{
+	if (avgName == "ao5") {
 		level = 1;
-	}
-	else if (avgName == "ao12")
-	{
+	} else if (avgName == "ao12") {
 		level = 2;
-	}
-	else if (avgName == "ao50")
-	{
+	} else if (avgName == "ao50") {
 		level = 3;
-	}
-	else if (avgName == "ao100")
-	{
+	} else if (avgName == "ao100") {
 		level = 4;
 	}
 
-	if (level >= scrambleLines.size())
-	{
+	if (level >= scrambleLines.size()) {
 		scrambleLines.emplace_back("");
 	}
 
 	// Check that at level index has no newline in it.
 	// If it does we must split it into 2 separate ones lines in scrambleLines
-	if (scrambleLines.at(level).find('\n') != std::string::npos)
-	{
-		std::string firstLine = scrambleLines.at(level).substr(0, scrambleLines.at(level).find('\n'));
-		std::string secondLine = scrambleLines.at(level).substr(scrambleLines.at(level).find('\n') + 1);
+	if (scrambleLines.at(level).find('\n') != std::string::npos) {
+		std::string firstLine =
+			scrambleLines.at(level).substr(0, scrambleLines.at(level).find('\n'));
+		std::string secondLine =
+			scrambleLines.at(level).substr(scrambleLines.at(level).find('\n') + 1);
 
 		scrambleLines.at(level) = firstLine;
 		scrambleLines.insert(scrambleLines.begin() + level + 1, secondLine);
 	}
 
-	if (std::to_string(avg) == "-nan")
-	{
+	if (std::to_string(avg) == "-nan") {
 		avg = 0.00f;
 	}
 
 	std::string avgAsStr;
 
-	if (avg == -1)
-	{
+	if (avg == -1) {
 		avgAsStr = "DNF";
-	}
-	else
-	{
+	} else {
 		avgAsStr = outputTimePretty(avg);
 	}
 
-	if (scrambleLines.size() < level + 1)
-	{
+	if (scrambleLines.size() < level + 1) {
 		scrambleLines.emplace_back("");
 	}
 
@@ -176,7 +153,7 @@ void appendAvg(std::vector<std::string> &scrambleLines, float avg, const std::st
 	scrambleLines.at(level) += std::string(spaces, ' ') + avgText;
 }
 
-std::vector<std::string> split_to_lines(std::string &scramble, int width)
+std::vector<std::string> split_to_lines(std::string& scramble, int width)
 {
 	size_t target_width = width / 3;
 
@@ -185,24 +162,18 @@ std::vector<std::string> split_to_lines(std::string &scramble, int width)
 
 	bool isSq1 = scramble.at(0) == '(';
 
-	while (index != scramble.size())
-	{
-		if (scramble.at(index) == '\n')
-		{
+	while (index != scramble.size()) {
+		if (scramble.at(index) == '\n') {
 			last_new_line = index;
 		}
 
-		if (index - last_new_line == target_width)
-		{
-			if (!isSq1)
-			{
+		if (index - last_new_line == target_width) {
+			if (!isSq1) {
 				// Find last space before index
 				size_t last_space = scramble.rfind(' ', index);
 				scramble.at(last_space) = '\n';
 				last_new_line = last_space;
-			}
-			else
-			{
+			} else {
 				size_t last_space = scramble.rfind('/', index);
 				scramble.at(last_space + 1) = '\n';
 				last_new_line = last_space;
@@ -211,17 +182,16 @@ std::vector<std::string> split_to_lines(std::string &scramble, int width)
 		index++;
 	}
 
-	return {scramble};
+	return { scramble };
 }
 
-void output(std::string &scramble, std::vector<float> &times, bool showAvg)
+void output(std::string& scramble, std::vector<float>& times, bool showAvg)
 {
 	// avg must be > 0 otherwise I will not output it.
 
 	std::vector<std::string> scrambleLines = split_to_lines(scramble, get_terminal_width());
 
-	if (showAvg)
-	{
+	if (showAvg) {
 		float mean = calculateMean(times);
 		float ao5 = calculateAvg(times, 5);
 		float ao12 = calculateAvg(times, 12);
@@ -236,14 +206,11 @@ void output(std::string &scramble, std::vector<float> &times, bool showAvg)
 		appendAvg(scrambleLines, ao100, "ao100");
 	}
 
-	for (std::string &line : scrambleLines)
-	{
+	for (std::string& line : scrambleLines) {
 		// I don't know why I have to do this.
 		// I literally do this like 22 lines above.
-		if (!line.empty())
-		{
-			if (line.at(0) == ' ')
-			{
+		if (!line.empty()) {
+			if (line.at(0) == ' ') {
 				line.erase(0, 1);
 			}
 		}
@@ -260,31 +227,27 @@ float getTime()
 	std::cout << "\nEnter your time: ";
 	std::cin >> inputtedTime;
 
-	if (inputtedTime == "next" || inputtedTime == "skip")
-	{
+	if (inputtedTime == "next" || inputtedTime == "skip") {
 		return -1;
 	}
 
-	if (inputtedTime[0] == 'Q' || inputtedTime[0] == 'q')
-	{
+	if (inputtedTime[0] == 'Q' || inputtedTime[0] == 'q') {
 		std::cout << std::endl;
 		exit(EXIT_SUCCESS);
 	}
 
 	float real_time_secs = timeStrToFloatSecs(inputtedTime);
 
-	std::cout << "\nYou entered in " << outputTime(inputtedTime) << " (which is also " << std::fixed << std::setprecision(2) << real_time_secs << " seconds)\nIs this correct? (Y/n)\n";
+	std::cout << "\nYou entered in " << outputTime(inputtedTime) << " (which is also " << std::fixed
+			  << std::setprecision(2) << real_time_secs << " seconds)\nIs this correct? (Y/n)\n";
 
 	std::cin.ignore();
 
 	std::getline(std::cin, correct);
 
-	if (correct.empty() || correct[0] == 'Y' || correct[0] == 'y')
-	{
+	if (correct.empty() || correct[0] == 'Y' || correct[0] == 'y') {
 		return real_time_secs;
-	}
-	else
-	{
+	} else {
 		return getTime();
 	}
 }
@@ -297,23 +260,20 @@ std::string getPenalty()
 
 	std::getline(std::cin, penalty);
 
-	if (penalty.empty())
-	{
+	if (penalty.empty()) {
 		return "OK";
-	}
-	else if (penalty == "OK" || penalty == "ok" || penalty == "+2" || penalty == "DNF" || penalty == "dnf")
-	{
+	} else if (penalty == "OK" || penalty == "ok" || penalty == "+2" || penalty == "DNF" ||
+			   penalty == "dnf") {
 		return penalty;
-	}
-	else
-	{
+	} else {
 		return getPenalty();
 	}
 }
 
 void outputHelp()
 {
-	std::cout << "How to use CLI_Timer.\nCLI_Timer (cube type) [-b] | [-MBLD{count}] | [-f(mc)] [--count{number}] [--no_enter] [--cache_size{n}] | [c] | [-s{session name}] | [--no_prompt] | [--no_avg] [--no_format] [--seed{s}] \
+	std::cout
+		<< "How to use CLI_Timer.\nCLI_Timer (cube type) [-b] | [-MBLD{count}] | [-f(mc)] [--count{number}] [--no_enter] [--cache_size{n}] | [c] | [-s{session name}] | [--no_prompt] | [--no_avg] [--no_format] [--seed{s}] \
     \n\nArgument (cube type) means an NxN of (2)x2 (3)x3 to (7)x7 or (S)kewb, (P)yraminx, (M)egaminx, (C)lock or s(Q)uare-1.\
     It is required (why else would you use it?)\n\n[c] means [c]ontinuous, meaning it won't stop after generating one scramble.\
     \n\nArgument [-b] gives scrambles for blindfolded solves for 3x3, 4x4 and 5x5 \
