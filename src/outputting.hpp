@@ -342,4 +342,5 @@ void outputVersion()
 	std::cout << "CLI_Timer version: 2.1\n\n";
 
 	std::cout << "Fixed bug with `--seed` doing nothing for square-1" << std::endl;
+	std::cout << "Made it clear screen when outputting a new scramble." << std::endl;
 }
