@@ -12,8 +12,7 @@ CPPFLAGS = -Wall -Wextra -Wpedantic -O3
 
 all:
 	mkdir -p $(Build_Dir)
-		$(TARGET): $(TARGET).cpp 
-			$(CPPC) $(CPPFLAGS) -std=c++$(STD) -o $(Build_Path) $(Main_Path)
+		$(CPPC) $(CPPFLAGS) -std=c++$(STD) -o $(Build_Path) $(Main_Path)
 
 # This was for cross compiling to windows however, the multi threading is impossible.
 
@@ -25,8 +24,7 @@ all:
 
 debug:
 	mkdir -p $(Build_Dir)
-		$(TARGET): $(TARGET).cpp 
-			$(CPPC) $(CPPFLAGS) -ggdb -O0 -o $(Build_Path) $(Main_Path)
+		$(CPPC) $(CPPFLAGS) -ggdb -O0 -o $(Build_Path) $(Main_Path)
 
 
 install:
@@ -34,5 +32,3 @@ install:
 
 uninstall:
 	rm $(Install_Path)
-				
-
