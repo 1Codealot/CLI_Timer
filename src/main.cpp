@@ -49,6 +49,12 @@ int main(int argc, char const *argv[])
 		}
 		else
 		{
+		#ifdef _WIN32
+			std::system("cls");
+		#else
+			std::system("clear");
+		#endif
+
 			output(currentScramble, timesVector, Args.shouldShowAvg);
 		}
 		if (!Args.shouldPrompt)
