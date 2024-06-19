@@ -1,18 +1,18 @@
 CPPC = g++
 
 Main_Path    = ./src/main.cpp
-Build_Dir    = ./Final_Build/
+Build_Dir    = ./build/
 Final_Name   = CLI_Timer
 Build_Path   = $(Build_Dir)$(Final_Name)
 Install_Path = /bin/$(Final_Name)
-
 STD         ?= 2b
+OPTLVL      ?= -O3
 
-CPPFLAGS = -Wall -Wextra -Wpedantic -O3
+CPPFLAGS = -Wall -Wextra -Wpedantic 
 
 all:
 	mkdir -p $(Build_Dir)
-		$(CPPC) $(CPPFLAGS) -std=c++$(STD) -o $(Build_Path) $(Main_Path)
+		$(CPPC) $(CPPFLAGS) $(OPTLVL) -std=c++$(STD) -o $(Build_Path) $(Main_Path)
 
 # This was for cross compiling to windows however, the multi threading is impossible.
 
