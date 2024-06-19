@@ -18,7 +18,4 @@ jobs:
         - name: upload to release
           env:
             GH_TOKEN: ${{ github.token }}
-          run: gh release upload ${{github.ref_name}} ./Final_Build/CLI_Timer_MacOs
-        
-        
-        
+          run: gh release upload ${{github.ref_name}} ./build/CLI_Timer_MacOs
