@@ -220,7 +220,7 @@ static std::string Four_By_Four(bool blind)
 		}
 
 		TwoPrevMove = PrevMove;
-		PrevMove = Move; //
+		PrevMove = Move;
 	}
 
 	int moveIndex;
@@ -229,13 +229,13 @@ static std::string Four_By_Four(bool blind)
 		do {
 			moveIndex = getRandomNum(0, scramble.size() - 1);
 
-			scramble.at(moveIndex).wsize = wideSizes::WIDE;
 
-		} while (scramble.at(moveIndex).wsize == wideSizes::NONE &&
+		} while (!(scramble.at(moveIndex).wsize == wideSizes::NONE &&
 				 (scramble.at(moveIndex).base == baseMoves::U ||
 				  scramble.at(moveIndex).base == baseMoves::F ||
-				  scramble.at(moveIndex).base == baseMoves::R));
+				  scramble.at(moveIndex).base == baseMoves::R)));
 
+		scramble.at(moveIndex).wsize = wideSizes::WIDE;
 		wideMoveCount--;
 	}
 
